@@ -1,9 +1,9 @@
 package graphics;
 
-import shapes.Ball;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
+import shapes.Ball;
 
 /**
  * @author Raziel Solomon
@@ -25,7 +25,7 @@ public class BouncingBallAnimation {
         Ball ball = new Ball(0, 0, 30, java.awt.Color.BLACK);
         ball.setVelocity(2, 2);
         while (true) {
-            ball.moveBoundedStep(0, 0, 200, 200);
+            ball.moveOneStep();
             DrawSurface d = gui.getDrawSurface();
             ball.drawOn(d);
             gui.show(d);

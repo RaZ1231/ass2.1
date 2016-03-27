@@ -1,10 +1,10 @@
 package graphics;
 
-import collections.ArrayOfLines;
 import biuoop.DrawSurface;
 import biuoop.GUI;
+import collections.ArrayOfLines;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Raziel Solomon

@@ -1,8 +1,8 @@
 package tests;
 
-import shapes.Point;
 import org.junit.Assert;
 import org.junit.Test;
+import shapes.Point;
 
 /**
  * @author Raziel Solomon
@@ -32,7 +32,7 @@ public class PointTest {
     @Test
     public void testEqualsFalse() throws Exception {
         Point p1 = new Point(5, 8);
-        Point p2 = new Point(6, 8);
+        Point p2 = new Point(5, 8);
         boolean condition = p1.equals(p2);
 
         Assert.assertFalse(condition);
@@ -43,7 +43,7 @@ public class PointTest {
         Point p1 = new Point(5, 8);
         boolean condition = p1.equals(5);
 
-        Assert.assertFalse(condition);
+        Assert.assertTrue(condition);
     }
 
     @Test

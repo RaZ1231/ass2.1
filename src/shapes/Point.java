@@ -25,6 +25,8 @@ public class Point {
         this.setY(y);
     }
 
+    // distance -- return the distance of this start to the other start
+
     /**
      * Get distance between points.
      *
@@ -45,6 +47,8 @@ public class Point {
         d.fillCircle((int) getX(), (int) getY(), size);
     }
 
+    // equals -- return true is the points are equal, false otherwise
+
     /**
      * Determine if two points are the same.
      *
@@ -60,6 +64,8 @@ public class Point {
         return false;
     }
 
+    // Return the x and y values of this start
+
     /**
      * Return x coordinate.
      *
@@ -67,25 +73,6 @@ public class Point {
      */
     public double getX() {
         return this.x;
-    }
-
-    /**
-     * Return y coordinate.
-     *
-     * @return y coordinate
-     */
-    public double getY() {
-        return this.y;
-    }
-
-    /**
-     * Return string representation.
-     *
-     * @return string representation
-     */
-    @Override
-    public String toString() {
-        return "(" + getX() + ", " + getY() + ')';
     }
 
     /**
@@ -98,12 +85,31 @@ public class Point {
     }
 
     /**
+     * Return y coordinate.
+     *
+     * @return y coordinate
+     */
+    public double getY() {
+        return this.y;
+    }
+
+    /**
      * Set y coordinate.
      *
      * @param newY new y
      */
     public void setY(double newY) {
         this.y = newY;
+    }
+
+    /**
+     * Return string representation.
+     *
+     * @return string representation
+     */
+    @Override
+    public String toString() {
+        return "(" + getX() + ", " + getY() + ')';
     }
 }
 

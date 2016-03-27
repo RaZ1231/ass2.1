@@ -3,17 +3,16 @@ package tests;
 import graphics.MultipleFramesBouncingBallsAnimation;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @author Raziel Solomon
- * @since 23-Mar-16.
+ * @since 27-Mar-16.
  */
 public class MultipleFramesBouncingBallsAnimationTest {
 
     @Test
-    public void mainTest() throws Exception {
-        String[] args = {"test","56","23","42","10","34","5","23","6"};
-        MultipleFramesBouncingBallsAnimation.main(args);
+    public void main() throws Exception {
+        String[] input = {"test", "12", "32", "34", "54", "11", "19", "20"};
+        MultipleFramesBouncingBallsAnimation.main(input);
+
     }
 }

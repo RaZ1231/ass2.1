@@ -121,16 +121,17 @@ public class Line {
     public Point intersectionWith(Line other) {
         Double m = calcSlope();
         Double mOther = other.calcSlope();
+
+        if (m.equals(mOther)) {
+            return null; //parallel
+        }
+
         Point intersection;
 
-        if (mOther == null && m == null) {
-            return null; //parallel verticals
-        } else if (mOther == null) {
+        if (mOther == null) {
             intersection = getVertInterPoint(other); //other line is vertical
         } else if (m == null) {
             intersection = other.getVertInterPoint(this); //line is vertical
-        } else if (m.equals(mOther)) {
-            return null; //parallel
         } else {
             intersection = getInterPoint(other);
         }
@@ -178,7 +179,7 @@ public class Line {
      * @return point of intersection
      */
     public Point getVertInterPoint(Line vert) {
-        return new Point(vert.start().getX(), vert.start().getX() * calcSlope() + calcYAxis());
+        return new Point(vert.start().getX(), vert.start().getX() + calcYAxis());
     }
 
     /**
