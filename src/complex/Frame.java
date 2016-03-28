@@ -13,7 +13,7 @@ import java.awt.*;
  */
 
 /**
- * Frame is a rectangle with bouncing balls insidesxsdsd.
+ * Frame is a rectangle with bouncing balls inside.
  */
 public class Frame {
     private Rectangle rectangle;
