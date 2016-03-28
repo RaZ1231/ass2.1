@@ -1,11 +1,11 @@
 package complex;
 
+import biuoop.DrawSurface;
 import collections.ArrayOfBalls;
 import shapes.Point;
 import shapes.Rectangle;
-import biuoop.DrawSurface;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Raziel Solomon
@@ -13,7 +13,7 @@ import java.awt.Color;
  */
 
 /**
- * Frame is a rectangle with bouncing balls inside.
+ * Frame is a rectangle with bouncing balls insidesxsdsd.
  */
 public class Frame {
     private Rectangle rectangle;
