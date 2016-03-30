@@ -1,6 +1,6 @@
 package tests;
 
-import graphics.MultipleFramesBouncingBallsAnimation;
+import art.MultipleFramesBouncingBallsAnimation;
 import org.junit.Test;
 
 /**
@@ -11,7 +11,7 @@ public class MultipleFramesBouncingBallsAnimationTest {
 
     @Test
     public void main() throws Exception {
-        String[] input = {"test", "12", "32", "34", "54", "11", "19", "20"};
+        String[] input = {"test", "12", "32", "34", "54", "11", "19", "20", "30"};
         MultipleFramesBouncingBallsAnimation.main(input);
 
     }

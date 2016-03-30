@@ -1,14 +1,13 @@
-package graphics;
+package art;
 
-import collections.ListOfFrames;
-
-import shapes.Point;
-import shapes.Rectangle;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
+import collections.ListOfFrames;
+import shapes.Point;
+import shapes.Rectangle;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

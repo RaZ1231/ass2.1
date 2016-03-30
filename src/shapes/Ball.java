@@ -1,9 +1,10 @@
 package shapes;
 
-import motion.Velocity;
 import biuoop.DrawSurface;
+import collisions.GameEnvironment;
+import motion.Velocity;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Raziel Solomon
@@ -18,6 +19,7 @@ public class Ball {
     private int radios;
     private Color color;
     private Velocity velocity;
+    private GameEnvironment environment;
 
     /**
      * constructor.
@@ -107,15 +109,6 @@ public class Ball {
     /**
      * Sets ball velocity.
      *
-     * @param v new velocity
-     */
-    public void setVelocity(Velocity v) {
-        this.velocity = v;
-    }
-
-    /**
-     * Sets ball velocity.
-     *
      * @param dx delta x
      * @param dy delta y
      */
@@ -130,6 +123,15 @@ public class Ball {
      */
     public Velocity getVelocity() {
         return this.velocity;
+    }
+
+    /**
+     * Sets ball velocity.
+     *
+     * @param v new velocity
+     */
+    public void setVelocity(Velocity v) {
+        this.velocity = v;
     }
 
     /**

@@ -1,13 +1,13 @@
-package graphics;
+package art;
 
-import collections.ArrayOfBalls;
-import shapes.Point;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
+import collections.ArrayOfBalls;
+import shapes.Point;
 
-import static utils.Mathematics.stringsToInts;
 import static java.util.Arrays.copyOfRange;
+import static utils.Mathematics.stringsToInts;
 
 /**
  * @author Raziel Solomon

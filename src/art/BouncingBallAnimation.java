@@ -1,4 +1,4 @@
-package graphics;
+package art;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;
