@@ -1,9 +1,9 @@
 package collections;
 
-import shapes.Line;
 import biuoop.DrawSurface;
+import shapes.Line;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Random;
 
 /**

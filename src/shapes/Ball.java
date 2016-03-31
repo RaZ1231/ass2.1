@@ -1,7 +1,8 @@
 package shapes;
 
 import biuoop.DrawSurface;
-import collisions.GameEnvironment;
+import game.Game;
+import interfaces.Sprite;
 import motion.Velocity;
 
 import java.awt.*;
@@ -14,12 +15,11 @@ import java.awt.*;
 /**
  * Representation of ball.
  */
-public class Ball {
+public class Ball implements Sprite {
     private Point center;
     private int radios;
     private Color color;
     private Velocity velocity;
-    private GameEnvironment environment;
 
     /**
      * constructor.
@@ -106,6 +106,11 @@ public class Ball {
         surface.fillCircle(getX(), getY(), getSize());
     }
 
+    @Override
+    public void timePassed() {
+
+    }
+
     /**
      * Sets ball velocity.
      *
@@ -177,5 +182,9 @@ public class Ball {
         if (getY() + getSize() > bottom) {
             center.setY(bottom - getSize());
         }
+    }
+
+    public void addToGame(Game game) {
+        game.addSprite(this);
     }
 }

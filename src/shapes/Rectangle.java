@@ -1,6 +1,6 @@
 package shapes;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * @author Raziel Solomon
@@ -26,6 +26,10 @@ public class Rectangle {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
+    }
+
+    public Rectangle(double x, double y, double width, double height) {
+        this(new Point(x, y), width, height);
     }
 
     /**

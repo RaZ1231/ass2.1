@@ -1,4 +1,4 @@
-package shapes;
+package game;
 
 /**
  * Created by Elisheva on 31/03/2016.
@@ -6,10 +6,10 @@ package shapes;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import game.Game;
 import interfaces.Collidable;
 import interfaces.Sprite;
 import motion.Velocity;
+import shapes.Line;
 
 import java.awt.*;
 
@@ -17,21 +17,25 @@ import java.awt.*;
  * Paddle representation.
  */
 public class Paddle implements Sprite, Collidable {
-    private Rectangle rect;
+    private shapes.Rectangle rect;
     private biuoop.KeyboardSensor keyboard;
+
+    public Paddle(shapes.Rectangle rect) {
+        this.rect = rect;
+    }
 
     /**
      * move the paddle left 5 pixels.
      */
     public void moveLeft() {
-        rect.setUpperLeft(new Point(rect.getUpperLeft().getX() - 5, rect.getUpperLeft().getY()));
+        rect.setUpperLeft(new shapes.Point(rect.getUpperLeft().getX() - 5, rect.getUpperLeft().getY()));
     }
 
     /**
      * move the paddle right 5 pixels.
      */
     public void moveRight() {
-        rect.setUpperLeft(new Point(rect.getUpperLeft().getX() + 5, rect.getUpperLeft().getY()));
+        rect.setUpperLeft(new shapes.Point(rect.getUpperLeft().getX() + 5, rect.getUpperLeft().getY()));
     }
 
     /**
@@ -52,9 +56,10 @@ public class Paddle implements Sprite, Collidable {
      */
     public void drawOn(DrawSurface d) {
         d.setColor(Color.YELLOW);
-        d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
         d.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
+                (int) rect.getWidth(), (int) rect.getHeight());
+        d.setColor(Color.BLACK);
+        d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
                 (int) rect.getWidth(), (int) rect.getHeight());
     }
 
@@ -63,7 +68,7 @@ public class Paddle implements Sprite, Collidable {
      *
      * @return the paddle's rectangle.
      */
-    public Rectangle getCollisionRectangle() {
+    public shapes.Rectangle getCollisionRectangle() {
         return this.rect;
     }
 
@@ -74,10 +79,10 @@ public class Paddle implements Sprite, Collidable {
      * @param currentVelocity the current velocity.
      * @return the new velocity expected after the hit.
      */
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(shapes.Point collisionPoint, Velocity currentVelocity) {
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
         if (lNorth.isInline(collisionPoint)) {
-            Point[] points = fiveRegions();
+            shapes.Point[] points = fiveRegions();
             int[] angles = {-60, -30, 0, 30, 60};
             int i = 0;
             while (i < 5) {
@@ -100,10 +105,10 @@ public class Paddle implements Sprite, Collidable {
      *
      * @return an array of the five regions of the paddle.
      */
-    public Point[] fiveRegions() {
-        Point[] points = new Point[5];
+    public shapes.Point[] fiveRegions() {
+        shapes.Point[] points = new shapes.Point[5];
         for (int i = 0; i < 5; i++) {
-            points[i] = new Point(rect.getUpperLeft().getX() + i * (rect.getWidth() / 5)
+            points[i] = new shapes.Point(rect.getUpperLeft().getX() + i * (rect.getWidth() / 5)
                     , rect.getUpperLeft().getY());
         }
         return points;

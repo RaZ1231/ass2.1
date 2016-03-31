@@ -8,15 +8,26 @@ import graphics.SpriteCollection;
 import interfaces.Collidable;
 import interfaces.Sprite;
 import shapes.Ball;
-import shapes.Block;
+import shapes.Rectangle;
+
+import java.awt.*;
+import java.util.List;
 
 /**
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
 public class Game {
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 600;
+
     private SpriteCollection sprites;
     private GameEnvironment environment;
+
+    public Game() {
+        sprites = new SpriteCollection();
+        environment = new GameEnvironment();
+    }
 
     /**
      * add a Collidable object to the game.
@@ -41,19 +52,29 @@ public class Game {
      * and add them to the game.
      */
     public void initialize() {
-        Ball ball = new Ball(...);
+        Ball ball = new Ball(50, 50, 10, Color.MAGENTA);
+        Paddle paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, 500, 100, 20));
+        double startX = 30;
+        double startY = 100;
+        double width = 60;
+        double height = 20;
+        List<Block> blocks = Stages.getStageOne(startX, startY, width, height);
+
+        blocks.addAll(Stages.getBorders(WIDTH, HEIGHT));
+
         ball.addToGame(this);
-        for (...){
-            Block block = new Block(...);
+        paddle.addToGame(this);
+        for (Block block : blocks) {
             block.addToGame(this);
         }
+
     }
 
     /**
      * Run the game -- start the animation loop.
      */
     public void run() {
-        GUI gui = new GUI("Arkanoid", 200, 200);
+        GUI gui = new GUI("Arkanoid", WIDTH, HEIGHT);
         Sleeper sleeper = new Sleeper();
         int framesPerSecond = 60;
         int millisecondsPerFrame = 1000 / framesPerSecond;

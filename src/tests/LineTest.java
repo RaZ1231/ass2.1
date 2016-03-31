@@ -1,9 +1,9 @@
 package tests;
 
-import shapes.Line;
-import shapes.Point;
 import org.junit.Assert;
 import org.junit.Test;
+import shapes.Line;
+import shapes.Point;
 
 /**
  * @author Raziel Solomon

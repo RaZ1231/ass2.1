@@ -2,7 +2,7 @@ package shapes;
 
 import biuoop.DrawSurface;
 
-import java.util.*;
+import java.util.ArrayList;
 
 import static utils.Mathematics.average;
 import static utils.Mathematics.isBetween;
@@ -280,12 +280,12 @@ public class Line {
     //
     public Point closestIntersectionToStartOfLine(Rectangle rect) {
         ArrayList<Point> pointsList = (ArrayList<Point>) rect.intersectionPoints(this);
-        if (pointsList.isEmpty()){
+        if (pointsList.isEmpty()) {
             return null;
         }
         Point closestPoint = this.end();
-        for (Point p:pointsList){
-            if(isCloser(p,closestPoint)){
+        for (Point p : pointsList) {
+            if (isCloser(p, closestPoint)) {
                 closestPoint = p;
             }
         }
@@ -299,7 +299,7 @@ public class Line {
      * @param p2 a point.
      * @return 'true' if p1 is closer. 'false' otherwise.
      */
-    public boolean isCloser(Point p1, Point p2){
+    public boolean isCloser(Point p1, Point p2) {
         return (this.start().distance(p1) >= this.start().distance(p2));
     }
 }

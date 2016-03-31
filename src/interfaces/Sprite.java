@@ -1,6 +1,7 @@
 package interfaces;
 
 import biuoop.DrawSurface;
+import game.Game;
 
 /**
  * @author Raziel Solomon
@@ -12,4 +13,6 @@ public interface Sprite {
 
     // notify the sprite that time has passed
     void timePassed();
+
+    void addToGame(Game game);
 }

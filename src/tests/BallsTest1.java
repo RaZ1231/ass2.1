@@ -3,9 +3,9 @@ package tests; /**
  * @since 16-Mar-16.
  */
 
-import shapes.Ball;
-import biuoop.GUI;
 import biuoop.DrawSurface;
+import biuoop.GUI;
+import shapes.Ball;
 
 import java.awt.*;
 

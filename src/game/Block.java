@@ -1,9 +1,10 @@
-package shapes;
+package game;
 
 import biuoop.DrawSurface;
 import interfaces.Collidable;
 import interfaces.Sprite;
 import motion.Velocity;
+import shapes.Line;
 import utils.Mathematics;
 
 import java.awt.*;
@@ -16,7 +17,7 @@ import java.awt.*;
  * Block representation.
  */
 public class Block implements Collidable, Sprite {
-    private Rectangle rect;
+    private shapes.Rectangle rect;
     private Color color;
     private int hitCounter;
 
@@ -28,7 +29,7 @@ public class Block implements Collidable, Sprite {
      * @param color      a color.
      * @param hitCounter hits counter. 'null' if none.
      */
-    public Block(Rectangle rect, Color color, int hitCounter) {
+    public Block(shapes.Rectangle rect, Color color, int hitCounter) {
         this.rect = rect;
         this.color = color;
         this.hitCounter = hitCounter;
@@ -39,7 +40,7 @@ public class Block implements Collidable, Sprite {
      *
      * @return block's rectangle.
      */
-    public Rectangle getRect() {
+    public shapes.Rectangle getRect() {
         return rect;
     }
 
@@ -68,14 +69,15 @@ public class Block implements Collidable, Sprite {
      */
     public void drawOn(DrawSurface d) {
         d.setColor(getColor());
-        d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
         d.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
                 (int) rect.getWidth(), (int) rect.getHeight());
-        double x = Mathematics.average(rect.getUpperLeft().getX(), rect.getUpperLeft().getX() + rect.getWidth());
-        double y = Mathematics.average(rect.getUpperLeft().getY(), rect.getUpperLeft().getY() + rect.getHeight());
+        d.setColor(Color.BLACK);
+        d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
+                (int) rect.getWidth(), (int) rect.getHeight());
+        double x = Mathematics.average(rect.getUpperLeft().getX(), rect.getUpperLeft().getX() + 0.9 * rect.getWidth());
+        double y = Mathematics.average(rect.getUpperLeft().getY(), rect.getUpperLeft().getY() + 1.75 * rect.getHeight());
         String s = hitsAsString();
-        d.drawText((int) x, (int) y, s, 11);
+        d.drawText((int) x, (int) y, s, 18);
     }
 
     /**
@@ -105,7 +107,7 @@ public class Block implements Collidable, Sprite {
      * @return the block's rectangle.
      */
     @Override
-    public Rectangle getCollisionRectangle() {
+    public shapes.Rectangle getCollisionRectangle() {
         return getRect();
     }
 
@@ -117,7 +119,7 @@ public class Block implements Collidable, Sprite {
      * @return the new velocity expected after the hit.
      */
     @Override
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(shapes.Point collisionPoint, Velocity currentVelocity) {
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
         Line lSouth = new Line(rect.getLowerLeft(), rect.getLowerRight());
         if (lNorth.isInline(collisionPoint) || lSouth.isInline(collisionPoint)) {
@@ -128,4 +130,8 @@ public class Block implements Collidable, Sprite {
     }
 
 
+    public void addToGame(Game game) {
+        game.addCollidable(this);
+        game.addSprite(this);
+    }
 }
