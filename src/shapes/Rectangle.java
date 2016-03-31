@@ -1,8 +1,6 @@
 package shapes;
 
-import biuoop.DrawSurface;
-
-import java.awt.Color;
+import java.util.*;
 
 /**
  * @author Raziel Solomon
@@ -13,26 +11,21 @@ import java.awt.Color;
  * Rectangle representation.
  */
 public class Rectangle {
-    private Point start;
+    private Point upperLeft;
     private double width;
     private double height;
-    private Color color;
 
     /**
      * constructor.
      *
-     * @param start starting point
-     * @param end   ending point
-     * @param color color of rectangle
+     * @param upperLeft starting point
+     * @param width     ending point
+     * @param height    color of rectangle
      */
-    public Rectangle(Point start, Point end, Color color) {
-        double x = Math.min(start.getX(), end.getX());
-        double y = Math.min(start.getY(), end.getY());
-
-        this.start = new Point(x, y);
-        this.width = Math.abs(end.getX() - start.getX());
-        this.height = Math.abs(end.getY() - start.getY());
-        this.color = color;
+    public Rectangle(Point upperLeft, double width, double height) {
+        this.upperLeft = upperLeft;
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -40,17 +33,17 @@ public class Rectangle {
      *
      * @return start point
      */
-    public Point getStart() {
-        return start;
+    public Point getUpperLeft() {
+        return upperLeft;
     }
 
     /**
-     * Returns end point.
+     * set the rectangle's upper left corner.
      *
-     * @return end point
+     * @param upperLeft rectangle's upper left corner.
      */
-    public Point getEnd() {
-        return new Point(getStart().getX() + getWidth(), getStart().getY() + getHeight());
+    public void setUpperLeft(Point upperLeft) {
+        this.upperLeft = upperLeft;
     }
 
     /**
@@ -72,21 +65,69 @@ public class Rectangle {
     }
 
     /**
-     * Returns color.
+     * returns the upper right corner.
      *
-     * @return color
+     * @return the upper right corner.
      */
-    public Color getColor() {
-        return color;
+    public Point getUpperRight() {
+        return new Point(this.getUpperLeft().getX() + this.getWidth(),
+                this.getUpperLeft().getY());
     }
 
     /**
-     * Draws on surface.
+     * returns the lower right corner.
      *
-     * @param d draw surface
+     * @return the lower right corner.
      */
-    public void drawOn(DrawSurface d) {
-        d.setColor(getColor());
-        d.fillRectangle((int) getStart().getX(), (int) getStart().getY(), (int) getWidth(), (int) getHeight());
+    public Point getLowerRight() {
+        return new Point(this.getUpperLeft().getX() + this.getWidth(),
+                this.getUpperLeft().getY() + this.getHeight());
+    }
+
+    /**
+     * returns the lower left corner.
+     *
+     * @return the lower left corner.
+     */
+    public Point getLowerLeft() {
+        return new Point(this.getUpperLeft().getX(),
+                this.getUpperLeft().getY() + this.getHeight());
+    }
+
+    /**
+     * Return a (possibly empty) List of intersection points
+     * with the specified line.
+     *
+     * @param line a line.
+     * @return a list of intersection points with the specified line.
+     */
+    public java.util.List intersectionPoints(Line line) {
+        ArrayList<Point> intersections = new ArrayList<Point>();
+        Line[] rectLines = this.fourLines();
+        for (Line l : rectLines) {
+            if (line.isIntersecting(l)) {
+                intersections.add(line.intersectionWith(l));
+            }
+        }
+        return intersections;
+    }
+
+    /**
+     * return rectangle's lines in array.
+     *
+     * @return a lines array.
+     */
+    public Line[] fourLines() {
+        Line[] lines = new Line[4];
+        lines[0] = new Line(this.upperLeft.getX(), this.upperLeft.getY(),
+                this.getUpperRight().getX(), this.getUpperRight().getY());
+        lines[1] = new Line(this.getLowerLeft().getX(), this.getLowerLeft().getY(),
+                this.getLowerRight().getX(), this.getLowerRight().getY());
+        lines[2] = new Line(this.upperLeft.getX(), this.upperLeft.getY(),
+                this.getLowerLeft().getX(), this.getLowerLeft().getY());
+        lines[3] = new Line(this.getUpperRight().getX(), this.getUpperRight().getY(),
+                this.getLowerRight().getX(), this.getLowerRight().getY());
+        return lines;
     }
 }
+

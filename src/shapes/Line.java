@@ -2,6 +2,8 @@ package shapes;
 
 import biuoop.DrawSurface;
 
+import java.util.*;
+
 import static utils.Mathematics.average;
 import static utils.Mathematics.isBetween;
 
@@ -129,14 +131,14 @@ public class Line {
         Point intersection;
 
         if (mOther == null) {
-            intersection = getVertInterPoint(other); //other line is vertical
+            intersection = this.getVertInterPoint(other); //other line is vertical
         } else if (m == null) {
             intersection = other.getVertInterPoint(this); //line is vertical
         } else {
-            intersection = getInterPoint(other);
+            intersection = this.getInterPoint(other);
         }
 
-        if (isInline(intersection) && other.isInline(intersection)) { //inline check
+        if (this.isInline(intersection) && other.isInline(intersection)) { //inline check
             return intersection;
         } else {
             return null;
@@ -236,13 +238,13 @@ public class Line {
      * @param size radios
      */
     public void drawMidPoint(DrawSurface d, int size) {
-        middle().drawOn(d, size);
+        this.middle().drawOn(d, size);
     }
 
     //
 
     /**
-     * equals -- return true is the lines are equal, false otherwise.
+     * equals -- return true if the lines are equal, false otherwise.
      *
      * @param other second line
      * @return true\false
@@ -265,5 +267,39 @@ public class Line {
     @Override
     public String toString() {
         return String.format("Line{y=%sx+%s, start=%s, end=%s}", calcSlope(), calcYAxis(), start, end);
+    }
+
+    /**
+     * If line does not intersect with the rectangle, return null.
+     * Otherwise, return the closest intersection point to the
+     * start of the line.
+     *
+     * @param rect a rectangle.
+     * @return the closest intersection point to the start of the line.
+     */
+    //
+    public Point closestIntersectionToStartOfLine(Rectangle rect) {
+        ArrayList<Point> pointsList = (ArrayList<Point>) rect.intersectionPoints(this);
+        if (pointsList.isEmpty()){
+            return null;
+        }
+        Point closestPoint = this.end();
+        for (Point p:pointsList){
+            if(isCloser(p,closestPoint)){
+                closestPoint = p;
+            }
+        }
+        return closestPoint;
+    }
+
+    /**
+     * returns if p1 is closer to start point than p2.
+     *
+     * @param p1 a point.
+     * @param p2 a point.
+     * @return 'true' if p1 is closer. 'false' otherwise.
+     */
+    public boolean isCloser(Point p1, Point p2){
+        return (this.start().distance(p1) >= this.start().distance(p2));
     }
 }

@@ -13,21 +13,33 @@ import java.util.List;
 public class GameEnvironment {
     private List<Collidable> collidables;
 
+    /**
+     * constructor.
+     */
     public GameEnvironment() {
         collidables = new LinkedList<Collidable>();
     }
 
-    // add the given collidable to the environment.
+    /**
+     * add the given collidable to the environment.
+     *
+     * @param c a Collidable object.
+     */
     public void addCollidable(Collidable c) {
         collidables.add(c);
     }
 
-    // Assume an object moving from line.start() to line.end().
-    // If this object will not collide with any of the collidables
-    // in this collection, return null. Else, return the information
-    // about the closest collision that is going to occur.
+    /**
+     * Assume an object moving from line.start() to line.end().
+     * If this object will not collide with any of the collidables
+     * in this collection, return null. Else, return the information
+     * about the closest collision that is going to occur.
+     *
+     * @param trajectory a line to the ball's next step.
+     * @return collision info.
+     */
     public CollisionInfo getClosestCollision(Line trajectory) {
-
+        return null;
     }
 
 }

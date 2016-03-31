@@ -26,7 +26,7 @@ public class Velocity {
     }
 
     /**
-     * Gets dx.
+     * returns dx.
      *
      * @return dx
      */
@@ -35,7 +35,7 @@ public class Velocity {
     }
 
     /**
-     * Returns dy.
+     * returns dy.
      *
      * @return dy
      */
