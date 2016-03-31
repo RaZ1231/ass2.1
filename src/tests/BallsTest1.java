@@ -7,7 +7,7 @@ import biuoop.DrawSurface;
 import biuoop.GUI;
 import shapes.Ball;
 
-import java.awt.*;
+import java.awt.Color;
 
 
 public class BallsTest1 {

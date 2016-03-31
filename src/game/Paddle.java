@@ -19,9 +19,9 @@ import java.awt.Color;
  */
 public class Paddle implements Sprite, Collidable {
     private shapes.Rectangle rect;
-    private biuoop.KeyboardSensor keyboard;
+    private KeyboardSensor keyboard;
 
-    public Paddle(Rectangle rect, biuoop.KeyboardSensor keyboard) {
+    public Paddle(Rectangle rect, KeyboardSensor keyboard) {
         this.rect = rect;
         this.keyboard = keyboard;
     }

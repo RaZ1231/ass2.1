@@ -5,7 +5,7 @@ import game.Game;
 import interfaces.Sprite;
 import motion.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Raziel Solomon

@@ -3,7 +3,7 @@ package collections;
 import biuoop.DrawSurface;
 import shapes.Line;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 /**

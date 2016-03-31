@@ -7,7 +7,7 @@ import motion.Velocity;
 import shapes.Line;
 import utils.Mathematics;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * Created by Elisheva on 30/03/2016.
