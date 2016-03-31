@@ -10,8 +10,9 @@ import interfaces.Collidable;
 import interfaces.Sprite;
 import motion.Velocity;
 import shapes.Line;
+import shapes.Rectangle;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * Paddle representation.
@@ -20,8 +21,9 @@ public class Paddle implements Sprite, Collidable {
     private shapes.Rectangle rect;
     private biuoop.KeyboardSensor keyboard;
 
-    public Paddle(shapes.Rectangle rect) {
+    public Paddle(Rectangle rect, biuoop.KeyboardSensor keyboard) {
         this.rect = rect;
+        this.keyboard = keyboard;
     }
 
     /**
@@ -68,7 +70,7 @@ public class Paddle implements Sprite, Collidable {
      *
      * @return the paddle's rectangle.
      */
-    public shapes.Rectangle getCollisionRectangle() {
+    public Rectangle getCollisionRectangle() {
         return this.rect;
     }
 

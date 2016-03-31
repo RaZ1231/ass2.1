@@ -10,7 +10,7 @@ import interfaces.Sprite;
 import shapes.Ball;
 import shapes.Rectangle;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 
 /**
@@ -23,6 +23,7 @@ public class Game {
 
     private SpriteCollection sprites;
     private GameEnvironment environment;
+    private GUI gui;
 
     public Game() {
         sprites = new SpriteCollection();
@@ -52,8 +53,9 @@ public class Game {
      * and add them to the game.
      */
     public void initialize() {
+        gui = new GUI("Arkanoid", WIDTH, HEIGHT);
         Ball ball = new Ball(50, 50, 10, Color.MAGENTA);
-        Paddle paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, 500, 100, 20));
+        Paddle paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, 500, 100, 20), gui.getKeyboardSensor());
         double startX = 30;
         double startY = 100;
         double width = 60;
@@ -74,7 +76,6 @@ public class Game {
      * Run the game -- start the animation loop.
      */
     public void run() {
-        GUI gui = new GUI("Arkanoid", WIDTH, HEIGHT);
         Sleeper sleeper = new Sleeper();
         int framesPerSecond = 60;
         int millisecondsPerFrame = 1000 / framesPerSecond;
