@@ -11,6 +11,13 @@ import java.util.List;
  * @since 31-Mar-16.
  */
 public class Stages {
+    /**
+     * returns surface's borders.
+     *
+     * @param width surface's width borders.
+     * @param height surface's height borders.
+     * @return surface's borders.
+     */
     public static List<Block> getBorders(double width, double height) {
         List<Block> borders = new LinkedList<>();
         int size = 15;
@@ -23,6 +30,13 @@ public class Stages {
         return borders;
     }
 
+    /**
+     * @param startX
+     * @param startY
+     * @param width
+     * @param height
+     * @return
+     */
     public static List<Block> getStageOne(double startX, double startY, double width, double height) {
         List<Block> blocks = new LinkedList<>();
         Color[] colors = {Color.GRAY, Color.RED, Color.YELLOW, Color.BLUE, Color.PINK, Color.GREEN};

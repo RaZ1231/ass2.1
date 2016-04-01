@@ -5,12 +5,14 @@ import interfaces.Collidable;
 import interfaces.Sprite;
 import motion.Velocity;
 import shapes.Line;
+import shapes.Point;
 import utils.Mathematics;
 
 import java.awt.Color;
 
 /**
- * Created by Elisheva on 30/03/2016.
+ * @author Elisheva
+ * @since 30/03/2016.
  */
 
 /**
@@ -119,7 +121,7 @@ public class Block implements Collidable, Sprite {
      * @return the new velocity expected after the hit.
      */
     @Override
-    public Velocity hit(shapes.Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
         Line lSouth = new Line(rect.getLowerLeft(), rect.getLowerRight());
         if (lNorth.isInline(collisionPoint) || lSouth.isInline(collisionPoint)) {

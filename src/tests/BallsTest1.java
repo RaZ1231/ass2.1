@@ -15,9 +15,9 @@ public class BallsTest1 {
         GUI gui = new GUI("Balls Test 1", 400, 400);
         DrawSurface d = gui.getDrawSurface();
 
-        Ball b1 = new Ball(100, 100, 30, Color.RED);
-        Ball b2 = new Ball(100, 150, 10, Color.BLUE);
-        Ball b3 = new Ball(80, 249, 50, Color.GREEN);
+        Ball b1 = new Ball(100, 100, 30, Color.RED, null);
+        Ball b2 = new Ball(100, 150, 10, Color.BLUE, null);
+        Ball b3 = new Ball(80, 249, 50, Color.GREEN, null);
 
         b1.drawOn(d);
         b2.drawOn(d);

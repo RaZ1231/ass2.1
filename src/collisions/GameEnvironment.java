@@ -2,6 +2,7 @@ package collisions;
 
 import interfaces.Collidable;
 import shapes.Line;
+import shapes.Point;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +40,16 @@ public class GameEnvironment {
      * @return collision info.
      */
     public CollisionInfo getClosestCollision(Line trajectory) {
-        return null;
+        Point closestPoint = trajectory.end();
+        Collidable collidable = null;
+        for (Collidable c:this.collidables) {
+            Point p = trajectory.closestIntersectionToStartOfLine(c.getCollisionRectangle());
+            if (trajectory.isCloserToStart(p, closestPoint)) {
+                closestPoint = p;
+                collidable = c;
+            }
+        }
+        return new CollisionInfo(closestPoint, collidable);
     }
 
 }

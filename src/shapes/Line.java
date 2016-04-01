@@ -285,7 +285,7 @@ public class Line {
         }
         Point closestPoint = this.end();
         for (Point p : pointsList) {
-            if (isCloser(p, closestPoint)) {
+            if (isCloserToStart(p, closestPoint)) {
                 closestPoint = p;
             }
         }
@@ -299,7 +299,7 @@ public class Line {
      * @param p2 a point.
      * @return 'true' if p1 is closer. 'false' otherwise.
      */
-    public boolean isCloser(Point p1, Point p2) {
-        return (this.start().distance(p1) >= this.start().distance(p2));
+    public boolean isCloserToStart(Point p1, Point p2) {
+        return (this.start().distance(p1) <= this.start().distance(p2));
     }
 }

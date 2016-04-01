@@ -1,6 +1,8 @@
 package shapes;
 
 import biuoop.DrawSurface;
+import collisions.CollisionInfo;
+import collisions.GameEnvironment;
 import game.Game;
 import interfaces.Sprite;
 import motion.Velocity;
@@ -20,6 +22,7 @@ public class Ball implements Sprite {
     private int radios;
     private Color color;
     private Velocity velocity;
+    private GameEnvironment gameEnvironment;
 
     /**
      * constructor.
@@ -28,10 +31,11 @@ public class Ball implements Sprite {
      * @param radios ball size
      * @param color  ball color
      */
-    public Ball(Point center, int radios, Color color) {
+    public Ball(Point center, int radios, Color color, GameEnvironment gameEnvironment) {
         this.center = center;
         this.radios = radios;
         this.color = color;
+        this.gameEnvironment = gameEnvironment;
     }
 
     /**
@@ -42,8 +46,8 @@ public class Ball implements Sprite {
      * @param radios ball size
      * @param color  ball color
      */
-    public Ball(double x, double y, int radios, Color color) {
-        this(new Point(x, y), radios, color);
+    public Ball(double x, double y, int radios, Color color, GameEnvironment gameEnvironment) {
+        this(new Point(x, y), radios, color, gameEnvironment);
     }
 
     // accessors
@@ -106,9 +110,19 @@ public class Ball implements Sprite {
         surface.fillCircle(getX(), getY(), getSize());
     }
 
+    /**
+     * move the ball one step.
+     */
     @Override
     public void timePassed() {
-
+        Point applyPoint = this.getVelocity().applyToPoint(this.center); // next position.
+        Line trajectory = new Line(this.center, applyPoint); // line to next position.
+        CollisionInfo info = this.gameEnvironment.getClosestCollision(trajectory); // is there an object it collide
+        if (info.getCollisionObject() != null) { // there is
+            this.setVelocity(info.getCollisionObject().hit(info.getCollisionPoint(), this.velocity));
+        } else { // there isn't.
+            this.moveOneStep();
+        }
     }
 
     /**

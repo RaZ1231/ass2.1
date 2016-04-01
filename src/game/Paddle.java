@@ -1,7 +1,8 @@
 package game;
 
 /**
- * Created by Elisheva on 31/03/2016.
+ * @author Elisheva
+ * @since 31/03/2016.
  */
 
 import biuoop.DrawSurface;
