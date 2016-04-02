@@ -1,6 +1,7 @@
 package shapes;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Raziel Solomon
@@ -105,14 +106,16 @@ public class Rectangle {
      * @param line a line.
      * @return a list of intersection points with the specified line.
      */
-    public java.util.List intersectionPoints(Line line) {
-        ArrayList<Point> intersections = new ArrayList<Point>();
+    public List<Point> intersectionPoints(Line line) {
+        List<Point> intersections = new ArrayList<Point>();
         Line[] rectLines = this.fourLines();
+
         for (Line l : rectLines) {
             if (line.isIntersecting(l)) {
                 intersections.add(line.intersectionWith(l));
             }
         }
+
         return intersections;
     }
 

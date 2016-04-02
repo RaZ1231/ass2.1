@@ -26,6 +26,33 @@ public class Velocity {
     }
 
     /**
+     * Turns angle and speed to new velocity.
+     *
+     * @param angle angle by degrees
+     * @param speed velocity speed
+     * @return new velocity
+     */
+    public static Velocity fromAngleAndSpeed(double angle, double speed) {
+        double dx = speed * Math.sin(Math.toRadians(angle));
+        double dy = speed * Math.cos(Math.toRadians(angle)) * (-1);
+
+        return new Velocity(dx, dy);
+    }
+
+    /**
+     * Turn too low speed to minimum.
+     *
+     * @param num speed
+     * @return minimum speed
+     */
+    public static int minimumSpeed(int num) {
+        if (num <= 0) {
+            return 1;
+        }
+        return num;
+    }
+
+    /**
      * returns dx.
      *
      * @return dx
@@ -51,33 +78,6 @@ public class Velocity {
      */
     public Point applyToPoint(Point p) {
         return new Point(p.getX() + dx, p.getY() + dy);
-    }
-
-    /**
-     * Turns angle and speed to new velocity.
-     *
-     * @param angle angle by degrees
-     * @param speed velocity speed
-     * @return new velocity
-     */
-    public static Velocity fromAngleAndSpeed(double angle, double speed) {
-        double dx = speed * Math.sin(angle);
-        double dy = speed * Math.cos(angle);
-
-        return new Velocity(dx, dy);
-    }
-
-    /**
-     * Turn too low speed to minimum.
-     *
-     * @param num speed
-     * @return minimum speed
-     */
-    public static int minimumSpeed(int num) {
-        if (num <= 0) {
-            return 1;
-        }
-        return num;
     }
 
 

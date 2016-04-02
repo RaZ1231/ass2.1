@@ -115,18 +115,13 @@ public class Ball implements Sprite {
      */
     @Override
     public void timePassed() {
-        try {
-
-            Point applyPoint = this.getVelocity().applyToPoint(this.center); // next position.
-            Line trajectory = new Line(this.center, applyPoint); // line to next position.
-            CollisionInfo info = this.gameEnvironment.getClosestCollision(trajectory); // is there an object it collide
-            if (info.getCollisionObject() != null) { // there is
-                this.setVelocity(info.getCollisionObject().hit(info.getCollisionPoint(), this.velocity));
-            } else { // there isn't.
-                this.moveOneStep();
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        Point applyPoint = this.getVelocity().applyToPoint(this.center); // next position.
+        Line trajectory = new Line(this.center, applyPoint); // line to next position.
+        CollisionInfo info = this.gameEnvironment.getClosestCollision(trajectory); // is there an object it collide
+        if (info.getCollisionObject() != null) { // there is
+            this.setVelocity(info.getCollisionObject().hit(info.getCollisionPoint(), this.velocity));
+        } else { // there isn't.
+            this.moveOneStep();
         }
     }
 

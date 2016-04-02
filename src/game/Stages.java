@@ -14,7 +14,7 @@ public class Stages {
     /**
      * returns surface's borders.
      *
-     * @param width surface's width borders.
+     * @param width  surface's width borders.
      * @param height surface's height borders.
      * @return surface's borders.
      */

@@ -11,7 +11,9 @@ import interfaces.Collidable;
 import interfaces.Sprite;
 import motion.Velocity;
 import shapes.Line;
+import shapes.Point;
 import shapes.Rectangle;
+import utils.Mathematics;
 
 import java.awt.Color;
 
@@ -19,7 +21,9 @@ import java.awt.Color;
  * Paddle representation.
  */
 public class Paddle implements Sprite, Collidable {
-    private shapes.Rectangle rect;
+    public static final int[] ANGLES = {-60, -30, 0, 30, 60};
+
+    private Rectangle rect;
     private KeyboardSensor keyboard;
 
     public Paddle(Rectangle rect, KeyboardSensor keyboard) {
@@ -82,25 +86,26 @@ public class Paddle implements Sprite, Collidable {
      * @param currentVelocity the current velocity.
      * @return the new velocity expected after the hit.
      */
-    public Velocity hit(shapes.Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
-        if (lNorth.isInline(collisionPoint)) {
-            shapes.Point[] points = fiveRegions();
-            int[] angles = {-60, -30, 0, 30, 60};
-            int i = 0;
-            while (i < 5) {
-                if (collisionPoint.getX() >= points[i + 1].getX()) {
-                    i++;
-                } else {
-                    double speed = Math.pow(currentVelocity.getDx(), 2)
-                            + Math.pow(currentVelocity.getDy(), 2);
-                    return Velocity.fromAngleAndSpeed(angles[i], speed);
-                }
-            }
-        } else {
+        if (lNorth.isInline(collisionPoint)) { //hit upper bound
+            double[] regions = getFiveRegions();
+            double speed = Math.sqrt(Math.pow(currentVelocity.getDx(), 2)
+                    + Math.pow(currentVelocity.getDy(), 2));
+
+            return Velocity.fromAngleAndSpeed(ANGLES[getRegion(collisionPoint.getX(), regions)], speed);
+        } else { //hit sides
             return new Velocity(-1 * currentVelocity.getDx(), currentVelocity.getDy());
         }
-        return currentVelocity;
+    }
+
+    public int getRegion(double x, double[] regions) {
+        for (int i = 0; i < 4; i++) {
+            if (Mathematics.isBetween(regions[i], x, regions[i + 1])) {
+                return i;
+            }
+        }
+        return 4;
     }
 
     /**
@@ -108,13 +113,14 @@ public class Paddle implements Sprite, Collidable {
      *
      * @return an array of the five regions of the paddle.
      */
-    public shapes.Point[] fiveRegions() {
-        shapes.Point[] points = new shapes.Point[5];
+    public double[] getFiveRegions() {
+        double[] regions = new double[5];
+
         for (int i = 0; i < 5; i++) {
-            points[i] = new shapes.Point(rect.getUpperLeft().getX() + i * (rect.getWidth() / 5)
-                    , rect.getUpperLeft().getY());
+            regions[i] = rect.getUpperLeft().getX() + i * rect.getWidth() / 5;
         }
-        return points;
+
+        return regions;
     }
 
     /**

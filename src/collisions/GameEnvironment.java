@@ -42,9 +42,9 @@ public class GameEnvironment {
     public CollisionInfo getClosestCollision(Line trajectory) {
         Point closestPoint = trajectory.end();
         Collidable collidable = null;
-        for (Collidable c:this.collidables) {
+        for (Collidable c : this.collidables) {
             Point p = trajectory.closestIntersectionToStartOfLine(c.getCollisionRectangle());
-            if (p == null){
+            if (p == null) {
                 continue;
             }
             if (trajectory.isCloserToStart(p, closestPoint)) {

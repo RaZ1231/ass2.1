@@ -54,8 +54,8 @@ public class Game {
      */
     public void initialize() {
         gui = new GUI("Arkanoid", WIDTH, HEIGHT);
-        Ball ball = new Ball(50, 50, 10, Color.MAGENTA, environment);
-        ball.setVelocity(10,10);
+        Ball ball = new Ball(50, 500, 10, Color.MAGENTA, environment);
+        ball.setVelocity(0, 5);
         Paddle paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, 500, 100, 20), gui.getKeyboardSensor());
         double startX = 30;
         double startY = 100;

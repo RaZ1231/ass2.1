@@ -2,7 +2,7 @@ package shapes;
 
 import biuoop.DrawSurface;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static utils.Mathematics.average;
 import static utils.Mathematics.isBetween;
@@ -26,13 +26,8 @@ public class Line {
      * @param end   Ending point
      */
     public Line(Point start, Point end) {
-        if (start.getX() <= end.getX()) {
-            this.start = start;
-            this.end = end;
-        } else {
-            this.start = end;
-            this.end = start;
-        }
+        this.start = start;
+        this.end = end;
     }
 
     /**
@@ -53,7 +48,7 @@ public class Line {
      * @return length of the line
      */
     public double length() {
-        return this.start().distance(this.end());
+        return Math.abs(this.start().distance(this.end()));
     }
 
     /**
@@ -124,7 +119,7 @@ public class Line {
         Double m = calcSlope();
         Double mOther = other.calcSlope();
 
-        if (m.equals(mOther)) {
+        if (m == mOther) {
             return null; //parallel
         }
 
@@ -181,7 +176,7 @@ public class Line {
      * @return point of intersection
      */
     public Point getVertInterPoint(Line vert) {
-        return new Point(vert.start().getX(), vert.start().getX() + calcYAxis());
+        return new Point(vert.start().getX(), calcSlope() * vert.start().getX() + calcYAxis());
     }
 
     /**
@@ -279,16 +274,18 @@ public class Line {
      */
     //
     public Point closestIntersectionToStartOfLine(Rectangle rect) {
-        ArrayList<Point> pointsList = (ArrayList<Point>) rect.intersectionPoints(this);
+        List<Point> pointsList = rect.intersectionPoints(this);
         if (pointsList.isEmpty()) {
             return null;
         }
+
         Point closestPoint = this.end();
         for (Point p : pointsList) {
-            if (isCloserToStart(p, closestPoint)) {
+            if (start().distance(p) < start().distance(closestPoint)) {
                 closestPoint = p;
             }
         }
+
         return closestPoint;
     }
 
