@@ -33,6 +33,17 @@ public class Mathematics {
     }
 
     /**
+     * Return a^2 + b^2.
+     *
+     * @param a first number
+     * @param b second number
+     * @return c^2
+     */
+    public static double pythagoras(double a, double b) {
+        return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    }
+
+    /**
      * Convet string array to int array.
      *
      * @param sArr string array to convert

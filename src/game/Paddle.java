@@ -22,27 +22,40 @@ import java.awt.Color;
  */
 public class Paddle implements Sprite, Collidable {
     public static final int[] ANGLES = {-60, -30, 0, 30, 60};
+    public static final double STEP = 5;
 
     private Rectangle rect;
     private KeyboardSensor keyboard;
+    private double leftBorder;
+    private double rightBorder;
 
-    public Paddle(Rectangle rect, KeyboardSensor keyboard) {
+    public Paddle(Rectangle rect, KeyboardSensor keyboard, double leftBorder, double rightBorder) {
         this.rect = rect;
         this.keyboard = keyboard;
+        this.leftBorder = leftBorder;
+        this.rightBorder = rightBorder;
     }
 
     /**
      * move the paddle left 5 pixels.
      */
     public void moveLeft() {
-        rect.setUpperLeft(new shapes.Point(rect.getUpperLeft().getX() - 5, rect.getUpperLeft().getY()));
+        if (rect.getUpperLeft().getX() <= leftBorder) {
+            rect.setUpperLeft(new Point(leftBorder, rect.getUpperLeft().getY()));
+        } else {
+            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() - STEP, rect.getUpperLeft().getY()));
+        }
     }
 
     /**
      * move the paddle right 5 pixels.
      */
     public void moveRight() {
-        rect.setUpperLeft(new shapes.Point(rect.getUpperLeft().getX() + 5, rect.getUpperLeft().getY()));
+        if (rect.getUpperRight().getX() >= rightBorder) {
+            rect.setUpperLeft(new Point(rightBorder - rect.getWidth(), rect.getUpperLeft().getY()));
+        } else {
+            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() + STEP, rect.getUpperLeft().getY()));
+        }
     }
 
     /**
@@ -90,13 +103,11 @@ public class Paddle implements Sprite, Collidable {
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
         if (lNorth.isInline(collisionPoint)) { //hit upper bound
             double[] regions = getFiveRegions();
-            double speed = Math.sqrt(Math.pow(currentVelocity.getDx(), 2)
-                    + Math.pow(currentVelocity.getDy(), 2));
+            double speed = Mathematics.pythagoras(currentVelocity.getDx(), currentVelocity.getDy());
 
             return Velocity.fromAngleAndSpeed(ANGLES[getRegion(collisionPoint.getX(), regions)], speed);
-        } else { //hit sides
-            return new Velocity(-1 * currentVelocity.getDx(), currentVelocity.getDy());
         }
+        return new Velocity(-1 * currentVelocity.getDx(), currentVelocity.getDy()); //hit sides
     }
 
     public int getRegion(double x, double[] regions) {

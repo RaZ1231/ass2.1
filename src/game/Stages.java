@@ -18,9 +18,8 @@ public class Stages {
      * @param height surface's height borders.
      * @return surface's borders.
      */
-    public static List<Block> getBorders(double width, double height) {
+    public static List<Block> getBorders(double width, double height, int size) {
         List<Block> borders = new LinkedList<>();
-        int size = 15;
 
         borders.add(new Block(new Rectangle(0, 0, size, height), Color.BLACK, 0)); //left
         borders.add(new Block(new Rectangle(width - size, 0, size, height), Color.BLACK, 0)); //right

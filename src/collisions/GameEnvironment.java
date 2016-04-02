@@ -42,16 +42,17 @@ public class GameEnvironment {
     public CollisionInfo getClosestCollision(Line trajectory) {
         Point closestPoint = trajectory.end();
         Collidable collidable = null;
+        Point p;
+
         for (Collidable c : this.collidables) {
-            Point p = trajectory.closestIntersectionToStartOfLine(c.getCollisionRectangle());
-            if (p == null) {
-                continue;
-            }
-            if (trajectory.isCloserToStart(p, closestPoint)) {
+            p = trajectory.closestIntersectionToStartOfLine(c.getCollisionRectangle());
+
+            if ((p != null) && (trajectory.start().distance(p) <= trajectory.start().distance(closestPoint))) {
                 closestPoint = p;
                 collidable = c;
             }
         }
+
         return new CollisionInfo(closestPoint, collidable);
     }
 
