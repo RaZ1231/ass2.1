@@ -6,6 +6,7 @@ import interfaces.Sprite;
 import motion.Velocity;
 import shapes.Line;
 import shapes.Point;
+import shapes.Rectangle;
 import utils.Mathematics;
 
 import java.awt.Color;
@@ -65,6 +66,19 @@ public class Block implements Collidable, Sprite {
     }
 
     /**
+     * setting hit counter of block.
+     *
+     * @param hitCounter hit counter of block.
+     */
+    public void setHitCounter(int hitCounter) {
+        if (hitCounter < 1) {
+            this.hitCounter = 0;
+        } else {
+            this.hitCounter = hitCounter;
+        }
+    }
+
+    /**
      * Draws on surface.
      *
      * @param d draw surface.
@@ -109,7 +123,7 @@ public class Block implements Collidable, Sprite {
      * @return the block's rectangle.
      */
     @Override
-    public shapes.Rectangle getCollisionRectangle() {
+    public Rectangle getCollisionRectangle() {
         return getRect();
     }
 
@@ -124,6 +138,7 @@ public class Block implements Collidable, Sprite {
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
         Line lSouth = new Line(rect.getLowerLeft(), rect.getLowerRight());
+        this.setHitCounter(hitCounter-1);
         if (lNorth.isInline(collisionPoint) || lSouth.isInline(collisionPoint)) {
             return new Velocity(currentVelocity.getDx(), -1 * currentVelocity.getDy());
         } else {

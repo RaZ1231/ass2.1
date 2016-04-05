@@ -166,7 +166,7 @@ public class Line {
         double x = ((nOther - n) / (m - mOther));
         double y = m * x + n;
 
-        return new Point(x, y);
+        return new Point(Math.round(x), Math.round(y));
     }
 
     /**
@@ -176,7 +176,7 @@ public class Line {
      * @return point of intersection
      */
     public Point getVertInterPoint(Line vert) {
-        return new Point(vert.start().getX(), calcSlope() * vert.start().getX() + calcYAxis());
+        return new Point(Math.round(vert.start().getX()), Math.round(calcSlope() * vert.start().getX() + calcYAxis()));
     }
 
     /**
@@ -281,22 +281,11 @@ public class Line {
 
         Point closestPoint = this.end();
         for (Point p : pointsList) {
-            if (start().distance(p) < start().distance(closestPoint)) {
+            if (start().distance(p) <= start().distance(closestPoint)) {
                 closestPoint = p;
             }
         }
 
         return closestPoint;
-    }
-
-    /**
-     * returns if p1 is closer to start point than p2.
-     *
-     * @param p1 a point.
-     * @param p2 a point.
-     * @return 'true' if p1 is closer. 'false' otherwise.
-     */
-    public boolean isCloserToStart(Point p1, Point p2) {
-        return (this.start().distance(p1) <= this.start().distance(p2));
     }
 }

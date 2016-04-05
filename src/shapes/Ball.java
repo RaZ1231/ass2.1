@@ -70,6 +70,10 @@ public class Ball implements Sprite {
         return (int) this.center.getY();
     }
 
+    public Point getCenter() {
+        return center;
+    }
+
     /**
      * Gets radios.
      *
@@ -115,13 +119,18 @@ public class Ball implements Sprite {
      */
     @Override
     public void timePassed() {
-        Point applyPoint = this.getVelocity().applyToPoint(this.center); // next position.
+        //Velocity tempV = Velocity.fromAngleAndSpeed(getVelocity().getAngle(), getVelocity().getSpeed() + getSize() -
+        //        2);
+        Point applyPoint = getVelocity().applyToPoint(this.center); // next position.
         Line trajectory = new Line(this.center, applyPoint); // line to next position.
-        CollisionInfo info = this.gameEnvironment.getClosestCollision(trajectory); // is there an object it collide
+        CollisionInfo info = this.gameEnvironment.getClosestCollision(trajectory); // is there an object it
+        //collide
         if (info.getCollisionObject() != null) { // there is
             this.setVelocity(info.getCollisionObject().hit(info.getCollisionPoint(), this.velocity));
-        } else { // there isn't.
-            this.moveOneStep();
+        }
+        this.moveOneStep();
+        if (this.center.getX() < 15 || this.center.getY() < 15 || this.center.getX() > 785 || this.center.getY() > 585) {
+            System.out.println("null");
         }
     }
 
@@ -158,44 +167,6 @@ public class Ball implements Sprite {
      */
     public void moveOneStep() {
         this.center = this.getVelocity().applyToPoint(this.center);
-    }
-
-    /**
-     * Move the ball one step in bounded step.
-     *
-     * @param left   right margin
-     * @param top    top margin
-     * @param right  left margin
-     * @param bottom bottom margin
-     */
-    public void moveBoundedStep(int left, int top, int right, int bottom) {
-        //checking if ball reached bound.
-        //sides
-        if (getX() - getSize() <= left || getX() + getSize() >= right) {
-            setVelocity((-1) * getVelocity().getDx(), getVelocity().getDy());
-        }
-        //top and bottom
-        if (getY() - getSize() <= top || getY() + getSize() >= bottom) {
-            setVelocity(getVelocity().getDx(), (-1) * getVelocity().getDy());
-        }
-
-        moveOneStep(); //move ball
-
-        //checking if ball missed bound
-        //sides
-        if (getX() - getSize() < left) {
-            center.setX(left + getSize());
-        }
-        if (getX() + getSize() > right) {
-            center.setX(right - getSize());
-        }
-        //top and bottom
-        if (getY() - getSize() < top) {
-            center.setY(top + getSize());
-        }
-        if (getY() + getSize() > bottom) {
-            center.setY(bottom - getSize());
-        }
     }
 
     public void addToGame(Game game) {

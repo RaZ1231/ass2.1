@@ -1,6 +1,7 @@
 package collisions;
 
 import interfaces.Collidable;
+import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 

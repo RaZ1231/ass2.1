@@ -1,6 +1,7 @@
 package motion;
 
 import shapes.Point;
+import utils.Mathematics;
 
 /**
  * @author Raziel Solomon
@@ -33,8 +34,8 @@ public class Velocity {
      * @return new velocity
      */
     public static Velocity fromAngleAndSpeed(double angle, double speed) {
-        double dx = speed * Math.sin(Math.toRadians(angle));
-        double dy = speed * Math.cos(Math.toRadians(angle)) * (-1);
+        double dx = Math.round(speed * Math.sin(Math.toRadians(angle)));
+        double dy = Math.round(speed * Math.cos(Math.toRadians(angle)) * (-1));
 
         return new Velocity(dx, dy);
     }
@@ -68,6 +69,14 @@ public class Velocity {
      */
     public double getDy() {
         return dy;
+    }
+
+    public double getSpeed() {
+        return Mathematics.pythagoras(dx, dy);
+    }
+
+    public double getAngle() {
+        return Math.toDegrees(Math.asin(dx / getSpeed()));
     }
 
     /**
