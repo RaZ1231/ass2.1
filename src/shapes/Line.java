@@ -13,7 +13,7 @@ import static utils.Mathematics.isBetween;
  */
 
 /**
- * Line representation.
+ * Line class.
  */
 public class Line {
     private Point start;
@@ -43,7 +43,7 @@ public class Line {
     }
 
     /**
-     * Return the length of the line.
+     * return the length of the line.
      *
      * @return length of the line
      */
@@ -52,9 +52,9 @@ public class Line {
     }
 
     /**
-     * Returns the middle start of the line.
+     * returns the middle start of the line.
      *
-     * @return ddle start of the line
+     * @return the start of the line
      */
     public Point middle() {
         double x = average(start().getX(), end().getX());
@@ -63,7 +63,7 @@ public class Line {
     }
 
     /**
-     * Returns the start of the line.
+     * returns the start of the line.
      *
      * @return start of the line
      */
@@ -72,7 +72,7 @@ public class Line {
     }
 
     /**
-     * Returns the end of the line.
+     * returns the end of the line.
      *
      * @return end of the line
      */
@@ -81,7 +81,7 @@ public class Line {
     }
 
     /**
-     * Sets start of line.
+     * sets start of line.
      *
      * @param newStart new start
      */
@@ -90,7 +90,7 @@ public class Line {
     }
 
     /**
-     * Sets end of line.
+     * sets end of line.
      *
      * @param newEnd new end
      */
@@ -99,21 +99,21 @@ public class Line {
     }
 
     /**
-     * Returns true if the lines intersect, false otherwise.
+     * returns true if the lines intersect, false otherwise.
      *
      * @param other other line
-     * @return true\false
+     * @return true if the lines intersect, false otherwise.
      */
     public boolean isIntersecting(Line other) {
         return (intersectionWith(other) != null);
     }
 
     /**
-     * Returns the intersection start if the lines intersect,
+     * returns the intersection start if the lines intersect,
      * and null otherwise.
      *
-     * @param other second line
-     * @return point of intersection
+     * @param other second line.
+     * @return point of intersection.
      */
     public Point intersectionWith(Line other) {
         Double m = calcSlope();
@@ -141,10 +141,10 @@ public class Line {
     }
 
     /**
-     * Checks if point is inline.
+     * checks if point is inline.
      *
-     * @param p point
-     * @return true\false
+     * @param p a point.
+     * @return true if point in line. false otherwise.
      */
     public boolean isInline(Point p) {
         return isBetween(start().getX(), p.getX(), end().getX())
@@ -152,10 +152,10 @@ public class Line {
     }
 
     /**
-     * Gets point of intersection.
+     * returns the point of intersection.
      *
-     * @param other second line
-     * @return point
+     * @param other second line.
+     * @return the point of intersection.
      */
     public Point getInterPoint(Line other) {
         Double m = calcSlope();
@@ -170,17 +170,17 @@ public class Line {
     }
 
     /**
-     * Gets point of intersection with vertical line.
+     * returns the point of intersection with vertical line.
      *
      * @param vert vertical line
-     * @return point of intersection
+     * @return the point of intersection with vertical line.
      */
     public Point getVertInterPoint(Line vert) {
         return new Point(Math.round(vert.start().getX()), Math.round(calcSlope() * vert.start().getX() + calcYAxis()));
     }
 
     /**
-     * Calculates y axis intersect.
+     * calculates y-axis intersect.
      *
      * @return point of intersection
      */
@@ -201,9 +201,9 @@ public class Line {
     }
 
     /**
-     * Calculates slope.
+     * calculates slope.
      *
-     * @return slope of line
+     * @return line's slope
      */
     public Double calcSlope() {
         double x1 = start().getX();
@@ -218,16 +218,17 @@ public class Line {
     }
 
     /**
-     * Draws on surface.
+     * draws on surface.
      *
-     * @param d draw surface
+     * @param d draw the line in surface.
      */
     public void drawOn(DrawSurface d) {
-        d.drawLine((int) start().getX(), (int) start().getY(), (int) end().getX(), (int) end().getY());
+        d.drawLine((int) start().getX(), (int) start().getY(),
+                (int) end().getX(), (int) end().getY());
     }
 
     /**
-     * Draws mid point.
+     * draws mid point.
      *
      * @param d    draw surface
      * @param size radios
@@ -236,13 +237,11 @@ public class Line {
         this.middle().drawOn(d, size);
     }
 
-    //
-
     /**
-     * equals -- return true if the lines are equal, false otherwise.
+     * returns true if the lines are equal, false otherwise.
      *
      * @param other second line
-     * @return true\false
+     * @return true if the lines are equal, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -272,7 +271,6 @@ public class Line {
      * @param rect a rectangle.
      * @return the closest intersection point to the start of the line.
      */
-    //
     public Point closestIntersectionToStartOfLine(Rectangle rect) {
         List<Point> pointsList = rect.intersectionPoints(this);
         if (pointsList.isEmpty()) {

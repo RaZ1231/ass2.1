@@ -1,14 +1,16 @@
 package shapes;
 
-import biuoop.DrawSurface;
+
 
 /**
  * @author Raziel Solomon
  * @since 14-Mar-16.
  */
 
+import biuoop.DrawSurface;
+
 /**
- * Class represent point.
+ * point class.
  */
 public class Point {
     private double x;
@@ -25,35 +27,32 @@ public class Point {
         this.setY(y);
     }
 
-    // distance -- return the distance of this start to the other start
-
     /**
-     * Get distance between points.
+     * returns the distance of this start to the other start.
      *
-     * @param other other point
-     * @return distance
+     * @param other other point.
+     * @return the distance of this start to the other start.
      */
     public double distance(Point other) {
-        return Math.sqrt(Math.pow(other.getX() - getX(), 2) + Math.pow(other.getY() - getY(), 2));
+        return Math.sqrt(Math.pow(other.getX() - getX(), 2)
+                + Math.pow(other.getY() - getY(), 2));
     }
 
     /**
-     * Draw point on drawSurface.
+     * draw point on drawSurface.
      *
-     * @param d    draw surface to draw on
-     * @param size radios
+     * @param d    draw surface to draw on.
+     * @param size radius.
      */
     public void drawOn(DrawSurface d, int size) {
         d.fillCircle((int) getX(), (int) getY(), size);
     }
 
-    // equals -- return true is the points are equal, false otherwise
-
     /**
-     * Determine if two points are the same.
+     * returns true if the points are equal, false otherwise.
      *
-     * @param other object to compare
-     * @return true\false
+     * @param other object to compare.
+     * @return true if the points are equal, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -64,10 +63,8 @@ public class Point {
         return false;
     }
 
-    // Return the x and y values of this start
-
     /**
-     * Return x coordinate.
+     * returns x coordinate.
      *
      * @return x coordinate
      */
@@ -76,7 +73,7 @@ public class Point {
     }
 
     /**
-     * Set x coordinate.
+     * Sets x coordinate.
      *
      * @param newX new x
      */
@@ -85,7 +82,7 @@ public class Point {
     }
 
     /**
-     * Return y coordinate.
+     * returns y coordinate.
      *
      * @return y coordinate
      */
@@ -94,7 +91,7 @@ public class Point {
     }
 
     /**
-     * Set y coordinate.
+     * sets y coordinate.
      *
      * @param newY new y
      */
@@ -103,7 +100,7 @@ public class Point {
     }
 
     /**
-     * Return string representation.
+     * return string representation.
      *
      * @return string representation
      */

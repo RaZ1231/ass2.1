@@ -15,7 +15,7 @@ import java.awt.Color;
  */
 
 /**
- * Representation of ball.
+ * ball class.
  */
 public class Ball implements Sprite {
     private Point center;
@@ -31,7 +31,8 @@ public class Ball implements Sprite {
      * @param radios ball size
      * @param color  ball color
      */
-    public Ball(Point center, int radios, Color color, GameEnvironment gameEnvironment) {
+    public Ball(Point center, int radios, Color color,
+                GameEnvironment gameEnvironment) {
         this.center = center;
         this.radios = radios;
         this.color = color;
@@ -50,43 +51,46 @@ public class Ball implements Sprite {
         this(new Point(x, y), radios, color, gameEnvironment);
     }
 
-    // accessors
-
     /**
-     * Gets center x.
+     * returns center x-axis value.
      *
-     * @return center x
+     * @return center x-axis value.
      */
     public int getX() {
         return (int) this.center.getX();
     }
 
     /**
-     * Gets center y.
+     * returns center y-axis value.
      *
-     * @return center y
+     * @return center y-axis value.
      */
     public int getY() {
         return (int) this.center.getY();
     }
 
+    /**
+     * returns center point.
+     *
+     * @return center point.
+     */
     public Point getCenter() {
         return center;
     }
 
     /**
-     * Gets radios.
+     * returns ball's radius.
      *
-     * @return ball radios
+     * @return ball's radius
      */
     public int getSize() {
         return this.radios;
     }
 
     /**
-     * Gets color.
+     * returns ball's color.
      *
-     * @return color
+     * @return ball's color.
      */
     public Color getColor() {
         return this.color;
@@ -102,10 +106,8 @@ public class Ball implements Sprite {
         return String.format("Ball{center=%s, radios=%d, color=%s, velocity=%s}", center, radios, color, velocity);
     }
 
-    // draw the ball on the given DrawSurface
-
     /**
-     * Draws on surface.
+     * draw the ball on the given DrawSurface
      *
      * @param surface draw surface
      */
@@ -115,28 +117,23 @@ public class Ball implements Sprite {
     }
 
     /**
-     * move the ball one step.
+     * move the ball one step according to possible collisions.
      */
     @Override
     public void timePassed() {
-        //Velocity tempV = Velocity.fromAngleAndSpeed(getVelocity().getAngle(), getVelocity().getSpeed() + getSize() -
-        //        2);
         Point applyPoint = getVelocity().applyToPoint(this.center); // next position.
         Line trajectory = new Line(this.center, applyPoint); // line to next position.
-        CollisionInfo info = this.gameEnvironment.getClosestCollision(trajectory); // is there an object it
-        //collide
-        if (info.getCollisionObject() != null) { // there is
+        CollisionInfo info = this.gameEnvironment.
+                getClosestCollision(trajectory); // is there an object it
+        if (info.getCollisionObject() != null) { // there is collision.
             this.setVelocity(info.getCollisionObject().hit(info.getCollisionPoint(), this.velocity));
-        } else {
+        } else { // there isn't.
             this.moveOneStep();
-        }
-        if (this.center.getX() < 15 || this.center.getY() < 15 || this.center.getX() > 785 || this.center.getY() > 585) {
-            System.out.println("null");
         }
     }
 
     /**
-     * Sets ball velocity.
+     * Sets ball's velocity.
      *
      * @param dx delta x
      * @param dy delta y
@@ -146,16 +143,16 @@ public class Ball implements Sprite {
     }
 
     /**
-     * Gets velocity.
+     * returns ball's velocity.
      *
-     * @return ball velocity
+     * @return ball's velocity
      */
     public Velocity getVelocity() {
         return this.velocity;
     }
 
     /**
-     * Sets ball velocity.
+     * Sets ball's velocity.
      *
      * @param v new velocity
      */
@@ -164,12 +161,17 @@ public class Ball implements Sprite {
     }
 
     /**
-     * Move the ball one step of velocity.
+     * Move the ball one step according to current velocity.
      */
     public void moveOneStep() {
         this.center = this.getVelocity().applyToPoint(this.center);
     }
 
+    /**
+     * add the ball to the game.
+     *
+     * @param game a game it add the ball to.
+     */
     public void addToGame(Game game) {
         game.addSprite(this);
     }

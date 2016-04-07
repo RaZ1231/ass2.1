@@ -9,7 +9,7 @@ import utils.Mathematics;
  */
 
 /**
- * Velocity specifies the change in position on the `x` and the `y` axes.
+ * Velocity specifies the change in position on the `x` and the `y` axis.
  */
 public class Velocity {
     private double dx;
@@ -41,46 +41,44 @@ public class Velocity {
     }
 
     /**
-     * Turn too low speed to minimum.
+     * returns velocity's dx.
      *
-     * @param num speed
-     * @return minimum speed
-     */
-    public static int minimumSpeed(int num) {
-        if (num <= 0) {
-            return 1;
-        }
-        return num;
-    }
-
-    /**
-     * returns dx.
-     *
-     * @return dx
+     * @return velocity's dx.
      */
     public double getDx() {
         return dx;
     }
 
     /**
-     * returns dy.
+     * returns velocity's dy.
      *
-     * @return dy
+     * @return velocity's dy.
      */
     public double getDy() {
         return dy;
     }
 
+    /**
+     * returns pythagoras value of velocity's dx and dy.
+     *
+     * @return pythagoras value of velocity's dx and dy.
+     */
     public double getSpeed() {
         return Mathematics.pythagoras(dx, dy);
     }
 
+    /**
+     * returns the hit's angle. test's used.
+     *
+     * @return the hit's angle. test's used.
+     */
     public double getAngle() {
         return Math.toDegrees(Math.asin(dx / getSpeed()));
     }
 
     /**
-     * Take a start with position (x,y) and return a new start with position (x+dx, y+dy).
+     * Take a start with position (x,y) and return a new start
+     * with position (x+dx, y+dy).
      *
      * @param p origin point
      * @return change point
@@ -88,6 +86,4 @@ public class Velocity {
     public Point applyToPoint(Point p) {
         return new Point(p.getX() + dx, p.getY() + dy);
     }
-
-
 }

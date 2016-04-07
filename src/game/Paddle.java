@@ -29,6 +29,14 @@ public class Paddle implements Sprite, Collidable {
     private double leftBorder;
     private double rightBorder;
 
+    /**
+     * constructor.
+     *
+     * @param rect a rectangle.
+     * @param keyboard a sensor of keyboard.
+     * @param leftBorder game environment's left border.
+     * @param rightBorder game environment's right border.
+     */
     public Paddle(Rectangle rect, KeyboardSensor keyboard, double leftBorder, double rightBorder) {
         this.rect = rect;
         this.keyboard = keyboard;
@@ -110,6 +118,13 @@ public class Paddle implements Sprite, Collidable {
         return new Velocity(-1 * currentVelocity.getDx(), currentVelocity.getDy()); //hit sides
     }
 
+    /**
+     * returns the region in line in which x is.
+     *
+     * @param x an x-axis value.
+     * @param regions an array of 5 regions of line.
+     * @return the region in line in which x is.
+     */
     public int getRegion(double x, double[] regions) {
         for (int i = 0; i < 4; i++) {
             if (Mathematics.isBetween(regions[i], x, regions[i + 1])) {
@@ -130,7 +145,6 @@ public class Paddle implements Sprite, Collidable {
         for (int i = 0; i < 5; i++) {
             regions[i] = rect.getUpperLeft().getX() + i * rect.getWidth() / 5;
         }
-
         return regions;
     }
 

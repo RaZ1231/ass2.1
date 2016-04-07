@@ -32,7 +32,7 @@ public class Block implements Collidable, Sprite {
      * @param color      a color.
      * @param hitCounter hits counter. 'null' if none.
      */
-    public Block(shapes.Rectangle rect, Color color, int hitCounter) {
+    public Block(Rectangle rect, Color color, int hitCounter) {
         this.rect = rect;
         this.color = color;
         this.hitCounter = hitCounter;
@@ -43,7 +43,7 @@ public class Block implements Collidable, Sprite {
      *
      * @return block's rectangle.
      */
-    public shapes.Rectangle getRect() {
+    public Rectangle getRect() {
         return rect;
     }
 
@@ -138,15 +138,23 @@ public class Block implements Collidable, Sprite {
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
         Line lSouth = new Line(rect.getLowerLeft(), rect.getLowerRight());
+        Line lWest = new Line(rect.getUpperLeft(), rect.getLowerLeft());
+        Line lEast = new Line(rect.getUpperRight(), rect.getLowerRight());
         this.setHitCounter(hitCounter-1);
         if (lNorth.isInline(collisionPoint) || lSouth.isInline(collisionPoint)) {
             return new Velocity(currentVelocity.getDx(), -1 * currentVelocity.getDy());
-        } else {
+        } else if (lWest.isInline(collisionPoint) || lEast.isInline(collisionPoint)){
             return new Velocity(-1 * currentVelocity.getDx(), currentVelocity.getDy());
+        } else {
+            return currentVelocity;
         }
     }
 
-
+    /**
+     * add the block to the game.
+     *
+     * @param game a game it add the block to.
+     */
     public void addToGame(Game game) {
         game.addCollidable(this);
         game.addSprite(this);

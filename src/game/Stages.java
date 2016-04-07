@@ -10,6 +10,10 @@ import java.util.List;
  * @author Raziel Solomon
  * @since 31-Mar-16.
  */
+
+/**
+ * stages class.
+ */
 public class Stages {
     /**
      * returns surface's borders.
@@ -20,7 +24,7 @@ public class Stages {
      */
     public static List<Block> getBorders(double width, double height, int size) {
         List<Block> borders = new LinkedList<>();
-////
+
         borders.add(new Block(new Rectangle(0, size, size, height - size), Color.BLACK, 0)); //left
         borders.add(new Block(new Rectangle(width - size, size, width, height - size), Color.BLACK, 0)); //right
         borders.add(new Block(new Rectangle(0, 0, width, size), Color.BLACK, 0)); //top
@@ -30,11 +34,13 @@ public class Stages {
     }
 
     /**
-     * @param startX
-     * @param startY
-     * @param width
-     * @param height
-     * @return
+     * returns a list of blocks for stage one.
+     *
+     * @param startX a x-axis value of the first upper left block in stage.
+     * @param startY a y-axis value of the first upper left block in stage.
+     * @param width block's width.
+     * @param height block's height.
+     * @return a list of blocks for stage one.
      */
     public static List<Block> getStageOne(double startX, double startY, double width, double height) {
         List<Block> blocks = new LinkedList<>();
@@ -55,7 +61,6 @@ public class Stages {
                         colors[row], hitCounter));
             }
         }
-
         return blocks;
     }
 }

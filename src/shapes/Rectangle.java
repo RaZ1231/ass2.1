@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 /**
- * Rectangle representation.
+ * Rectangle class.
  */
 public class Rectangle {
     private Point upperLeft;
@@ -29,12 +29,20 @@ public class Rectangle {
         this.height = height;
     }
 
+    /**
+     * constructor.
+     *
+     * @param x upper left x-axis value.
+     * @param y upper left y-axis value.
+     * @param width rectangle's width.
+     * @param height rectangle's height.
+     */
     public Rectangle(double x, double y, double width, double height) {
         this(new Point(x, y), width, height);
     }
 
     /**
-     * Returns start point.
+     * returns start point.
      *
      * @return start point
      */
@@ -52,18 +60,18 @@ public class Rectangle {
     }
 
     /**
-     * Return width.
+     * returns rectangle's width.
      *
-     * @return width
+     * @return rectangle's width.
      */
     public double getWidth() {
         return width;
     }
 
     /**
-     * Returns height.
+     * returns rectangle's height.
      *
-     * @return height
+     * @return rectangle's height.
      */
     public double getHeight() {
         return height;
@@ -100,7 +108,7 @@ public class Rectangle {
     }
 
     /**
-     * Return a (possibly empty) List of intersection points
+     * return a (possibly empty) List of intersection points
      * with the specified line.
      *
      * @param line a line.
