@@ -7,11 +7,10 @@ import collisions.GameEnvironment;
 import graphics.SpriteCollection;
 import interfaces.Collidable;
 import interfaces.Sprite;
-import shapes.Ball;
-import shapes.Rectangle;
-
 import java.awt.Color;
 import java.util.List;
+import shapes.Ball;
+import shapes.Rectangle;
 
 /**
  * @author Raziel Solomon
@@ -67,8 +66,8 @@ public class Game {
                 15, WIDTH - 15);
         List<Block> blocks = Stages.getStageOne(30, 100, 60, 20);
 
-        ball1.setVelocity(7, 5);
-        ball2.setVelocity(7, 5);
+        ball1.setVelocity(3, 5);
+        ball2.setVelocity(2, 4);
         blocks.addAll(Stages.getBorders(WIDTH, HEIGHT, 15));
 
         ball1.addToGame(this);

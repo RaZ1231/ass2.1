@@ -3,13 +3,12 @@ package game;
 import biuoop.DrawSurface;
 import interfaces.Collidable;
 import interfaces.Sprite;
+import java.awt.Color;
 import motion.Velocity;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
-
-import java.awt.*;
 
 /**
  * @author Elisheva
@@ -20,7 +19,7 @@ import java.awt.*;
  * Block representation.
  */
 public class Block implements Collidable, Sprite {
-    private shapes.Rectangle rect;
+    private Rectangle rect;
     private Color color;
     private int hitCounter;
 

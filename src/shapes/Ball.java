@@ -5,9 +5,8 @@ import collisions.CollisionInfo;
 import collisions.GameEnvironment;
 import game.Game;
 import interfaces.Sprite;
+import java.awt.Color;
 import motion.Velocity;
-
-import java.awt.*;
 
 /**
  * @author Raziel Solomon
