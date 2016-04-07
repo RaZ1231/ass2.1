@@ -2,10 +2,10 @@
 # salomor3 broyere1
 
 compile: bin
-	javac -d bin -cp biuoop-1.4.jar src/*.java
+	javac -d bin -cp biuoop-1.4.jar src/*/*.java
 run:
-	java -cp biuoop-1.4.jar:bin Ass3Game
+	java -cp biuoop-1.4.jar:bin art/Ass3Game
 check:
-	java -jar checkstyle-5.7-all.jar -c biuoop.xml src/*.java
+	java -jar checkstyle-5.7-all.jar -c biuoop.xml src/*/*.java
 bin:
 	mkdir bin

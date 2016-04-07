@@ -1,10 +1,9 @@
 package game;
 
-import shapes.Rectangle;
-
-import java.awt.*;
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
+import shapes.Rectangle;
 
 /**
  * @author Raziel Solomon
