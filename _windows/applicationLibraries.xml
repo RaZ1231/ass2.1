@@ -7,6 +7,13 @@
       <JAVADOC />
       <SOURCES />
     </library>
+    <library name="checkstyle-5.7-all">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/Documents/IdeaProjects/Ass3_github/ass2.1/tools/checkstyle-5.7-all.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="hamcrest-core-1.3">
       <CLASSES>
         <root url="jar://$USER_HOME$/Documents/IdeaProjects/Ass3_github/ass2.1/tools/hamcrest-core-1.3.jar!/" />
