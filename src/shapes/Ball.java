@@ -127,8 +127,9 @@ public class Ball implements Sprite {
         //collide
         if (info.getCollisionObject() != null) { // there is
             this.setVelocity(info.getCollisionObject().hit(info.getCollisionPoint(), this.velocity));
+        } else {
+            this.moveOneStep();
         }
-        this.moveOneStep();
         if (this.center.getX() < 15 || this.center.getY() < 15 || this.center.getX() > 785 || this.center.getY() > 585) {
             System.out.println("null");
         }

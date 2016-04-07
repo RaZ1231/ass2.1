@@ -54,14 +54,14 @@ public class Game {
      */
     public void initialize() {
         gui = new GUI("Arkanoid", WIDTH, HEIGHT);
-        Ball ball1 = new Ball(30, 30, 5, Color.MAGENTA, environment);
-        Ball ball2 = new Ball(50, 50, 5, Color.ORANGE, environment);
+        Ball ball1 = new Ball(330, 350, 5, Color.MAGENTA, environment);
+        Ball ball2 = new Ball(350, 350, 5, Color.ORANGE, environment);
         Paddle paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, HEIGHT - 35, 100, 20), gui.getKeyboardSensor(),
                 15, WIDTH - 15);
         List<Block> blocks = Stages.getStageOne(30, 100, 60, 20);
 
-        ball1.setVelocity(10, 5);
-        ball2.setVelocity(12, 9);
+        ball1.setVelocity(7, 5);
+        ball2.setVelocity(7, 5);
         blocks.addAll(Stages.getBorders(WIDTH, HEIGHT, 15));
 
         ball1.addToGame(this);
