@@ -53,10 +53,10 @@ public class Rectangle {
     /**
      * set the rectangle's upper left corner.
      *
-     * @param upperLeft rectangle's upper left corner.
+     * @param upLeft rectangle's upper left corner.
      */
-    public void setUpperLeft(Point upperLeft) {
-        this.upperLeft = upperLeft;
+    public void setUpperLeft(Point upLeft) {
+        this.upperLeft = upLeft;
     }
 
     /**

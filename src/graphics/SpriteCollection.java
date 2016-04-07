@@ -25,7 +25,7 @@ public class SpriteCollection {
     }
 
     /**
-     * add sprite
+     * add sprite.
      *
      * @param s a sprite.
      */

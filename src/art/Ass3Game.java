@@ -8,7 +8,7 @@ import game.Game;
  */
 
 /**
- * ass3 class
+ * ass3 class.
  */
 public class Ass3Game {
     /**

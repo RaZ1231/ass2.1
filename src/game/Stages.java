@@ -2,7 +2,7 @@ package game;
 
 import shapes.Rectangle;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,6 +20,7 @@ public class Stages {
      *
      * @param width  surface's width borders.
      * @param height surface's height borders.
+     * @param size borders' size.
      * @return surface's borders.
      */
     public static List<Block> getBorders(double width, double height, int size) {

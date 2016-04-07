@@ -283,7 +283,6 @@ public class Line {
                 closestPoint = p;
             }
         }
-
         return closestPoint;
     }
 }

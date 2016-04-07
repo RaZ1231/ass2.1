@@ -7,7 +7,7 @@ import game.Game;
 import interfaces.Sprite;
 import motion.Velocity;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Raziel Solomon
@@ -27,9 +27,10 @@ public class Ball implements Sprite {
     /**
      * constructor.
      *
-     * @param center center point
-     * @param radios ball size
-     * @param color  ball color
+     * @param center center point.
+     * @param radios ball size.
+     * @param color  ball color.
+     * @param gameEnvironment game environment.
      */
     public Ball(Point center, int radios, Color color,
                 GameEnvironment gameEnvironment) {
@@ -46,6 +47,7 @@ public class Ball implements Sprite {
      * @param y      y of center point
      * @param radios ball size
      * @param color  ball color
+     * @param gameEnvironment game environment.
      */
     public Ball(double x, double y, int radios, Color color, GameEnvironment gameEnvironment) {
         this(new Point(x, y), radios, color, gameEnvironment);
@@ -99,7 +101,7 @@ public class Ball implements Sprite {
     /**
      * String representation.
      *
-     * @return String representation
+     * @return String representation.
      */
     @Override
     public String toString() {
@@ -107,7 +109,7 @@ public class Ball implements Sprite {
     }
 
     /**
-     * draw the ball on the given DrawSurface
+     * draw the ball on the given DrawSurface.
      *
      * @param surface draw surface
      */

@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 /**
- * game environment class
+ * game environment class.
  */
 public class GameEnvironment {
     private List<Collidable> collidables;

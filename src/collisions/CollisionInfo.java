@@ -9,7 +9,7 @@ import shapes.Point;
  */
 
 /**
- * collision info class
+ * collision info class.
  */
 public class CollisionInfo {
     private Point collisionPoint; //the point at which the collision occurs.
