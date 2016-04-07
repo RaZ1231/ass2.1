@@ -1,4 +1,4 @@
-package shapes;
+package tests;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;
@@ -6,6 +6,10 @@ import biuoop.Sleeper;
 import com.sun.deploy.util.ArrayUtil;
 import motion.Velocity;
 import org.junit.Test;
+import shapes.Ball;
+import shapes.Line;
+import shapes.Point;
+import shapes.Rectangle;
 
 import java.awt.Color;
 import java.util.ArrayList;

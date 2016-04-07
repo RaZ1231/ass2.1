@@ -17,6 +17,10 @@ import java.util.List;
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
+
+/**
+ * a game class.
+ */
 public class Game {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
@@ -25,6 +29,9 @@ public class Game {
     private GameEnvironment environment;
     private GUI gui;
 
+    /**
+     * constructor.
+     */
     public Game() {
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
@@ -70,11 +77,10 @@ public class Game {
         for (Block block : blocks) {
             block.addToGame(this);
         }
-
     }
 
     /**
-     * Run the game -- start the animation loop.
+     * Run the game - start the animation loop.
      */
     public void run() {
         Sleeper sleeper = new Sleeper();
@@ -97,5 +103,4 @@ public class Game {
             }
         }
     }
-
 }

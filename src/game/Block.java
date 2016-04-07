@@ -9,7 +9,7 @@ import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Elisheva
@@ -32,7 +32,7 @@ public class Block implements Collidable, Sprite {
      * @param color      a color.
      * @param hitCounter hits counter. 'null' if none.
      */
-    public Block(shapes.Rectangle rect, Color color, int hitCounter) {
+    public Block(Rectangle rect, Color color, int hitCounter) {
         this.rect = rect;
         this.color = color;
         this.hitCounter = hitCounter;
@@ -43,7 +43,7 @@ public class Block implements Collidable, Sprite {
      *
      * @return block's rectangle.
      */
-    public shapes.Rectangle getRect() {
+    public Rectangle getRect() {
         return rect;
     }
 
@@ -68,13 +68,13 @@ public class Block implements Collidable, Sprite {
     /**
      * setting hit counter of block.
      *
-     * @param hitCounter hit counter of block.
+     * @param hitCount hit counter of block.
      */
-    public void setHitCounter(int hitCounter) {
-        if (hitCounter < 1) {
+    public void setHitCounter(int hitCount) {
+        if (hitCount < 1) {
             this.hitCounter = 0;
         } else {
-            this.hitCounter = hitCounter;
+            this.hitCounter = hitCount;
         }
     }
 
@@ -85,13 +85,17 @@ public class Block implements Collidable, Sprite {
      */
     public void drawOn(DrawSurface d) {
         d.setColor(getColor());
-        d.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
+        d.fillRectangle((int) rect.getUpperLeft().getX(),
+                (int) rect.getUpperLeft().getY(),
                 (int) rect.getWidth(), (int) rect.getHeight());
         d.setColor(Color.BLACK);
-        d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
+        d.drawRectangle((int) rect.getUpperLeft().getX(),
+                (int) rect.getUpperLeft().getY(),
                 (int) rect.getWidth(), (int) rect.getHeight());
-        double x = Mathematics.average(rect.getUpperLeft().getX(), rect.getUpperLeft().getX() + 0.9 * rect.getWidth());
-        double y = Mathematics.average(rect.getUpperLeft().getY(), rect.getUpperLeft().getY() + 1.75 * rect.getHeight());
+        double x = Mathematics.average(rect.getUpperLeft().getX(),
+                rect.getUpperLeft().getX() + 0.9 * rect.getWidth());
+        double y = Mathematics.average(rect.getUpperLeft().getY(),
+                rect.getUpperLeft().getY() + 1.75 * rect.getHeight());
         String s = hitsAsString();
         d.drawText((int) x, (int) y, s, 18);
     }
@@ -138,15 +142,23 @@ public class Block implements Collidable, Sprite {
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
         Line lSouth = new Line(rect.getLowerLeft(), rect.getLowerRight());
-        this.setHitCounter(hitCounter-1);
+        Line lWest = new Line(rect.getUpperLeft(), rect.getLowerLeft());
+        Line lEast = new Line(rect.getUpperRight(), rect.getLowerRight());
+        this.setHitCounter(hitCounter - 1);
         if (lNorth.isInline(collisionPoint) || lSouth.isInline(collisionPoint)) {
             return new Velocity(currentVelocity.getDx(), -1 * currentVelocity.getDy());
-        } else {
+        } else if (lWest.isInline(collisionPoint) || lEast.isInline(collisionPoint)) {
             return new Velocity(-1 * currentVelocity.getDx(), currentVelocity.getDy());
+        } else {
+            return currentVelocity;
         }
     }
 
-
+    /**
+     * add the block to the game.
+     *
+     * @param game a game it add the block to.
+     */
     public void addToGame(Game game) {
         game.addCollidable(this);
         game.addSprite(this);

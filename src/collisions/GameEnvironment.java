@@ -1,7 +1,6 @@
 package collisions;
 
 import interfaces.Collidable;
-import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 
@@ -11,6 +10,10 @@ import java.util.List;
 /**
  * @author Raziel Solomon
  * @since 30-Mar-16.
+ */
+
+/**
+ * game environment class.
  */
 public class GameEnvironment {
     private List<Collidable> collidables;

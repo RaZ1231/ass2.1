@@ -7,6 +7,10 @@ import shapes.Point;
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
+
+/**
+ * collision info class.
+ */
 public class CollisionInfo {
     private Point collisionPoint; //the point at which the collision occurs.
     private Collidable collisionObject; //the collidable object involved in the collision.

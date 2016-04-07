@@ -6,7 +6,7 @@ package utils;
  */
 
 /**
- * Mathematics functions.
+ * Mathematics functions class.
  */
 public class Mathematics {
     /**
@@ -55,7 +55,6 @@ public class Mathematics {
         for (int i = 0; i < sArr.length; i++) {
             iArr[i] = Integer.parseInt(sArr[i]);
         }
-
         return iArr;
     }
 }
