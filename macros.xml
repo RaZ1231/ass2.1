@@ -2,7 +2,7 @@
   <component name="ActionMacroManager">
     <macro name="Reformatting">
       <action id="ReformatCode" />
-      <action id="SaveAll" />
+      <shortuct text="control S" />
     </macro>
   </component>
 </application>
