@@ -9,13 +9,13 @@ import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import interfaces.Collidable;
 import interfaces.Sprite;
+import java.awt.Color;
 import motion.Velocity;
+import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
-
-import java.awt.Color;
 
 /**
  * Paddle representation.
@@ -107,7 +107,7 @@ public class Paddle implements Sprite, Collidable {
      * @param currentVelocity the current velocity.
      * @return the new velocity expected after the hit.
      */
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
         if (lNorth.isInline(collisionPoint)) { //hit upper bound
             double[] regions = getFiveRegions();

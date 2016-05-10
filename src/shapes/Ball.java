@@ -127,7 +127,7 @@ public class Ball implements Sprite {
         CollisionInfo info = this.gameEnvironment.
                 getClosestCollision(trajectory); // is there an object it
         if (info.getCollisionObject() != null) { // there is collision.
-            this.setVelocity(info.getCollisionObject().hit(info.getCollisionPoint(), this.velocity));
+            this.setVelocity(info.getCollisionObject().hit(this, info.getCollisionPoint(), this.velocity));
         } else { // there isn't.
             this.moveOneStep();
         }

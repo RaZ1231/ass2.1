@@ -1,11 +1,10 @@
 package collisions;
 
 import interfaces.Collidable;
-import shapes.Line;
-import shapes.Point;
-
 import java.util.LinkedList;
 import java.util.List;
+import shapes.Line;
+import shapes.Point;
 
 /**
  * @author Raziel Solomon
@@ -34,6 +33,9 @@ public class GameEnvironment {
         collidables.add(c);
     }
 
+    public void removeCollidable(Collidable c) {
+        collidables.remove(c);
+    }
     /**
      * Assume an object moving from line.start() to line.end().
      * If this object will not collide with any of the collidables

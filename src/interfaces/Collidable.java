@@ -1,6 +1,7 @@
 package interfaces;
 
 import motion.Velocity;
+import shapes.Ball;
 import shapes.Point;
 import shapes.Rectangle;
 
@@ -22,9 +23,10 @@ public interface Collidable {
      * The return is the new velocity expected after the hit (based on
      * the force the object inflicted on us).
      *
+     * @param hitter the hitting ball.
      * @param collisionPoint  point of collision.
      * @param currentVelocity current velocity.
-     * @return the new velocity expected after the hit
+     * @return the new velocity expected after the hit.
      */
-    Velocity hit(Point collisionPoint, Velocity currentVelocity);
+    Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity);
 }

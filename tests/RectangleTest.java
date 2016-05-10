@@ -3,21 +3,16 @@ package tests;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
-import com.sun.deploy.util.ArrayUtil;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import motion.Velocity;
 import org.junit.Test;
 import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Elisheva

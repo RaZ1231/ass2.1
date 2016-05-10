@@ -2,7 +2,6 @@ package graphics;
 
 import biuoop.DrawSurface;
 import interfaces.Sprite;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,6 +30,17 @@ public class SpriteCollection {
      */
     public void addSprite(Sprite s) {
         sprites.add(s);
+    }
+
+    /**
+     * remove sprite.
+     *
+     * @param s a sprite.
+     */
+    public void removeSprite(Sprite s) {
+        List<Sprite> tempSprites = new LinkedList<>(sprites);
+        tempSprites.remove(s);
+        sprites = tempSprites;
     }
 
     /**

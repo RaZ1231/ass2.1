@@ -1,5 +1,6 @@
 package game;
 
+import blocks.Block;
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,9 +26,9 @@ public class Stages {
     public static List<Block> getBorders(double width, double height, int size) {
         List<Block> borders = new LinkedList<>();
 
-        borders.add(new Block(new Rectangle(0, size, size, height - size), Color.BLACK, 0)); //left
-        borders.add(new Block(new Rectangle(width - size, size, width, height - size), Color.BLACK, 0)); //right
-        borders.add(new Block(new Rectangle(0, 0, width, size), Color.BLACK, 0)); //top
+        borders.add(new Block(new Rectangle(0, 20, size, height - size), Color.BLACK, 0)); //left
+        borders.add(new Block(new Rectangle(width - size, 20, width, height - size), Color.BLACK, 0)); //right
+        borders.add(new Block(new Rectangle(0, 20, width, size), Color.BLACK, 0)); //top
         borders.add(new Block(new Rectangle(0, height - size, width, size), Color.BLACK, 0)); //bottom
 
         return borders;
