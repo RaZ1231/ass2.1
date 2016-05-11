@@ -8,11 +8,15 @@ import shapes.Rectangle;
 import java.awt.Color;
 
 /**
- * @author Elisheva Broyer.
- * @since 10/05/2016.
+ * @author Raziel Solomon
+ * @since 11-May-16.
  */
-public class BorderBlock extends BaseBlock implements InterBlock {
-    public BorderBlock(Rectangle rect, Color color) {
+public class DeathRegion extends BaseBlock implements InterBlock {
+    public DeathRegion() {
+        this(new Rectangle(0, 600, 800, 10), Color.WHITE);
+    }
+
+    public DeathRegion(Rectangle rect, Color color) {
         super(rect, color);
     }
 

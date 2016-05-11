@@ -1,4 +1,4 @@
-package Listener;
+package listeners;
 
 import blocks.Block;
 import game.Game;
@@ -34,7 +34,7 @@ public class BlockRemover implements HitListener {
      * from the game. Remember to remove this listener from the block
      * that is being removed from the game.
      *
-     * @param beingHit the hitted block.
+     * @param beingHit the block that got a hit.
      * @param hitter   the hitting ball.
      */
     @Override

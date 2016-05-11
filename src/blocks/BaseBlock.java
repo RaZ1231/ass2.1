@@ -4,15 +4,16 @@ import biuoop.DrawSurface;
 import game.Game;
 import interfaces.HitListener;
 import interfaces.InterBlock;
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Elisheva Broyer.
@@ -27,28 +28,6 @@ public abstract class BaseBlock {
         this.rect = rect;
         this.color = color;
         this.hitListeners = new ArrayList<>();
-    }
-
-    /**
-     * returns rectangle.
-     *
-     * @return block's rectangle.
-     */
-    public Rectangle getRect() {
-        return rect;
-    }
-
-    /**
-     * returns color.
-     *
-     * @return color.
-     */
-    public Color getColor() {
-        return color;
-    }
-
-    public List<HitListener> getHitListeners() {
-        return hitListeners;
     }
 
     /**
@@ -70,6 +49,24 @@ public abstract class BaseBlock {
         double y = Mathematics.average(getRect().getUpperLeft().getY(),
                 getRect().getUpperLeft().getY() + 1.75 * getRect().getHeight());
         drawSelf(d, x, y);
+    }
+
+    /**
+     * returns color.
+     *
+     * @return color.
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * returns rectangle.
+     *
+     * @return block's rectangle.
+     */
+    public Rectangle getRect() {
+        return rect;
     }
 
     protected abstract void drawSelf(DrawSurface d, double x, double y);
@@ -104,7 +101,7 @@ public abstract class BaseBlock {
         Line lWest = new Line(getRect().getUpperLeft(), getRect().getLowerLeft());
         Line lEast = new Line(getRect().getUpperRight(), getRect().getLowerRight());
 
-        selfAffect();
+        effect();
 
         this.notifyHit(hitter);
 
@@ -117,7 +114,7 @@ public abstract class BaseBlock {
         }
     }
 
-    protected abstract void selfAffect();
+    protected abstract void effect();
 
     private void notifyHit(Ball hitter) {
         // Make a copy of the hitListeners before iterating over them.
@@ -126,6 +123,10 @@ public abstract class BaseBlock {
         for (HitListener hl : listeners) {
             hl.hitEvent((InterBlock) this, hitter);
         }
+    }
+
+    public List<HitListener> getHitListeners() {
+        return hitListeners;
     }
 
     /**

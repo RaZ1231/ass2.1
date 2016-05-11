@@ -1,21 +1,24 @@
 package game;
 
-import Listener.BlockRemover;
-import Listener.ScoreTrackingListener;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.Sleeper;
-import blocks.Block;
 import collisions.GameEnvironment;
 import graphics.SpriteCollection;
 import interfaces.Collidable;
+import interfaces.InterBlock;
 import interfaces.Sprite;
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
+import listeners.BallRemover;
+import listeners.BlockRemover;
+import listeners.ScoreTrackingListener;
 import shapes.Ball;
 import shapes.Rectangle;
 import utils.Counter;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Raziel Solomon
@@ -33,8 +36,9 @@ public class Game {
     private GameEnvironment environment;
     private GUI gui;
     private Counter blocksCounter;
+    private Counter ballsCounter;
     private Counter score;
-    private List<Block> borders;
+    private List<InterBlock> borders;
 
     /**
      * constructor.
@@ -47,7 +51,7 @@ public class Game {
         score = new Counter(0);
     }
 
-    public List<Block> getBorders() {
+    public List<InterBlock> getBorders() {
         return borders;
     }
 
@@ -97,9 +101,13 @@ public class Game {
         Ball ball2 = new Ball(350, 350, 5, Color.ORANGE, environment);
         Paddle paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, HEIGHT - 35, 100, 20),
                 gui.getKeyboardSensor(), 15, WIDTH - 15);
-        List<Block> blocks = Stages.getStageOne(30, 100, 60, 20);
+        List<InterBlock> blocks = new ArrayList<>(Stages.getStageOne(30, 100, 60, 20));
+
         blocksCounter = new Counter(blocks.size());
+        ballsCounter = new Counter(2);
+
         BlockRemover blockRemover = new BlockRemover(this, blocksCounter);
+        BallRemover ballRemover = new BallRemover(this, ballsCounter);
         ScoreTrackingListener sTL = new ScoreTrackingListener(this, score);
         ScoreIndicator sI = new ScoreIndicator(score);
 
@@ -113,13 +121,16 @@ public class Game {
         paddle.addToGame(this);
         sI.addToGame(this);
 
-        for (Block block : blocks) {
+        for (InterBlock block : blocks) {
             block.addHitListener(blockRemover);
             block.addHitListener(sTL);
             //block.addHitListener(phl);
         }
+
+        borders.get(3).addHitListener(ballRemover);
         blocks.addAll(borders);
-        for (Block block : blocks) {
+
+        for (InterBlock block : blocks) {
             block.addToGame(this);
         }
     }
@@ -148,7 +159,7 @@ public class Game {
                 sleeper.sleepFor(milliSecondLeftToSleep);
             }
 
-            if (blocksCounter.getValue() == 0) {
+            if ((blocksCounter.getValue() == 0) || (ballsCounter.getValue() == 0)) {
                 score.increase(100);
                 gui.close();
             }

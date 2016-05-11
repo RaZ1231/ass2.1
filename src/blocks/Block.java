@@ -3,8 +3,9 @@ package blocks;
 import biuoop.DrawSurface;
 import game.Game;
 import interfaces.InterBlock;
-import java.awt.Color;
 import shapes.Rectangle;
+
+import java.awt.Color;
 
 /**
  * Block representation.
@@ -37,19 +38,6 @@ public class Block extends BaseBlock implements InterBlock {
     }
 
     /**
-     * setting hit counter of block.
-     *
-     * @param hitCount hit counter of block.
-     */
-    private void setHitCounter(int hitCount) {
-        if (hitCount < 1) {
-            this.hitCounter = 0;
-        } else {
-            this.hitCounter = hitCount;
-        }
-    }
-
-    /**
      * Draws on surface.
      *
      * @param d draw surface.
@@ -72,10 +60,22 @@ public class Block extends BaseBlock implements InterBlock {
         }
     }
 
-    public void selfAffect() {
+    public void effect() {
         this.setHitCounter(hitCounter - 1);
     }
 
+    /**
+     * setting hit counter of block.
+     *
+     * @param hitCount hit counter of block.
+     */
+    private void setHitCounter(int hitCount) {
+        if (hitCount < 1) {
+            this.hitCounter = 0;
+        } else {
+            this.hitCounter = hitCount;
+        }
+    }
 
     public void removeFromGame(Game game) {
         game.removeCollidable(this);

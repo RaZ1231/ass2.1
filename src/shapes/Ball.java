@@ -5,8 +5,9 @@ import collisions.CollisionInfo;
 import collisions.GameEnvironment;
 import game.Game;
 import interfaces.Sprite;
-import java.awt.Color;
 import motion.Velocity;
+
+import java.awt.Color;
 
 /**
  * @author Raziel Solomon
@@ -18,7 +19,7 @@ import motion.Velocity;
  */
 public class Ball implements Sprite {
     private Point center;
-    private int radios;
+    private int radius;
     private Color color;
     private Velocity velocity;
     private GameEnvironment gameEnvironment;
@@ -26,30 +27,68 @@ public class Ball implements Sprite {
     /**
      * constructor.
      *
-     * @param center center point.
-     * @param radios ball size.
-     * @param color  ball color.
+     * @param x      x of center point
+     * @param y      y of center point
+     * @param radius ball size
+     * @param color  ball color
      * @param gameEnvironment game environment.
      */
-    public Ball(Point center, int radios, Color color,
-                GameEnvironment gameEnvironment) {
-        this.center = center;
-        this.radios = radios;
-        this.color = color;
-        this.gameEnvironment = gameEnvironment;
+    public Ball(double x, double y, int radius, Color color, GameEnvironment gameEnvironment) {
+        this(new Point(x, y), radius, color, gameEnvironment);
     }
 
     /**
      * constructor.
      *
-     * @param x      x of center point
-     * @param y      y of center point
-     * @param radios ball size
-     * @param color  ball color
+     * @param center center point.
+     * @param radius ball size.
+     * @param color  ball color.
      * @param gameEnvironment game environment.
      */
-    public Ball(double x, double y, int radios, Color color, GameEnvironment gameEnvironment) {
-        this(new Point(x, y), radios, color, gameEnvironment);
+    public Ball(Point center, int radius, Color color,
+                GameEnvironment gameEnvironment) {
+        this.center = center;
+        this.radius = radius;
+        this.color = color;
+        this.gameEnvironment = gameEnvironment;
+    }
+
+    /**
+     * returns center point.
+     *
+     * @return center point.
+     */
+    public Point getCenter() {
+        return center;
+    }
+
+    /**
+     * String representation.
+     *
+     * @return String representation.
+     */
+    @Override
+    public String toString() {
+        return String.format("Ball{center=%s, radius=%d, color=%s, velocity=%s}", center, radius, color, velocity);
+    }
+
+    /**
+     * draw the ball on the given DrawSurface.
+     *
+     * @param surface draw surface
+     */
+    public void drawOn(DrawSurface surface) {
+        surface.setColor(getColor());
+        surface.fillCircle(getX(), getY(), getSize());
+    }
+
+    /**
+     * returns ball's color.
+     *
+     * @return ball's color.
+     */
+    public Color getColor() {
+        return this.color;
     }
 
     /**
@@ -71,50 +110,12 @@ public class Ball implements Sprite {
     }
 
     /**
-     * returns center point.
-     *
-     * @return center point.
-     */
-    public Point getCenter() {
-        return center;
-    }
-
-    /**
      * returns ball's radius.
      *
      * @return ball's radius
      */
     public int getSize() {
-        return this.radios;
-    }
-
-    /**
-     * returns ball's color.
-     *
-     * @return ball's color.
-     */
-    public Color getColor() {
-        return this.color;
-    }
-
-    /**
-     * String representation.
-     *
-     * @return String representation.
-     */
-    @Override
-    public String toString() {
-        return String.format("Ball{center=%s, radios=%d, color=%s, velocity=%s}", center, radios, color, velocity);
-    }
-
-    /**
-     * draw the ball on the given DrawSurface.
-     *
-     * @param surface draw surface
-     */
-    public void drawOn(DrawSurface surface) {
-        surface.setColor(getColor());
-        surface.fillCircle(getX(), getY(), getSize());
+        return this.radius;
     }
 
     /**
@@ -131,16 +132,6 @@ public class Ball implements Sprite {
         } else { // there isn't.
             this.moveOneStep();
         }
-    }
-
-    /**
-     * Sets ball's velocity.
-     *
-     * @param dx delta x
-     * @param dy delta y
-     */
-    public void setVelocity(double dx, double dy) {
-        this.setVelocity(new Velocity(dx, dy));
     }
 
     /**
@@ -175,5 +166,19 @@ public class Ball implements Sprite {
      */
     public void addToGame(Game game) {
         game.addSprite(this);
+    }
+
+    /**
+     * Sets ball's velocity.
+     *
+     * @param dx delta x
+     * @param dy delta y
+     */
+    public void setVelocity(double dx, double dy) {
+        this.setVelocity(new Velocity(dx, dy));
+    }
+
+    public void removeFromGame(Game game) {
+        game.removeSprite(this);
     }
 }
