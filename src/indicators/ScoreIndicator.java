@@ -1,8 +1,8 @@
-package game;
+package indicators;
 
 import biuoop.DrawSurface;
+import game.Game;
 import interfaces.Sprite;
-import java.awt.Color;
 import utils.Counter;
 
 /**
@@ -23,11 +23,7 @@ public class ScoreIndicator implements Sprite {
      */
     @Override
     public void drawOn(DrawSurface d) {
-        String s = "Score: " + scores.getValue();
-        d.setColor(Color.WHITE);
-        d.fillRectangle(0, 0, 800, 25);
-        d.setColor(Color.red);
-        d.drawText(370, 15, s, 18);
+        d.drawText(370, 15, toString(), 18);
     }
 
     /**
@@ -46,5 +42,10 @@ public class ScoreIndicator implements Sprite {
     @Override
     public void addToGame(Game game) {
         game.addSprite(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Score: " + scores.getValue();
     }
 }

@@ -40,4 +40,9 @@ public class Counter {
     public int getValue() {
         return count;
     }
+
+    @Override
+    public String toString() {
+        return "(" + count + ")";
+    }
 }

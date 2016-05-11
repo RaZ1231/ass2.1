@@ -9,13 +9,14 @@ import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import interfaces.Collidable;
 import interfaces.Sprite;
-import java.awt.Color;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
+
+import java.awt.Color;
 
 /**
  * Paddle representation.
@@ -32,9 +33,9 @@ public class Paddle implements Sprite, Collidable {
     /**
      * constructor.
      *
-     * @param rect a rectangle.
-     * @param keyboard a sensor of keyboard.
-     * @param leftBorder game environment's left border.
+     * @param rect        a rectangle.
+     * @param keyboard    a sensor of keyboard.
+     * @param leftBorder  game environment's left border.
      * @param rightBorder game environment's right border.
      */
     public Paddle(Rectangle rect, KeyboardSensor keyboard, double leftBorder, double rightBorder) {
@@ -42,6 +43,31 @@ public class Paddle implements Sprite, Collidable {
         this.keyboard = keyboard;
         this.leftBorder = leftBorder;
         this.rightBorder = rightBorder;
+    }
+
+    /**
+     * Draws on surface.
+     *
+     * @param d draw surface.
+     */
+    public void drawOn(DrawSurface d) {
+        d.setColor(Color.YELLOW);
+        d.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
+                (int) rect.getWidth(), (int) rect.getHeight());
+        d.setColor(Color.BLACK);
+        d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
+                (int) rect.getWidth(), (int) rect.getHeight());
+    }
+
+    /**
+     * check if the "left" or "right" keys are pressed, and if so move it accordingly.
+     */
+    public void timePassed() {
+        if (keyboard.isPressed(KeyboardSensor.LEFT_KEY)) {
+            this.moveLeft();
+        } else if (keyboard.isPressed(KeyboardSensor.RIGHT_KEY)) {
+            this.moveRight();
+        }
     }
 
     /**
@@ -67,28 +93,13 @@ public class Paddle implements Sprite, Collidable {
     }
 
     /**
-     * check if the "left" or "right" keys are pressed, and if so move it accordingly.
-     */
-    public void timePassed() {
-        if (keyboard.isPressed(KeyboardSensor.LEFT_KEY)) {
-            this.moveLeft();
-        } else if (keyboard.isPressed(KeyboardSensor.RIGHT_KEY)) {
-            this.moveRight();
-        }
-    }
-
-    /**
-     * Draws on surface.
+     * Add this paddle to the game.
      *
-     * @param d draw surface.
+     * @param g a game.
      */
-    public void drawOn(DrawSurface d) {
-        d.setColor(Color.YELLOW);
-        d.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
-        d.setColor(Color.BLACK);
-        d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
+    public void addToGame(Game g) {
+        g.addCollidable(this);
+        g.addSprite(this);
     }
 
     /**
@@ -119,22 +130,6 @@ public class Paddle implements Sprite, Collidable {
     }
 
     /**
-     * returns the region in line in which x is.
-     *
-     * @param x an x-axis value.
-     * @param regions an array of 5 regions of line.
-     * @return the region in line in which x is.
-     */
-    public int getRegion(double x, double[] regions) {
-        for (int i = 0; i < 4; i++) {
-            if (Mathematics.isBetween(regions[i], x, regions[i + 1])) {
-                return i;
-            }
-        }
-        return 4;
-    }
-
-    /**
      * returns an array of the five regions of the paddle.
      *
      * @return an array of the five regions of the paddle.
@@ -149,12 +144,22 @@ public class Paddle implements Sprite, Collidable {
     }
 
     /**
-     * Add this paddle to the game.
+     * returns the region in line in which x is.
      *
-     * @param g a game.
+     * @param x       an x-axis value.
+     * @param regions an array of 5 regions of line.
+     * @return the region in line in which x is.
      */
-    public void addToGame(Game g) {
-        g.addCollidable(this);
-        g.addSprite(this);
+    public int getRegion(double x, double[] regions) {
+        for (int i = 0; i < 4; i++) {
+            if (Mathematics.isBetween(regions[i], x, regions[i + 1])) {
+                return i;
+            }
+        }
+        return 4;
+    }
+
+    public void center(int width) {
+        rect.setUpperLeft(new Point(width / 2 - rect.getWidth() / 2, rect.getUpperLeft().getY()));
     }
 }

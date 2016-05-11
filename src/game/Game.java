@@ -5,6 +5,9 @@ import biuoop.GUI;
 import biuoop.Sleeper;
 import collisions.GameEnvironment;
 import graphics.SpriteCollection;
+import indicators.LivesIndicator;
+import indicators.RectIndicator;
+import indicators.ScoreIndicator;
 import interfaces.Collidable;
 import interfaces.InterBlock;
 import interfaces.Sprite;
@@ -38,6 +41,9 @@ public class Game {
     private Counter blocksCounter;
     private Counter ballsCounter;
     private Counter score;
+    private Counter lives;
+    private Paddle paddle;
+    private List<Ball> balls;
     private List<InterBlock> borders;
 
     /**
@@ -49,6 +55,7 @@ public class Game {
         borders = new LinkedList<>();
         borders.addAll(Stages.getBorders(WIDTH, HEIGHT, 15));
         score = new Counter(0);
+        lives = new Counter(4);
     }
 
     public List<InterBlock> getBorders() {
@@ -97,33 +104,31 @@ public class Game {
      */
     public void initialize() {
         gui = new GUI("Arkanoid", WIDTH, HEIGHT);
-        Ball ball1 = new Ball(330, 350, 5, Color.MAGENTA, environment);
-        Ball ball2 = new Ball(350, 350, 5, Color.ORANGE, environment);
-        Paddle paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, HEIGHT - 35, 100, 20),
+        paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, HEIGHT - 35, 100, 20),
                 gui.getKeyboardSensor(), 15, WIDTH - 15);
         List<InterBlock> blocks = new ArrayList<>(Stages.getStageOne(30, 100, 60, 20));
-
         blocksCounter = new Counter(blocks.size());
-        ballsCounter = new Counter(2);
+        ballsCounter = new Counter(0);
+        initBalls();
 
         BlockRemover blockRemover = new BlockRemover(this, blocksCounter);
         BallRemover ballRemover = new BallRemover(this, ballsCounter);
-        ScoreTrackingListener sTL = new ScoreTrackingListener(this, score);
-        ScoreIndicator sI = new ScoreIndicator(score);
+        ScoreTrackingListener scoreTrackingListener = new ScoreTrackingListener(this, score);
+        RectIndicator rectIndicator = new RectIndicator();
+        ScoreIndicator scoreIndicator = new ScoreIndicator(score);
+        LivesIndicator livesIndicator = new LivesIndicator(lives);
 
-        ball1.setVelocity(3, 5);
-        ball2.setVelocity(2, 4);
 
         //PrintingHitListener phl = new PrintingHitListener();
 
-        ball1.addToGame(this);
-        ball2.addToGame(this);
         paddle.addToGame(this);
-        sI.addToGame(this);
+        rectIndicator.addToGame(this);
+        scoreIndicator.addToGame(this);
+        livesIndicator.addToGame(this);
 
         for (InterBlock block : blocks) {
             block.addHitListener(blockRemover);
-            block.addHitListener(sTL);
+            block.addHitListener(scoreTrackingListener);
             //block.addHitListener(phl);
         }
 
@@ -135,10 +140,33 @@ public class Game {
         }
     }
 
+    private void initBalls() {
+        balls = new LinkedList<Ball>();
+
+        balls.add(new Ball(330, 350, 5, Color.MAGENTA, environment));
+        balls.add(new Ball(350, 350, 5, Color.ORANGE, environment));
+
+        for (Ball ball : balls) {
+            ball.setVelocity(4, 4);
+            ball.addToGame(this);
+        }
+
+        ballsCounter.increase(2);
+    }
+
+    public void run() {
+        while ((lives.getValue() > 0) && blocksCounter.getValue() > 0) {
+            playOneTurn();
+            respawn();
+        }
+
+        gui.close();
+    }
+
     /**
      * Run the game - start the animation loop.
      */
-    public void run() {
+    public void playOneTurn() {
         Sleeper sleeper = new Sleeper();
         int framesPerSecond = 60;
         int millisecondsPerFrame = 1000 / framesPerSecond;
@@ -159,10 +187,19 @@ public class Game {
                 sleeper.sleepFor(milliSecondLeftToSleep);
             }
 
-            if ((blocksCounter.getValue() == 0) || (ballsCounter.getValue() == 0)) {
+            if (blocksCounter.getValue() == 0) {
                 score.increase(100);
-                gui.close();
+                break;
+            }
+            if (ballsCounter.getValue() == 0) {
+                lives.decrease(1);
+                break;
             }
         }
+    }
+
+    private void respawn() {
+        paddle.center(WIDTH);
+        initBalls();
     }
 }
