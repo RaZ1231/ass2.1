@@ -1,7 +1,7 @@
 package indicators;
 
+import Animations.GameLevel;
 import biuoop.DrawSurface;
-import game.Game;
 import interfaces.Sprite;
 
 import java.awt.Color;
@@ -34,12 +34,12 @@ public class RectIndicator implements Sprite {
     }
 
     /**
-     * add object to game.
+     * add object to gameLevel.
      *
-     * @param game a game to add the object to.
+     * @param gameLevel a gameLevel to add the object to.
      */
     @Override
-    public void addToGame(Game game) {
-        game.addSprite(this);
+    public void addToGame(GameLevel gameLevel) {
+        gameLevel.addSprite(this);
     }
 }

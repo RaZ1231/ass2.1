@@ -1,9 +1,11 @@
 package interfaces;
 
+import Animations.GameLevel;
 import biuoop.DrawSurface;
-import game.Game;
 
 /**
+ * Object that can be drawn to the screen
+ *
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
@@ -21,9 +23,9 @@ public interface Sprite {
     void timePassed();
 
     /**
-     * add object to game.
+     * add object to gameLevel.
      *
-     * @param game a game to add the object to.
+     * @param gameLevel a gameLevel to add the object to.
      */
-    void addToGame(Game game);
+    void addToGame(GameLevel gameLevel);
 }

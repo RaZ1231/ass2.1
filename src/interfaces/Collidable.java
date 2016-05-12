@@ -6,6 +6,8 @@ import shapes.Point;
 import shapes.Rectangle;
 
 /**
+ * Object that can be collided with
+ *
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
@@ -23,7 +25,7 @@ public interface Collidable {
      * The return is the new velocity expected after the hit (based on
      * the force the object inflicted on us).
      *
-     * @param hitter the hitting ball.
+     * @param hitter          the hitting ball.
      * @param collisionPoint  point of collision.
      * @param currentVelocity current velocity.
      * @return the new velocity expected after the hit.

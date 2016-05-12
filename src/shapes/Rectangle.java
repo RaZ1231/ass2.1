@@ -4,17 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Rectangle class.
+ *
  * @author Raziel Solomon
  * @since 18-Mar-16.
- */
-
-/**
- * Rectangle class.
  */
 public class Rectangle {
     private Point upperLeft;
     private double width;
     private double height;
+
+    /**
+     * constructor.
+     *
+     * @param x      upper left x-axis value.
+     * @param y      upper left y-axis value.
+     * @param width  rectangle's width.
+     * @param height rectangle's height.
+     */
+    public Rectangle(double x, double y, double width, double height) {
+        this(new Point(x, y), width, height);
+    }
 
     /**
      * constructor.
@@ -27,84 +37,6 @@ public class Rectangle {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
-    }
-
-    /**
-     * constructor.
-     *
-     * @param x upper left x-axis value.
-     * @param y upper left y-axis value.
-     * @param width rectangle's width.
-     * @param height rectangle's height.
-     */
-    public Rectangle(double x, double y, double width, double height) {
-        this(new Point(x, y), width, height);
-    }
-
-    /**
-     * returns start point.
-     *
-     * @return start point
-     */
-    public Point getUpperLeft() {
-        return upperLeft;
-    }
-
-    /**
-     * set the rectangle's upper left corner.
-     *
-     * @param upLeft rectangle's upper left corner.
-     */
-    public void setUpperLeft(Point upLeft) {
-        this.upperLeft = upLeft;
-    }
-
-    /**
-     * returns rectangle's width.
-     *
-     * @return rectangle's width.
-     */
-    public double getWidth() {
-        return width;
-    }
-
-    /**
-     * returns rectangle's height.
-     *
-     * @return rectangle's height.
-     */
-    public double getHeight() {
-        return height;
-    }
-
-    /**
-     * returns the upper right corner.
-     *
-     * @return the upper right corner.
-     */
-    public Point getUpperRight() {
-        return new Point(this.getUpperLeft().getX() + this.getWidth(),
-                this.getUpperLeft().getY());
-    }
-
-    /**
-     * returns the lower right corner.
-     *
-     * @return the lower right corner.
-     */
-    public Point getLowerRight() {
-        return new Point(this.getUpperLeft().getX() + this.getWidth(),
-                this.getUpperLeft().getY() + this.getHeight());
-    }
-
-    /**
-     * returns the lower left corner.
-     *
-     * @return the lower left corner.
-     */
-    public Point getLowerLeft() {
-        return new Point(this.getUpperLeft().getX(),
-                this.getUpperLeft().getY() + this.getHeight());
     }
 
     /**
@@ -143,6 +75,72 @@ public class Rectangle {
         lines[3] = new Line(this.getUpperRight().getX(), this.getUpperRight().getY(),
                 this.getLowerRight().getX(), this.getLowerRight().getY());
         return lines;
+    }
+
+    /**
+     * returns the upper right corner.
+     *
+     * @return the upper right corner.
+     */
+    public Point getUpperRight() {
+        return new Point(this.getUpperLeft().getX() + this.getWidth(),
+                this.getUpperLeft().getY());
+    }
+
+    /**
+     * returns the lower left corner.
+     *
+     * @return the lower left corner.
+     */
+    public Point getLowerLeft() {
+        return new Point(this.getUpperLeft().getX(),
+                this.getUpperLeft().getY() + this.getHeight());
+    }
+
+    /**
+     * returns the lower right corner.
+     *
+     * @return the lower right corner.
+     */
+    public Point getLowerRight() {
+        return new Point(this.getUpperLeft().getX() + this.getWidth(),
+                this.getUpperLeft().getY() + this.getHeight());
+    }
+
+    /**
+     * returns start point.
+     *
+     * @return start point
+     */
+    public Point getUpperLeft() {
+        return upperLeft;
+    }
+
+    /**
+     * set the rectangle's upper left corner.
+     *
+     * @param upLeft rectangle's upper left corner.
+     */
+    public void setUpperLeft(Point upLeft) {
+        this.upperLeft = upLeft;
+    }
+
+    /**
+     * returns rectangle's width.
+     *
+     * @return rectangle's width.
+     */
+    public double getWidth() {
+        return width;
+    }
+
+    /**
+     * returns rectangle's height.
+     *
+     * @return rectangle's height.
+     */
+    public double getHeight() {
+        return height;
     }
 }
 

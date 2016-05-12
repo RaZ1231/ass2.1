@@ -1,14 +1,12 @@
 package art;
 
-import game.Game;
-
-/**
- * @author Raziel Solomon
- * @since 30-Mar-16.
- */
+import Animations.GameLevel;
 
 /**
  * ass3 class.
+ *
+ * @author Raziel Solomon
+ * @since 30-Mar-16.
  */
 public class Ass3Game {
     /**
@@ -17,8 +15,8 @@ public class Ass3Game {
      * @param args data from user
      */
     public static void main(String[] args) {
-        Game game = new Game();
-        game.initialize();
-        game.run();
+        GameLevel gameLevel = new GameLevel();
+        gameLevel.initialize();
+        gameLevel.run();
     }
 }

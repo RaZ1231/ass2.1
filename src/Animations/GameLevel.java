@@ -1,15 +1,18 @@
-package game;
+package Animations;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;
-import biuoop.Sleeper;
 import collisions.GameEnvironment;
+import game.Paddle;
+import game.Stages;
+import graphics.AnimationRunner;
 import graphics.SpriteCollection;
 import indicators.LivesIndicator;
 import indicators.RectIndicator;
 import indicators.ScoreIndicator;
+import interfaces.Animation;
 import interfaces.Collidable;
-import interfaces.InterBlock;
+import interfaces.GameBlock;
 import interfaces.Sprite;
 import listeners.BallRemover;
 import listeners.BlockRemover;
@@ -24,14 +27,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * a game class.
+ *
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
-
-/**
- * a game class.
- */
-public class Game {
+public class GameLevel implements Animation {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
 
@@ -44,12 +45,15 @@ public class Game {
     private Counter lives;
     private Paddle paddle;
     private List<Ball> balls;
-    private List<InterBlock> borders;
+    private List<GameBlock> borders;
+
+    private AnimationRunner runner;
+    private boolean running;
 
     /**
      * constructor.
      */
-    public Game() {
+    public GameLevel() {
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
         borders = new LinkedList<>();
@@ -58,7 +62,7 @@ public class Game {
         lives = new Counter(4);
     }
 
-    public List<InterBlock> getBorders() {
+    public List<GameBlock> getBorders() {
         return borders;
     }
 
@@ -104,12 +108,12 @@ public class Game {
      */
     public void initialize() {
         gui = new GUI("Arkanoid", WIDTH, HEIGHT);
+        runner = new AnimationRunner(gui, 60);
         paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, HEIGHT - 35, 100, 20),
                 gui.getKeyboardSensor(), 15, WIDTH - 15);
-        List<InterBlock> blocks = new ArrayList<>(Stages.getStageOne(30, 100, 60, 20));
+        List<GameBlock> blocks = new ArrayList<>(Stages.getStageOne(30, 100, 60, 20));
         blocksCounter = new Counter(blocks.size());
         ballsCounter = new Counter(0);
-        initBalls();
 
         BlockRemover blockRemover = new BlockRemover(this, blocksCounter);
         BallRemover ballRemover = new BallRemover(this, ballsCounter);
@@ -118,7 +122,6 @@ public class Game {
         ScoreIndicator scoreIndicator = new ScoreIndicator(score);
         LivesIndicator livesIndicator = new LivesIndicator(lives);
 
-
         //PrintingHitListener phl = new PrintingHitListener();
 
         paddle.addToGame(this);
@@ -126,7 +129,7 @@ public class Game {
         scoreIndicator.addToGame(this);
         livesIndicator.addToGame(this);
 
-        for (InterBlock block : blocks) {
+        for (GameBlock block : blocks) {
             block.addHitListener(blockRemover);
             block.addHitListener(scoreTrackingListener);
             //block.addHitListener(phl);
@@ -135,9 +138,31 @@ public class Game {
         borders.get(3).addHitListener(ballRemover);
         blocks.addAll(borders);
 
-        for (InterBlock block : blocks) {
+        for (GameBlock block : blocks) {
             block.addToGame(this);
         }
+    }
+
+    public void run() {
+        while ((lives.getValue() > 0) && blocksCounter.getValue() > 0) {
+            playOneTurn();
+        }
+
+        gui.close();
+    }
+
+    public void playOneTurn() {
+        this.respawn();
+        this.runner.run(new CountdownAnimation(2, 3, sprites)); // countdown before turn starts.
+        // use our runner to run the current animation -- which is one turn of
+        // the game.
+        this.running = true;
+        this.runner.run(this);
+    }
+
+    private void respawn() {
+        paddle.center(WIDTH);
+        initBalls();
     }
 
     private void initBalls() {
@@ -154,52 +179,24 @@ public class Game {
         ballsCounter.increase(2);
     }
 
-    public void run() {
-        while ((lives.getValue() > 0) && blocksCounter.getValue() > 0) {
-            playOneTurn();
-            respawn();
+    public void doOneFrame(DrawSurface d) {
+        this.sprites.drawAllOn(d);
+        this.sprites.notifyAllTimePassed();
+
+        if (blocksCounter.getValue() == 0) {
+            score.increase(100);
+            running = false;
         }
-
-        gui.close();
-    }
-
-    /**
-     * Run the game - start the animation loop.
-     */
-    public void playOneTurn() {
-        Sleeper sleeper = new Sleeper();
-        int framesPerSecond = 60;
-        int millisecondsPerFrame = 1000 / framesPerSecond;
-
-        while (true) {
-            long startTime = System.currentTimeMillis(); // timing
-
-            DrawSurface d = gui.getDrawSurface();
-            this.sprites.drawAllOn(d);
-
-            gui.show(d);
-            this.sprites.notifyAllTimePassed();
-
-            // timing
-            long usedTime = System.currentTimeMillis() - startTime;
-            long milliSecondLeftToSleep = millisecondsPerFrame - usedTime;
-            if (milliSecondLeftToSleep > 0) {
-                sleeper.sleepFor(milliSecondLeftToSleep);
-            }
-
-            if (blocksCounter.getValue() == 0) {
-                score.increase(100);
-                break;
-            }
-            if (ballsCounter.getValue() == 0) {
-                lives.decrease(1);
-                break;
-            }
+        if (ballsCounter.getValue() == 0) {
+            lives.decrease(1);
+            running = false;
+        }
+        if (gui.getKeyboardSensor().isPressed("p")) {
+            this.runner.run(new PauseScreen(gui.getKeyboardSensor()));
         }
     }
 
-    private void respawn() {
-        paddle.center(WIDTH);
-        initBalls();
+    public boolean shouldStop() {
+        return !this.running;
     }
 }

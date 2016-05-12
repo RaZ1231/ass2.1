@@ -1,10 +1,6 @@
 package game;
 
-/**
- * @author Elisheva
- * @since 31/03/2016.
- */
-
+import Animations.GameLevel;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import interfaces.Collidable;
@@ -20,6 +16,9 @@ import java.awt.Color;
 
 /**
  * Paddle representation.
+ *
+ * @author Elisheva
+ * @since 31/03/2016.
  */
 public class Paddle implements Sprite, Collidable {
     public static final int[] ANGLES = {-60, -30, 0, 30, 60};
@@ -97,7 +96,7 @@ public class Paddle implements Sprite, Collidable {
      *
      * @param g a game.
      */
-    public void addToGame(Game g) {
+    public void addToGame(GameLevel g) {
         g.addCollidable(this);
         g.addSprite(this);
     }

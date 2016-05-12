@@ -8,27 +8,14 @@ import static utils.Mathematics.average;
 import static utils.Mathematics.isBetween;
 
 /**
+ * Line class.
+ *
  * @author Raziel Solomon
  * @since 14-Mar-16.
- */
-
-/**
- * Line class.
  */
 public class Line {
     private Point start;
     private Point end;
-
-    /**
-     * constructor.
-     *
-     * @param start Starting point
-     * @param end   Ending point
-     */
-    public Line(Point start, Point end) {
-        this.start = start;
-        this.end = end;
-    }
 
     /**
      * constructor.
@@ -43,23 +30,23 @@ public class Line {
     }
 
     /**
+     * constructor.
+     *
+     * @param start Starting point
+     * @param end   Ending point
+     */
+    public Line(Point start, Point end) {
+        this.start = start;
+        this.end = end;
+    }
+
+    /**
      * return the length of the line.
      *
      * @return length of the line
      */
     public double length() {
         return Math.abs(this.start().distance(this.end()));
-    }
-
-    /**
-     * returns the middle start of the line.
-     *
-     * @return the start of the line
-     */
-    public Point middle() {
-        double x = average(start().getX(), end().getX());
-        double y = average(start().getY(), end().getY());
-        return new Point(x, y);
     }
 
     /**
@@ -180,44 +167,6 @@ public class Line {
     }
 
     /**
-     * calculates y-axis intersect.
-     *
-     * @return point of intersection
-     */
-    public Double calcYAxis() {
-        double x = start().getX();
-        double y = start().getY();
-        Double m = calcSlope();
-
-        if (m == null) {
-            if (x != 0) {
-                return null; //line is vertical
-            } else {
-                return 0.0;
-            }
-        }
-
-        return y - m * x;
-    }
-
-    /**
-     * calculates slope.
-     *
-     * @return line's slope
-     */
-    public Double calcSlope() {
-        double x1 = start().getX();
-        double x2 = end().getX();
-        double y1 = start().getY();
-        double y2 = end().getY();
-
-        if (x1 == x2) {
-            return null; //vertical line
-        }
-        return (y2 - y1) / (x2 - x1);
-    }
-
-    /**
      * draws on surface.
      *
      * @param d draw the line in surface.
@@ -235,6 +184,17 @@ public class Line {
      */
     public void drawMidPoint(DrawSurface d, int size) {
         this.middle().drawOn(d, size);
+    }
+
+    /**
+     * returns the middle start of the line.
+     *
+     * @return the start of the line
+     */
+    public Point middle() {
+        double x = average(start().getX(), end().getX());
+        double y = average(start().getY(), end().getY());
+        return new Point(x, y);
     }
 
     /**
@@ -261,6 +221,44 @@ public class Line {
     @Override
     public String toString() {
         return String.format("Line{y=%sx+%s, start=%s, end=%s}", calcSlope(), calcYAxis(), start, end);
+    }
+
+    /**
+     * calculates slope.
+     *
+     * @return line's slope
+     */
+    public Double calcSlope() {
+        double x1 = start().getX();
+        double x2 = end().getX();
+        double y1 = start().getY();
+        double y2 = end().getY();
+
+        if (x1 == x2) {
+            return null; //vertical line
+        }
+        return (y2 - y1) / (x2 - x1);
+    }
+
+    /**
+     * calculates y-axis intersect.
+     *
+     * @return point of intersection
+     */
+    public Double calcYAxis() {
+        double x = start().getX();
+        double y = start().getY();
+        Double m = calcSlope();
+
+        if (m == null) {
+            if (x != 0) {
+                return null; //line is vertical
+            } else {
+                return 0.0;
+            }
+        }
+
+        return y - m * x;
     }
 
     /**

@@ -2,16 +2,15 @@ package graphics;
 
 import biuoop.DrawSurface;
 import interfaces.Sprite;
+
 import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * sprite collection class.
+ *
  * @author Raziel Solomon
  * @since 30-Mar-16.
- */
-
-/**
- * sprite collection class.
  */
 public class SpriteCollection {
     private List<Sprite> sprites;

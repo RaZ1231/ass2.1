@@ -1,9 +1,9 @@
 package blocks;
 
+import Animations.GameLevel;
 import biuoop.DrawSurface;
-import game.Game;
+import interfaces.GameBlock;
 import interfaces.HitListener;
-import interfaces.InterBlock;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
@@ -121,7 +121,7 @@ public abstract class BaseBlock {
         List<HitListener> listeners = new ArrayList<HitListener>(this.getHitListeners());
         // Notify all listeners about a hit event:
         for (HitListener hl : listeners) {
-            hl.hitEvent((InterBlock) this, hitter);
+            hl.hitEvent((GameBlock) this, hitter);
         }
     }
 
@@ -130,13 +130,13 @@ public abstract class BaseBlock {
     }
 
     /**
-     * add the block to the game.
+     * add the block to the gameLevel.
      *
-     * @param game a game it add the block to.
+     * @param gameLevel a gameLevel it add the block to.
      */
-    public void addToGame(Game game) {
-        game.addCollidable((InterBlock) this);
-        game.addSprite((InterBlock) this);
+    public void addToGame(GameLevel gameLevel) {
+        gameLevel.addCollidable((GameBlock) this);
+        gameLevel.addSprite((GameBlock) this);
     }
 
     public void addHitListener(HitListener hl) {

@@ -1,8 +1,8 @@
 package blocks;
 
+import Animations.GameLevel;
 import biuoop.DrawSurface;
-import game.Game;
-import interfaces.InterBlock;
+import interfaces.GameBlock;
 import shapes.Rectangle;
 
 import java.awt.Color;
@@ -11,7 +11,7 @@ import java.awt.Color;
  * @author Elisheva Broyer.
  * @since 10/05/2016.
  */
-public class BorderBlock extends BaseBlock implements InterBlock {
+public class BorderBlock extends BaseBlock implements GameBlock {
     public BorderBlock(Rectangle rect, Color color) {
         super(rect, color);
     }
@@ -27,7 +27,7 @@ public class BorderBlock extends BaseBlock implements InterBlock {
     }
 
     @Override
-    public void removeFromGame(Game game) {
+    public void removeFromGame(GameLevel gameLevel) {
         // nothing happens.
     }
 }

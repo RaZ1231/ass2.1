@@ -1,9 +1,9 @@
 package listeners;
 
+import Animations.GameLevel;
 import blocks.Block;
-import game.Game;
+import interfaces.GameBlock;
 import interfaces.HitListener;
-import interfaces.InterBlock;
 import shapes.Ball;
 import utils.Counter;
 
@@ -14,15 +14,15 @@ import utils.Counter;
  * @since 11/05/2016.
  */
 public class ScoreTrackingListener implements HitListener {
-    private Game game;
+    private GameLevel gameLevel;
     private Counter currentScore;
 
-    public ScoreTrackingListener(Game game, Counter scoreCounter) {
-        this.game = game;
+    public ScoreTrackingListener(GameLevel gameLevel, Counter scoreCounter) {
+        this.gameLevel = gameLevel;
         this.currentScore = scoreCounter;
     }
 
-    public void hitEvent(InterBlock beingHit, Ball hitter) {
+    public void hitEvent(GameBlock beingHit, Ball hitter) {
         if (((Block) beingHit).getHitPoints() == 0) {
             currentScore.increase(10);
         } else {

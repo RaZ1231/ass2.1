@@ -4,12 +4,10 @@ import shapes.Point;
 import utils.Mathematics;
 
 /**
+ * Velocity specifies the change in position on the `x` and the `y` axis.
+ *
  * @author Raziel Solomon
  * @since 16-Mar-16.
- */
-
-/**
- * Velocity specifies the change in position on the `x` and the `y` axis.
  */
 public class Velocity {
     private double dx;
@@ -59,21 +57,21 @@ public class Velocity {
     }
 
     /**
-     * returns pythagoras value of velocity's dx and dy.
-     *
-     * @return pythagoras value of velocity's dx and dy.
-     */
-    public double getSpeed() {
-        return Mathematics.pythagoras(dx, dy);
-    }
-
-    /**
      * returns the hit's angle. test's used.
      *
      * @return the hit's angle. test's used.
      */
     public double getAngle() {
         return Math.toDegrees(Math.asin(dx / getSpeed()));
+    }
+
+    /**
+     * returns pythagoras value of velocity's dx and dy.
+     *
+     * @return pythagoras value of velocity's dx and dy.
+     */
+    public double getSpeed() {
+        return Mathematics.pythagoras(dx, dy);
     }
 
     /**

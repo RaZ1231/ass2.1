@@ -1,8 +1,8 @@
 package listeners;
 
-import game.Game;
+import Animations.GameLevel;
+import interfaces.GameBlock;
 import interfaces.HitListener;
-import interfaces.InterBlock;
 import shapes.Ball;
 import utils.Counter;
 
@@ -11,23 +11,23 @@ import utils.Counter;
  * @since 11-May-16.
  */
 public class BallRemover implements HitListener {
-    private Game game;
+    private GameLevel gameLevel;
     private Counter removedBalls;
 
     /**
      * constructor;
      *
-     * @param game         a game.
+     * @param gameLevel         a gameLevel.
      * @param removedBalls number of blocks.
      */
-    public BallRemover(Game game, Counter removedBalls) {
-        this.game = game;
+    public BallRemover(GameLevel gameLevel, Counter removedBalls) {
+        this.gameLevel = gameLevel;
         this.removedBalls = removedBalls;
     }
 
     @Override
-    public void hitEvent(InterBlock beingHit, Ball hitter) {
-        hitter.removeFromGame(game);
+    public void hitEvent(GameBlock beingHit, Ball hitter) {
+        hitter.removeFromGame(gameLevel);
         removedBalls.decrease(1);
     }
 }

@@ -1,8 +1,8 @@
 package blocks;
 
+import Animations.GameLevel;
 import biuoop.DrawSurface;
-import game.Game;
-import interfaces.InterBlock;
+import interfaces.GameBlock;
 import shapes.Rectangle;
 
 import java.awt.Color;
@@ -13,7 +13,7 @@ import java.awt.Color;
  * @author Elisheva
  * @since 30/03/2016.
  */
-public class Block extends BaseBlock implements InterBlock {
+public class Block extends BaseBlock implements GameBlock {
     private int hitCounter;
 
     /**
@@ -77,8 +77,8 @@ public class Block extends BaseBlock implements InterBlock {
         }
     }
 
-    public void removeFromGame(Game game) {
-        game.removeCollidable(this);
-        game.removeSprite(this);
+    public void removeFromGame(GameLevel gameLevel) {
+        gameLevel.removeCollidable(this);
+        gameLevel.removeSprite(this);
     }
 }

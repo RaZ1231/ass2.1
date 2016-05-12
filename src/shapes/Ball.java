@@ -1,21 +1,19 @@
 package shapes;
 
+import Animations.GameLevel;
 import biuoop.DrawSurface;
 import collisions.CollisionInfo;
 import collisions.GameEnvironment;
-import game.Game;
 import interfaces.Sprite;
 import motion.Velocity;
 
 import java.awt.Color;
 
 /**
+ * ball class.
+ *
  * @author Raziel Solomon
  * @since 16-Mar-16.
- */
-
-/**
- * ball class.
  */
 public class Ball implements Sprite {
     private Point center;
@@ -27,10 +25,10 @@ public class Ball implements Sprite {
     /**
      * constructor.
      *
-     * @param x      x of center point
-     * @param y      y of center point
-     * @param radius ball size
-     * @param color  ball color
+     * @param x               x of center point
+     * @param y               y of center point
+     * @param radius          ball size
+     * @param color           ball color
      * @param gameEnvironment game environment.
      */
     public Ball(double x, double y, int radius, Color color, GameEnvironment gameEnvironment) {
@@ -40,9 +38,9 @@ public class Ball implements Sprite {
     /**
      * constructor.
      *
-     * @param center center point.
-     * @param radius ball size.
-     * @param color  ball color.
+     * @param center          center point.
+     * @param radius          ball size.
+     * @param color           ball color.
      * @param gameEnvironment game environment.
      */
     public Ball(Point center, int radius, Color color,
@@ -160,12 +158,12 @@ public class Ball implements Sprite {
     }
 
     /**
-     * add the ball to the game.
+     * add the ball to the gameLevel.
      *
-     * @param game a game it add the ball to.
+     * @param gameLevel a gameLevel it add the ball to.
      */
-    public void addToGame(Game game) {
-        game.addSprite(this);
+    public void addToGame(GameLevel gameLevel) {
+        gameLevel.addSprite(this);
     }
 
     /**
@@ -178,7 +176,7 @@ public class Ball implements Sprite {
         this.setVelocity(new Velocity(dx, dy));
     }
 
-    public void removeFromGame(Game game) {
-        game.removeSprite(this);
+    public void removeFromGame(GameLevel gameLevel) {
+        gameLevel.removeSprite(this);
     }
 }

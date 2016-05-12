@@ -1,18 +1,17 @@
 package collisions;
 
 import interfaces.Collidable;
-import java.util.LinkedList;
-import java.util.List;
 import shapes.Line;
 import shapes.Point;
 
-/**
- * @author Raziel Solomon
- * @since 30-Mar-16.
- */
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * game environment class.
+ *
+ * @author Raziel Solomon
+ * @since 30-Mar-16.
  */
 public class GameEnvironment {
     private List<Collidable> collidables;
@@ -36,6 +35,7 @@ public class GameEnvironment {
     public void removeCollidable(Collidable c) {
         collidables.remove(c);
     }
+
     /**
      * Assume an object moving from line.start() to line.end().
      * If this object will not collide with any of the collidables

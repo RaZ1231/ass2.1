@@ -11,5 +11,5 @@ import shapes.Ball;
 public interface HitListener {
     // This method is called whenever the beingHit object is hit.
     // The hitter parameter is the Ball that's doing the hitting.
-    void hitEvent(InterBlock beingHit, Ball hitter);
+    void hitEvent(GameBlock beingHit, Ball hitter);
 }

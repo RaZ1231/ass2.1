@@ -1,12 +1,10 @@
 package utils;
 
 /**
+ * Mathematics functions class.
+ *
  * @author Raziel Solomon
  * @since 19-Mar-16.
- */
-
-/**
- * Mathematics functions class.
  */
 public class Mathematics {
     /**
