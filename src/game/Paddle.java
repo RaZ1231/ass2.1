@@ -5,6 +5,7 @@ import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import interfaces.Collidable;
 import interfaces.Sprite;
+import java.awt.Color;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
@@ -12,12 +13,10 @@ import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
 
-import java.awt.Color;
-
 /**
  * Paddle representation.
  *
- * @author Elisheva
+ * @author Elisheva Broyer.
  * @since 31/03/2016.
  */
 public class Paddle implements Sprite, Collidable {

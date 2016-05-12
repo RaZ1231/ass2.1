@@ -3,9 +3,8 @@ package Animations;
 import biuoop.DrawSurface;
 import graphics.SpriteCollection;
 import interfaces.Animation;
-import utils.Counter;
-
 import java.awt.Color;
+import utils.Counter;
 
 /**
  * The CountdownAnimation will display the given gameScreen,
@@ -25,6 +24,13 @@ public class CountdownAnimation implements Animation {
     private Counter count;
     private Counter framesPassed;
 
+    /**
+     * count down to the beggining of the game.
+     *
+     * @param numOfSeconds the number of seconds to count.
+     * @param countFrom    the number to count from.
+     * @param gameScreen   a screen.
+     */
     public CountdownAnimation(double numOfSeconds, int countFrom, SpriteCollection gameScreen) {
         this.numOfSeconds = numOfSeconds;
         this.countFrom = countFrom;
@@ -34,6 +40,11 @@ public class CountdownAnimation implements Animation {
         this.framesPassed = new Counter(0);
     }
 
+    /**
+     * apply one frame on drawsurface.
+     *
+     * @param d a drawsurface.
+     */
     public void doOneFrame(DrawSurface d) {
         gameScreen.drawAllOn(d);
 
@@ -51,6 +62,11 @@ public class CountdownAnimation implements Animation {
         }
     }
 
+    /**
+     * returns whether turn should stop.
+     *
+     * @return whether turn should stop.
+     */
     public boolean shouldStop() {
         return !this.running;
     }
