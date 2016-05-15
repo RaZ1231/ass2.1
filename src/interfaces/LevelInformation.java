@@ -36,7 +36,7 @@ public interface LevelInformation {
      *
      * @return paddle's width in level.
      */
-    int paddleWidth();
+    double paddleWidth();
 
     /**
      * returns the level name to be displayed at the top of the screen.

@@ -1,5 +1,6 @@
 package levels;
 
+import Animations.Background;
 import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
@@ -9,6 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import motion.Velocity;
 import shapes.Rectangle;
+import sprites.Circle;
+import sprites.Square;
+import sprites.Star;
 
 /**
  * level 1 class.
@@ -36,7 +40,7 @@ public class Level1 implements LevelInformation {
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new LinkedList<>();
 
-        velocities.add(new Velocity(0, 4));
+        velocities.add(new Velocity(3, 0));
 
         return velocities;
     }
@@ -57,7 +61,7 @@ public class Level1 implements LevelInformation {
      * @return paddle's width in level.
      */
     @Override
-    public int paddleWidth() {
+    public double paddleWidth() {
         return 100;
     }
 
@@ -78,9 +82,26 @@ public class Level1 implements LevelInformation {
      */
     @Override
     public Sprite getBackground() {
-
-
-        return null;
+        Background background = new Background();
+        Square s1 = new Square(0, 0, 800, 600, Color.BLUE);
+        background.addElement(s1);
+        Circle c1 = new Circle(Color.yellow, 50);
+        c1.addX(250);
+        c1.addY(250);
+        Circle c2 = new Circle(Color.BLUE, 50);
+        c2.addX(270);
+        c2.addY(230);
+        background.addElement(c1);
+        background.addElement(c2);
+        Star st1 = new Star(Color.WHITE, 100, 100, 20, 10);
+        background.addElement(st1);
+        Star st2 = new Star(Color.WHITE, 190, 160, 20, 10);
+        background.addElement(st2);
+        Star st3 = new Star(Color.WHITE, 200, 420, 20, 10);
+        background.addElement(st3);
+        Star st4 = new Star(Color.WHITE, 530, 200, 20, 10);
+        background.addElement(st4);
+        return background;
     }
 
     /**

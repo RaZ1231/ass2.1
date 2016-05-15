@@ -21,12 +21,12 @@ import utils.Mathematics;
  */
 public class Paddle implements Sprite, Collidable {
     public static final int[] ANGLES = {-60, -30, 0, 30, 60};
-    public static final double STEP = 5;
 
     private Rectangle rect;
     private KeyboardSensor keyboard;
     private double leftBorder;
     private double rightBorder;
+    private int step;
 
     /**
      * constructor.
@@ -36,11 +36,13 @@ public class Paddle implements Sprite, Collidable {
      * @param leftBorder  game environment's left border.
      * @param rightBorder game environment's right border.
      */
-    public Paddle(Rectangle rect, KeyboardSensor keyboard, double leftBorder, double rightBorder) {
+    public Paddle(Rectangle rect, KeyboardSensor keyboard,
+                  double leftBorder, double rightBorder, int step) {
         this.rect = rect;
         this.keyboard = keyboard;
         this.leftBorder = leftBorder;
         this.rightBorder = rightBorder;
+        this.step = step;
     }
 
     /**
@@ -75,7 +77,7 @@ public class Paddle implements Sprite, Collidable {
         if (rect.getUpperLeft().getX() <= leftBorder) {
             rect.setUpperLeft(new Point(leftBorder, rect.getUpperLeft().getY()));
         } else {
-            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() - STEP, rect.getUpperLeft().getY()));
+            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() - step, rect.getUpperLeft().getY()));
         }
     }
 
@@ -86,7 +88,7 @@ public class Paddle implements Sprite, Collidable {
         if (rect.getUpperRight().getX() >= rightBorder) {
             rect.setUpperLeft(new Point(rightBorder - rect.getWidth(), rect.getUpperLeft().getY()));
         } else {
-            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() + STEP, rect.getUpperLeft().getY()));
+            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() + step, rect.getUpperLeft().getY()));
         }
     }
 

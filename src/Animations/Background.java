@@ -1,19 +1,23 @@
-package indicators;
+package Animations;
 
-import Animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
-import utils.Counter;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
- * @author Raziel Solomon
- * @since 11-May-16.
+ * @author Elisheva Broyer.
+ * @since 15/05/2016.
  */
-public class LivesIndicator implements Sprite {
-    private Counter lives;
+public class Background implements Sprite {
+    private List<Sprite> sprites;
 
-    public LivesIndicator(Counter lives) {
-        this.lives = lives;
+    public Background() {
+        this.sprites = new LinkedList<>();
+    }
+
+    public void addElement(Sprite s) {
+        sprites.add(s);
     }
 
     /**
@@ -23,7 +27,9 @@ public class LivesIndicator implements Sprite {
      */
     @Override
     public void drawOn(DrawSurface d) {
-        d.drawText(120, 15, toString(), 18);
+        for (Sprite s : sprites) {
+            s.drawOn(d);
+        }
     }
 
     /**
@@ -31,7 +37,7 @@ public class LivesIndicator implements Sprite {
      */
     @Override
     public void timePassed() {
-        //do nothing.
+        // do nothing.
     }
 
     /**
@@ -42,10 +48,5 @@ public class LivesIndicator implements Sprite {
     @Override
     public void addToGame(GameLevel gameLevel) {
         gameLevel.addSprite(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Lives: " + lives.getValue();
     }
 }

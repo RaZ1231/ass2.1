@@ -1,6 +1,7 @@
 package art;
 
 import Animations.GameLevel;
+import levels.Level2;
 
 /**
  * ass3 class.
@@ -15,7 +16,9 @@ public class Ass3Game {
      * @param args data from user
      */
     public static void main(String[] args) {
-        GameLevel gameLevel = new GameLevel();
+        Level2 level = new Level2();
+
+        GameLevel gameLevel = new GameLevel(level);
         gameLevel.initialize();
         gameLevel.run();
     }

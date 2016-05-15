@@ -10,15 +10,12 @@ import java.util.LinkedList;
 import java.util.List;
 import motion.Velocity;
 import shapes.Rectangle;
-import sprites.Square;
 
 /**
- * Level 2 class.
- *
  * @author Elisheva Broyer.
- * @since 13/05/2016.
+ * @since 15/05/2016.
  */
-public class Level2 implements LevelInformation {
+public class Level4 implements LevelInformation {
     /**
      * returns number of balls played in level.
      *
@@ -37,7 +34,7 @@ public class Level2 implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new LinkedList<>();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 1; i++) {
             velocities.add(new Velocity(0, 4));
         }
         return velocities;
@@ -50,7 +47,7 @@ public class Level2 implements LevelInformation {
      */
     @Override
     public int paddleSpeed() {
-        return 2;
+        return 5;
     }
 
     /**
@@ -60,7 +57,7 @@ public class Level2 implements LevelInformation {
      */
     @Override
     public double paddleWidth() {
-        return 500;
+        return 100;
     }
 
     /**
@@ -70,7 +67,7 @@ public class Level2 implements LevelInformation {
      */
     @Override
     public String levelName() {
-        return "Wide Easy";
+        return "Final Four";
     }
 
     /**
@@ -81,8 +78,6 @@ public class Level2 implements LevelInformation {
     @Override
     public Sprite getBackground() {
         Background background = new Background();
-        Square s1 = new Square(0, 0, 800, 600, Color.GREEN);
-        background.addElement(s1);
         return background;
     }
 
@@ -96,7 +91,7 @@ public class Level2 implements LevelInformation {
         List<GameBlock> blocks = new LinkedList<>();
 
         for (int i = 0; i < 15; i++) {
-            Block b = new Block(new Rectangle(15 + i * 50, 60, 50, 30), Color.BLUE, 2);
+            Block b = new Block(new Rectangle(15 + i, 60, 50, 30), Color.BLUE, 2);
 
             blocks.add(b);
         }

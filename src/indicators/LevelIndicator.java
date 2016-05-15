@@ -2,18 +2,18 @@ package indicators;
 
 import Animations.GameLevel;
 import biuoop.DrawSurface;
+import interfaces.LevelInformation;
 import interfaces.Sprite;
-import utils.Counter;
 
 /**
- * @author Raziel Solomon
- * @since 11-May-16.
+ * @author Elisheva Broyer.
+ * @since 15/05/2016.
  */
-public class LivesIndicator implements Sprite {
-    private Counter lives;
+public class LevelIndicator implements Sprite {
+    private LevelInformation level;
 
-    public LivesIndicator(Counter lives) {
-        this.lives = lives;
+    public LevelIndicator(LevelInformation level) {
+        this.level = level;
     }
 
     /**
@@ -23,7 +23,7 @@ public class LivesIndicator implements Sprite {
      */
     @Override
     public void drawOn(DrawSurface d) {
-        d.drawText(120, 15, toString(), 18);
+        d.drawText(500, 15, toString(), 18);
     }
 
     /**
@@ -46,6 +46,6 @@ public class LivesIndicator implements Sprite {
 
     @Override
     public String toString() {
-        return "Lives: " + lives.getValue();
+        return "Level Name: " + level.levelName();
     }
 }

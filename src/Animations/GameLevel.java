@@ -7,24 +7,25 @@ import game.Paddle;
 import game.Stages;
 import graphics.AnimationRunner;
 import graphics.SpriteCollection;
+import indicators.LevelIndicator;
 import indicators.LivesIndicator;
 import indicators.RectIndicator;
 import indicators.ScoreIndicator;
 import interfaces.Animation;
 import interfaces.Collidable;
 import interfaces.GameBlock;
+import interfaces.LevelInformation;
 import interfaces.Sprite;
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 import listeners.BallRemover;
 import listeners.BlockRemover;
 import listeners.ScoreTrackingListener;
+import motion.Velocity;
 import shapes.Ball;
 import shapes.Rectangle;
 import utils.Counter;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * a game class.
@@ -46,20 +47,29 @@ public class GameLevel implements Animation {
     private Paddle paddle;
     private List<Ball> balls;
     private List<GameBlock> borders;
-
     private AnimationRunner runner;
     private boolean running;
-
+    private LevelInformation level;
     /**
      * constructor.
      */
-    public GameLevel() {
+    public GameLevel(LevelInformation gLevel) {
+
+        level = gLevel;
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
         borders = new LinkedList<>();
         borders.addAll(Stages.getBorders(WIDTH, HEIGHT, 15));
         score = new Counter(0);
         lives = new Counter(4);
+    }
+
+    public Counter getBlocksCounter() {
+        return blocksCounter;
+    }
+
+    public Counter getLives() {
+        return lives;
     }
 
     public List<GameBlock> getBorders() {
@@ -109,11 +119,11 @@ public class GameLevel implements Animation {
     public void initialize() {
         gui = new GUI("Arkanoid", WIDTH, HEIGHT);
         runner = new AnimationRunner(gui, 60);
-        paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, HEIGHT - 35, 100, 20),
-                gui.getKeyboardSensor(), 15, WIDTH - 15);
-        List<GameBlock> blocks = new ArrayList<>(Stages.getStageOne(30, 100, 60, 20));
-        blocksCounter = new Counter(blocks.size());
-        ballsCounter = new Counter(0);
+        paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, HEIGHT - 35, level.paddleWidth(), 20),
+                gui.getKeyboardSensor(), 15, WIDTH - 15, level.paddleSpeed());
+        List<GameBlock> blocks = level.blocks();
+        blocksCounter = new Counter(level.numberOfBlocksToRemove());
+        ballsCounter = new Counter(level.numberOfBalls());
 
         BlockRemover blockRemover = new BlockRemover(this, blocksCounter);
         BallRemover ballRemover = new BallRemover(this, ballsCounter);
@@ -121,13 +131,15 @@ public class GameLevel implements Animation {
         RectIndicator rectIndicator = new RectIndicator();
         ScoreIndicator scoreIndicator = new ScoreIndicator(score);
         LivesIndicator livesIndicator = new LivesIndicator(lives);
+        LevelIndicator levelIndicator = new LevelIndicator(level);
 
         //PrintingHitListener phl = new PrintingHitListener();
-
+        level.getBackground().addToGame(this);
         paddle.addToGame(this);
         rectIndicator.addToGame(this);
         scoreIndicator.addToGame(this);
         livesIndicator.addToGame(this);
+        levelIndicator.addToGame(this);
 
         for (GameBlock block : blocks) {
             block.addHitListener(blockRemover);
@@ -168,15 +180,17 @@ public class GameLevel implements Animation {
     private void initBalls() {
         balls = new LinkedList<Ball>();
 
-        balls.add(new Ball(330, 350, 5, Color.MAGENTA, environment));
-        balls.add(new Ball(350, 350, 5, Color.ORANGE, environment));
-
-        for (Ball ball : balls) {
-            ball.setVelocity(4, 4);
-            ball.addToGame(this);
+        for (int i = 0; i < level.numberOfBalls(); i++) {
+            balls.add(new Ball(400 + i * 6, HEIGHT - 36, 5, Color.WHITE, environment));
         }
 
-        ballsCounter.increase(2);
+        for (int i = 0; i < level.numberOfBalls(); i++) {
+            Velocity v = level.initialBallVelocities().get(i);
+            balls.get(i).setVelocity(v);
+            balls.get(i).addToGame(this);
+        }
+
+        ballsCounter.increase(level.numberOfBalls());
     }
 
     public void doOneFrame(DrawSurface d) {
