@@ -9,6 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Base sprite class.
+ *
  * @author Elisheva Broyer.
  * @since 15/05/2016.
  */
@@ -28,10 +30,20 @@ public abstract class BaseSprite implements Sprite {
         y = new LinkedList<>();
     }
 
+    /**
+     * add an x value to list.
+     *
+     * @param newX new x value.
+     */
     public void addX(int newX) {
         x.add(newX);
     }
 
+    /**
+     * add an y value to list.
+     *
+     * @param newY new x value.
+     */
     public void addY(int newY) {
         y.add(newY);
     }
@@ -61,6 +73,12 @@ public abstract class BaseSprite implements Sprite {
         d.fillPolygon(new Polygon(arrX, arrY, x.size()));
     }
 
+    /**
+     * convert a list to an array.
+     *
+     * @param list a list.
+     * @return an array with list's values.
+     */
     public int[] listToArray(List<Integer> list) {
         int[] arr = new int[list.size()];
 

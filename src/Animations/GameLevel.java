@@ -50,6 +50,7 @@ public class GameLevel implements Animation {
     private AnimationRunner runner;
     private boolean running;
     private LevelInformation level;
+
     /**
      * constructor.
      */

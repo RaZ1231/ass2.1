@@ -12,10 +12,10 @@ import motion.Velocity;
 import shapes.Rectangle;
 import sprites.Circle;
 import sprites.Square;
-import sprites.Star;
+import sprites.Triangle;
 
 /**
- * level 1 class.
+ * level 1.
  *
  * @author Elisheva Broyer.
  * @since 13/05/2016.
@@ -40,7 +40,7 @@ public class Level1 implements LevelInformation {
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new LinkedList<>();
 
-        velocities.add(new Velocity(3, 0));
+        velocities.add(new Velocity(0, 4));
 
         return velocities;
     }
@@ -83,24 +83,55 @@ public class Level1 implements LevelInformation {
     @Override
     public Sprite getBackground() {
         Background background = new Background();
-        Square s1 = new Square(0, 0, 800, 600, Color.BLUE);
-        background.addElement(s1);
-        Circle c1 = new Circle(Color.yellow, 50);
-        c1.addX(250);
-        c1.addY(250);
-        Circle c2 = new Circle(Color.BLUE, 50);
-        c2.addX(270);
-        c2.addY(230);
+        Square back = new Square(800, 600, Color.pink);
+        back.addX(0);
+        back.addY(0);
+        background.addElement(back);
+
+        Circle c1 = new Circle(Color.YELLOW, 250);
+        c1.addX(400);
+        c1.addY(300);
         background.addElement(c1);
+
+        Circle c2 = new Circle(new Color(185, 122, 87), 140);
+        c2.addX(400);
+        c2.addY(360);
         background.addElement(c2);
-        Star st1 = new Star(Color.WHITE, 100, 100, 20, 10);
-        background.addElement(st1);
-        Star st2 = new Star(Color.WHITE, 190, 160, 20, 10);
-        background.addElement(st2);
-        Star st3 = new Star(Color.WHITE, 200, 420, 20, 10);
-        background.addElement(st3);
-        Star st4 = new Star(Color.WHITE, 530, 200, 20, 10);
-        background.addElement(st4);
+
+        Square s1 = new Square(280, 140, Color.yellow);
+        s1.addX(260);
+        s1.addY(220);
+        background.addElement(s1);
+
+        Square s2 = new Square(100, 140, new Color(255, 128, 255));
+        s1.addX(360);
+        s1.addY(380);
+        background.addElement(s2);
+
+        Circle c3 = new Circle(new Color(255, 128, 255), 50);
+        c3.addX(410);
+        c3.addY(520);
+        background.addElement(c3);
+
+        Triangle t1a = new Triangle(new Color(185, 122, 87), 60, 20);
+        t1a.addX(285);
+        t1a.addY(200);
+        background.addElement(t1a);
+        Triangle t1b = new Triangle(Color.yellow, 50, 20);
+        t1b.addX(260);
+        t1b.addY(215);
+        background.addElement(t1b);
+
+        Triangle t2a = new Triangle(new Color(185, 122, 87), 60, 20);
+        t2a.addX(515);
+        t2a.addY(200);
+        background.addElement(t2a);
+        Triangle t2b = new Triangle(Color.yellow, 50, 20);
+        t2b.addX(540);
+        t2b.addY(215);
+        background.addElement(t2b);
+
+
         return background;
     }
 
@@ -112,7 +143,7 @@ public class Level1 implements LevelInformation {
     @Override
     public List<GameBlock> blocks() {
         List<GameBlock> blocks = new LinkedList<>();
-        Block b = new Block(new Rectangle(400, 100, 50, 50), Color.RED, 1);
+        Block b = new Block(new Rectangle(350, 100, 100, 50), Color.RED, 1);
 
         blocks.add(b);
 

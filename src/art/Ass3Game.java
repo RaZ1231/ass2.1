@@ -1,7 +1,7 @@
 package art;
 
 import Animations.GameLevel;
-import levels.Level2;
+import levels.Level4;
 
 /**
  * ass3 class.
@@ -16,10 +16,20 @@ public class Ass3Game {
      * @param args data from user
      */
     public static void main(String[] args) {
-        Level2 level = new Level2();
+       /* GUI gui = new GUI("Arkanoid", 800, 600);
+        AnimationRunner runner = new AnimationRunner(gui, 60);
+        List<LevelInformation> levels = new LinkedList<>();
+        levels.add(new Level1());
+        levels.add(new Level2());
+        levels.add(new Level3());
+        levels.add(new Level4());
 
-        GameLevel gameLevel = new GameLevel(level);
+        GameFlow gF = new GameFlow(runner, gui.getKeyboardSensor());
+        gF.runLevels(levels);*/
+
+        GameLevel gameLevel = new GameLevel(new Level4());
         gameLevel.initialize();
         gameLevel.run();
+
     }
 }

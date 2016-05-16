@@ -19,7 +19,7 @@ public class BlockRemover implements HitListener {
     private Counter removedBlocks;
 
     /**
-     * constructor;
+     * constructor.
      *
      * @param gameLevel          a gameLevel.
      * @param removedBlocks number of blocks.
@@ -30,12 +30,11 @@ public class BlockRemover implements HitListener {
     }
 
     /**
-     * Blocks that are hit and reach 0 hit-points should be removed
-     * from the gameLevel. Remember to remove this listener from the block
-     * that is being removed from the gameLevel.
+     * This method is called whenever the beingHit object is hit.
+     * The hitter parameter is the Ball that's doing the hitting.
      *
-     * @param beingHit the block that got a hit.
-     * @param hitter   the hitting ball.
+     * @param beingHit the block that got hit.
+     * @param hitter the hitting ball.
      */
     @Override
     public void hitEvent(GameBlock beingHit, Ball hitter) {

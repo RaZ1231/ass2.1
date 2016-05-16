@@ -6,12 +6,12 @@ import java.awt.Polygon;
 import java.util.List;
 
 /**
+ * drawable star.
+ *
  * @author Elisheva Broyer.
  * @since 15/05/2016.
  */
 public class Star extends BaseSprite {
-    private double sX;
-    private double sY;
     private double externalRadius;
     private double internalRadius;
     private double[] angles;
@@ -19,12 +19,12 @@ public class Star extends BaseSprite {
     /**
      * constructor.
      *
-     * @param color a color.
+     * @param color          a color.
+     * @param externalRadius largest
+     * @param internalRadius smallest.
      */
-    public Star(Color color, double x, double y, double externalRadius, double internalRadius) {
+    public Star(Color color, double externalRadius, double internalRadius) {
         super(color);
-        this.sX = x;
-        this.sY = y;
         this.externalRadius = externalRadius;
         this.internalRadius = internalRadius;
         this.angles = new double[5];
@@ -33,6 +33,15 @@ public class Star extends BaseSprite {
         }
     }
 
+    /**
+     * draw itself.
+     *
+     * @param d     a draw surface.
+     * @param x     sprite's x positions.
+     * @param y     sprite's y positions.
+     * @param color a color.
+     */
+    @Override
     public void drawSelf(DrawSurface d, List<Integer> x, List<Integer> y, Color color) {
         Polygon polygon = new Polygon();
 
@@ -40,12 +49,12 @@ public class Star extends BaseSprite {
             double dx = Math.cos(angles[i]) * externalRadius;
             double dy = Math.sin(angles[i]) * externalRadius;
 
-            polygon.addPoint((int) (sX + dx), (int) (sY + dy));
+            polygon.addPoint((int) (x.get(0) + dx), (int) (y.get(0) + dy));
 
             dx = Math.cos(angles[i] + Math.PI / 5) * internalRadius;
             dy = Math.sin(angles[i] + Math.PI / 5) * internalRadius;
 
-            polygon.addPoint((int) (sX + dx), (int) (sY + dy));
+            polygon.addPoint((int) (x.get(0) + dx), (int) (y.get(0) + dy));
         }
 
         d.setColor(color);

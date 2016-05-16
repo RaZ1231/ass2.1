@@ -3,25 +3,28 @@ package sprites;
 import biuoop.DrawSurface;
 import java.awt.Color;
 import java.util.List;
+import shapes.Point;
 
 /**
- * drawable circle.
+ * drawable line.
  *
  * @author Elisheva Broyer.
- * @since 15/05/2016.
+ * @since 16/05/2016.
  */
-public class Circle extends BaseSprite {
-    private int radius;
+public class ALine extends BaseSprite {
+    private Point start;
+    private Point end;
+    private int thick;
 
     /**
      * constructor.
      *
-     * @param color  circle's color.
-     * @param radius circle's radius.
+     * @param color a color.
+     * @param thick line's thickness.
      */
-    public Circle(Color color, int radius) {
+    public ALine(Color color, int thick) {
         super(color);
-        this.radius = radius;
+        this.thick = thick;
     }
 
     /**
@@ -35,6 +38,10 @@ public class Circle extends BaseSprite {
     @Override
     public void drawSelf(DrawSurface d, List<Integer> x, List<Integer> y, Color color) {
         d.setColor(color);
-        d.fillCircle(x.get(0), y.get(0), radius);
+        for (int i = 0; i < thick / 2; i++) {
+            d.drawLine(x.get(0) + i, y.get(0) + i, x.get(1) + i, y.get(1) + i);
+            d.drawLine(x.get(0) - i, y.get(0) - i, x.get(1) - i, y.get(1) - i);
+        }
+
     }
 }

@@ -9,6 +9,11 @@ package utils;
 public class Counter {
     private int count;
 
+    /**
+     * constructor.
+     *
+     * @param count a count.
+     */
     public Counter(int count) {
         this.count = count;
     }
@@ -41,6 +46,11 @@ public class Counter {
         return count;
     }
 
+    /**
+     * returns info as string.
+     *
+     * @return info as string.
+     */
     @Override
     public String toString() {
         return "(" + count + ")";

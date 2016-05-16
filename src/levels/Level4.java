@@ -10,8 +10,12 @@ import java.util.LinkedList;
 import java.util.List;
 import motion.Velocity;
 import shapes.Rectangle;
+import sprites.Square;
+import sprites.Text;
 
 /**
+ * Level 4.
+ *
  * @author Elisheva Broyer.
  * @since 15/05/2016.
  */
@@ -78,6 +82,16 @@ public class Level4 implements LevelInformation {
     @Override
     public Sprite getBackground() {
         Background background = new Background();
+        Square back = new Square(800, 600, new Color(149, 43, 255));
+        back.addX(0);
+        back.addY(0);
+        background.addElement(back);
+
+        Text t = new Text(Color.yellow, "Almost done...", 80);
+        t.addX(100);
+        t.addY(500);
+        background.addElement(t);
+
         return background;
     }
 
@@ -90,10 +104,17 @@ public class Level4 implements LevelInformation {
     public List<GameBlock> blocks() {
         List<GameBlock> blocks = new LinkedList<>();
 
-        for (int i = 0; i < 15; i++) {
-            Block b = new Block(new Rectangle(15 + i, 60, 50, 30), Color.BLUE, 2);
+        Color[] c = new Color[2];
+        c[0] = Color.GRAY;
+        c[1] = Color.WHITE;
 
-            blocks.add(b);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 7; j++) {
+                Block b1 = new Block(new Rectangle(30 + 100 * j, 80 + 30 * 2 * i, 50, 30), c[1], 4);
+                blocks.add(b1);
+                Block b2 = new Block(new Rectangle(80 + 100 * j, 110 + 30 * 2 * i, 50, 30), c[0], 4);
+                blocks.add(b2);
+            }
         }
 
         return blocks;

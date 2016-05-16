@@ -5,23 +5,26 @@ import java.awt.Color;
 import java.util.List;
 
 /**
- * drawable circle.
+ * drawable text.
  *
  * @author Elisheva Broyer.
- * @since 15/05/2016.
+ * @since 16/05/2016.
  */
-public class Circle extends BaseSprite {
-    private int radius;
+public class Text extends BaseSprite {
+    private String text;
+    private int size;
 
     /**
      * constructor.
      *
-     * @param color  circle's color.
-     * @param radius circle's radius.
+     * @param color a color.
+     * @param text  text to draw.
+     * @param size  text's size.
      */
-    public Circle(Color color, int radius) {
+    public Text(Color color, String text, int size) {
         super(color);
-        this.radius = radius;
+        this.text = text;
+        this.size = size;
     }
 
     /**
@@ -35,6 +38,6 @@ public class Circle extends BaseSprite {
     @Override
     public void drawSelf(DrawSurface d, List<Integer> x, List<Integer> y, Color color) {
         d.setColor(color);
-        d.fillCircle(x.get(0), y.get(0), radius);
+        d.drawText(x.get(0), y.get(0), text, size);
     }
 }

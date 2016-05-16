@@ -5,9 +5,8 @@ import biuoop.DrawSurface;
 import collisions.CollisionInfo;
 import collisions.GameEnvironment;
 import interfaces.Sprite;
-import motion.Velocity;
-
 import java.awt.Color;
+import motion.Velocity;
 
 /**
  * ball class.
@@ -76,6 +75,8 @@ public class Ball implements Sprite {
      * @param surface draw surface
      */
     public void drawOn(DrawSurface surface) {
+        surface.setColor(Color.black);
+        surface.drawCircle(getX(), getY(), getSize());
         surface.setColor(getColor());
         surface.fillCircle(getX(), getY(), getSize());
     }

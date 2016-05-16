@@ -7,6 +7,8 @@ import shapes.Ball;
 import utils.Counter;
 
 /**
+ * removing balls listener.
+ *
  * @author Raziel Solomon
  * @since 11-May-16.
  */
@@ -15,7 +17,7 @@ public class BallRemover implements HitListener {
     private Counter removedBalls;
 
     /**
-     * constructor;
+     * constructor.
      *
      * @param gameLevel         a gameLevel.
      * @param removedBalls number of blocks.
@@ -25,6 +27,13 @@ public class BallRemover implements HitListener {
         this.removedBalls = removedBalls;
     }
 
+    /**
+     * This method is called whenever the beingHit object is hit.
+     * The hitter parameter is the Ball that's doing the hitting.
+     *
+     * @param beingHit the block that got hit.
+     * @param hitter   the hitting ball.
+     */
     @Override
     public void hitEvent(GameBlock beingHit, Ball hitter) {
         hitter.removeFromGame(gameLevel);
