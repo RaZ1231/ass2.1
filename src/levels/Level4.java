@@ -1,17 +1,18 @@
 package levels;
 
-import Animations.Background;
 import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
+import motion.Velocity;
+import shapes.Rectangle;
+import sprites.Background;
+import sprites.Square;
+import sprites.Text;
+
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
-import motion.Velocity;
-import shapes.Rectangle;
-import sprites.Square;
-import sprites.Text;
 
 /**
  * Level 4.

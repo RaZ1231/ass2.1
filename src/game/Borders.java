@@ -3,10 +3,11 @@ package game;
 import blocks.BorderBlock;
 import blocks.DeathRegion;
 import interfaces.GameBlock;
+import shapes.Rectangle;
+
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
-import shapes.Rectangle;
 
 /**
  * stages class.
@@ -14,7 +15,7 @@ import shapes.Rectangle;
  * @author Raziel Solomon
  * @since 31-Mar-16.
  */
-public class Stages {
+public class Borders {
     /**
      * returns surface's borders.
      *

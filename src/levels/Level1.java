@@ -1,18 +1,19 @@
 package levels;
 
-import Animations.Background;
 import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
 import motion.Velocity;
 import shapes.Rectangle;
+import sprites.Background;
 import sprites.Circle;
 import sprites.Square;
 import sprites.Triangle;
+
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * level 1.
@@ -104,8 +105,8 @@ public class Level1 implements LevelInformation {
         background.addElement(s1);
 
         Square s2 = new Square(100, 140, new Color(255, 128, 255));
-        s1.addX(360);
-        s1.addY(380);
+        s2.addX(360);
+        s2.addY(380);
         background.addElement(s2);
 
         Circle c3 = new Circle(new Color(255, 128, 255), 50);
@@ -117,6 +118,7 @@ public class Level1 implements LevelInformation {
         t1a.addX(285);
         t1a.addY(200);
         background.addElement(t1a);
+
         Triangle t1b = new Triangle(Color.yellow, 50, 20);
         t1b.addX(260);
         t1b.addY(215);
@@ -126,6 +128,7 @@ public class Level1 implements LevelInformation {
         t2a.addX(515);
         t2a.addY(200);
         background.addElement(t2a);
+
         Triangle t2b = new Triangle(Color.yellow, 50, 20);
         t2b.addX(540);
         t2b.addY(215);

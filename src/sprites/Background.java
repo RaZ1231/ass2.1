@@ -1,7 +1,9 @@
-package Animations;
+package sprites;
 
+import Animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
+
 import java.util.LinkedList;
 import java.util.List;
 

@@ -3,22 +3,15 @@ package Animations;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import collisions.GameEnvironment;
+import game.Borders;
 import game.Paddle;
-import game.Stages;
 import graphics.AnimationRunner;
 import graphics.SpriteCollection;
 import indicators.LevelIndicator;
 import indicators.LivesIndicator;
 import indicators.RectIndicator;
 import indicators.ScoreIndicator;
-import interfaces.Animation;
-import interfaces.Collidable;
-import interfaces.GameBlock;
-import interfaces.LevelInformation;
-import interfaces.Sprite;
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
+import interfaces.*;
 import listeners.BallRemover;
 import listeners.BlockRemover;
 import listeners.ScoreTrackingListener;
@@ -27,6 +20,10 @@ import shapes.Ball;
 import shapes.Rectangle;
 import utils.Counter;
 
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * a game class.
  *
@@ -34,8 +31,8 @@ import utils.Counter;
  * @since 30-Mar-16.
  */
 public class GameLevel implements Animation {
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+    private int width;
+    private int height;
 
     private SpriteCollection sprites;
     private GameEnvironment environment;
@@ -45,7 +42,6 @@ public class GameLevel implements Animation {
     private Counter score;
     private Counter lives;
     private Paddle paddle;
-    private List<Ball> balls;
     private List<GameBlock> borders;
     private AnimationRunner runner;
     private boolean running;
@@ -54,15 +50,13 @@ public class GameLevel implements Animation {
     /**
      * constructor.
      */
-    public GameLevel(LevelInformation gLevel) {
-
+    public GameLevel(LevelInformation gLevel, AnimationRunner runner, GUI gui, Counter lives,
+                     Counter score) {
         level = gLevel;
-        sprites = new SpriteCollection();
-        environment = new GameEnvironment();
-        borders = new LinkedList<>();
-        borders.addAll(Stages.getBorders(WIDTH, HEIGHT, 15));
-        score = new Counter(0);
-        lives = new Counter(4);
+        this.score = score;
+        this.lives = lives;
+        this.runner = runner;
+        this.gui = gui;
     }
 
     public Counter getBlocksCounter() {
@@ -118,13 +112,19 @@ public class GameLevel implements Animation {
      * and add them to the game.
      */
     public void initialize() {
-        gui = new GUI("Arkanoid", WIDTH, HEIGHT);
-        runner = new AnimationRunner(gui, 60);
-        paddle = new Paddle(new Rectangle(WIDTH / 2 - 50, HEIGHT - 35, level.paddleWidth(), 20),
-                gui.getKeyboardSensor(), 15, WIDTH - 15, level.paddleSpeed());
+        width = gui.getDrawSurface().getWidth();
+        height = gui.getDrawSurface().getHeight();
+
+        sprites = new SpriteCollection();
+        environment = new GameEnvironment();
+        borders = new LinkedList<>();
+        borders.addAll(Borders.getBorders(width, height, 15));
+
+        paddle = new Paddle(new Rectangle(width / 2 - 50, height - 35, level.paddleWidth(), 20),
+                gui.getKeyboardSensor(), 15, width - 15, level.paddleSpeed());
         List<GameBlock> blocks = level.blocks();
         blocksCounter = new Counter(level.numberOfBlocksToRemove());
-        ballsCounter = new Counter(level.numberOfBalls());
+        ballsCounter = new Counter(0);
 
         BlockRemover blockRemover = new BlockRemover(this, blocksCounter);
         BallRemover ballRemover = new BallRemover(this, ballsCounter);
@@ -174,15 +174,15 @@ public class GameLevel implements Animation {
     }
 
     private void respawn() {
-        paddle.center(WIDTH);
+        paddle.center(width);
         initBalls();
     }
 
     private void initBalls() {
-        balls = new LinkedList<Ball>();
+        List<Ball> balls = new LinkedList<Ball>();
 
         for (int i = 0; i < level.numberOfBalls(); i++) {
-            balls.add(new Ball(400 + i * 6, HEIGHT - 36, 5, Color.WHITE, environment));
+            balls.add(new Ball(400 + i * 6, height - 36, 5, Color.WHITE, environment));
         }
 
         for (int i = 0; i < level.numberOfBalls(); i++) {
@@ -208,6 +208,14 @@ public class GameLevel implements Animation {
         }
         if (gui.getKeyboardSensor().isPressed("p")) {
             this.runner.run(new PauseScreen(gui.getKeyboardSensor()));
+        }
+
+        //cheats
+        if (gui.getKeyboardSensor().isPressed("z")) {
+            blocksCounter = new Counter(0);
+        }
+        if (gui.getKeyboardSensor().isPressed("a")) {
+            ballsCounter = new Counter(0);
         }
     }
 

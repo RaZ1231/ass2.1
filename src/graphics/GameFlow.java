@@ -1,36 +1,36 @@
 package graphics;
 
 import Animations.GameLevel;
+import Animations.GameOver;
+import Animations.YouWin;
 import biuoop.GUI;
-import biuoop.KeyboardSensor;
-import collisions.GameEnvironment;
 import interfaces.LevelInformation;
-import java.util.List;
 import utils.Counter;
+
+import java.util.List;
 
 /**
  * @author Elisheva Broyer.
  * @since 15/05/2016.
  */
 public class GameFlow {
-    private AnimationRunner ar;
-    private KeyboardSensor ks;
+    private AnimationRunner runner;
     private Counter score;
     private Counter lives;
-    private GameEnvironment environment;
     private GUI gui;
 
-
-    public GameFlow(AnimationRunner ar, KeyboardSensor ks) {
-        this.ar = ar;
-        this.ks = ks;
+    public GameFlow(AnimationRunner runner, GUI gui, Counter lives, Counter score) {
+        this.runner = runner;
+        this.score = score;
+        this.lives = lives;
+        this.gui = gui;
     }
 
     public void runLevels(List<LevelInformation> levels) {
 
         for (LevelInformation levelInfo : levels) {
 
-            GameLevel level = new GameLevel(levelInfo);//, this.keyboardSensor, this.animationRunner);
+            GameLevel level = new GameLevel(levelInfo, runner, gui, lives, score);
 
             level.initialize();
 
@@ -39,9 +39,11 @@ public class GameFlow {
             }
 
             if (level.getLives().getValue() == 0) {
-                break;
+                this.runner.run(new GameOver(gui.getKeyboardSensor(), score));
             }
 
         }
+
+        this.runner.run(new YouWin(gui.getKeyboardSensor(), score));
     }
 }
