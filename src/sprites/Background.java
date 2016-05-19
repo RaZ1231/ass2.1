@@ -3,6 +3,7 @@ package sprites;
 import Animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,6 +30,15 @@ public class Background implements Sprite {
      */
     public void addElement(Sprite s) {
         sprites.add(s);
+    }
+
+    /**
+     * adding list of elements to background.
+     *
+     * @param s a sprite to add.
+     */
+    public void addElements(List<Sprite> s) {
+        sprites.addAll(s);
     }
 
     /**

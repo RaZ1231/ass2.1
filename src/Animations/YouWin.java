@@ -3,12 +3,14 @@ package Animations;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import interfaces.Animation;
-import java.awt.Color;
 import shapes.Point;
 import sprites.Background;
+import sprites.Crown;
 import sprites.Square;
 import sprites.Text;
 import utils.Counter;
+
+import java.awt.Color;
 
 /**
  * winning screen class.
@@ -54,14 +56,24 @@ public class YouWin implements Animation {
      */
     public void drawBackGround(DrawSurface d) {
         Background b = new Background();
-        Square back = new Square(new Point(0, 0), 800, 600, new Color(253, 225, 68));
+        Color backColor = new Color(89, 115, 253);
+
+        Square back = new Square(new Point(0, 0), 800, 600, backColor);
         b.addElement(back);
 
-        Text t1 = new Text(Color.black, new Point(d.getWidth() / 2 - 100, d.getHeight() / 2), "YOU WIN!", 48);
+        //crown
+        Color cBody = new Color(253, 244, 27);
+        Color cScnd = new Color(253, 83, 64);
+        Color cText = new Color(253, 185, 73);
+
+        Crown crown = new Crown(cBody, cScnd, backColor, new Point(200, 200), 400, 200);
+        b.addElement(crown);
+
+
+        Text t1 = new Text(cText, new Point(200, 150), "YOU WIN!", 86);
         b.addElement(t1);
 
-        Text t2 = new Text(Color.black, new Point(d.getWidth() / 2 - 50, d.getHeight() / 2 + 50),
-                "Score: " + score.getValue(), 48);
+        Text t2 = new Text(cText, new Point(200, 500), "Score: " + score.getValue(), 86);
         b.addElement(t2);
 
         b.drawOn(d);

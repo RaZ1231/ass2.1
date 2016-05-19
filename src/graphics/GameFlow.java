@@ -5,8 +5,9 @@ import Animations.GameOver;
 import Animations.YouWin;
 import biuoop.GUI;
 import interfaces.LevelInformation;
-import java.util.List;
 import utils.Counter;
+
+import java.util.List;
 
 /**
  * game flow class.
@@ -54,6 +55,7 @@ public class GameFlow {
 
             if (level.getLives().getValue() == 0) {
                 this.runner.run(new GameOver(gui.getKeyboardSensor(), score));
+                return;
             }
 
         }
