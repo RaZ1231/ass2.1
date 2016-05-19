@@ -4,6 +4,9 @@ import Animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.GameBlock;
 import interfaces.HitListener;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
@@ -11,11 +14,9 @@ import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
+ * base block class.
+ *
  * @author Elisheva Broyer.
  * @since 11/05/2016.
  */
@@ -24,6 +25,12 @@ public abstract class BaseBlock {
     private Color color;
     private List<HitListener> hitListeners;
 
+    /**
+     * constructor.
+     *
+     * @param rect  a rectangle.
+     * @param color a color.
+     */
     public BaseBlock(Rectangle rect, Color color) {
         this.rect = rect;
         this.color = color;
@@ -52,6 +59,15 @@ public abstract class BaseBlock {
     }
 
     /**
+     * block draws itself.
+     *
+     * @param d a drawsurface.
+     * @param x x-axes coordinate.
+     * @param y y-axes coordinate.
+     */
+    protected abstract void drawSelf(DrawSurface d, double x, double y);
+
+    /**
      * returns color.
      *
      * @return color.
@@ -69,13 +85,11 @@ public abstract class BaseBlock {
         return rect;
     }
 
-    protected abstract void drawSelf(DrawSurface d, double x, double y);
-
     /**
-     * currently we do nothing.
+     * do nothing.
      */
     public void timePassed() {
-        // currently we do nothing.
+        // do nothing.
     }
 
     /**
@@ -114,8 +128,16 @@ public abstract class BaseBlock {
         }
     }
 
+    /**
+     * the effect of the hit on the block.
+     */
     protected abstract void effect();
 
+    /**
+     * notifying all listeners that hit occurred.
+     *
+     * @param hitter the hitting block.
+     */
     private void notifyHit(Ball hitter) {
         // Make a copy of the hitListeners before iterating over them.
         List<HitListener> listeners = new ArrayList<HitListener>(this.getHitListeners());
@@ -125,6 +147,11 @@ public abstract class BaseBlock {
         }
     }
 
+    /**
+     * returns list of listeners.
+     *
+     * @return list of listeners.
+     */
     public List<HitListener> getHitListeners() {
         return hitListeners;
     }
@@ -139,10 +166,20 @@ public abstract class BaseBlock {
         gameLevel.addSprite((GameBlock) this);
     }
 
+    /**
+     * add listener to block's list.
+     *
+     * @param hl a hit listener.
+     */
     public void addHitListener(HitListener hl) {
         hitListeners.add(hl);
     }
 
+    /**
+     * remove listener from block's list.
+     *
+     * @param hl a hit listener.
+     */
     public void removeHitListener(HitListener hl) {
         hitListeners.remove(hl);
     }

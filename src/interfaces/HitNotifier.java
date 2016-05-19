@@ -7,9 +7,17 @@ package interfaces;
  * @since 10/05/2016.
  */
 public interface HitNotifier {
-    // Add hl as a listener to hit events.
+    /**
+     * add listener to block's list.
+     *
+     * @param hl a hit listener.
+     */
     void addHitListener(HitListener hl);
 
-    // Remove hl from the list of listeners to hit events.
+    /**
+     * remove listener from block's list.
+     *
+     * @param hl a hit listener.
+     */
     void removeHitListener(HitListener hl);
 }

@@ -11,7 +11,14 @@ import indicators.LevelIndicator;
 import indicators.LivesIndicator;
 import indicators.RectIndicator;
 import indicators.ScoreIndicator;
-import interfaces.*;
+import interfaces.Animation;
+import interfaces.Collidable;
+import interfaces.GameBlock;
+import interfaces.LevelInformation;
+import interfaces.Sprite;
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 import listeners.BallRemover;
 import listeners.BlockRemover;
 import listeners.ScoreTrackingListener;
@@ -20,12 +27,8 @@ import shapes.Ball;
 import shapes.Rectangle;
 import utils.Counter;
 
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
- * a game class.
+ * a game level class.
  *
  * @author Raziel Solomon
  * @since 30-Mar-16.
@@ -49,6 +52,12 @@ public class GameLevel implements Animation {
 
     /**
      * constructor.
+     *
+     * @param gLevel a level.
+     * @param runner an animation runner.
+     * @param gui    a gui.
+     * @param lives  lives counter.
+     * @param score  scores counter.
      */
     public GameLevel(LevelInformation gLevel, AnimationRunner runner, GUI gui, Counter lives,
                      Counter score) {
@@ -59,14 +68,29 @@ public class GameLevel implements Animation {
         this.gui = gui;
     }
 
+    /**
+     * returns level's number of blocks.
+     *
+     * @return level's number of blocks.
+     */
     public Counter getBlocksCounter() {
         return blocksCounter;
     }
 
+    /**
+     * returns current number of lives.
+     *
+     * @return current number of lives.
+     */
     public Counter getLives() {
         return lives;
     }
 
+    /**
+     * returns game's borders.
+     *
+     * @return game's borders.
+     */
     public List<GameBlock> getBorders() {
         return borders;
     }
@@ -108,8 +132,9 @@ public class GameLevel implements Animation {
     }
 
     /**
-     * Initialize a new game: create the Blocks and Ball (and Paddle)
+     * Initialize a new level: create the Blocks, Ball and Paddle
      * and add them to the game.
+     * Also draws the level's background.
      */
     public void initialize() {
         width = gui.getDrawSurface().getWidth();
@@ -156,14 +181,9 @@ public class GameLevel implements Animation {
         }
     }
 
-    public void run() {
-        while ((lives.getValue() > 0) && blocksCounter.getValue() > 0) {
-            playOneTurn();
-        }
-
-        gui.close();
-    }
-
+    /**
+     * run one turn of the game.
+     */
     public void playOneTurn() {
         this.respawn();
         this.runner.run(new CountdownAnimation(2, 3, sprites)); // countdown before turn starts.
@@ -173,11 +193,17 @@ public class GameLevel implements Animation {
         this.runner.run(this);
     }
 
+    /**
+     * initial paddle and balls.
+     */
     private void respawn() {
         paddle.center(width);
         initBalls();
     }
 
+    /**
+     * initial balls according to level's information.
+     */
     private void initBalls() {
         List<Ball> balls = new LinkedList<Ball>();
 
@@ -194,6 +220,11 @@ public class GameLevel implements Animation {
         ballsCounter.increase(level.numberOfBalls());
     }
 
+    /**
+     * draw one frame.
+     *
+     * @param d a drawsurface.
+     */
     public void doOneFrame(DrawSurface d) {
         this.sprites.drawAllOn(d);
         this.sprites.notifyAllTimePassed();
@@ -219,6 +250,11 @@ public class GameLevel implements Animation {
         }
     }
 
+    /**
+     * returns whether turn should stop.
+     *
+     * @return whether turn should stop.
+     */
     public boolean shouldStop() {
         return !this.running;
     }

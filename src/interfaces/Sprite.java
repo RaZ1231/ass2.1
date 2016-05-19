@@ -4,7 +4,7 @@ import Animations.GameLevel;
 import biuoop.DrawSurface;
 
 /**
- * Object that can be drawn to the screen
+ * Object that can be drawn to the screen.
  *
  * @author Raziel Solomon
  * @since 30-Mar-16.

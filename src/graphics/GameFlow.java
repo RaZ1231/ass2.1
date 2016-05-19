@@ -5,11 +5,12 @@ import Animations.GameOver;
 import Animations.YouWin;
 import biuoop.GUI;
 import interfaces.LevelInformation;
+import java.util.List;
 import utils.Counter;
 
-import java.util.List;
-
 /**
+ * game flow class.
+ *
  * @author Elisheva Broyer.
  * @since 15/05/2016.
  */
@@ -19,6 +20,14 @@ public class GameFlow {
     private Counter lives;
     private GUI gui;
 
+    /**
+     * constructor.
+     *
+     * @param runner an animation runner.
+     * @param gui    a gui.
+     * @param lives  current lives counter.
+     * @param score  current scores counter.
+     */
     public GameFlow(AnimationRunner runner, GUI gui, Counter lives, Counter score) {
         this.runner = runner;
         this.score = score;
@@ -26,6 +35,11 @@ public class GameFlow {
         this.gui = gui;
     }
 
+    /**
+     * running levels one by one according to initialized order.
+     *
+     * @param levels list f levels.
+     */
     public void runLevels(List<LevelInformation> levels) {
 
         for (LevelInformation levelInfo : levels) {

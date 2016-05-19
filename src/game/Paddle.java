@@ -71,7 +71,7 @@ public class Paddle implements Sprite, Collidable {
     }
 
     /**
-     * move the paddle left 5 pixels.
+     * move the paddle 'step' pixels to the left.
      */
     public void moveLeft() {
         if (rect.getUpperLeft().getX() <= leftBorder) {
@@ -82,7 +82,7 @@ public class Paddle implements Sprite, Collidable {
     }
 
     /**
-     * move the paddle right 5 pixels.
+     * move the paddle 'step' pixels to the right.
      */
     public void moveRight() {
         if (rect.getUpperRight().getX() >= rightBorder) {
@@ -159,6 +159,11 @@ public class Paddle implements Sprite, Collidable {
         return 4;
     }
 
+    /**
+     * to center the paddle.
+     *
+     * @param width paddle width.
+     */
     public void center(int width) {
         rect.setUpperLeft(new Point(width / 2 - rect.getWidth() / 2, rect.getUpperLeft().getY()));
     }

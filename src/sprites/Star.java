@@ -3,7 +3,7 @@ package sprites;
 import biuoop.DrawSurface;
 import java.awt.Color;
 import java.awt.Polygon;
-import java.util.List;
+import shapes.Point;
 
 /**
  * drawable star.
@@ -12,6 +12,7 @@ import java.util.List;
  * @since 15/05/2016.
  */
 public class Star extends BaseSprite {
+    private Point center;
     private double externalRadius;
     private double internalRadius;
     private double[] angles;
@@ -20,11 +21,13 @@ public class Star extends BaseSprite {
      * constructor.
      *
      * @param color          a color.
+     * @param center         star's center.
      * @param externalRadius largest
      * @param internalRadius smallest.
      */
-    public Star(Color color, double externalRadius, double internalRadius) {
+    public Star(Color color, Point center, double externalRadius, double internalRadius) {
         super(color);
+        this.center = center;
         this.externalRadius = externalRadius;
         this.internalRadius = internalRadius;
         this.angles = new double[5];
@@ -37,24 +40,22 @@ public class Star extends BaseSprite {
      * draw itself.
      *
      * @param d     a draw surface.
-     * @param x     sprite's x positions.
-     * @param y     sprite's y positions.
      * @param color a color.
      */
     @Override
-    public void drawSelf(DrawSurface d, List<Integer> x, List<Integer> y, Color color) {
+    public void drawSelf(DrawSurface d, Color color) {
         Polygon polygon = new Polygon();
 
         for (int i = 0; i < 5; i++) {
             double dx = Math.cos(angles[i]) * externalRadius;
             double dy = Math.sin(angles[i]) * externalRadius;
 
-            polygon.addPoint((int) (x.get(0) + dx), (int) (y.get(0) + dy));
+            polygon.addPoint((int) (center.getX() + dx), (int) (center.getY() + dy));
 
             dx = Math.cos(angles[i] + Math.PI / 5) * internalRadius;
             dy = Math.sin(angles[i] + Math.PI / 5) * internalRadius;
 
-            polygon.addPoint((int) (x.get(0) + dx), (int) (y.get(0) + dy));
+            polygon.addPoint((int) (center.getX() + dx), (int) (center.getY() + dy));
         }
 
         d.setColor(color);

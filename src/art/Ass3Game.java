@@ -4,14 +4,13 @@ import biuoop.GUI;
 import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.LevelInformation;
+import java.util.LinkedList;
+import java.util.List;
 import levels.Level1;
 import levels.Level2;
 import levels.Level3;
 import levels.Level4;
 import utils.Counter;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * ass3 class.
@@ -40,6 +39,12 @@ public class Ass3Game {
         gui.close();
     }
 
+    /**
+     * returns list of levels.
+     *
+     * @param args data from user.
+     * @return list of levels.
+     */
     private static List<LevelInformation> buildLevels(String[] args) {
         List<LevelInformation> levels = new LinkedList<>();
 

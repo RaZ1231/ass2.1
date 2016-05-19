@@ -3,21 +3,30 @@ package sprites;
 import Animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
-
 import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * background class.
+ *
  * @author Elisheva Broyer.
  * @since 15/05/2016.
  */
 public class Background implements Sprite {
     private List<Sprite> sprites;
 
+    /**
+     * constructor.
+     */
     public Background() {
         this.sprites = new LinkedList<>();
     }
 
+    /**
+     * adding element to background.
+     *
+     * @param s a sprite to add.
+     */
     public void addElement(Sprite s) {
         sprites.add(s);
     }

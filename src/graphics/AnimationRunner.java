@@ -6,6 +6,8 @@ import biuoop.Sleeper;
 import interfaces.Animation;
 
 /**
+ * Animation runner class.
+ *
  * @author Raziel Solomon
  * @since 12-May-16.
  */
@@ -14,12 +16,23 @@ public class AnimationRunner {
     private int framesPerSecond;
     private Sleeper sleeper;
 
+    /**
+     * constructor.
+     *
+     * @param gui             a gui.
+     * @param framesPerSecond number of frames per second.
+     */
     public AnimationRunner(GUI gui, int framesPerSecond) {
         this.gui = gui;
         this.framesPerSecond = framesPerSecond;
         sleeper = new Sleeper();
     }
 
+    /**
+     * running animation.
+     *
+     * @param animation an animation.
+     */
     public void run(Animation animation) {
         int millisecondsPerFrame = 1000 / framesPerSecond;
 

@@ -4,13 +4,17 @@ import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
-import motion.Velocity;
-import shapes.Rectangle;
-import sprites.*;
-
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
+import motion.Velocity;
+import shapes.Point;
+import shapes.Rectangle;
+import sprites.ALine;
+import sprites.Background;
+import sprites.Circle;
+import sprites.Square;
+import sprites.Text;
 
 /**
  * Level 3.
@@ -82,75 +86,41 @@ public class Level3 implements LevelInformation {
     public Sprite getBackground() {
         Background background = new Background();
 
-        Square back1 = new Square(800, 600, new Color(179, 248, 255));
-        back1.addX(0);
-        back1.addY(0);
+        Square back1 = new Square(new Point(0, 0), 800, 600, new Color(179, 248, 255));
         background.addElement(back1);
 
-        Square back2 = new Square(800, 600, new Color(3, 113, 233));
-        back2.addX(0);
-        back2.addY(300);
+        Square back2 = new Square(new Point(0, 300), 800, 600, new Color(3, 113, 233));
         background.addElement(back2);
 
-        Square back3 = new Square(800, 600, new Color(211, 205, 78));
-        back3.addX(0);
-        back3.addY(450);
+        Square back3 = new Square(new Point(0, 450), 800, 600, new Color(211, 205, 78));
         background.addElement(back3);
 
-        Text t = new Text(new Color(255, 0, 255), "SUMMER!", 70);
-        t.addX(30);
-        t.addY(150);
+        Text t = new Text(new Color(255, 0, 255), new Point(30, 150), "SUMMER!", 70);
         background.addElement(t);
 
         for (int i = 0; i < 40; i++) {
-            Circle c1 = new Circle(new Color(3, 113, 233), 10);
-            c1.addX(10 * 4 * i);
-            c1.addY(450);
-            Circle c2 = new Circle(new Color(211, 205, 78), 10);
-            c2.addX(10 * 4 * i + 20);
-            c2.addY(450);
+            Circle c1 = new Circle(new Color(3, 113, 233), new Point(10 * 4 * i, 450), 10);
+            Circle c2 = new Circle(new Color(211, 205, 78), new Point(10 * 4 * i + 20, 450), 10);
             background.addElement(c1);
             background.addElement(c2);
         }
 
-        Circle c3 = new Circle(Color.YELLOW, 60);
-        c3.addX(700);
-        c3.addY(100);
+        Circle c3 = new Circle(Color.YELLOW, new Point(700, 100), 60);
         background.addElement(c3);
 
-        ALine l1 = new ALine(Color.yellow, 8);
-        l1.addX(630);
-        l1.addY(80);
-        l1.addX(510);
-        l1.addY(80);
+        ALine l1 = new ALine(Color.yellow, new Point(630, 80), new Point(510, 80), 8);
         background.addElement(l1);
 
-        ALine l2 = new ALine(Color.yellow, 8);
-        l2.addX(630);
-        l2.addY(120);
-        l2.addX(520);
-        l2.addY(140);
+        ALine l2 = new ALine(Color.yellow, new Point(630, 120), new Point(520, 140), 8);
         background.addElement(l2);
 
-        ALine l3 = new ALine(Color.yellow, 8);
-        l3.addX(640);
-        l3.addY(160);
-        l3.addX(550);
-        l3.addY(200);
+        ALine l3 = new ALine(Color.yellow, new Point(640, 160), new Point(550, 200), 8);
         background.addElement(l3);
 
-        ALine l4 = new ALine(Color.yellow, 8);
-        l4.addX(670);
-        l4.addY(180);
-        l4.addX(630);
-        l4.addY(260);
+        ALine l4 = new ALine(Color.yellow, new Point(670, 180), new Point(630, 260), 8);
         background.addElement(l4);
 
-        ALine l5 = new ALine(Color.yellow, 10);
-        l5.addX(710);
-        l5.addY(180);
-        l5.addX(730);
-        l5.addY(260);
+        ALine l5 = new ALine(Color.yellow, new Point(710, 180), new Point(730, 260), 10);
         background.addElement(l5);
 
         return background;
@@ -164,11 +134,8 @@ public class Level3 implements LevelInformation {
     @Override
     public List<GameBlock> blocks() {
         List<GameBlock> blocks = new LinkedList<>();
-        Color[] c = new Color[4];
-        c[0] = Color.green;
-        c[1] = new Color(255, 128, 64);
-        c[2] = Color.gray;
-        c[3] = new Color(0, 255, 255);
+        Color[] c = {Color.green, new Color(255, 128, 64), Color.gray, new Color(0, 255, 255)};
+
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 4; j++) {
                 Block b = new Block(new Rectangle(30 + 50 * i, 80 + 30 * j, 50, 30), c[j], 4 - j);

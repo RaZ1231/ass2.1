@@ -4,15 +4,15 @@ import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 import motion.Velocity;
+import shapes.Point;
 import shapes.Rectangle;
 import sprites.Background;
 import sprites.Square;
 import sprites.Text;
-
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Level 4.
@@ -83,14 +83,10 @@ public class Level4 implements LevelInformation {
     @Override
     public Sprite getBackground() {
         Background background = new Background();
-        Square back = new Square(800, 600, new Color(149, 43, 255));
-        back.addX(0);
-        back.addY(0);
+        Square back = new Square(new Point(0, 0), 800, 600, new Color(149, 43, 255));
         background.addElement(back);
 
-        Text t = new Text(Color.yellow, "Almost done...", 80);
-        t.addX(100);
-        t.addY(500);
+        Text t = new Text(Color.yellow, new Point(100, 500), "Almost done...", 80);
         background.addElement(t);
 
         return background;
@@ -105,9 +101,7 @@ public class Level4 implements LevelInformation {
     public List<GameBlock> blocks() {
         List<GameBlock> blocks = new LinkedList<>();
 
-        Color[] c = new Color[2];
-        c[0] = Color.GRAY;
-        c[1] = Color.WHITE;
+        Color[] c = {Color.gray, Color.white};
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 7; j++) {

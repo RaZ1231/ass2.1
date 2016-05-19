@@ -2,7 +2,7 @@ package sprites;
 
 import biuoop.DrawSurface;
 import java.awt.Color;
-import java.util.List;
+import shapes.Point;
 
 /**
  * drawable text.
@@ -11,6 +11,7 @@ import java.util.List;
  * @since 16/05/2016.
  */
 public class Text extends BaseSprite {
+    private Point upperLeft;
     private String text;
     private int size;
 
@@ -18,11 +19,13 @@ public class Text extends BaseSprite {
      * constructor.
      *
      * @param color a color.
+     * @param uL    text's position.
      * @param text  text to draw.
      * @param size  text's size.
      */
-    public Text(Color color, String text, int size) {
+    public Text(Color color, Point uL, String text, int size) {
         super(color);
+        this.upperLeft = uL;
         this.text = text;
         this.size = size;
     }
@@ -31,13 +34,11 @@ public class Text extends BaseSprite {
      * draw itself.
      *
      * @param d     a draw surface.
-     * @param x     sprite's x positions.
-     * @param y     sprite's y positions.
      * @param color a color.
      */
     @Override
-    public void drawSelf(DrawSurface d, List<Integer> x, List<Integer> y, Color color) {
+    public void drawSelf(DrawSurface d, Color color) {
         d.setColor(color);
-        d.drawText(x.get(0), y.get(0), text, size);
+        d.drawText((int) upperLeft.getX(), (int) upperLeft.getY(), text, size);
     }
 }

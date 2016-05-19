@@ -6,12 +6,19 @@ import interfaces.Sprite;
 import utils.Counter;
 
 /**
+ * lives indicator class.
+ *
  * @author Raziel Solomon
  * @since 11-May-16.
  */
 public class LivesIndicator implements Sprite {
     private Counter lives;
 
+    /**
+     * constructor.
+     *
+     * @param lives current lives counter.
+     */
     public LivesIndicator(Counter lives) {
         this.lives = lives;
     }
@@ -44,6 +51,11 @@ public class LivesIndicator implements Sprite {
         gameLevel.addSprite(this);
     }
 
+    /**
+     * returns current lives as a string.
+     *
+     * @return current lives as a string.
+     */
     @Override
     public String toString() {
         return "Lives: " + lives.getValue();

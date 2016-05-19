@@ -3,11 +3,10 @@ package indicators;
 import Animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
-
 import java.awt.Color;
 
 /**
- * Rectangle sprite that contains the indicators
+ * Rectangle sprite that contains the indicators.
  *
  * @author Raziel Solomon
  * @since 11-May-16.
@@ -30,7 +29,7 @@ public class RectIndicator implements Sprite {
      */
     @Override
     public void timePassed() {
-
+        // do nothing.
     }
 
     /**

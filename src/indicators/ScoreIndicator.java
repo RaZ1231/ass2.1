@@ -6,12 +6,19 @@ import interfaces.Sprite;
 import utils.Counter;
 
 /**
+ * score indicator class.
+ *
  * @author Elisheva Broyer.
  * @since 11/05/2016.
  */
 public class ScoreIndicator implements Sprite {
     private Counter scores;
 
+    /**
+     * constructor.
+     *
+     * @param scores current scores.
+     */
     public ScoreIndicator(Counter scores) {
         this.scores = scores;
     }
@@ -31,7 +38,7 @@ public class ScoreIndicator implements Sprite {
      */
     @Override
     public void timePassed() {
-
+        // do nothing.
     }
 
     /**
@@ -44,6 +51,11 @@ public class ScoreIndicator implements Sprite {
         gameLevel.addSprite(this);
     }
 
+    /**
+     * returns current scores as a string.
+     *
+     * @return current scores as a string.
+     */
     @Override
     public String toString() {
         return "Score: " + scores.getValue();

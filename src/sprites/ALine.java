@@ -2,7 +2,6 @@ package sprites;
 
 import biuoop.DrawSurface;
 import java.awt.Color;
-import java.util.List;
 import shapes.Point;
 
 /**
@@ -12,18 +11,23 @@ import shapes.Point;
  * @since 16/05/2016.
  */
 public class ALine extends BaseSprite {
-    private Point start;
-    private Point end;
+    private Point p1;
+    private Point p2;
     private int thick;
+
 
     /**
      * constructor.
      *
      * @param color a color.
-     * @param thick line's thickness.
+     * @param p1    a point.
+     * @param p2    another point.
+     * @param thick lines thickness.
      */
-    public ALine(Color color, int thick) {
+    public ALine(Color color, Point p1, Point p2, int thick) {
         super(color);
+        this.p1 = p1;
+        this.p2 = p2;
         this.thick = thick;
     }
 
@@ -31,17 +35,16 @@ public class ALine extends BaseSprite {
      * draw itself.
      *
      * @param d     a draw surface.
-     * @param x     sprite's x positions.
-     * @param y     sprite's y positions.
      * @param color a color.
      */
     @Override
-    public void drawSelf(DrawSurface d, List<Integer> x, List<Integer> y, Color color) {
+    public void drawSelf(DrawSurface d, Color color) {
         d.setColor(color);
         for (int i = 0; i < thick / 2; i++) {
-            d.drawLine(x.get(0) + i, y.get(0) + i, x.get(1) + i, y.get(1) + i);
-            d.drawLine(x.get(0) - i, y.get(0) - i, x.get(1) - i, y.get(1) - i);
+            d.drawLine((int) p1.getX() + i, (int) p1.getY() + i,
+                    (int) p2.getX() + i, (int) p2.getY() + i);
+            d.drawLine((int) p1.getX() - i, (int) p1.getY() - i,
+                    (int) p2.getX() - i, (int) p2.getY() - i);
         }
-
     }
 }

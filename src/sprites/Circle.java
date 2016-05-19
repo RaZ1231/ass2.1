@@ -2,7 +2,7 @@ package sprites;
 
 import biuoop.DrawSurface;
 import java.awt.Color;
-import java.util.List;
+import shapes.Point;
 
 /**
  * drawable circle.
@@ -11,16 +11,19 @@ import java.util.List;
  * @since 15/05/2016.
  */
 public class Circle extends BaseSprite {
+    private Point center;
     private int radius;
 
     /**
-     * constructor.
+     * constructor
      *
-     * @param color  circle's color.
+     * @param color  a color.
+     * @param center circle's center.
      * @param radius circle's radius.
      */
-    public Circle(Color color, int radius) {
+    public Circle(Color color, Point center, int radius) {
         super(color);
+        this.center = center;
         this.radius = radius;
     }
 
@@ -28,13 +31,11 @@ public class Circle extends BaseSprite {
      * draw itself.
      *
      * @param d     a draw surface.
-     * @param x     sprite's x positions.
-     * @param y     sprite's y positions.
      * @param color a color.
      */
     @Override
-    public void drawSelf(DrawSurface d, List<Integer> x, List<Integer> y, Color color) {
+    public void drawSelf(DrawSurface d, Color color) {
         d.setColor(color);
-        d.fillCircle(x.get(0), y.get(0), radius);
+        d.fillCircle((int) center.getX(), (int) center.getY(), radius);
     }
 }

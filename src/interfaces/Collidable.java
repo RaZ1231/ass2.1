@@ -6,7 +6,7 @@ import shapes.Point;
 import shapes.Rectangle;
 
 /**
- * Object that can be collided with
+ * Object that can be collided with.
  *
  * @author Raziel Solomon
  * @since 30-Mar-16.

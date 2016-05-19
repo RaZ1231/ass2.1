@@ -3,9 +3,8 @@ package blocks;
 import Animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.GameBlock;
-import shapes.Rectangle;
-
 import java.awt.Color;
+import shapes.Rectangle;
 
 /**
  * Block representation.
@@ -38,9 +37,11 @@ public class Block extends BaseBlock implements GameBlock {
     }
 
     /**
-     * Draws on surface.
+     * block draws itself.
      *
-     * @param d draw surface.
+     * @param d a drawsurface.
+     * @param x x-axes coordinate.
+     * @param y y-axes coordinate.
      */
     public void drawSelf(DrawSurface d, double x, double y) {
         String s = hitsAsString();
@@ -60,6 +61,9 @@ public class Block extends BaseBlock implements GameBlock {
         }
     }
 
+    /**
+     * the effect of the hit on the block.
+     */
     public void effect() {
         this.setHitCounter(hitCounter - 1);
     }
@@ -77,6 +81,11 @@ public class Block extends BaseBlock implements GameBlock {
         }
     }
 
+    /**
+     * remove block from game.
+     *
+     * @param gameLevel a level.
+     */
     public void removeFromGame(GameLevel gameLevel) {
         gameLevel.removeCollidable(this);
         gameLevel.removeSprite(this);

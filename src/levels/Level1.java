@@ -4,16 +4,16 @@ import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 import motion.Velocity;
+import shapes.Point;
 import shapes.Rectangle;
 import sprites.Background;
 import sprites.Circle;
 import sprites.Square;
 import sprites.Triangle;
-
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * level 1.
@@ -84,56 +84,35 @@ public class Level1 implements LevelInformation {
     @Override
     public Sprite getBackground() {
         Background background = new Background();
-        Square back = new Square(800, 600, Color.pink);
-        back.addX(0);
-        back.addY(0);
+        Square back = new Square(new Point(0, 0), 800, 600, Color.pink);
         background.addElement(back);
 
-        Circle c1 = new Circle(Color.YELLOW, 250);
-        c1.addX(400);
-        c1.addY(300);
+        Circle c1 = new Circle(Color.YELLOW, new Point(400, 300), 250);
         background.addElement(c1);
 
-        Circle c2 = new Circle(new Color(185, 122, 87), 140);
-        c2.addX(400);
-        c2.addY(360);
+        Circle c2 = new Circle(new Color(185, 122, 87), new Point(400, 360), 140);
         background.addElement(c2);
 
-        Square s1 = new Square(280, 140, Color.yellow);
-        s1.addX(260);
-        s1.addY(220);
+        Square s1 = new Square(new Point(260, 220), 280, 140, Color.yellow);
         background.addElement(s1);
 
-        Square s2 = new Square(100, 140, new Color(255, 128, 255));
-        s2.addX(360);
-        s2.addY(380);
+        Square s2 = new Square(new Point(360, 380), 100, 140, new Color(255, 128, 255));
         background.addElement(s2);
 
-        Circle c3 = new Circle(new Color(255, 128, 255), 50);
-        c3.addX(410);
-        c3.addY(520);
+        Circle c3 = new Circle(new Color(255, 128, 255), new Point(410, 520), 50);
         background.addElement(c3);
 
-        Triangle t1a = new Triangle(new Color(185, 122, 87), 60, 20);
-        t1a.addX(285);
-        t1a.addY(200);
+        Triangle t1a = new Triangle(new Color(185, 122, 87), new Point(285, 200), 60);
         background.addElement(t1a);
 
-        Triangle t1b = new Triangle(Color.yellow, 50, 20);
-        t1b.addX(260);
-        t1b.addY(215);
+        Triangle t1b = new Triangle(Color.yellow, new Point(260, 215), 50);
         background.addElement(t1b);
 
-        Triangle t2a = new Triangle(new Color(185, 122, 87), 60, 20);
-        t2a.addX(515);
-        t2a.addY(200);
+        Triangle t2a = new Triangle(new Color(185, 122, 87), new Point(515, 200), 60);
         background.addElement(t2a);
 
-        Triangle t2b = new Triangle(Color.yellow, 50, 20);
-        t2b.addX(540);
-        t2b.addY(215);
+        Triangle t2b = new Triangle(Color.yellow, new Point(540, 215), 50);
         background.addElement(t2b);
-
 
         return background;
     }
