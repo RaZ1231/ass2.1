@@ -18,7 +18,7 @@ import utils.Counter;
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
-public class Ass3Game {
+public class Ass5Game {
     /**
      * the main method of game.
      *
