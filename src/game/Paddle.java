@@ -1,17 +1,18 @@
 package game;
 
-import Animations.GameLevel;
+import animations.GameLevel;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import interfaces.Collidable;
 import interfaces.Sprite;
-import java.awt.Color;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
+
+import java.awt.Color;
 
 /**
  * Paddle representation.
@@ -35,6 +36,7 @@ public class Paddle implements Sprite, Collidable {
      * @param keyboard    a sensor of keyboard.
      * @param leftBorder  game environment's left border.
      * @param rightBorder game environment's right border.
+     * @param step        speed.
      */
     public Paddle(Rectangle rect, KeyboardSensor keyboard,
                   double leftBorder, double rightBorder, int step) {
@@ -114,6 +116,7 @@ public class Paddle implements Sprite, Collidable {
     /**
      * returns the new velocity expected after hit the paddle.
      *
+     * @param hitter          ball of collision.
      * @param collisionPoint  the collision point.
      * @param currentVelocity the current velocity.
      * @return the new velocity expected after the hit.

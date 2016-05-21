@@ -1,6 +1,6 @@
 package indicators;
 
-import Animations.GameLevel;
+import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
 import utils.Counter;

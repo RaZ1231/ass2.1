@@ -1,12 +1,13 @@
 package shapes;
 
-import Animations.GameLevel;
+import animations.GameLevel;
 import biuoop.DrawSurface;
 import collisions.CollisionInfo;
 import collisions.GameEnvironment;
 import interfaces.Sprite;
-import java.awt.Color;
 import motion.Velocity;
+
+import java.awt.Color;
 
 /**
  * ball class.
@@ -82,15 +83,6 @@ public class Ball implements Sprite {
     }
 
     /**
-     * returns ball's color.
-     *
-     * @return ball's color.
-     */
-    public Color getColor() {
-        return this.color;
-    }
-
-    /**
      * returns center x-axis value.
      *
      * @return center x-axis value.
@@ -115,6 +107,15 @@ public class Ball implements Sprite {
      */
     public int getSize() {
         return this.radius;
+    }
+
+    /**
+     * returns ball's color.
+     *
+     * @return ball's color.
+     */
+    public Color getColor() {
+        return this.color;
     }
 
     /**
@@ -177,6 +178,11 @@ public class Ball implements Sprite {
         this.setVelocity(new Velocity(dx, dy));
     }
 
+    /**
+     * remove from game level.
+     *
+     * @param gameLevel game to remove from.
+     */
     public void removeFromGame(GameLevel gameLevel) {
         gameLevel.removeSprite(this);
     }

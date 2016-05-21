@@ -1,8 +1,8 @@
 package sprites;
 
-import Animations.GameLevel;
-import biuoop.DrawSurface;
+import animations.GameLevel;
 import interfaces.Sprite;
+
 import java.awt.Color;
 
 /**
@@ -24,22 +24,13 @@ public abstract class BaseSprite implements Sprite {
     }
 
     /**
-     * draw the sprite to the screen.
+     * get the color of sprite.
      *
-     * @param d draw surface.
+     * @return color
      */
-    @Override
-    public void drawOn(DrawSurface d) {
-        drawSelf(d, color);
+    protected Color getColor() {
+        return color;
     }
-
-    /**
-     * draw itself.
-     *
-     * @param d     a draw surface.
-     * @param color a color.
-     */
-    public abstract void drawSelf(DrawSurface d, Color color);
 
     /**
      * notify the sprite that time has passed.

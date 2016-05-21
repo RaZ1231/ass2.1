@@ -1,4 +1,4 @@
-package Animations;
+package animations;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;
@@ -11,14 +11,7 @@ import indicators.LevelIndicator;
 import indicators.LivesIndicator;
 import indicators.RectIndicator;
 import indicators.ScoreIndicator;
-import interfaces.Animation;
-import interfaces.Collidable;
-import interfaces.GameBlock;
-import interfaces.LevelInformation;
-import interfaces.Sprite;
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
+import interfaces.*;
 import listeners.BallRemover;
 import listeners.BlockRemover;
 import listeners.ScoreTrackingListener;
@@ -26,6 +19,10 @@ import motion.Velocity;
 import shapes.Ball;
 import shapes.Rectangle;
 import utils.Counter;
+
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * a game level class.

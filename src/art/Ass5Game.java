@@ -4,13 +4,14 @@ import biuoop.GUI;
 import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.LevelInformation;
-import java.util.LinkedList;
-import java.util.List;
 import levels.Level1;
 import levels.Level2;
 import levels.Level3;
 import levels.Level4;
 import utils.Counter;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * ass3 class.
@@ -62,6 +63,7 @@ public class Ass5Game {
                 case "4":
                     levels.add((new Level4()));
                     break;
+                default:
             }
         }
 

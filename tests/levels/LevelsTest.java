@@ -1,4 +1,4 @@
-package animations;
+package levels;
 
 import biuoop.GUI;
 import graphics.AnimationRunner;
@@ -12,9 +12,9 @@ import java.util.List;
 
 /**
  * @author Raziel Solomon
- * @since 19-May-16.
+ * @since 20-May-16.
  */
-public class YouWinTest {
+public class LevelsTest {
     @Test
     public void drawBackGround() throws Exception {
         //init game
@@ -23,6 +23,8 @@ public class YouWinTest {
         Counter lives = new Counter(7);
         Counter score = new Counter(0);
         List<LevelInformation> levels = new LinkedList<>();
+
+        levels.add(new Level4());
 
         //run
         GameFlow gF = new GameFlow(runner, gui, lives, score);

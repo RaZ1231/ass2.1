@@ -1,8 +1,9 @@
 package sprites;
 
 import biuoop.DrawSurface;
-import java.awt.Color;
 import shapes.Point;
+
+import java.awt.Color;
 
 /**
  * drawable text.
@@ -31,14 +32,13 @@ public class Text extends BaseSprite {
     }
 
     /**
-     * draw itself.
+     * draw the sprite to the screen.
      *
-     * @param d     a draw surface.
-     * @param color a color.
+     * @param d a draw surface.
      */
     @Override
-    public void drawSelf(DrawSurface d, Color color) {
-        d.setColor(color);
+    public void drawOn(DrawSurface d) {
+        d.setColor(getColor());
         d.drawText((int) upperLeft.getX(), (int) upperLeft.getY(), text, size);
     }
 }

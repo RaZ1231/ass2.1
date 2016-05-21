@@ -1,8 +1,9 @@
 package sprites;
 
 import biuoop.DrawSurface;
-import java.awt.Color;
 import shapes.Point;
+
+import java.awt.Color;
 
 /**
  * drawable circle.
@@ -15,7 +16,7 @@ public class Circle extends BaseSprite {
     private int radius;
 
     /**
-     * constructor
+     * constructor.
      *
      * @param color  a color.
      * @param center circle's center.
@@ -28,14 +29,13 @@ public class Circle extends BaseSprite {
     }
 
     /**
-     * draw itself.
+     * draw the sprite to the screen.
      *
-     * @param d     a draw surface.
-     * @param color a color.
+     * @param d a draw surface.
      */
     @Override
-    public void drawSelf(DrawSurface d, Color color) {
-        d.setColor(color);
+    public void drawOn(DrawSurface d) {
+        d.setColor(getColor());
         d.fillCircle((int) center.getX(), (int) center.getY(), radius);
     }
 }

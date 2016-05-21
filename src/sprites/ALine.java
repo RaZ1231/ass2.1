@@ -1,8 +1,9 @@
 package sprites;
 
 import biuoop.DrawSurface;
-import java.awt.Color;
 import shapes.Point;
+
+import java.awt.Color;
 
 /**
  * drawable line.
@@ -32,14 +33,13 @@ public class ALine extends BaseSprite {
     }
 
     /**
-     * draw itself.
+     * draw the sprite to the screen.
      *
-     * @param d     a draw surface.
-     * @param color a color.
+     * @param d a draw surface.
      */
     @Override
-    public void drawSelf(DrawSurface d, Color color) {
-        d.setColor(color);
+    public void drawOn(DrawSurface d) {
+        d.setColor(getColor());
         for (int i = 0; i < thick / 2; i++) {
             d.drawLine((int) p1.getX() + i, (int) p1.getY() + i,
                     (int) p2.getX() + i, (int) p2.getY() + i);

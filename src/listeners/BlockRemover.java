@@ -1,6 +1,6 @@
 package listeners;
 
-import Animations.GameLevel;
+import animations.GameLevel;
 import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.HitListener;

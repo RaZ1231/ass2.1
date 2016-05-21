@@ -1,6 +1,6 @@
 package interfaces;
 
-import Animations.GameLevel;
+import animations.GameLevel;
 
 /**
  * game block interface.

@@ -1,16 +1,13 @@
-package Animations;
+package animations;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import interfaces.Animation;
-import java.awt.Color;
 import shapes.Point;
-import sprites.ALine;
-import sprites.Background;
-import sprites.Circle;
-import sprites.Square;
-import sprites.Text;
+import sprites.*;
 import utils.Counter;
+
+import java.awt.Color;
 
 /**
  * game over screen class.

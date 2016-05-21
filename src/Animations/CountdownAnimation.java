@@ -1,10 +1,11 @@
-package Animations;
+package animations;
 
 import biuoop.DrawSurface;
 import graphics.SpriteCollection;
 import interfaces.Animation;
-import java.awt.Color;
 import utils.Counter;
+
+import java.awt.Color;
 
 /**
  * The CountdownAnimation will display the given gameScreen,

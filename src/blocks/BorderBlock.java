@@ -1,10 +1,11 @@
 package blocks;
 
-import Animations.GameLevel;
+import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.GameBlock;
-import java.awt.Color;
 import shapes.Rectangle;
+
+import java.awt.Color;
 
 /**
  * border block class.

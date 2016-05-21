@@ -1,9 +1,10 @@
 package sprites;
 
 import biuoop.DrawSurface;
+import shapes.Point;
+
 import java.awt.Color;
 import java.awt.Polygon;
-import shapes.Point;
 
 /**
  * drawable star.
@@ -37,13 +38,12 @@ public class Star extends BaseSprite {
     }
 
     /**
-     * draw itself.
+     * draw the sprite to the screen.
      *
-     * @param d     a draw surface.
-     * @param color a color.
+     * @param d a draw surface.
      */
     @Override
-    public void drawSelf(DrawSurface d, Color color) {
+    public void drawOn(DrawSurface d) {
         Polygon polygon = new Polygon();
 
         for (int i = 0; i < 5; i++) {
@@ -58,7 +58,7 @@ public class Star extends BaseSprite {
             polygon.addPoint((int) (center.getX() + dx), (int) (center.getY() + dy));
         }
 
-        d.setColor(color);
+        d.setColor(getColor());
         d.fillPolygon(polygon);
     }
 }

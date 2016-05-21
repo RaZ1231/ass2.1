@@ -32,6 +32,11 @@ public class GameEnvironment {
         collidables.add(c);
     }
 
+    /**
+     * add the given collidable to the environment.
+     *
+     * @param c a Collidable object.
+     */
     public void removeCollidable(Collidable c) {
         collidables.remove(c);
     }

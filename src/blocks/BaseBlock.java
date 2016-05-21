@@ -1,12 +1,9 @@
 package blocks;
 
-import Animations.GameLevel;
+import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.GameBlock;
 import interfaces.HitListener;
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
@@ -14,8 +11,12 @@ import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * base block class.
+ * Base block class.
  *
  * @author Elisheva Broyer.
  * @since 11/05/2016.
@@ -59,15 +60,6 @@ public abstract class BaseBlock {
     }
 
     /**
-     * block draws itself.
-     *
-     * @param d a drawsurface.
-     * @param x x-axes coordinate.
-     * @param y y-axes coordinate.
-     */
-    protected abstract void drawSelf(DrawSurface d, double x, double y);
-
-    /**
      * returns color.
      *
      * @return color.
@@ -84,6 +76,15 @@ public abstract class BaseBlock {
     public Rectangle getRect() {
         return rect;
     }
+
+    /**
+     * block draws itself.
+     *
+     * @param d a drawsurface.
+     * @param x x-axes coordinate.
+     * @param y y-axes coordinate.
+     */
+    protected abstract void drawSelf(DrawSurface d, double x, double y);
 
     /**
      * do nothing.

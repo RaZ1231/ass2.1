@@ -1,8 +1,8 @@
 package graphics;
 
-import Animations.GameLevel;
-import Animations.GameOver;
-import Animations.YouWin;
+import animations.GameLevel;
+import animations.GameOver;
+import animations.YouWin;
 import biuoop.GUI;
 import interfaces.LevelInformation;
 import utils.Counter;

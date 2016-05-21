@@ -19,7 +19,12 @@ public class Crown extends BaseSprite {
     /**
      * constructor.
      *
-     * @param color a color.
+     * @param color     color
+     * @param scndColor secondary color
+     * @param back      back color
+     * @param corner    upper left point
+     * @param width     width of crown
+     * @param height    height of crown
      */
     public Crown(Color color, Color scndColor, Color back, Point corner, int width, int height) {
         super(color);
@@ -31,18 +36,17 @@ public class Crown extends BaseSprite {
     }
 
     /**
-     * draw itself.
+     * draw the sprite to the screen.
      *
-     * @param d     a draw surface.
-     * @param color a color.
+     * @param d a draw surface.
      */
     @Override
-    public void drawSelf(DrawSurface d, Color color) {
+    public void drawOn(DrawSurface d) {
         Background b = new Background();
         int points = 5;
 
         //body
-        b.addElement(new Square(corner, width, height, color));
+        b.addElement(new Square(corner, width, height, getColor()));
 
         //triangles
         for (int i = (int) corner.getX() + width / (2 * points); i <= width + corner.getX(); i += width / points) {
@@ -51,7 +55,7 @@ public class Crown extends BaseSprite {
 
         //top circles
         for (int i = (int) corner.getX(); i <= width + corner.getX(); i += width / points) {
-            b.addElement(new Circle(color, new Point(i, corner.getY() + 5), width / (10 * points)));
+            b.addElement(new Circle(getColor(), new Point(i, corner.getY() + 5), width / (10 * points)));
         }
 
         //bottom circles

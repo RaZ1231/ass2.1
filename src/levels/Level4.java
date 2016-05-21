@@ -1,18 +1,17 @@
 package levels;
 
-import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
+import motion.Velocity;
+import shapes.Point;
+import sprites.Background;
+import sprites.Chess;
+import sprites.Text;
+
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
-import motion.Velocity;
-import shapes.Point;
-import shapes.Rectangle;
-import sprites.Background;
-import sprites.Square;
-import sprites.Text;
 
 /**
  * Level 4.
@@ -82,12 +81,22 @@ public class Level4 implements LevelInformation {
      */
     @Override
     public Sprite getBackground() {
+        int width = 80;
+        int height = 30;
+
         Background background = new Background();
-        Square back = new Square(new Point(0, 0), 800, 600, new Color(149, 43, 255));
+        Chess back = new Chess(Color.white, new Point(0, 0), 800 / width, 600 / height, width, height, 4);
         background.addElement(back);
 
-        Text t = new Text(Color.yellow, new Point(100, 500), "Almost done...", 80);
-        background.addElement(t);
+        int x = 100;
+        int y = 150;
+
+        Text t1 = new Text(Color.black, new Point(x - 5, y - 5), "Almost done...", 80);
+        background.addElement(t1);
+        Text t2 = new Text(Color.black, new Point(x + 5, y + 5), "Almost done...", 80);
+        background.addElement(t2);
+        Text t3 = new Text(Color.white, new Point(x, y), "Almost done...", 80);
+        background.addElement(t3);
 
         return background;
     }
@@ -99,20 +108,7 @@ public class Level4 implements LevelInformation {
      */
     @Override
     public List<GameBlock> blocks() {
-        List<GameBlock> blocks = new LinkedList<>();
-
-        Color[] c = {Color.gray, Color.white};
-
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 7; j++) {
-                Block b1 = new Block(new Rectangle(30 + 100 * j, 80 + 30 * 2 * i, 50, 30), c[1], 4);
-                blocks.add(b1);
-                Block b2 = new Block(new Rectangle(80 + 100 * j, 110 + 30 * 2 * i, 50, 30), c[0], 4);
-                blocks.add(b2);
-            }
-        }
-
-        return blocks;
+        return new Chess(Color.black, new Point(80, 60), 720 / 80, 210 / 30, 80, 30, 4).getBlocks();
     }
 
     /**
