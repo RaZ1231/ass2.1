@@ -41,7 +41,7 @@ public class Level2 implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new LinkedList<>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 5; i++) {
             velocities.add(new Velocity(0, -3 - i));
 
         }
@@ -114,7 +114,7 @@ public class Level2 implements LevelInformation {
         List<GameBlock> blocks = new LinkedList<>();
 
         for (int i = 0; i < 15; i++) {
-            Block b = new Block(new Rectangle(15 + i * 50, 60, 50, 30), Color.gray, 2);
+            Block b = new Block(new Rectangle(15 + i * 50, 100, 50, 30), Color.gray, 2);
 
             blocks.add(b);
         }

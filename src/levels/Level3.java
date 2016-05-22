@@ -41,9 +41,13 @@ public class Level3 implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new LinkedList<>();
+        velocities.add(new Velocity(0, -4));
         velocities.add(new Velocity(0, -5));
-        velocities.add(new Velocity(3, -4));
-        velocities.add(new Velocity(-3, -4));
+        velocities.add(new Velocity(0, -6));
+        velocities.add(new Velocity(0, -7));
+        velocities.add(new Velocity(0, -6));
+        velocities.add(new Velocity(0, -5));
+        velocities.add(new Velocity(0, -4));
         return velocities;
     }
 
@@ -64,7 +68,7 @@ public class Level3 implements LevelInformation {
      */
     @Override
     public double paddleWidth() {
-        return 200;
+        return 300;
     }
 
     /**
