@@ -21,11 +21,11 @@ public class VelocityTest {
 
     @Test
     public void getAngle() throws Exception {
-        double expected = 34;
+        double expected = 152;
         Velocity v = Velocity.fromAngleAndSpeed(expected, 3);
         double actual = v.getAngle();
 
-        Assert.assertEquals(expected, actual, 0);
+        Assert.assertEquals(expected, actual, 0.1);
 
     }
 }

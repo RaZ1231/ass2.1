@@ -4,17 +4,14 @@ import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
 import motion.Velocity;
 import shapes.Point;
 import shapes.Rectangle;
-import sprites.ALine;
-import sprites.Background;
-import sprites.Circle;
-import sprites.Square;
-import sprites.Text;
+import sprites.*;
+
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Level 3.
@@ -41,13 +38,13 @@ public class Level3 implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new LinkedList<>();
-        velocities.add(new Velocity(0, -4));
-        velocities.add(new Velocity(0, -5));
-        velocities.add(new Velocity(0, -6));
-        velocities.add(new Velocity(0, -7));
-        velocities.add(new Velocity(0, -6));
-        velocities.add(new Velocity(0, -5));
-        velocities.add(new Velocity(0, -4));
+        velocities.add(new Velocity(0, -4 * 60));
+        velocities.add(new Velocity(0, -5 * 60));
+        velocities.add(new Velocity(0, -6 * 60));
+        velocities.add(new Velocity(0, -7 * 60));
+        velocities.add(new Velocity(0, -6 * 60));
+        velocities.add(new Velocity(0, -5 * 60));
+        velocities.add(new Velocity(0, -4 * 60));
         return velocities;
     }
 
@@ -58,7 +55,7 @@ public class Level3 implements LevelInformation {
      */
     @Override
     public int paddleSpeed() {
-        return 8;
+        return 480;
     }
 
     /**

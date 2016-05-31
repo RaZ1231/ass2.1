@@ -4,9 +4,6 @@ import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
 import motion.Velocity;
 import shapes.Point;
 import shapes.Rectangle;
@@ -14,6 +11,10 @@ import sprites.Background;
 import sprites.Circle;
 import sprites.Square;
 import sprites.Triangle;
+
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * level 1.
@@ -41,7 +42,7 @@ public class Level1 implements LevelInformation {
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new LinkedList<>();
 
-        velocities.add(new Velocity(0, 4));
+        velocities.add(new Velocity(0, 240));
 
         return velocities;
     }
@@ -53,7 +54,7 @@ public class Level1 implements LevelInformation {
      */
     @Override
     public int paddleSpeed() {
-        return 5;
+        return 300;
     }
 
     /**

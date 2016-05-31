@@ -40,7 +40,7 @@ public class AnimationRunner {
             long startTime = System.currentTimeMillis(); // timing
             DrawSurface d = gui.getDrawSurface();
 
-            animation.doOneFrame(d);
+            animation.doOneFrame(d, 1 / (double) framesPerSecond);
 
             gui.show(d);
             long usedTime = System.currentTimeMillis() - startTime;

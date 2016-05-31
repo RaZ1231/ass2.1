@@ -34,9 +34,11 @@ public abstract class BaseSprite implements Sprite {
 
     /**
      * notify the sprite that time has passed.
+     *
+     * @param dt seconds passed.
      */
     @Override
-    public void timePassed() {
+    public void timePassed(double dt) {
         // do nothing.
     }
 

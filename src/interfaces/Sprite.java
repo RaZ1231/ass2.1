@@ -19,8 +19,10 @@ public interface Sprite {
 
     /**
      * notify the sprite that time has passed.
+     *
+     * @param dt seconds passed.
      */
-    void timePassed();
+    void timePassed(double dt);
 
     /**
      * add object to gameLevel.

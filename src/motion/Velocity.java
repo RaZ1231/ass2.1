@@ -32,46 +32,12 @@ public class Velocity {
      * @return new velocity
      */
     public static Velocity fromAngleAndSpeed(double angle, double speed) {
-        double dx = Math.round(speed * Math.sin(Math.toRadians(angle)));
-        double dy = Math.round(speed * Math.cos(Math.toRadians(angle)) * (-1));
+        angle = angle % 360;
+
+        double dx = speed * Math.sin(Math.toRadians(angle));
+        double dy = speed * Math.cos(Math.toRadians(angle)) * (-1);
 
         return new Velocity(dx, dy);
-    }
-
-    /**
-     * returns velocity's dx.
-     *
-     * @return velocity's dx.
-     */
-    public double getDx() {
-        return dx;
-    }
-
-    /**
-     * returns velocity's dy.
-     *
-     * @return velocity's dy.
-     */
-    public double getDy() {
-        return dy;
-    }
-
-    /**
-     * returns the hit's angle. test's used.
-     *
-     * @return the hit's angle. test's used.
-     */
-    public double getAngle() {
-        return Math.toDegrees(Math.asin(dx / getSpeed()));
-    }
-
-    /**
-     * returns pythagoras value of velocity's dx and dy.
-     *
-     * @return pythagoras value of velocity's dx and dy.
-     */
-    public double getSpeed() {
-        return Mathematics.pythagoras(dx, dy);
     }
 
     /**
@@ -82,6 +48,47 @@ public class Velocity {
      * @return change point
      */
     public Point applyToPoint(Point p) {
-        return new Point(p.getX() + dx, p.getY() + dy);
+        return new Point(p.getX() + getDx(), p.getY() + getDy());
+    }
+
+    /**
+     * returns velocity's dx.
+     *
+     * @return velocity's dx.
+     */
+    public double getDx() {
+        return Math.round(dx);
+    }
+
+    /**
+     * returns velocity's dy.
+     *
+     * @return velocity's dy.
+     */
+    public double getDy() {
+        return Math.round(dy);
+    }
+
+    @Override
+    public String toString() {
+        return "V{" + dx + ", " + dy + "},S[" + getAngle() + ", " + getSpeed() + ']';
+    }
+
+    /**
+     * returns the hit's angle. test's used.
+     *
+     * @return the hit's angle. test's used.
+     */
+    public double getAngle() {
+        return Math.toDegrees(Math.atan2(dy, dx)) + 90;
+    }
+
+    /**
+     * returns pythagoras value of velocity's dx and dy.
+     *
+     * @return pythagoras value of velocity's dx and dy.
+     */
+    public double getSpeed() {
+        return Mathematics.pythagoras(dx, dy);
     }
 }

@@ -39,7 +39,7 @@ public class Level4 implements LevelInformation {
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new LinkedList<>();
         for (int i = 0; i < 1; i++) {
-            velocities.add(new Velocity(0, 4));
+            velocities.add(new Velocity(0, -4 * 60));
         }
         return velocities;
     }
@@ -51,7 +51,7 @@ public class Level4 implements LevelInformation {
      */
     @Override
     public int paddleSpeed() {
-        return 5;
+        return 300;
     }
 
     /**

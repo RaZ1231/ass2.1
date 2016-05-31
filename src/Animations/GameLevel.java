@@ -220,11 +220,12 @@ public class GameLevel implements Animation {
     /**
      * draw one frame.
      *
-     * @param d a drawsurface.
+     * @param d  a drawsurface.
+     * @param dt seconds passed.
      */
-    public void doOneFrame(DrawSurface d) {
+    public void doOneFrame(DrawSurface d, double dt) {
         this.sprites.drawAllOn(d);
-        this.sprites.notifyAllTimePassed();
+        this.sprites.notifyAllTimePassed(dt);
 
         if (blocksCounter.getValue() == 0) {
             score.increase(100);

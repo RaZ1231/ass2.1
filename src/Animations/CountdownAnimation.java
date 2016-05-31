@@ -26,7 +26,7 @@ public class CountdownAnimation implements Animation {
     private Counter framesPassed;
 
     /**
-     * count down to the beggining of the game.
+     * count down to the beginning of the game.
      *
      * @param numOfSeconds the number of seconds to count.
      * @param countFrom    the number to count from.
@@ -44,14 +44,15 @@ public class CountdownAnimation implements Animation {
     /**
      * apply one frame on drawsurface.
      *
-     * @param d a drawsurface.
+     * @param d  a drawsurface.
+     * @param dt seconds passed.
      */
-    public void doOneFrame(DrawSurface d) {
+    public void doOneFrame(DrawSurface d, double dt) {
         gameScreen.drawAllOn(d);
 
         framesPassed.increase(1);
 
-        if (framesPassed.getValue() % ((numOfSeconds / countFrom) * 60) == 0) {
+        if (framesPassed.getValue() % ((numOfSeconds / countFrom) * (1 / dt)) == 0) {
             count.decrease(1);
         }
 

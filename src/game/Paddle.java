@@ -63,34 +63,40 @@ public class Paddle implements Sprite, Collidable {
 
     /**
      * check if the "left" or "right" keys are pressed, and if so move it accordingly.
+     *
+     * @param dt seconds passed.
      */
-    public void timePassed() {
+    public void timePassed(double dt) {
         if (keyboard.isPressed(KeyboardSensor.LEFT_KEY)) {
-            this.moveLeft();
+            this.moveLeft(dt);
         } else if (keyboard.isPressed(KeyboardSensor.RIGHT_KEY)) {
-            this.moveRight();
+            this.moveRight(dt);
         }
     }
 
     /**
      * move the paddle 'step' pixels to the left.
+     *
+     * @param dt seconds passed.
      */
-    public void moveLeft() {
+    public void moveLeft(double dt) {
         if (rect.getUpperLeft().getX() <= leftBorder) {
             rect.setUpperLeft(new Point(leftBorder, rect.getUpperLeft().getY()));
         } else {
-            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() - step, rect.getUpperLeft().getY()));
+            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() - dt * step, rect.getUpperLeft().getY()));
         }
     }
 
     /**
      * move the paddle 'step' pixels to the right.
+     *
+     * @param dt seconds passed.
      */
-    public void moveRight() {
+    public void moveRight(double dt) {
         if (rect.getUpperRight().getX() >= rightBorder) {
             rect.setUpperLeft(new Point(rightBorder - rect.getWidth(), rect.getUpperLeft().getY()));
         } else {
-            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() + step, rect.getUpperLeft().getY()));
+            rect.setUpperLeft(new Point(rect.getUpperLeft().getX() + dt * step, rect.getUpperLeft().getY()));
         }
     }
 

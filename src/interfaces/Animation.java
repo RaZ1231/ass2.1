@@ -12,9 +12,10 @@ public interface Animation {
     /**
      * draw one frame.
      *
-     * @param d a drawsurface.
+     * @param d  a drawsurface.
+     * @param dt seconds passed.
      */
-    void doOneFrame(DrawSurface d);
+    void doOneFrame(DrawSurface d, double dt);
 
     /**
      * returns whether turn should stop.

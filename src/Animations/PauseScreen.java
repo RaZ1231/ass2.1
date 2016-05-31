@@ -33,9 +33,10 @@ public class PauseScreen implements Animation {
     /**
      * drawing the pause screen.
      *
-     * @param d a draw surface.
+     * @param d  a draw surface.
+     * @param dt seconds passed.
      */
-    public void doOneFrame(DrawSurface d) {
+    public void doOneFrame(DrawSurface d, double dt) {
         drawBackGround(d);
 
         if (this.keyboard.isPressed(KeyboardSensor.SPACE_KEY)) {

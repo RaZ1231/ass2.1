@@ -44,10 +44,12 @@ public class SpriteCollection {
 
     /**
      * call timePassed() on all sprites.
+     *
+     * @param dt seconds passed.
      */
-    public void notifyAllTimePassed() {
+    public void notifyAllTimePassed(double dt) {
         for (Sprite s : sprites) {
-            s.timePassed();
+            s.timePassed(dt);
         }
     }
 

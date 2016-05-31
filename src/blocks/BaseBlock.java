@@ -88,8 +88,9 @@ public abstract class BaseBlock {
 
     /**
      * do nothing.
+     * @param dt
      */
-    public void timePassed() {
+    public void timePassed(double dt) {
         // do nothing.
     }
 

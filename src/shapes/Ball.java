@@ -120,17 +120,20 @@ public class Ball implements Sprite {
 
     /**
      * move the ball one step according to possible collisions.
+     *
+     * @param dt seconds passed.
      */
     @Override
-    public void timePassed() {
-        Point applyPoint = getVelocity().applyToPoint(this.center); // next position.
+    public void timePassed(double dt) {
+        Velocity relativeV = Velocity.fromAngleAndSpeed(getVelocity().getAngle(), dt * getVelocity().getSpeed());
+
+        Point applyPoint = relativeV.applyToPoint(this.center); // next position.
         Line trajectory = new Line(this.center, applyPoint); // line to next position.
-        CollisionInfo info = this.gameEnvironment.
-                getClosestCollision(trajectory); // is there an object it
+        CollisionInfo info = this.gameEnvironment.getClosestCollision(trajectory); // is there an object it
         if (info.getCollisionObject() != null) { // there is collision.
             this.setVelocity(info.getCollisionObject().hit(this, info.getCollisionPoint(), this.velocity));
         } else { // there isn't.
-            this.moveOneStep();
+            this.center = relativeV.applyToPoint(this.center);
         }
     }
 
@@ -150,13 +153,6 @@ public class Ball implements Sprite {
      */
     public void setVelocity(Velocity v) {
         this.velocity = v;
-    }
-
-    /**
-     * Move the ball one step according to current velocity.
-     */
-    public void moveOneStep() {
-        this.center = this.getVelocity().applyToPoint(this.center);
     }
 
     /**

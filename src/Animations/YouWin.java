@@ -38,10 +38,11 @@ public class YouWin implements Animation {
     /**
      * draw one turn.
      *
-     * @param d a drawsurface.
+     * @param d  a drawsurface.
+     * @param dt seconds passed.
      */
     @Override
-    public void doOneFrame(DrawSurface d) {
+    public void doOneFrame(DrawSurface d, double dt) {
         drawBackGround(d);
 
         if (sensor.isPressed(KeyboardSensor.SPACE_KEY)) {
