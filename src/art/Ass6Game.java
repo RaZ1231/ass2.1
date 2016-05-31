@@ -4,14 +4,13 @@ import biuoop.GUI;
 import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.LevelInformation;
+import java.util.LinkedList;
+import java.util.List;
 import levels.Level1;
 import levels.Level2;
 import levels.Level3;
 import levels.Level4;
 import utils.Counter;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * ass3 class.
@@ -19,7 +18,7 @@ import java.util.List;
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
-public class Ass5Game {
+public class Ass6Game {
     /**
      * the main method of game.
      *
