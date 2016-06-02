@@ -21,7 +21,7 @@ import java.util.List;
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
-public class Ass5Game {
+public class Ass6Game {
     /**
      * the main method of game.
      *
