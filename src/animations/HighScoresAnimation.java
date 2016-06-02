@@ -12,6 +12,8 @@ import sprites.Text;
 import java.awt.Color;
 
 /**
+ * High scores screen.
+ *
  * @author Raziel Solomon
  * @since 01-Jun-16.
  */

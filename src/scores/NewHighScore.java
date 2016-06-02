@@ -4,6 +4,8 @@ import biuoop.DialogManager;
 import biuoop.GUI;
 
 /**
+ * Add new high score.
+ *
  * @author Raziel Solomon
  * @since 02-Jun-16.
  */

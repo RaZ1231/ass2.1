@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * game flow class.
+ * Class responsible for ordering animations.
  *
  * @author Elisheva Broyer.
  * @since 15/05/2016.

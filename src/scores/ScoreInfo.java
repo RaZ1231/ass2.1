@@ -3,6 +3,8 @@ package scores;
 import java.io.Serializable;
 
 /**
+ * Class represent a score.
+ *
  * @author Raziel Solomon
  * @since 01-Jun-16.
  */

@@ -5,6 +5,8 @@ import biuoop.KeyboardSensor;
 import interfaces.Animation;
 
 /**
+ * Deals with key presses.
+ *
  * @author Raziel Solomon
  * @since 02-Jun-16.
  */

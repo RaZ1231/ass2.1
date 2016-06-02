@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Class deals with high scores table, reading and writing to file.
+ *
  * @author Raziel Solomon
  * @since 01-Jun-16.
  */

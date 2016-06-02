@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ass3 class.
+ * Game entry point.
  *
  * @author Raziel Solomon
  * @since 30-Mar-16.
