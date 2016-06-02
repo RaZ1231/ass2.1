@@ -5,8 +5,10 @@ import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.LevelInformation;
 import org.junit.Test;
+import scores.HighScoresTable;
 import utils.Counter;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,17 +18,40 @@ import java.util.List;
  */
 public class YouWinTest {
     @Test
-    public void drawBackGround() throws Exception {
+    public void youWin() throws Exception {
         //init game
         GUI gui = new GUI("Arkanoid", 800, 600);
         AnimationRunner runner = new AnimationRunner(gui, 60);
         Counter lives = new Counter(7);
         Counter score = new Counter(0);
         List<LevelInformation> levels = new LinkedList<>();
+        HighScoresTable hst = HighScoresTable.loadFromFile(new File("highscores.ser"));
 
         //run
-        GameFlow gF = new GameFlow(runner, gui, lives, score);
+        GameFlow gF = new GameFlow(runner, gui, lives, hst);
         gF.runLevels(levels);
+
+        gui.close();
+    }
+
+    @Test
+    public void HighScores() throws Exception {
+        //init game
+        GUI gui = new GUI("Arkanoid", 800, 600);
+        AnimationRunner runner = new AnimationRunner(gui, 60);
+        Counter lives = new Counter(7);
+        Counter score = new Counter(0);
+        List<LevelInformation> levels = new LinkedList<>();
+        HighScoresTable hst = HighScoresTable.loadFromFile(new File("highscores.ser"));
+
+        System.out.println(hst);
+
+        HighScoresAnimation hsa = new HighScoresAnimation(hst);
+
+        runner.run(hsa);
+
+        //run
+
 
         gui.close();
     }

@@ -52,7 +52,7 @@ public class CountdownAnimation implements Animation {
 
         framesPassed.increase(1);
 
-        if (framesPassed.getValue() % ((numOfSeconds / countFrom) * (1 / dt)) == 0) {
+        if (framesPassed.getValue() % ((numOfSeconds / countFrom) / dt) == 0) {
             count.decrease(1);
         }
 

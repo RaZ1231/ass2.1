@@ -5,8 +5,10 @@ import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.LevelInformation;
 import org.junit.Test;
+import scores.HighScoresTable;
 import utils.Counter;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,11 +25,12 @@ public class LevelsTest {
         Counter lives = new Counter(7);
         Counter score = new Counter(0);
         List<LevelInformation> levels = new LinkedList<>();
+        HighScoresTable hst = HighScoresTable.loadFromFile(new File("highscores.ser"));
 
         levels.add(new Level4());
 
         //run
-        GameFlow gF = new GameFlow(runner, gui, lives, score);
+        GameFlow gF = new GameFlow(runner, gui, lives, hst);
         gF.runLevels(levels);
 
         gui.close();

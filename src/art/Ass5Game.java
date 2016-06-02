@@ -8,8 +8,10 @@ import levels.Level1;
 import levels.Level2;
 import levels.Level3;
 import levels.Level4;
+import scores.HighScoresTable;
 import utils.Counter;
 
+import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,11 +32,13 @@ public class Ass5Game {
         GUI gui = new GUI("Arkanoid", 800, 600);
         AnimationRunner runner = new AnimationRunner(gui, 60);
         Counter lives = new Counter(7);
-        Counter score = new Counter(0);
         List<LevelInformation> levels = buildLevels(args);
 
+        //high scores
+        HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores.ser"));
+
         //run
-        GameFlow gF = new GameFlow(runner, gui, lives, score);
+        GameFlow gF = new GameFlow(runner, gui, lives, highScores);
         gF.runLevels(levels);
 
         gui.close();

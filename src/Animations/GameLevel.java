@@ -2,6 +2,7 @@ package animations;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;
+import biuoop.KeyboardSensor;
 import collisions.GameEnvironment;
 import game.Borders;
 import game.Paddle;
@@ -236,7 +237,8 @@ public class GameLevel implements Animation {
             running = false;
         }
         if (gui.getKeyboardSensor().isPressed("p")) {
-            this.runner.run(new PauseScreen(gui.getKeyboardSensor()));
+            this.runner.run(new KeyPressStoppableAnimation(
+                    gui.getKeyboardSensor(), KeyboardSensor.SPACE_KEY, new PauseScreen()));
         }
 
         //cheats
