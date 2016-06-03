@@ -9,7 +9,7 @@ import utils.Counter;
 import java.awt.Color;
 
 /**
- * game over screen class.
+ * Game over screen class.
  *
  * @author Raziel Solomon
  * @since 17-May-16.
@@ -38,7 +38,7 @@ public class GameOver implements Animation {
     }
 
     /**
-     * draws screen's background.
+     * draws screen's background to draw surface.
      *
      * @param d a drawsurface.
      */

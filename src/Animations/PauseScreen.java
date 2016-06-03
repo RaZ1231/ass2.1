@@ -10,7 +10,7 @@ import sprites.Text;
 import java.awt.Color;
 
 /**
- * pause screen class.
+ * Pause screen class.
  *
  * @author Raziel Solomon
  * @since 12-May-16.

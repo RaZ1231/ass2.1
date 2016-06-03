@@ -12,7 +12,7 @@ import utils.Counter;
 import java.awt.Color;
 
 /**
- * winning screen class.
+ * Winning screen class.
  *
  * @author Raziel Solomon
  * @since 17-May-16.

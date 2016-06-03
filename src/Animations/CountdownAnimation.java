@@ -12,7 +12,7 @@ import java.awt.Color;
  * for numOfSeconds seconds, and on top of them it will show
  * a countdown from countFrom back to 1, where each number will
  * appear on the screen for (numOfSeconds / countFrom) secods, before
- * it is replaced with the next one.
+ * it is replaced with the next one. Counting is relative to time.
  *
  * @author Raziel Solomon
  * @since 12-May-16.

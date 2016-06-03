@@ -33,13 +33,13 @@ public class KeyPressStoppableAnimation implements Animation {
      */
     @Override
     public void doOneFrame(DrawSurface d, double dt) {
-        animation.doOneFrame(d, dt);
-
         if (sensor.isPressed(key)) {
             running = isAlreadyPressed; //key press bug
         } else {
             isAlreadyPressed = false;
         }
+
+        animation.doOneFrame(d, dt);
     }
 
     /**

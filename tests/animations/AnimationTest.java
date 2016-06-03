@@ -16,7 +16,7 @@ import java.util.List;
  * @author Raziel Solomon
  * @since 19-May-16.
  */
-public class YouWinTest {
+public class AnimationTest {
     @Test
     public void youWin() throws Exception {
         //init game
@@ -52,6 +52,23 @@ public class YouWinTest {
 
         //run
 
+
+        gui.close();
+    }
+
+    @Test
+    public void menu() throws Exception {
+        //init game
+        GUI gui = new GUI("Arkanoid", 800, 600);
+        AnimationRunner runner = new AnimationRunner(gui, 60);
+        MenuAnimation menu = new MenuAnimation("- Arkanoid -", gui.getKeyboardSensor());
+
+        menu.addSelection("s", "Start", null);
+        menu.addSelection("h", "High Scores", null);
+        menu.addSelection("q", "Quit", null);
+
+        //run
+        runner.run(menu);
 
         gui.close();
     }
