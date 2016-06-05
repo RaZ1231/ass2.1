@@ -1,7 +1,6 @@
 package animations;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
 import interfaces.Animation;
 import shapes.Point;
 import sprites.Background;
@@ -13,26 +12,21 @@ import utils.Counter;
 import java.awt.Color;
 
 /**
- * winning screen class.
+ * Winning screen class.
  *
  * @author Raziel Solomon
  * @since 17-May-16.
  */
 public class YouWin implements Animation {
-    private KeyboardSensor sensor;
     private Counter score;
-    private boolean running;
 
     /**
      * constructor.
      *
-     * @param sensor a keyboard sensor.
      * @param score  current scores.
      */
-    public YouWin(KeyboardSensor sensor, Counter score) {
-        this.sensor = sensor;
+    public YouWin(Counter score) {
         this.score = score;
-        this.running = true;
     }
 
     /**
@@ -44,10 +38,6 @@ public class YouWin implements Animation {
     @Override
     public void doOneFrame(DrawSurface d, double dt) {
         drawBackGround(d);
-
-        if (sensor.isPressed(KeyboardSensor.SPACE_KEY)) {
-            running = false;
-        }
     }
 
     /**
@@ -87,6 +77,6 @@ public class YouWin implements Animation {
      */
     @Override
     public boolean shouldStop() {
-        return !running;
+        return true;
     }
 }

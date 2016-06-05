@@ -1,0 +1,5 @@
+get long string of the whole text. V
+parse it according to START END LEVEL V
+parse each string to commands V
+each command create itself V
+get the level and attaached itself to it. V

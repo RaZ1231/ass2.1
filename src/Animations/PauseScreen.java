@@ -1,7 +1,6 @@
 package animations;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
 import interfaces.Animation;
 import shapes.Point;
 import sprites.Background;
@@ -11,25 +10,12 @@ import sprites.Text;
 import java.awt.Color;
 
 /**
- * pause screen class.
+ * Pause screen class.
  *
  * @author Raziel Solomon
  * @since 12-May-16.
  */
 public class PauseScreen implements Animation {
-    private KeyboardSensor keyboard;
-    private boolean stop;
-
-    /**
-     * constructor.
-     *
-     * @param k a keyboard sensor.
-     */
-    public PauseScreen(KeyboardSensor k) {
-        this.keyboard = k;
-        this.stop = false;
-    }
-
     /**
      * drawing the pause screen.
      *
@@ -38,10 +24,6 @@ public class PauseScreen implements Animation {
      */
     public void doOneFrame(DrawSurface d, double dt) {
         drawBackGround(d);
-
-        if (this.keyboard.isPressed(KeyboardSensor.SPACE_KEY)) {
-            this.stop = true;
-        }
     }
 
     /**
@@ -80,6 +62,6 @@ public class PauseScreen implements Animation {
      * @return whether turn should stop.
      */
     public boolean shouldStop() {
-        return this.stop;
+        return true;
     }
 }

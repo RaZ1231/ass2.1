@@ -1,7 +1,6 @@
 package animations;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
 import interfaces.Animation;
 import shapes.Point;
 import sprites.*;
@@ -10,26 +9,21 @@ import utils.Counter;
 import java.awt.Color;
 
 /**
- * game over screen class.
+ * Game over screen class.
  *
  * @author Raziel Solomon
  * @since 17-May-16.
  */
 public class GameOver implements Animation {
-    private KeyboardSensor sensor;
     private Counter score;
-    private boolean running;
 
     /**
      * constructor.
      *
-     * @param sensor a keyboard sensor.
-     * @param score  current scores.
+     * @param score current scores.
      */
-    public GameOver(KeyboardSensor sensor, Counter score) {
-        this.sensor = sensor;
+    public GameOver(Counter score) {
         this.score = score;
-        this.running = true;
     }
 
     /**
@@ -41,14 +35,10 @@ public class GameOver implements Animation {
     @Override
     public void doOneFrame(DrawSurface d, double dt) {
         drawBackGround(d);
-
-        if (sensor.isPressed(KeyboardSensor.SPACE_KEY)) {
-            running = false;
-        }
     }
 
     /**
-     * draws screen's background.
+     * draws screen's background to draw surface.
      *
      * @param d a drawsurface.
      */
@@ -106,6 +96,6 @@ public class GameOver implements Animation {
      */
     @Override
     public boolean shouldStop() {
-        return !running;
+        return true;
     }
 }
