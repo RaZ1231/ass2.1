@@ -26,7 +26,7 @@ public class Command {
                 level.setBallVelocities(vF.createVelocities(operation));
                 break;
             case "background":
-                //????
+                //???? level.setBackground();
                 break;
             case "paddle_speed":
                 level.setPaddleSpeed(Integer.parseInt(operation));
@@ -35,8 +35,8 @@ public class Command {
                 level.setPaddleWidth(Integer.parseInt(operation));
                 break;
             case "block_definitions":
-                BlockFactory bF = new BlockFactory();
-                level.setBlocks(bF.createBlocks(operation));
+                BlockMapFactory bF = new BlockMapFactory();
+                bF.createMap(operation); // level need to have private map.
                 break;
             case "blocks_start_x":
                 level.setBlocksXPos(Double.parseDouble(operation));

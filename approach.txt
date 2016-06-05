@@ -2,4 +2,11 @@ get long string of the whole text. V
 parse it according to START END LEVEL V
 parse each string to commands V
 each command create itself V
-get the level and attaached itself to it. V
+get the level and attached itself to it. V
+
+
+blocks:
+reading block definition file.
+create map of symbol:string_of_details for all block types.
+also default:string_of_details.
+executor parse blocks lines and add them to level.setBlocks according to level's map.

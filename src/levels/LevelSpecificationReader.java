@@ -22,13 +22,13 @@ public class LevelSpecificationReader {
                 s = s + c;
             } while (c != (char) -1);
             Parser parser = new Parser();
-            List<String> stringLevels = parser.parseString(s, "START_LEVEL((.|\\s|\\n)*)END_LEVEL");
+            List<String> stringLevels = parser.parseString(s,
+                    "START_LEVEL(.|\\s)*?END_LEVEL");
 
             for (String str : stringLevels) {
-                Executer exe = new Executer();
-                exe.createLevel(str);
+                Executor exe = new Executor();
+                levelI.add(exe.createLevel(str));
             }
-
 
         } catch (IOException e) {
             e.printStackTrace();

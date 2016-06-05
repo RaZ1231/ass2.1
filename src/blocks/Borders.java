@@ -1,13 +1,10 @@
-package game;
+package blocks;
 
-import blocks.BorderBlock;
-import blocks.DeathRegion;
 import interfaces.GameBlock;
-import shapes.Rectangle;
-
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
+import shapes.Rectangle;
 
 /**
  * stages class.

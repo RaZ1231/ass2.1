@@ -7,9 +7,13 @@ paddle_width:100
 block_definitions:definitions/Direct_Hit_definitions.txt
 blocks_start_x:350
 blocks_start_y:100
-row_height:50
+row_height:100
 num_blocks:1
 START_BLOCKS
----s--
+-------s
 END_BLOCKS
+END_LEVEL
+
+START_LEVEL
+bla_bla:000
 END_LEVEL

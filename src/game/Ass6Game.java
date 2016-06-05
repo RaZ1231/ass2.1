@@ -1,4 +1,4 @@
-package art;
+package game;
 
 /**
  * Game entry point.

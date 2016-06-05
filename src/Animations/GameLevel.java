@@ -3,16 +3,23 @@ package animations;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
+import blocks.Borders;
 import collisions.GameEnvironment;
-import game.Borders;
-import game.Paddle;
+import collisions.Paddle;
 import graphics.AnimationRunner;
 import graphics.SpriteCollection;
 import indicators.LevelIndicator;
 import indicators.LivesIndicator;
 import indicators.RectIndicator;
 import indicators.ScoreIndicator;
-import interfaces.*;
+import interfaces.Animation;
+import interfaces.Collidable;
+import interfaces.GameBlock;
+import interfaces.LevelInformation;
+import interfaces.Sprite;
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 import listeners.BallRemover;
 import listeners.BlockRemover;
 import listeners.ScoreTrackingListener;
@@ -20,10 +27,6 @@ import motion.Velocity;
 import shapes.Ball;
 import shapes.Rectangle;
 import utils.Counter;
-
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * a game level class.

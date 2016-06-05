@@ -1,4 +1,4 @@
-package art;
+package game;
 
 import animations.HighScoresAnimation;
 import animations.KeyPressStoppableAnimation;
@@ -10,7 +10,11 @@ import graphics.GameFlow;
 import interfaces.LevelInformation;
 import interfaces.Menu;
 import interfaces.Task;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 import levels.Level1;
@@ -70,17 +74,17 @@ public class Game {
         Counter lives = new Counter(7);
         Menu<Task<Void>> menu = new MenuAnimation("- Arkanoid -", gui.getKeyboardSensor());
         LevelSpecificationReader lSR = new LevelSpecificationReader();
-       /*
+        List<LevelInformation> levelsList = null;
         try {
-            final List<LevelInformation> levels = lSR.fromReader(new BufferedReader(new InputStreamReader(new
+            levelsList = lSR.fromReader(new BufferedReader(new InputStreamReader(new
                     FileInputStream("definitions/level_definition.txt"))));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }*/
-        final List<LevelInformation> levels = buildLevels(args);
+        }
+        //final List<LevelInformation> levels = buildLevels(args);
         final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores.ser"));
         final GameFlow gF = new GameFlow(runner, gui, lives, highScores);
-
+        final List<LevelInformation> levels = new LinkedList<>(levelsList);
         //menu items
         menu.addSelection("s", "Start", new Task<Void>() {
             @Override
