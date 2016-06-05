@@ -4,6 +4,7 @@ import interfaces.LevelInformation;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import utils.Parser;
 
 /**
  * @author Elisheva Broyer.
@@ -20,9 +21,14 @@ public class LevelSpecificationReader {
                 c = (char) reader.read();
                 s = s + c;
             } while (c != (char) -1);
+            Parser parser = new Parser();
+            List<String> stringLevels = parser.parseString(s, "START_LEVEL((.|\\s|\\n)*)END_LEVEL");
 
-            Executer exe = new Executer();
-            exe.createLevel(s);
+            for (String str : stringLevels) {
+                Executer exe = new Executer();
+                exe.createLevel(str);
+            }
+
 
         } catch (IOException e) {
             e.printStackTrace();

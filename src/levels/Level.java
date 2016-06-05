@@ -5,7 +5,6 @@ import interfaces.LevelInformation;
 import interfaces.Sprite;
 import java.util.List;
 import motion.Velocity;
-import shapes.Point;
 
 /**
  * @author Elisheva Broyer.
@@ -18,7 +17,8 @@ public class Level implements LevelInformation {
     private String name;
     private String background;
     private List<GameBlock> blocks;
-    private Point blocksPos;
+    private double blocksXPos;
+    private double blocksYPos;
     private int numOfBlocks;
     private int rowHeight;
 
@@ -33,15 +33,54 @@ public class Level implements LevelInformation {
      * @param blocks         a list of blocks.
      */
     public Level(List<Velocity> ballVelocities, int paddleSpeed, int paddleWidth, String name,
-                 String background, List<GameBlock> blocks, Point blocksPos, int numOfBlocks, int rowHeight) {
+                 String background, List<GameBlock> blocks, double blocksXPos, double blocksYPos, int
+                         numOfBlocks, int
+                         rowHeight) {
         this.ballVelocities = ballVelocities;
         this.paddleSpeed = paddleSpeed;
         this.paddleWidth = paddleWidth;
         this.name = name;
         this.background = background;
         this.blocks = blocks;
-        this.blocksPos = blocksPos;
+        this.blocksXPos = blocksXPos;
+        this.blocksYPos = blocksYPos;
         this.numOfBlocks = numOfBlocks;
+        this.rowHeight = rowHeight;
+    }
+
+    public void setBallVelocities(List<Velocity> ballVelocities) {
+        this.ballVelocities = ballVelocities;
+    }
+
+    public void setPaddleSpeed(int paddleSpeed) {
+        this.paddleSpeed = paddleSpeed;
+    }
+
+    public void setPaddleWidth(int paddleWidth) {
+        this.paddleWidth = paddleWidth;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBlocks(List<GameBlock> blocks) {
+        this.blocks = blocks;
+    }
+
+    public void setBlocksXPos(double blocksXPos) {
+        this.blocksXPos = blocksXPos;
+    }
+
+    public void setBlocksYPos(double blocksYPos) {
+        this.blocksYPos = blocksYPos;
+    }
+
+    public void setNumOfBlocks(int numOfBlocks) {
+        this.numOfBlocks = numOfBlocks;
+    }
+
+    public void setRowHeight(int rowHeight) {
         this.rowHeight = rowHeight;
     }
 
@@ -103,6 +142,10 @@ public class Level implements LevelInformation {
     @Override
     public Sprite getBackground() {
         return null;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
     }
 
     /**

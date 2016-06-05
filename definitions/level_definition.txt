@@ -10,7 +10,6 @@ blocks_start_y:100
 row_height:50
 num_blocks:1
 START_BLOCKS
-------
-------
+---s--
 END_BLOCKS
 END_LEVEL

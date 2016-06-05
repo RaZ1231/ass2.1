@@ -10,65 +10,22 @@ import graphics.GameFlow;
 import interfaces.LevelInformation;
 import interfaces.Menu;
 import interfaces.Task;
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 import levels.Level1;
 import levels.Level2;
 import levels.Level3;
 import levels.Level4;
+import levels.LevelSpecificationReader;
 import scores.HighScoresTable;
 import utils.Counter;
-
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author Raziel Solomon
  * @since 03-Jun-16.
  */
 public class Game {
-    public void run(String[] args) {
-        //init game
-        final GUI gui = new GUI("Arkanoid", 800, 600);
-        final AnimationRunner runner = new AnimationRunner(gui, 60);
-        Counter lives = new Counter(7);
-        Menu<Task<Void>> menu = new MenuAnimation("- Arkanoid -", gui.getKeyboardSensor());
-        final List<LevelInformation> levels = buildLevels(args);
-        final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores.ser"));
-        final GameFlow gF = new GameFlow(runner, gui, lives, highScores);
-
-        //menu items
-        menu.addSelection("s", "Start", new Task<Void>() {
-            @Override
-            public Void run() {
-                gF.runLevels(levels);
-                return null;
-            }
-        });
-
-        menu.addSelection("h", "High Scores", new Task<Void>() {
-            @Override
-            public Void run() {
-                runner.run(new KeyPressStoppableAnimation(
-                        gui.getKeyboardSensor(), KeyboardSensor.SPACE_KEY, new HighScoresAnimation(highScores)));
-                return null;
-            }
-        });
-
-        menu.addSelection("q", "Quit", new Task<Void>() {
-            @Override
-            public Void run() {
-                gui.close();
-                System.exit(0);
-                return null;
-            }
-        });
-
-        //run
-        while (true) {
-            runner.run(menu);
-        }
-    }
-
     /**
      * returns list of levels.
      *
@@ -104,5 +61,56 @@ public class Game {
         }
 
         return levels;
+    }
+
+    public void run(String[] args) {
+        //init game
+        final GUI gui = new GUI("Arkanoid", 800, 600);
+        final AnimationRunner runner = new AnimationRunner(gui, 60);
+        Counter lives = new Counter(7);
+        Menu<Task<Void>> menu = new MenuAnimation("- Arkanoid -", gui.getKeyboardSensor());
+        LevelSpecificationReader lSR = new LevelSpecificationReader();
+       /*
+        try {
+            final List<LevelInformation> levels = lSR.fromReader(new BufferedReader(new InputStreamReader(new
+                    FileInputStream("definitions/level_definition.txt"))));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }*/
+        final List<LevelInformation> levels = buildLevels(args);
+        final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores.ser"));
+        final GameFlow gF = new GameFlow(runner, gui, lives, highScores);
+
+        //menu items
+        menu.addSelection("s", "Start", new Task<Void>() {
+            @Override
+            public Void run() {
+                gF.runLevels(levels);
+                return null;
+            }
+        });
+
+        menu.addSelection("h", "High Scores", new Task<Void>() {
+            @Override
+            public Void run() {
+                runner.run(new KeyPressStoppableAnimation(
+                        gui.getKeyboardSensor(), KeyboardSensor.SPACE_KEY, new HighScoresAnimation(highScores)));
+                return null;
+            }
+        });
+
+        menu.addSelection("q", "Quit", new Task<Void>() {
+            @Override
+            public Void run() {
+                gui.close();
+                System.exit(0);
+                return null;
+            }
+        });
+
+        //run
+        while (true) {
+            runner.run(menu);
+        }
     }
 }
