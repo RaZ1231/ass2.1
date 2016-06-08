@@ -1,9 +1,8 @@
 package scores;
 
+import java.io.File;
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.io.File;
 
 /**
  * @author Raziel Solomon
@@ -16,9 +15,9 @@ public class HighScoresTableTest {
         HighScoresTable expected = new HighScoresTable(5);
 
         expected.add(new ScoreInfo("Nevo", -15));
-        expected.add(new ScoreInfo("Raz", 999999999));
+        expected.add(new ScoreInfo("Raz", 9999));
         expected.add(new ScoreInfo("Maayan", 34));
-        expected.add(new ScoreInfo("Elish", 99999999));
+        expected.add(new ScoreInfo("Elish", 999999999));
 
         expected.save(new File(path));
         HighScoresTable actual = HighScoresTable.loadFromFile(new File(path));
@@ -34,7 +33,7 @@ public class HighScoresTableTest {
         String path = "highscores.ser";
         HighScoresTable highScores = new HighScoresTable(5);
 
-        highScores.add(new ScoreInfo("Raz", 999999999));
+        highScores.add(new ScoreInfo("Raz", 99999));
         highScores.add(new ScoreInfo("Elish", 99999999));
         highScores.add(new ScoreInfo("Maayan", 34));
         highScores.add(new ScoreInfo("Nevo", -15));

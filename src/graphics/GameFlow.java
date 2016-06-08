@@ -1,17 +1,20 @@
 package graphics;
 
-import animations.*;
+import animations.GameLevel;
+import animations.GameOver;
+import animations.HighScoresAnimation;
+import animations.KeyPressStoppableAnimation;
+import animations.YouWin;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import interfaces.LevelInformation;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 import scores.HighScoresTable;
 import scores.NewHighScore;
 import scores.ScoreInfo;
 import utils.Counter;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 /**
  * Class responsible for ordering animations.

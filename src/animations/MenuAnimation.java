@@ -4,16 +4,16 @@ import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import interfaces.Menu;
 import interfaces.Task;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import shapes.Point;
 import sprites.Background;
+import sprites.CopyRightsS;
 import sprites.MenuItem;
 import sprites.Square;
 import sprites.Text;
 import utils.Selection;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Raziel Solomon
@@ -105,6 +105,10 @@ public class MenuAnimation implements Menu<Task<Void>> {
                 new Point(d.getWidth() / 2 - 42, 250 + selections.size() * itemHeight),
                 "EB & RS", 20);
         b.addElement(credits);
+
+        CopyRightsS copyRightsS = new CopyRightsS(itemColor,
+                new Point(d.getWidth() / 2 - 72, 250 + selections.size() * itemHeight), 20);
+        b.addElement(copyRightsS);
 
         b.drawOn(d);
     }

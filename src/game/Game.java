@@ -71,7 +71,6 @@ public class Game {
         //init game
         final GUI gui = new GUI("Arkanoid", 800, 600);
         final AnimationRunner runner = new AnimationRunner(gui, 60);
-        Counter lives = new Counter(7);
         Menu<Task<Void>> menu = new MenuAnimation("- Arkanoid -", gui.getKeyboardSensor());
         LevelSpecificationReader lSR = new LevelSpecificationReader();
         List<LevelInformation> levelsList = null;
@@ -81,14 +80,14 @@ public class Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        final List<LevelInformation> levels = new LinkedList<>(levelsList);
         //final List<LevelInformation> levels = buildLevels(args);
         final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores.ser"));
-        final GameFlow gF = new GameFlow(runner, gui, lives, highScores);
-        final List<LevelInformation> levels = new LinkedList<>(levelsList);
         //menu items
         menu.addSelection("s", "Start", new Task<Void>() {
             @Override
             public Void run() {
+                GameFlow gF = new GameFlow(runner, gui, new Counter(7), highScores);
                 gF.runLevels(levels);
                 return null;
             }

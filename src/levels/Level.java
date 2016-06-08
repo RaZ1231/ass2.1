@@ -21,35 +21,24 @@ public class Level implements LevelInformation {
     private double blocksYPos;
     private int numOfBlocks;
     private int rowHeight;
+    private BlocksFromSymbolsFactory bFSF;
 
     /**
      * Constructor.
      *
-     * @param ballVelocities a list of balls.
-     * @param paddleSpeed    level's paddle's speed.
-     * @param paddleWidth    level's paddle's width.
-     * @param name           level's name.
-     * @param background     level's background.
-     * @param blocks         a list of blocks.
      */
-    public Level(List<Velocity> ballVelocities, int paddleSpeed, int paddleWidth, String name,
-                 String background, List<GameBlock> blocks, double blocksXPos, double blocksYPos, int
-                         numOfBlocks, int
-                         rowHeight) {
-        this.ballVelocities = ballVelocities;
-        this.paddleSpeed = paddleSpeed;
-        this.paddleWidth = paddleWidth;
-        this.name = name;
-        this.background = background;
-        this.blocks = blocks;
-        this.blocksXPos = blocksXPos;
-        this.blocksYPos = blocksYPos;
-        this.numOfBlocks = numOfBlocks;
-        this.rowHeight = rowHeight;
-    }
-
-    public void setBallVelocities(List<Velocity> ballVelocities) {
-        this.ballVelocities = ballVelocities;
+    public Level() {
+        this.ballVelocities = null;
+        this.paddleSpeed = 0;
+        this.paddleWidth = 0;
+        this.name = "";
+        this.background = "";
+        this.blocks = null;
+        this.blocksXPos = 0;
+        this.blocksYPos = 0;
+        this.numOfBlocks = 0;
+        this.rowHeight = 0;
+        this.bFSF = null;
     }
 
     public void setPaddleSpeed(int paddleSpeed) {
@@ -64,24 +53,60 @@ public class Level implements LevelInformation {
         this.name = name;
     }
 
-    public void setBlocks(List<GameBlock> blocks) {
-        this.blocks = blocks;
+    public BlocksFromSymbolsFactory getbFSF() {
+        return bFSF;
+    }
+
+    public void setbFSF(BlocksFromSymbolsFactory bFSF) {
+        this.bFSF = bFSF;
+    }
+
+    public double getBlocksXPos() {
+        return blocksXPos;
     }
 
     public void setBlocksXPos(double blocksXPos) {
         this.blocksXPos = blocksXPos;
     }
 
+    public double getBlocksYPos() {
+        return blocksYPos;
+    }
+
     public void setBlocksYPos(double blocksYPos) {
         this.blocksYPos = blocksYPos;
+    }
+
+    public int getNumOfBlocks() {
+        return numOfBlocks;
     }
 
     public void setNumOfBlocks(int numOfBlocks) {
         this.numOfBlocks = numOfBlocks;
     }
 
+    public int getRowHeight() {
+        return rowHeight;
+    }
+
     public void setRowHeight(int rowHeight) {
         this.rowHeight = rowHeight;
+    }
+
+    public List<GameBlock> getBlocks() {
+        return blocks;
+    }
+
+    public void setBlocks(List<GameBlock> blocks) {
+        this.blocks = blocks;
+    }
+
+    public List<Velocity> getBallVelocities() {
+        return ballVelocities;
+    }
+
+    public void setBallVelocities(List<Velocity> ballVelocities) {
+        this.ballVelocities = ballVelocities;
     }
 
     /**

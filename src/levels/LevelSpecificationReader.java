@@ -21,9 +21,10 @@ public class LevelSpecificationReader {
                 c = (char) reader.read();
                 s = s + c;
             } while (c != (char) -1);
+            reader.close();
+
             Parser parser = new Parser();
-            List<String> stringLevels = parser.parseString(s,
-                    "START_LEVEL(.|\\s)*?END_LEVEL");
+            List<String> stringLevels = parser.parseString(s, "START_LEVEL(.|\\s)*?END_LEVEL");
 
             for (String str : stringLevels) {
                 Executor exe = new Executor();

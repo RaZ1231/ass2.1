@@ -22,6 +22,16 @@ public class Parser {
         return list;
     }
 
+    public String getString(String s, String patternString) {
+        Pattern pattern = Pattern.compile(patternString);
+        Matcher matcher = pattern.matcher(s);
+
+        while (matcher.find()) {
+            return s.substring(matcher.start(), matcher.end());
+        }
+        return "";
+    }
+
     public String getExpression(String s, int i) {
         String patternString = "level_name:(1)\n" +
                 "ball_velocities:(2);\n" +

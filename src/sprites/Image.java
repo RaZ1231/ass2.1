@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  * @since 05/06/2016.
  */
 public class Image extends BaseSprite {
-    java.awt.Image image;
+    String image;
 
     /**
      * constructor.
@@ -23,12 +23,8 @@ public class Image extends BaseSprite {
      */
     public Image(Color color, String path) {
         super(color);
-        this.image = null;
-        try {
-            this.image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.image = path;
+
     }
 
     /**
@@ -38,6 +34,11 @@ public class Image extends BaseSprite {
      */
     @Override
     public void drawOn(DrawSurface d) {
-        d.drawImage(0, 0, image);
+        try {
+            d.drawImage(0, 0, ImageIO.read(new File(image)));
+        } catch (IOException e) {
+            d.setColor(getColor());
+            d.drawRectangle(0, 0, d.getWidth(), d.getHeight());
+        }
     }
 }

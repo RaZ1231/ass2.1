@@ -1,5 +1,10 @@
 package levels;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+
 /**
  * command class. create and attach details to level.
  *
@@ -35,8 +40,13 @@ public class Command {
                 level.setPaddleWidth(Integer.parseInt(operation));
                 break;
             case "block_definitions":
-                BlockMapFactory bF = new BlockMapFactory();
-                bF.createMap(operation); // level need to have private map.
+                BlocksDefinitionReader bDR = new BlocksDefinitionReader();
+                try {
+                    level.setbFSF(BlocksDefinitionReader.fromReader(new BufferedReader(new InputStreamReader(new
+                            FileInputStream(operation)))));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
                 break;
             case "blocks_start_x":
                 level.setBlocksXPos(Double.parseDouble(operation));
