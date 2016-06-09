@@ -1,8 +1,7 @@
 package levels;
 
-import interfaces.GameBlock;
+import blocks.BlockListCreator;
 import interfaces.LevelInformation;
-import java.util.LinkedList;
 import java.util.List;
 import utils.Parser;
 
@@ -17,31 +16,16 @@ public class Executor {
         Parser parser = new Parser();
         List<String> commands = parser.parseString(s, ".*:{1}.*");
 
+        //set all members of level.
         for (String command : commands) {
             Command comm = new Command(command);
             comm.setLevel(level);
         }
 
+        //create all blocks of level.
         String blockString = parser.getString(s, "START_BLOCKS(.|\\s)*?END_BLOCKS");
-        String str = blockString.substring(14, blockString.length() - 12);
-
-        double x = level.getBlocksXPos();
-        double y = level.getBlocksYPos();
-        List<GameBlock> blocks = new LinkedList<>();
-
-        for (int i = 0; i < str.length(); i++) {
-            String symbol = "" + str.charAt(i);
-            if (level.getbFSF().isSpaceSymbol(symbol)) {
-                x += level.getbFSF().getSpaceWidth(symbol);
-            } else if (level.getbFSF().isBlockSymbol(symbol)) {
-                blocks.add(level.getbFSF().getBlock(symbol, (int) x, (int) y));
-            } else if (symbol.equals("\n")) {
-                x = level.getBlocksXPos();
-                y += level.getRowHeight();
-            }
-        }
-
-        level.setBlocks(blocks);
+        BlockListCreator blockListCreator = new BlockListCreator();
+        level.setBlocks(blockListCreator.createBlocks(blockString.substring(14, blockString.length() - 12), level));
 
         return level;
     }

@@ -3,9 +3,8 @@ package blocks;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.GameBlock;
-import shapes.Rectangle;
-
 import java.awt.Color;
+import shapes.Rectangle;
 
 /**
  * @author Raziel Solomon
@@ -16,7 +15,7 @@ public class DeathRegion extends BaseBlock implements GameBlock {
      * constructor.
      */
     public DeathRegion() {
-        this(new Rectangle(0, 600, 800, 10), Color.WHITE);
+        this(new Rectangle(0, 600, 800, 10), Color.WHITE, Color.black);
     }
 
     /**
@@ -25,8 +24,8 @@ public class DeathRegion extends BaseBlock implements GameBlock {
      * @param rect  a rectangle.
      * @param color a color.
      */
-    public DeathRegion(Rectangle rect, Color color) {
-        super(rect, color);
+    public DeathRegion(Rectangle rect, Color color, Color stroke) {
+        super(rect, color, stroke);
     }
 
     /**

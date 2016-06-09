@@ -3,9 +3,8 @@ package blocks;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.GameBlock;
-import shapes.Rectangle;
-
 import java.awt.Color;
+import shapes.Rectangle;
 
 /**
  * border block class.
@@ -20,8 +19,8 @@ public class BorderBlock extends BaseBlock implements GameBlock {
      * @param rect  a rectangle.
      * @param color a color.
      */
-    public BorderBlock(Rectangle rect, Color color) {
-        super(rect, color);
+    public BorderBlock(Rectangle rect, Color color, Color stroke) {
+        super(rect, color, stroke);
     }
 
     /**

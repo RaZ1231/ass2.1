@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
+import utils.Parser;
 
 /**
  * command class. create and attach details to level.
@@ -31,7 +32,9 @@ public class Command {
                 level.setBallVelocities(vF.createVelocities(operation));
                 break;
             case "background":
-                //???? level.setBackground();
+                Parser parser = new Parser();
+                String path = parser.getString(operation, "definitions/(.)*");
+                level.setBackground(path.substring(0, path.length() - 1));
                 break;
             case "paddle_speed":
                 level.setPaddleSpeed(Integer.parseInt(operation));
@@ -40,10 +43,9 @@ public class Command {
                 level.setPaddleWidth(Integer.parseInt(operation));
                 break;
             case "block_definitions":
-                BlocksDefinitionReader bDR = new BlocksDefinitionReader();
                 try {
-                    level.setbFSF(BlocksDefinitionReader.fromReader(new BufferedReader(new InputStreamReader(new
-                            FileInputStream(operation)))));
+                    level.setbFSF(BlocksDefinitionReader.fromReader
+                            (new BufferedReader(new InputStreamReader(new FileInputStream(operation)))));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }

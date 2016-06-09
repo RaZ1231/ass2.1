@@ -3,9 +3,8 @@ package blocks;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.GameBlock;
-import shapes.Rectangle;
-
 import java.awt.Color;
+import shapes.Rectangle;
 
 /**
  * Block representation.
@@ -23,11 +22,22 @@ public class Block extends BaseBlock implements GameBlock {
      * @param color      a color.
      * @param hitCounter hits counter. 'null' if none.
      */
-    public Block(Rectangle rect, Color color, int hitCounter) {
-        super(rect, color);
+    public Block(Rectangle rect, Color color, Color stroke, int hitCounter) {
+        super(rect, color, stroke);
         this.hitCounter = hitCounter;
     }
 
+    /**
+     * constructor.
+     *
+     * @param rect       a rectangle.
+     * @param image      a path.
+     * @param hitCounter hits counter. 'null' if none.
+     */
+    public Block(Rectangle rect, String image, Color stroke, int hitCounter) {
+        super(rect, image, stroke);
+        this.hitCounter = hitCounter;
+    }
     /**
      * returns hits counter.
      *

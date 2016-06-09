@@ -5,6 +5,9 @@ import interfaces.LevelInformation;
 import interfaces.Sprite;
 import java.util.List;
 import motion.Velocity;
+import shapes.Point;
+import sprites.AImage;
+import sprites.Background;
 
 /**
  * @author Elisheva Broyer.
@@ -25,14 +28,13 @@ public class Level implements LevelInformation {
 
     /**
      * Constructor.
-     *
      */
     public Level() {
         this.ballVelocities = null;
         this.paddleSpeed = 0;
         this.paddleWidth = 0;
         this.name = "";
-        this.background = "";
+        this.background = null;
         this.blocks = null;
         this.blocksXPos = 0;
         this.blocksYPos = 0;
@@ -166,7 +168,9 @@ public class Level implements LevelInformation {
      */
     @Override
     public Sprite getBackground() {
-        return null;
+        Background background = new Background();
+        background.addElement(new AImage(this.background, new Point(0, 0)));
+        return background;
     }
 
     public void setBackground(String background) {

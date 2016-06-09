@@ -4,16 +4,18 @@ import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.GameBlock;
 import interfaces.HitListener;
+import interfaces.Sprite;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
+import sprites.AImage;
+import sprites.Square;
 import utils.Mathematics;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Base block class.
@@ -23,7 +25,8 @@ import java.util.List;
  */
 public abstract class BaseBlock {
     private Rectangle rect;
-    private Color color;
+    private Sprite fill;
+    private Color stroke;
     private List<HitListener> hitListeners;
 
     /**
@@ -32,10 +35,17 @@ public abstract class BaseBlock {
      * @param rect  a rectangle.
      * @param color a color.
      */
-    public BaseBlock(Rectangle rect, Color color) {
+    public BaseBlock(Rectangle rect, Color color, Color stroke) {
         this.rect = rect;
-        this.color = color;
+        this.fill = new Square(rect.getUpperLeft(), (int) rect.getWidth(), (int) rect.getHeight(), color);
+        this.stroke = stroke;
         this.hitListeners = new ArrayList<>();
+    }
+
+    public BaseBlock(Rectangle rect, String image, Color stroke) {
+        this.fill = new AImage(image, rect.getUpperLeft());
+        this.stroke = stroke;
+        this.rect = rect;
     }
 
     /**
@@ -44,11 +54,8 @@ public abstract class BaseBlock {
      * @param d draw surface.
      */
     public void drawOn(DrawSurface d) {
-        d.setColor(getColor());
-        d.fillRectangle((int) getRect().getUpperLeft().getX(),
-                (int) getRect().getUpperLeft().getY(),
-                (int) getRect().getWidth(), (int) getRect().getHeight());
-        d.setColor(Color.BLACK);
+        fill.drawOn(d);
+        d.setColor(getStroke());
         d.drawRectangle((int) getRect().getUpperLeft().getX(),
                 (int) getRect().getUpperLeft().getY(),
                 (int) getRect().getWidth(), (int) getRect().getHeight());
@@ -59,13 +66,8 @@ public abstract class BaseBlock {
         drawSelf(d, x, y);
     }
 
-    /**
-     * returns color.
-     *
-     * @return color.
-     */
-    public Color getColor() {
-        return color;
+    public Color getStroke() {
+        return stroke;
     }
 
     /**
@@ -88,7 +90,8 @@ public abstract class BaseBlock {
 
     /**
      * do nothing.
-     * @param dt
+     *
+     * @param dt a delta.
      */
     public void timePassed(double dt) {
         // do nothing.

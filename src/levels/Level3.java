@@ -4,14 +4,17 @@ import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
-import motion.Velocity;
-import shapes.Point;
-import shapes.Rectangle;
-import sprites.*;
-
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
+import motion.Velocity;
+import shapes.Point;
+import shapes.Rectangle;
+import sprites.ALine;
+import sprites.Background;
+import sprites.Circle;
+import sprites.Square;
+import sprites.Text;
 
 /**
  * Level 3.
@@ -139,7 +142,7 @@ public class Level3 implements LevelInformation {
 
         for (int i = 0; i < 15; i++) {
             for (int j = 0; j < 4; j++) {
-                Block b = new Block(new Rectangle(30 + 50 * i, 80 + 30 * j, 50, 30), c[j], 4 - j);
+                Block b = new Block(new Rectangle(30 + 50 * i, 80 + 30 * j, 50, 30), c[j], Color.black, 4 - j);
                 blocks.add(b);
             }
         }

@@ -4,6 +4,10 @@ import blocks.Block;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 import motion.Velocity;
 import shapes.Point;
 import shapes.Rectangle;
@@ -11,11 +15,6 @@ import sprites.Background;
 import sprites.Circle;
 import sprites.Square;
 import sprites.Star;
-
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Level 2.
@@ -115,7 +114,7 @@ public class Level2 implements LevelInformation {
         List<GameBlock> blocks = new LinkedList<>();
 
         for (int i = 0; i < 15; i++) {
-            Block b = new Block(new Rectangle(15 + i * 50, 100, 50, 30), Color.gray, 2);
+            Block b = new Block(new Rectangle(15 + i * 50, 100, 50, 30), Color.gray, Color.black, 2);
 
             blocks.add(b);
         }
