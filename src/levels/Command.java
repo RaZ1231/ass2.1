@@ -1,10 +1,11 @@
 package levels;
 
+import utils.Parser;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
-import utils.Parser;
 
 /**
  * command class. create and attach details to level.
@@ -33,7 +34,7 @@ public class Command {
                 break;
             case "background":
                 Parser parser = new Parser();
-                String path = parser.getString(operation, "definitions/(.)*");
+                String path = parser.getString(operation, "src/definitions/(.)*");
                 level.setBackground(path.substring(0, path.length() - 1));
                 break;
             case "paddle_speed":

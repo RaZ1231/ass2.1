@@ -2,8 +2,9 @@ package levels;
 
 import blocks.BlockListCreator;
 import interfaces.LevelInformation;
-import java.util.List;
 import utils.Parser;
+
+import java.util.List;
 
 /**
  * @author Elisheva Broyer.
@@ -12,14 +13,14 @@ import utils.Parser;
 public class Executor {
     public LevelInformation createLevel(String s) {
         Level level = new Level();
-
         Parser parser = new Parser();
-        List<String> commands = parser.parseString(s, ".*:{1}.*");
+        List<String> lines = parser.parseString(s, ".*:{1}.*");
 
         //set all members of level.
-        for (String command : commands) {
-            Command comm = new Command(command);
-            comm.setLevel(level);
+        for (String line : lines) {
+            Spec spec = Spec.valueOfText(line.split(":")[0]);
+            String value = line.split(":")[1];
+            spec.setLevel(level, value);
         }
 
         //create all blocks of level.

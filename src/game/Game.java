@@ -10,20 +10,13 @@ import graphics.GameFlow;
 import interfaces.LevelInformation;
 import interfaces.Menu;
 import interfaces.Task;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.List;
-import levels.Level1;
-import levels.Level2;
-import levels.Level3;
-import levels.Level4;
-import levels.LevelSpecificationReader;
+import levels.*;
 import scores.HighScoresTable;
 import utils.Counter;
+
+import java.io.*;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Raziel Solomon
@@ -76,7 +69,7 @@ public class Game {
         List<LevelInformation> levelsList = null;
         try {
             levelsList = lSR.fromReader(new BufferedReader(new InputStreamReader(new
-                    FileInputStream("definitions/level_definition.txt"))));
+                    FileInputStream("src/definitions/level_definition.txt"))));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
