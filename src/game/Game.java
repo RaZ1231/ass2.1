@@ -7,84 +7,67 @@ import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import graphics.AnimationRunner;
 import graphics.GameFlow;
-import interfaces.LevelInformation;
 import interfaces.Menu;
 import interfaces.Task;
-import levels.*;
+import levels.LevelSet;
+import levels.LevelSetsReader;
 import scores.HighScoresTable;
 import utils.Counter;
+import utils.SubMenu;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Game class.
+ *
  * @author Raziel Solomon
  * @since 03-Jun-16.
  */
 public class Game {
     /**
-     * returns list of levels.
+     * run the game.
      *
-     * @param args data from user.
-     * @return list of levels.
+     * @param args main's arguments
      */
-    private static List<LevelInformation> buildLevels(String[] args) {
-        List<LevelInformation> levels = new LinkedList<>();
-
-        for (String arg : args) {
-            switch (arg) {
-                case "1":
-                    levels.add((new Level1()));
-                    break;
-                case "2":
-                    levels.add((new Level2()));
-                    break;
-                case "3":
-                    levels.add((new Level3()));
-                    break;
-                case "4":
-                    levels.add((new Level4()));
-                    break;
-                default:
-            }
-        }
-
-        if (levels.size() == 0) {
-            levels.add(new Level1());
-            levels.add(new Level2());
-            levels.add(new Level3());
-            levels.add(new Level4());
-        }
-
-        return levels;
-    }
-
     public void run(String[] args) {
         //init game
         final GUI gui = new GUI("Arkanoid", 800, 600);
         final AnimationRunner runner = new AnimationRunner(gui, 60);
         Menu<Task<Void>> menu = new MenuAnimation("- Arkanoid -", gui.getKeyboardSensor());
-        LevelSpecificationReader lSR = new LevelSpecificationReader();
-        List<LevelInformation> levelsList = null;
+        List<LevelSet> levelSets;
+        String path = args.length > 0 ? args[0] : "level_sets.txt"; //check args
+
         try {
-            levelsList = lSR.fromReader(new BufferedReader(new InputStreamReader(new
-                    FileInputStream("src/definitions/level_definition.txt"))));
+            levelSets = LevelSetsReader.fromReader(new BufferedReader(new InputStreamReader(new
+                    FileInputStream(path))));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            levelSets = new LinkedList<>();
         }
-        final List<LevelInformation> levels = new LinkedList<>(levelsList);
-        //final List<LevelInformation> levels = buildLevels(args);
+
+        final List<LevelSet> lSets = levelSets;
         final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores.ser"));
+
         //menu items
-        menu.addSelection("s", "Start", new Task<Void>() {
-            @Override
-            public Void run() {
-                GameFlow gF = new GameFlow(runner, gui, new Counter(7), highScores);
-                gF.runLevels(levels);
-                return null;
-            }
-        });
+        SubMenu sets = new SubMenu("Sets :", gui.getKeyboardSensor());
+
+        for (final LevelSet set : lSets) {
+            sets.addSelection(set.getKey(), set.getName(), new Task<Void>() {
+                @Override
+                public Void run() {
+                    GameFlow gF = new GameFlow(runner, gui, new Counter(7), highScores);
+                    gF.runLevels(set.getLevels());
+                    return null;
+                }
+            });
+        }
+
+        menu.addSubMenu("s", "Start", sets);
 
         menu.addSelection("h", "High Scores", new Task<Void>() {
             @Override
@@ -106,7 +89,9 @@ public class Game {
 
         //run
         while (true) {
+            menu.restart();
             runner.run(menu);
+            menu.getStatus().run();
         }
     }
 }

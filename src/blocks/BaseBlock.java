@@ -2,20 +2,19 @@ package blocks;
 
 import animations.GameLevel;
 import biuoop.DrawSurface;
+import interfaces.Fill;
 import interfaces.GameBlock;
 import interfaces.HitListener;
-import interfaces.Sprite;
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
-import sprites.AImage;
-import sprites.Square;
 import utils.Mathematics;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base block class.
@@ -25,27 +24,21 @@ import utils.Mathematics;
  */
 public abstract class BaseBlock {
     private Rectangle rect;
-    private Sprite fill;
+    private Fill fill;
     private Color stroke;
     private List<HitListener> hitListeners;
 
     /**
      * constructor.
      *
-     * @param rect  a rectangle.
-     * @param color a color.
+     * @param rect a rectangle.
+     * @param fill a fill object.
      */
-    public BaseBlock(Rectangle rect, Color color, Color stroke) {
+    public BaseBlock(Rectangle rect, Fill fill, Color stroke) {
         this.rect = rect;
-        this.fill = new Square(rect.getUpperLeft(), (int) rect.getWidth(), (int) rect.getHeight(), color);
+        this.fill = fill.create(rect);
         this.stroke = stroke;
         this.hitListeners = new ArrayList<>();
-    }
-
-    public BaseBlock(Rectangle rect, String image, Color stroke) {
-        this.fill = new AImage(image, rect.getUpperLeft());
-        this.stroke = stroke;
-        this.rect = rect;
     }
 
     /**
@@ -55,17 +48,27 @@ public abstract class BaseBlock {
      */
     public void drawOn(DrawSurface d) {
         fill.drawOn(d);
-        d.setColor(getStroke());
-        d.drawRectangle((int) getRect().getUpperLeft().getX(),
-                (int) getRect().getUpperLeft().getY(),
-                (int) getRect().getWidth(), (int) getRect().getHeight());
+
+        if (getStroke() != null) {
+            d.setColor(getStroke());
+            d.drawRectangle((int) getRect().getUpperLeft().getX(),
+                    (int) getRect().getUpperLeft().getY(),
+                    (int) getRect().getWidth(), (int) getRect().getHeight());
+        }
+
         double x = Mathematics.average(getRect().getUpperLeft().getX(),
                 getRect().getUpperLeft().getX() + 0.9 * getRect().getWidth());
         double y = Mathematics.average(getRect().getUpperLeft().getY(),
                 getRect().getUpperLeft().getY() + 1.75 * getRect().getHeight());
+
         drawSelf(d, x, y);
     }
 
+    /**
+     * stroke getter.
+     *
+     * @return stroke color
+     */
     public Color getStroke() {
         return stroke;
     }
@@ -187,5 +190,38 @@ public abstract class BaseBlock {
      */
     public void removeHitListener(HitListener hl) {
         hitListeners.remove(hl);
+    }
+
+    /**
+     * fill getter.
+     *
+     * @return get fill object
+     */
+    public Fill getFill() {
+        return fill;
+    }
+
+    /**
+     * fill setter.
+     *
+     * @param fill set fill
+     */
+    public void setFill(Fill fill) {
+        this.fill = fill;
+    }
+
+    /**
+     * string representation.
+     *
+     * @return string
+     */
+    @Override
+    public String toString() {
+        return "BaseBlock{" +
+                "rect=" + rect +
+                ", fill=" + fill +
+                ", stroke=" + stroke +
+                ", hitListeners=" + hitListeners +
+                '}';
     }
 }

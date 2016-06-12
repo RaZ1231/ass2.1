@@ -142,5 +142,14 @@ public class Rectangle {
     public double getHeight() {
         return height;
     }
+
+    @Override
+    public String toString() {
+        return "Rectangle{" +
+                "upperLeft=" + upperLeft +
+                ", width=" + width +
+                ", height=" + height +
+                '}';
+    }
 }
 

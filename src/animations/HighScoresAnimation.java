@@ -20,6 +20,11 @@ import java.awt.Color;
 public class HighScoresAnimation implements Animation {
     private HighScoresTable highScores;
 
+    /**
+     * Constructor.
+     *
+     * @param highScores high scores table
+     */
     public HighScoresAnimation(HighScoresTable highScores) {
         this.highScores = highScores;
     }
@@ -35,6 +40,11 @@ public class HighScoresAnimation implements Animation {
         drawBackGround(d);
     }
 
+    /**
+     * Draw background for animation.
+     *
+     * @param d drawsurface
+     */
     private void drawBackGround(DrawSurface d) {
         Background b = new Background();
         Color backColor = Color.RED;

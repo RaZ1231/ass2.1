@@ -3,10 +3,11 @@ package sprites;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
+import shapes.Point;
+
+import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import shapes.Point;
 
 /**
  * drawable image.
@@ -21,11 +22,22 @@ public class AImage implements Sprite {
     /**
      * constructor.
      *
-     * @param path a path to an image.
+     * @param path      a path to an image.
+     * @param upperLeft corner point.
      */
     public AImage(String path, Point upperLeft) {
         this.image = path;
         this.upperLeft = upperLeft;
+    }
+
+    /**
+     * constructor.
+     *
+     * @param path a path to an image.
+     */
+    public AImage(String path) {
+        this.image = path;
+        this.upperLeft = new Point(0, 0);
     }
 
     /**

@@ -1,9 +1,10 @@
-package blocks;
+package levels;
 
+import blocks.Block;
 import interfaces.GameBlock;
+
 import java.util.LinkedList;
 import java.util.List;
-import levels.Level;
 
 /**
  * creator of a block list.
@@ -29,7 +30,9 @@ public class BlockListCreator {
             if (level.getbFSF().isSpaceSymbol(symbol)) {
                 x += level.getbFSF().getSpaceWidth(symbol);
             } else if (level.getbFSF().isBlockSymbol(symbol)) {
-                blocks.add(level.getbFSF().getBlock(symbol, (int) x, (int) y));
+                Block block = level.getbFSF().getBlock(symbol, (int) x, (int) y);
+                blocks.add(block);
+                x += block.getRect().getWidth();
             } else if (symbol.equals("\n")) {
                 x = level.getBlocksXPos();
                 y += level.getRowHeight();

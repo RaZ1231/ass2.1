@@ -2,9 +2,13 @@ package blocks;
 
 import animations.GameLevel;
 import biuoop.DrawSurface;
+import interfaces.Fill;
 import interfaces.GameBlock;
-import java.awt.Color;
 import shapes.Rectangle;
+
+import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Block representation.
@@ -13,31 +17,44 @@ import shapes.Rectangle;
  * @since 30/03/2016.
  */
 public class Block extends BaseBlock implements GameBlock {
-    private int hitCounter;
+    private Integer hitCounter;
+    private Map<Integer, Fill> fillK;
 
     /**
      * constructor.
      *
      * @param rect       a rectangle.
-     * @param color      a color.
+     * @param fill       a filling.
      * @param hitCounter hits counter. 'null' if none.
      */
-    public Block(Rectangle rect, Color color, Color stroke, int hitCounter) {
-        super(rect, color, stroke);
-        this.hitCounter = hitCounter;
+    public Block(Rectangle rect, Fill fill, Color stroke, int hitCounter) {
+        this(rect, fill, new HashMap<Integer, Fill>(), stroke, hitCounter);
     }
 
     /**
      * constructor.
-     *
-     * @param rect       a rectangle.
-     * @param image      a path.
-     * @param hitCounter hits counter. 'null' if none.
+     * @param rect a rectangle
+     * @param fill a filling
+     * @param fillK fill-k map
+     * @param stroke stroke color
+     * @param hitCounter hit counter
      */
-    public Block(Rectangle rect, String image, Color stroke, int hitCounter) {
-        super(rect, image, stroke);
+    public Block(Rectangle rect, Fill fill, Map<Integer, Fill> fillK, Color stroke, int hitCounter) {
+        super(rect, fill, stroke);
         this.hitCounter = hitCounter;
+        this.fillK = fillK;
+
+        for (Map.Entry<Integer, Fill> entry : fillK.entrySet()) {
+            fillK.put(entry.getKey(), entry.getValue().create(rect));
+        }
+
+        this.fillK.put(-1, fill.create(rect));
+
+        if (fillK.containsKey(hitCounter)) {
+            this.setFill(fillK.get(hitCounter));
+        }
     }
+
     /**
      * returns hits counter.
      *
@@ -55,7 +72,11 @@ public class Block extends BaseBlock implements GameBlock {
      * @param y y-axes coordinate.
      */
     public void drawSelf(DrawSurface d, double x, double y) {
+        if (hitCounter == null) {
+            return;
+        }
         String s = hitsAsString();
+        d.setColor(Color.BLACK);
         d.drawText((int) x, (int) y, s, 18);
     }
 
@@ -76,7 +97,17 @@ public class Block extends BaseBlock implements GameBlock {
      * the effect of the hit on the block.
      */
     public void effect() {
+        if (hitCounter == null) {
+            return;
+        }
         this.setHitCounter(hitCounter - 1);
+
+        //fill-k
+        if (fillK.containsKey(hitCounter)) {
+            setFill(fillK.get(hitCounter).create(getRect()));
+        } else {
+            setFill(fillK.get(-1).create(getRect()));
+        }
     }
 
     /**
@@ -90,6 +121,14 @@ public class Block extends BaseBlock implements GameBlock {
         } else {
             this.hitCounter = hitCount;
         }
+    }
+
+    public Map<Integer, Fill> getFillK() {
+        return fillK;
+    }
+
+    public void putFillK(int k, Fill fill) {
+        fillK.put(k, fill);
     }
 
     /**

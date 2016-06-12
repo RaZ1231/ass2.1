@@ -4,6 +4,7 @@ import biuoop.GUI;
 import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.LevelInformation;
+import levelsold.Level4;
 import org.junit.Test;
 import scores.HighScoresTable;
 import utils.Counter;

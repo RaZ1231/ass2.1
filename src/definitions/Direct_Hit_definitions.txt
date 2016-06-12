@@ -3,8 +3,8 @@ default height:50
 default stroke:color(black)
 
 # block definitions
-bdef symbol:r width:50 hit_points:5 height:50 fill:color(RGB(255,10,255)) stroke:color(black)
-bdef symbol:t width:20 hit_points:3 height:50 fill:color(red) stroke:color(black)
+bdef symbol:r width:50 hit_points:5 fill:color(RGB(255,10,255)) fill-4:color(blue) fill-3:color(red)
+bdef symbol:t width:20 hit_points:3 fill:color(red) fill-2:color(blue)
 
 # spacers definitions
 sdef symbol:- width:50

@@ -1,15 +1,15 @@
 package levels;
 
+import interfaces.Fill;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
-import interfaces.Sprite;
-import java.util.List;
 import motion.Velocity;
-import shapes.Point;
-import sprites.AImage;
-import sprites.Background;
+
+import java.util.List;
 
 /**
+ * Level class.
+ *
  * @author Elisheva Broyer.
  * @since 05/06/2016.
  */
@@ -18,7 +18,7 @@ public class Level implements LevelInformation {
     private int paddleSpeed;
     private int paddleWidth;
     private String name;
-    private String background;
+    private Fill background;
     private List<GameBlock> blocks;
     private double blocksXPos;
     private double blocksYPos;
@@ -43,70 +43,155 @@ public class Level implements LevelInformation {
         this.bFSF = null;
     }
 
+    /**
+     * paddle speed setter.
+     *
+     * @param paddleSpeed new speed
+     */
     public void setPaddleSpeed(int paddleSpeed) {
         this.paddleSpeed = paddleSpeed;
     }
 
+    /**
+     * paddle width setter.
+     *
+     * @param paddleWidth new width
+     */
     public void setPaddleWidth(int paddleWidth) {
         this.paddleWidth = paddleWidth;
     }
 
+    /**
+     * name setter.
+     *
+     * @param name new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * block factory getter.
+     *
+     * @return block factory
+     */
     public BlocksFromSymbolsFactory getbFSF() {
         return bFSF;
     }
 
+    /**
+     * block factory setter.
+     *
+     * @param bFSF new block factory
+     */
     public void setbFSF(BlocksFromSymbolsFactory bFSF) {
         this.bFSF = bFSF;
     }
 
+    /**
+     * blocks start x getter.
+     *
+     * @return start x
+     */
     public double getBlocksXPos() {
         return blocksXPos;
     }
 
+    /**
+     * blocks start x setter.
+     *
+     * @param blocksXPos new x
+     */
     public void setBlocksXPos(double blocksXPos) {
         this.blocksXPos = blocksXPos;
     }
 
+    /**
+     * blocks start y getter.
+     *
+     * @return start y
+     */
     public double getBlocksYPos() {
         return blocksYPos;
     }
 
+    /**
+     * blocks start y setter.
+     *
+     * @param blocksYPos new y
+     */
     public void setBlocksYPos(double blocksYPos) {
         this.blocksYPos = blocksYPos;
     }
 
+    /**
+     * number of blocks getter.
+     *
+     * @return number of blocks
+     */
     public int getNumOfBlocks() {
         return numOfBlocks;
     }
 
+    /**
+     * number of blocks setter.
+     *
+     * @param numOfBlocks set number of blocks
+     */
     public void setNumOfBlocks(int numOfBlocks) {
         this.numOfBlocks = numOfBlocks;
     }
 
+    /**
+     * row height getter.
+     *
+     * @return row height
+     */
     public int getRowHeight() {
         return rowHeight;
     }
 
+    /**
+     * row height setter.
+     *
+     * @param rowHeight new row height
+     */
     public void setRowHeight(int rowHeight) {
         this.rowHeight = rowHeight;
     }
 
+    /**
+     * blocks getter.
+     *
+     * @return blocks
+     */
     public List<GameBlock> getBlocks() {
         return blocks;
     }
 
+    /**
+     * blocks setter.
+     *
+     * @param blocks new blocks
+     */
     public void setBlocks(List<GameBlock> blocks) {
         this.blocks = blocks;
     }
 
+    /**
+     * velocities getter.
+     *
+     * @return velocities
+     */
     public List<Velocity> getBallVelocities() {
         return ballVelocities;
     }
 
+    /**
+     * velocities setter.
+     *
+     * @param ballVelocities new velocities.
+     */
     public void setBallVelocities(List<Velocity> ballVelocities) {
         this.ballVelocities = ballVelocities;
     }
@@ -167,13 +252,16 @@ public class Level implements LevelInformation {
      * @return a sprite with the background of the level.
      */
     @Override
-    public Sprite getBackground() {
-        Background background = new Background();
-        background.addElement(new AImage(this.background, new Point(0, 0)));
+    public Fill getBackground() {
         return background;
     }
 
-    public void setBackground(String background) {
+    /**
+     * background setter.
+     *
+     * @param background new background
+     */
+    public void setBackground(Fill background) {
         this.background = background;
     }
 

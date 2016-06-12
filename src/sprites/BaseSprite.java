@@ -28,7 +28,7 @@ public abstract class BaseSprite implements Sprite {
      *
      * @return color
      */
-    protected Color getColor() {
+    public Color getColor() {
         return color;
     }
 

@@ -1,8 +1,9 @@
 package levels;
 
+import motion.Velocity;
+
 import java.util.LinkedList;
 import java.util.List;
-import motion.Velocity;
 
 /**
  * velocity factory class.
@@ -11,13 +12,19 @@ import motion.Velocity;
  * @since 05/06/2016.
  */
 public class VelocityFactory {
+    /**
+     * create velocity list.
+     *
+     * @param velocities velocities string to parse
+     * @return list
+     */
     public List<Velocity> createVelocities(String velocities) {
-        String[] out = velocities.split(";");
+        String[] out = velocities.split(" ");
         List<Velocity> vel = new LinkedList<>();
 
         for (int i = 0; i < out.length; i++) {
             String[] v = out[i].split(",");
-            vel.add(new Velocity(Integer.parseInt(v[0]), Integer.parseInt(v[1])));
+            vel.add(Velocity.fromAngleAndSpeed(Integer.parseInt(v[0]), Integer.parseInt(v[1])));
         }
         return vel;
     }

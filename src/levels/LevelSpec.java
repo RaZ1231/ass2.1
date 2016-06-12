@@ -1,24 +1,36 @@
 package levels;
 
-import utils.Parser;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 
 /**
+ * Level specification enum.
+ *
  * @author Raziel Solomon
  * @since 09-Jun-16.
  */
-public enum Spec {
+public enum LevelSpec implements TextEnum {
     NAME("level_name") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
             level.setName(value);
         }
     },
     VELOCITIES("ball_velocities") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
             VelocityFactory vF = new VelocityFactory();
@@ -26,26 +38,49 @@ public enum Spec {
         }
     },
     BACKGROUND("background") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
-            Parser parser = new Parser();
-            String path = parser.getString(value, "src/definitions/(.)*");
-            level.setBackground(path.substring(0, path.length() - 1));
+            level.setBackground(FillParser.fromString(
+                    value.substring(6, value.length() - 1)));
         }
     },
     PAD_SPEED("paddle_speed") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
             level.setPaddleSpeed(Integer.parseInt(value));
         }
     },
     PAD_WIDTH("paddle_width") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
             level.setPaddleWidth(Integer.parseInt(value));
         }
     },
     BLOCKS("block_definitions") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
             try {
@@ -56,24 +91,48 @@ public enum Spec {
         }
     },
     BLOCKS_X("blocks_start_x") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
             level.setBlocksXPos(Double.parseDouble(value));
         }
     },
     BLOCKS_Y("blocks_start_y") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
             level.setBlocksYPos(Double.parseDouble(value));
         }
     },
     ROW("row_height") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
             level.setRowHeight(Integer.parseInt(value));
         }
     },
     BLOCKS_NUM("num_blocks") {
+        /**
+         * set value to level.
+         *
+         * @param level level to set
+         * @param value value to set
+         */
         @Override
         void setLevel(Level level, String value) {
             level.setNumOfBlocks(Integer.parseInt(value));
@@ -82,23 +141,30 @@ public enum Spec {
 
     private String text;
 
-    Spec(String text) {
+    /**
+     * constructor.
+     *
+     * @param text specification
+     */
+    LevelSpec(String text) {
         this.text = text;
     }
 
-    public static Spec valueOfText(String category) {
-        for (Spec spec : values()) {
-            if (category.equals(spec.getText())) {
-                return spec;
-            }
-        }
-
-        throw new IllegalArgumentException("Enum text not found.");
-    }
-
+    /**
+     * text getter.
+     *
+     * @return specification
+     */
+    @Override
     public String getText() {
         return text;
     }
 
+    /**
+     * set value to level.
+     *
+     * @param level level to set
+     * @param value value to set
+     */
     abstract void setLevel(Level level, String value);
 }

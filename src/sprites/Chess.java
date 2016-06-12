@@ -3,12 +3,13 @@ package sprites;
 import biuoop.DrawSurface;
 import blocks.Block;
 import interfaces.GameBlock;
+import shapes.Point;
+import shapes.Rectangle;
+
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import shapes.Point;
-import shapes.Rectangle;
 
 /**
  * Chess sprite class.
@@ -106,7 +107,8 @@ public class Chess extends BaseSprite {
 
         for (int i = x; i < nWidth * bWidth; i += bWidth) {
             for (int j = y; j < nHeight * bHeight; j += bHeight) {
-                collidables.add(new Block(new Rectangle(i, j, bWidth, bHeight), color, Color.black, hit));
+                collidables.add(new Block(new Rectangle(i, j, bWidth, bHeight),
+                        new FillColor(color), Color.black, hit));
                 color = switchColor(color);
             }
 

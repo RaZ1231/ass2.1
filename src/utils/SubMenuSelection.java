@@ -1,30 +1,30 @@
 package utils;
 
+import interfaces.Menu;
 import interfaces.MenuOption;
-import interfaces.Task;
 
 /**
- * Menu selection class.
+ * Sub menu option class.
  *
  * @author Raziel Solomon
- * @since 03-Jun-16.
+ * @since 11-Jun-16.
  */
-public class Selection<T> implements MenuOption {
+public class SubMenuSelection<T> implements MenuOption {
     private String key;
     private String message;
-    private Task<T> task;
+    private Menu<T> menu;
 
     /**
      * constructor.
      *
      * @param key     hot key
      * @param message text
-     * @param task    task to run
+     * @param menu    sub menu
      */
-    public Selection(String key, String message, Task<T> task) {
+    public SubMenuSelection(String key, String message, Menu<T> menu) {
         this.key = key;
         this.message = message;
-        this.task = task;
+        this.menu = menu;
     }
 
     /**
@@ -47,11 +47,11 @@ public class Selection<T> implements MenuOption {
     }
 
     /**
-     * task getter.
+     * sub menu getter.
      *
-     * @return task
+     * @return sub menu
      */
-    public Task<T> getTask() {
-        return task;
+    public Menu<T> getMenu() {
+        return menu;
     }
 }
