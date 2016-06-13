@@ -35,7 +35,8 @@ public class LevelIndicator implements Sprite {
 
     /**
      * notify the sprite that time has passed.
-     * @param dt
+     *
+     * @param dt amount of seconds passed since the last call.
      */
     @Override
     public void timePassed(double dt) {

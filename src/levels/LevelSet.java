@@ -1,7 +1,6 @@
 package levels;
 
 import interfaces.LevelInformation;
-
 import java.util.List;
 
 /**
@@ -18,9 +17,9 @@ public class LevelSet {
     /**
      * constructor.
      *
-     * @param key
-     * @param name
-     * @param levels
+     * @param key    set's key.
+     * @param name   set's name.
+     * @param levels list of levels.
      */
     public LevelSet(String key, String name, List<LevelInformation> levels) {
         this.key = key;

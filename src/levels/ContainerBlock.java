@@ -86,14 +86,13 @@ public class ContainerBlock {
      */
     @Override
     public String toString() {
-        return "ContainerBlock{" +
-                "symbol='" + symbol + '\'' +
-                ", width=" + width +
-                ", height=" + height +
-                ", hits=" + hits +
-                ", fill=" + fill +
-                ", stroke=" + stroke +
-                '}';
+        return "ContainerBlock{"
+                + "symbol='" + symbol + '\''
+                + ", width=" + width
+                + ", height=" + height
+                + ", hits=" + hits
+                + ", fill=" + fill
+                + ", stroke=" + stroke + '}';
     }
 
     /**
@@ -108,10 +107,10 @@ public class ContainerBlock {
     /**
      * Sets new symbol.
      *
-     * @param symbol New value of symbol.
+     * @param aSymbol New value of symbol.
      */
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
+    public void setSymbol(String aSymbol) {
+        this.symbol = aSymbol;
     }
 
     /**
@@ -126,10 +125,10 @@ public class ContainerBlock {
     /**
      * Sets new hits.
      *
-     * @param hits New value of hits.
+     * @param hitsNum New value of hits.
      */
-    public void setHits(int hits) {
-        this.hits = Math.abs(hits);
+    public void setHits(int hitsNum) {
+        this.hits = Math.abs(hitsNum);
     }
 
     /**
@@ -144,10 +143,10 @@ public class ContainerBlock {
     /**
      * Sets new stroke.
      *
-     * @param stroke New value of stroke.
+     * @param cStroke New value of stroke.
      */
-    public void setStroke(Color stroke) {
-        this.stroke = stroke;
+    public void setStroke(Color cStroke) {
+        this.stroke = cStroke;
     }
 
     /**
@@ -162,10 +161,10 @@ public class ContainerBlock {
     /**
      * Sets new width.
      *
-     * @param width New value of width.
+     * @param widthSize New value of width.
      */
-    public void setWidth(double width) {
-        this.width = Math.abs(width);
+    public void setWidth(double widthSize) {
+        this.width = Math.abs(widthSize);
     }
 
     /**
@@ -180,10 +179,10 @@ public class ContainerBlock {
     /**
      * Sets new fillK.
      *
-     * @param fillK New value of fillK.
+     * @param fillOfK New value of fillK.
      */
-    public void setFillK(Map<Integer, Fill> fillK) {
-        this.fillK = fillK;
+    public void setFillK(Map<Integer, Fill> fillOfK) {
+        this.fillK = fillOfK;
     }
 
     /**
@@ -198,10 +197,10 @@ public class ContainerBlock {
     /**
      * Sets new height.
      *
-     * @param height New value of height.
+     * @param heightSize New value of height.
      */
-    public void setHeight(double height) {
-        this.height = Math.abs(height);
+    public void setHeight(double heightSize) {
+        this.height = Math.abs(heightSize);
     }
 
     /**
@@ -216,19 +215,19 @@ public class ContainerBlock {
     /**
      * Sets new fill.
      *
-     * @param fill New value of fill.
+     * @param aFill New value of fill.
      */
-    public void setFill(Fill fill) {
-        this.fill = fill;
+    public void setFill(Fill aFill) {
+        this.fill = aFill;
     }
 
     /**
      * put fill-k in map.
      *
-     * @param k    hits
-     * @param fill filling
+     * @param k     hits
+     * @param aFill filling
      */
-    public void putFillK(int k, Fill fill) {
-        fillK.put(k, fill);
+    public void putFillK(int k, Fill aFill) {
+        fillK.put(k, aFill);
     }
 }

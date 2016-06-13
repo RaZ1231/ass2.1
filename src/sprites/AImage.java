@@ -3,11 +3,10 @@ package sprites;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
-import shapes.Point;
-
-import javax.imageio.ImageIO;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
+import shapes.Point;
 
 /**
  * drawable image.
@@ -16,8 +15,8 @@ import java.io.IOException;
  * @since 05/06/2016.
  */
 public class AImage implements Sprite {
-    Point upperLeft;
-    String image;
+    private Point upperLeft;
+    private String image;
 
     /**
      * constructor.
@@ -47,9 +46,18 @@ public class AImage implements Sprite {
      */
     @Override
     public void drawOn(DrawSurface d) {
+        InputStream is = null;
         try {
-            d.drawImage((int) upperLeft.getX(), (int) upperLeft.getY(), ImageIO.read(new File(image)));
-        } catch (IOException ignored) {
+            is = ClassLoader.getSystemClassLoader().getResourceAsStream(image);
+            d.drawImage((int) upperLeft.getX(), (int) upperLeft.getY(), ImageIO.read(is));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                System.out.println("failed to close image!");
+            }
         }
     }
 

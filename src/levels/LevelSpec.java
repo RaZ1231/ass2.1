@@ -1,8 +1,6 @@
 package levels;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 
 /**
@@ -83,11 +81,10 @@ public enum LevelSpec implements TextEnum {
          */
         @Override
         void setLevel(Level level, String value) {
-            try {
-                level.setbFSF(BlocksDefinitionReader.fromReader
-                        (new BufferedReader(new InputStreamReader(new FileInputStream(value)))));
-            } catch (FileNotFoundException e) {
-            }
+            level.setbFSF(BlocksDefinitionReader.fromReader(
+                    new BufferedReader(
+                            new InputStreamReader(ClassLoader.getSystemClassLoader()
+                                    .getResourceAsStream(value)))));
         }
     },
     BLOCKS_X("blocks_start_x") {

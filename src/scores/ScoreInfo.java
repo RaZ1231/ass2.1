@@ -15,8 +15,8 @@ public class ScoreInfo implements Serializable {
     /**
      * constructor.
      *
-     * @param name  player name
-     * @param score player score
+     * @param name  player name.
+     * @param score player score.
      */
     public ScoreInfo(String name, int score) {
         this.name = name;
@@ -26,7 +26,7 @@ public class ScoreInfo implements Serializable {
     /**
      * name getter.
      *
-     * @return name
+     * @return name.
      */
     public String getName() {
         return name;
@@ -35,7 +35,7 @@ public class ScoreInfo implements Serializable {
     /**
      * score getter.
      *
-     * @return score
+     * @return score.
      */
     public int getScore() {
         return score;
@@ -44,8 +44,8 @@ public class ScoreInfo implements Serializable {
     /**
      * equals method.
      *
-     * @param o other object
-     * @return true/false
+     * @param o other object.
+     * @return true/false.
      */
     @Override
     public boolean equals(Object o) {
@@ -64,7 +64,7 @@ public class ScoreInfo implements Serializable {
     /**
      * toString method.
      *
-     * @return string representation
+     * @return string representation.
      */
     @Override
     public String toString() {

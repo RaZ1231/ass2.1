@@ -2,11 +2,14 @@ package animations;
 
 import biuoop.DrawSurface;
 import interfaces.Animation;
-import shapes.Point;
-import sprites.*;
-import utils.Counter;
-
 import java.awt.Color;
+import shapes.Point;
+import sprites.ALine;
+import sprites.Background;
+import sprites.Circle;
+import sprites.Square;
+import sprites.Text;
+import utils.Counter;
 
 /**
  * Game over screen class.

@@ -1,11 +1,10 @@
 package levels;
 
 import interfaces.LevelInformation;
-import utils.Parser;
-
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import utils.Parser;
 
 /**
  * Level reader class.
@@ -18,7 +17,7 @@ public class LevelSpecificationReader {
      * use reader to read levels from file.
      *
      * @param reader reader to use
-     * @return
+     * @return list of levels.
      */
     public List<LevelInformation> fromReader(java.io.Reader reader) {
         List<LevelInformation> levelI = new LinkedList<>();

@@ -5,16 +5,15 @@ import biuoop.DrawSurface;
 import interfaces.Fill;
 import interfaces.GameBlock;
 import interfaces.HitListener;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
 import utils.Mathematics;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Base block class.
@@ -31,8 +30,9 @@ public abstract class BaseBlock {
     /**
      * constructor.
      *
-     * @param rect a rectangle.
-     * @param fill a fill object.
+     * @param rect   a rectangle.
+     * @param fill   a fill object.
+     * @param stroke a color.
      */
     public BaseBlock(Rectangle rect, Fill fill, Color stroke) {
         this.rect = rect;
@@ -94,7 +94,7 @@ public abstract class BaseBlock {
     /**
      * do nothing.
      *
-     * @param dt a delta.
+     * @param dt amount of seconds passed since the last call.
      */
     public void timePassed(double dt) {
         // do nothing.
@@ -204,10 +204,10 @@ public abstract class BaseBlock {
     /**
      * fill setter.
      *
-     * @param fill set fill
+     * @param aFill set fill
      */
-    public void setFill(Fill fill) {
-        this.fill = fill;
+    public void setFill(Fill aFill) {
+        this.fill = aFill;
     }
 
     /**
@@ -217,11 +217,10 @@ public abstract class BaseBlock {
      */
     @Override
     public String toString() {
-        return "BaseBlock{" +
-                "rect=" + rect +
-                ", fill=" + fill +
-                ", stroke=" + stroke +
-                ", hitListeners=" + hitListeners +
-                '}';
+        return "BaseBlock{"
+                + "rect=" + rect
+                + ", fill=" + fill
+                + ", stroke=" + stroke
+                + ", hitListeners=" + hitListeners + '}';
     }
 }

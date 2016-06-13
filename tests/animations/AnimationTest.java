@@ -4,13 +4,12 @@ import biuoop.GUI;
 import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.LevelInformation;
-import org.junit.Test;
-import scores.HighScoresTable;
-import utils.Counter;
-
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+import org.junit.Test;
+import scores.HighScoresTable;
+import utils.Counter;
 
 /**
  * @author Raziel Solomon
@@ -42,7 +41,7 @@ public class AnimationTest {
         Counter lives = new Counter(7);
         Counter score = new Counter(0);
         List<LevelInformation> levels = new LinkedList<>();
-        HighScoresTable hst = HighScoresTable.loadFromFile(new File("highscores.ser"));
+        HighScoresTable hst = HighScoresTable.loadFromFile(new File("highscores"));
 
         System.out.println(hst);
 

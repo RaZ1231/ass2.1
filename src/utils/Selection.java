@@ -6,6 +6,7 @@ import interfaces.Task;
 /**
  * Menu selection class.
  *
+ * @param <T> an option.
  * @author Raziel Solomon
  * @since 03-Jun-16.
  */

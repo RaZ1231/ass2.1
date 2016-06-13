@@ -4,10 +4,9 @@ import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Fill;
 import interfaces.GameBlock;
+import java.awt.Color;
 import shapes.Rectangle;
 import sprites.FillColor;
-
-import java.awt.Color;
 
 /**
  * Death region in charge of screen's bottom.
@@ -26,8 +25,9 @@ public class DeathRegion extends BaseBlock implements GameBlock {
     /**
      * constructor.
      *
-     * @param rect a rectangle.
-     * @param fill a filling.
+     * @param rect   a rectangle.
+     * @param fill   a filling.
+     * @param stroke a color.
      */
     public DeathRegion(Rectangle rect, Fill fill, Color stroke) {
         super(rect, fill, stroke);

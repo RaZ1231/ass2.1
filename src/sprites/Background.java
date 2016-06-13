@@ -3,7 +3,6 @@ package sprites;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -55,7 +54,8 @@ public class Background implements Sprite {
 
     /**
      * notify the sprite that time has passed.
-     * @param dt
+     *
+     * @param dt amount of seconds passed since the last call.
      */
     @Override
     public void timePassed(double dt) {

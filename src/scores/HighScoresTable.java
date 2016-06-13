@@ -24,7 +24,7 @@ public class HighScoresTable implements Serializable {
      * Create an empty high-scores table with the specified size.
      * The size means that the table holds up to size top scores.
      *
-     * @param size size of table
+     * @param size size of table.
      */
     public HighScoresTable(int size) {
         scores = new LinkedList<ScoreInfo>();
@@ -36,8 +36,8 @@ public class HighScoresTable implements Serializable {
      * If the file does not exist, or there is a problem with
      * reading it, an empty table is returned.
      *
-     * @param filename path
-     * @return high scores table
+     * @param filename path.
+     * @return high scores table.
      */
     public static HighScoresTable loadFromFile(File filename) {
         HighScoresTable highScores = new HighScoresTable(5);
@@ -47,7 +47,8 @@ public class HighScoresTable implements Serializable {
         } catch (IOException e) {
             try {
                 highScores.save(filename);
-            } catch (IOException ignored) {
+            } catch (IOException e1) {
+                e1.printStackTrace();
             }
         }
 
@@ -58,13 +59,17 @@ public class HighScoresTable implements Serializable {
      * Load table data from file.
      * Current table data is cleared.
      *
-     * @param filename path
-     * @throws IOException
+     * @param filename path.
+     * @throws IOException an exception.
      */
     public void load(File filename) throws IOException {
         try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(filename))) {
             size = (int) objectInputStream.readObject();
-            scores = (List<ScoreInfo>) objectInputStream.readObject();
+            try {
+                scores = (List<ScoreInfo>) objectInputStream.readObject();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } catch (ClassNotFoundException e) {
             scores = new LinkedList<ScoreInfo>();
         }
@@ -73,8 +78,8 @@ public class HighScoresTable implements Serializable {
     /**
      * Save table data to the specified file.
      *
-     * @param filename path
-     * @throws IOException
+     * @param filename path.
+     * @throws IOException an exception.
      */
     public void save(File filename) throws IOException {
         try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(filename))) {
@@ -86,7 +91,7 @@ public class HighScoresTable implements Serializable {
     /**
      * Add a high-score.
      *
-     * @param score new score
+     * @param score new score.
      */
     public void add(ScoreInfo score) {
         int i = getRank(score.getScore());
@@ -107,8 +112,8 @@ public class HighScoresTable implements Serializable {
      * Rank > `size` means the score is too low and will not
      * be added to the list.
      *
-     * @param score score to check
-     * @return rank in table
+     * @param score score to check.
+     * @return rank in table.
      */
     public int getRank(int score) {
         int i = 1;
@@ -123,7 +128,7 @@ public class HighScoresTable implements Serializable {
     /**
      * Return table size.
      *
-     * @return size
+     * @return size.
      */
     public int size() {
         return size;
@@ -147,8 +152,8 @@ public class HighScoresTable implements Serializable {
     /**
      * check if score in table.
      *
-     * @param score to check
-     * @return true/false
+     * @param score to check.
+     * @return true/false.
      */
     public boolean checkScore(int score) {
         return getRank(score) <= size();
@@ -164,8 +169,8 @@ public class HighScoresTable implements Serializable {
     /**
      * get ith score.
      *
-     * @param i place in list
-     * @return ith score
+     * @param i index in list.
+     * @return ith score.
      */
     public ScoreInfo get(int i) {
         return scores.get(i);
@@ -183,8 +188,8 @@ public class HighScoresTable implements Serializable {
     /**
      * equals method.
      *
-     * @param o other object
-     * @return true/false
+     * @param o other object.
+     * @return true/false.
      */
     @Override
     public boolean equals(Object o) {
@@ -204,7 +209,7 @@ public class HighScoresTable implements Serializable {
     /**
      * toString method.
      *
-     * @return string representation
+     * @return string representation.
      */
     @Override
     public String toString() {

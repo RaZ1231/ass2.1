@@ -45,28 +45,28 @@ public class Level implements LevelInformation {
     /**
      * paddle speed setter.
      *
-     * @param paddleSpeed new speed
+     * @param aPaddleSpeed new speed
      */
-    public void setPaddleSpeed(int paddleSpeed) {
-        this.paddleSpeed = Math.abs(paddleSpeed);
+    public void setPaddleSpeed(int aPaddleSpeed) {
+        this.paddleSpeed = Math.abs(aPaddleSpeed);
     }
 
     /**
      * paddle width setter.
      *
-     * @param paddleWidth new width
+     * @param aPaddleWidth new width
      */
-    public void setPaddleWidth(int paddleWidth) {
-        this.paddleWidth = Math.abs(paddleWidth);
+    public void setPaddleWidth(int aPaddleWidth) {
+        this.paddleWidth = Math.abs(aPaddleWidth);
     }
 
     /**
      * name setter.
      *
-     * @param name new name
+     * @param aName new name
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String aName) {
+        this.name = aName;
     }
 
     /**
@@ -81,10 +81,10 @@ public class Level implements LevelInformation {
     /**
      * block factory setter.
      *
-     * @param bFSF new block factory
+     * @param aBFSF new block factory
      */
-    public void setbFSF(BlocksFromSymbolsFactory bFSF) {
-        this.bFSF = bFSF;
+    public void setbFSF(BlocksFromSymbolsFactory aBFSF) {
+        this.bFSF = aBFSF;
     }
 
     /**
@@ -99,10 +99,10 @@ public class Level implements LevelInformation {
     /**
      * blocks start x setter.
      *
-     * @param blocksXPos new x
+     * @param blocksXPosition new x
      */
-    public void setBlocksXPos(double blocksXPos) {
-        this.blocksXPos = blocksXPos;
+    public void setBlocksXPos(double blocksXPosition) {
+        this.blocksXPos = blocksXPosition;
     }
 
     /**
@@ -117,10 +117,10 @@ public class Level implements LevelInformation {
     /**
      * blocks start y setter.
      *
-     * @param blocksYPos new y
+     * @param blocksYPosition new y
      */
-    public void setBlocksYPos(double blocksYPos) {
-        this.blocksYPos = blocksYPos;
+    public void setBlocksYPos(double blocksYPosition) {
+        this.blocksYPos = blocksYPosition;
     }
 
     /**
@@ -135,10 +135,10 @@ public class Level implements LevelInformation {
     /**
      * number of blocks setter.
      *
-     * @param numOfBlocks set number of blocks
+     * @param numberOfBlocks set number of blocks
      */
-    public void setNumOfBlocks(int numOfBlocks) {
-        this.numOfBlocks = numOfBlocks;
+    public void setNumOfBlocks(int numberOfBlocks) {
+        this.numOfBlocks = numberOfBlocks;
     }
 
     /**
@@ -153,10 +153,10 @@ public class Level implements LevelInformation {
     /**
      * row height setter.
      *
-     * @param rowHeight new row height
+     * @param rowHeightSize new row height
      */
-    public void setRowHeight(int rowHeight) {
-        this.rowHeight = Math.abs(rowHeight);
+    public void setRowHeight(int rowHeightSize) {
+        this.rowHeight = Math.abs(rowHeightSize);
     }
 
     /**
@@ -171,10 +171,10 @@ public class Level implements LevelInformation {
     /**
      * blocks setter.
      *
-     * @param blocks new blocks
+     * @param blocksList new blocks
      */
-    public void setBlocks(List<GameBlock> blocks) {
-        this.blocks = blocks;
+    public void setBlocks(List<GameBlock> blocksList) {
+        this.blocks = blocksList;
     }
 
     /**
@@ -189,10 +189,10 @@ public class Level implements LevelInformation {
     /**
      * velocities setter.
      *
-     * @param ballVelocities new velocities.
+     * @param ballVelocitiesList new velocities.
      */
-    public void setBallVelocities(List<Velocity> ballVelocities) {
-        this.ballVelocities = ballVelocities;
+    public void setBallVelocities(List<Velocity> ballVelocitiesList) {
+        this.ballVelocities = ballVelocitiesList;
     }
 
     /**
@@ -258,10 +258,10 @@ public class Level implements LevelInformation {
     /**
      * background setter.
      *
-     * @param background new background
+     * @param aBackground new background
      */
-    public void setBackground(Fill background) {
-        this.background = background;
+    public void setBackground(Fill aBackground) {
+        this.background = aBackground;
     }
 
     /**

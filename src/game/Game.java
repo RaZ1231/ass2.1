@@ -9,19 +9,15 @@ import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.Menu;
 import interfaces.Task;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.util.List;
 import levels.LevelSet;
 import levels.LevelSetsReader;
 import scores.HighScoresTable;
 import utils.Counter;
 import utils.SubMenu;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Game class.
@@ -43,15 +39,12 @@ public class Game {
         List<LevelSet> levelSets;
         String path = args.length > 0 ? args[0] : "level_sets.txt"; //check args
 
-        try {
-            levelSets = LevelSetsReader.fromReader(new BufferedReader(new InputStreamReader(new
-                    FileInputStream(path))));
-        } catch (FileNotFoundException e) {
-            levelSets = new LinkedList<>();
-        }
+        levelSets = LevelSetsReader.fromReader(new BufferedReader(
+                new InputStreamReader(ClassLoader.getSystemClassLoader()
+                        .getResourceAsStream(path))));
 
         final List<LevelSet> lSets = levelSets;
-        final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores.ser"));
+        final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores"));
 
         //menu items
         SubMenu sets = new SubMenu("Sets :", gui.getKeyboardSensor());

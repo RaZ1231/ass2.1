@@ -1,10 +1,7 @@
 package levels;
 
 import interfaces.LevelInformation;
-
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
@@ -44,12 +41,9 @@ public class LevelSetsReader {
             String[] split = lines.get(i).split(":");
             List<LevelInformation> levelsList = null;
 
-            try {
-                levelsList = lsr.fromReader(new BufferedReader(new InputStreamReader(
-                        new FileInputStream(lines.get(i + 1)))));
-            } catch (FileNotFoundException e) {
-                System.out.println("Error reading level file");
-            }
+            levelsList = lsr.fromReader(new BufferedReader(
+                    new InputStreamReader(ClassLoader.getSystemClassLoader()
+                            .getResourceAsStream(lines.get(i + 1)))));
 
             sets.add(new LevelSet(split[0], split[1], levelsList));
         }

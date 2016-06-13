@@ -4,8 +4,8 @@ import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Fill;
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.imageio.ImageIO;
 import shapes.Rectangle;
 
@@ -39,11 +39,18 @@ public class FillImage implements Fill {
     public FillImage(String path) {
         this.path = path;
         this.rect = new Rectangle(0, 0, 800, 600);
+        InputStream is = null;
         try {
-            this.img = ImageIO.read(new File(path));
-            ////.close????
+            is = ClassLoader.getSystemClassLoader().getResourceAsStream(path);
+            this.img = ImageIO.read(is);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                System.out.println("failed to close image!");
+            }
         }
     }
 
@@ -90,18 +97,18 @@ public class FillImage implements Fill {
     /**
      * create fill in rectangle size.
      *
-     * @param rect rectangle
-     * @return new fill
+     * @param rectangle rectangle.
+     * @return new fill.
      */
     @Override
-    public Fill create(Rectangle rect) {
-        return new FillImage(getPath(), rect);
+    public Fill create(Rectangle rectangle) {
+        return new FillImage(getPath(), rectangle);
     }
 
     /**
      * path getter.
      *
-     * @return path
+     * @return path.
      */
     public String getPath() {
         return path;
@@ -114,9 +121,8 @@ public class FillImage implements Fill {
      */
     @Override
     public String toString() {
-        return "FillImage{" +
-                "path='" + path + '\'' +
-                ", rect=" + rect +
-                '}';
+        return "FillImage{"
+                + "path='" + path + '\''
+                + ", rect=" + rect + '}';
     }
 }

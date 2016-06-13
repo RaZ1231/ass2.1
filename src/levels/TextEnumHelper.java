@@ -6,18 +6,18 @@ package levels;
  * @author Raziel Solomon
  * @since 09-Jun-16.
  */
-public class TextEnumHelper<T> {
+public class TextEnumHelper {
     /**
      * search enum by text.
      *
-     * @param values enum constants
-     * @param text   search text
-     * @return found enum
+     * @param values enum constants.
+     * @param text   search text.
+     * @return found enum.
      */
-    public T valueOfText(TextEnum[] values, String text) {
+    public TextEnum valueOfText(TextEnum[] values, String text) {
         for (TextEnum value : values) {
             if (text.equals(value.getText()) || text.matches(value.getText())) {
-                return (T) value;
+                return value;
             }
         }
 

@@ -12,6 +12,13 @@ public class CopyRightsS extends BaseSprite {
     private Point pos;
     private int radius;
 
+    /**
+     * constructor.
+     *
+     * @param color  a color
+     * @param pos    position on screen.
+     * @param radius circle's radius.
+     */
     public CopyRightsS(Color color, Point pos, int radius) {
         super(color);
         this.pos = pos;

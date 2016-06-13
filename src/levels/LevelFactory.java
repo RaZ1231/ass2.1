@@ -1,9 +1,8 @@
 package levels;
 
 import interfaces.LevelInformation;
-import utils.Parser;
-
 import java.util.List;
+import utils.Parser;
 
 /**
  * Level factory class.
@@ -23,12 +22,12 @@ public class LevelFactory {
         Parser parser = new Parser();
         String[] split;
         List<String> lines = parser.parseString(s, ".*:.*");
-        TextEnumHelper<LevelSpec> helper = new TextEnumHelper<LevelSpec>();
+        TextEnumHelper helper = new TextEnumHelper();
 
         //set all members of level.
         for (String line : lines) {
             split = parser.getString(line, "\\w*:.*").split(":");
-            LevelSpec spec = helper.valueOfText(LevelSpec.values(), split[0]);
+            LevelSpec spec = (LevelSpec) helper.valueOfText(LevelSpec.values(), split[0]);
             spec.setLevel(level, split[1]);
         }
 

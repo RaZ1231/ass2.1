@@ -1,14 +1,13 @@
 package levels;
 
 import interfaces.BlockCreator;
-import utils.Parser;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import utils.Parser;
 
 /**
  * Blocks definition reader class.
@@ -72,6 +71,7 @@ public class BlocksDefinitionReader {
             bFSF.setBlockCreators(blockCreators);
 
         } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return bFSF;
@@ -87,7 +87,7 @@ public class BlocksDefinitionReader {
     private static BlockCreator getBlockCreator(List<String> specifics, ContainerBlock defaultCB) {
         Parser parser = new Parser();
         String[] split;
-        TextEnumHelper<BlockSpec> helper = new TextEnumHelper<BlockSpec>();
+        TextEnumHelper helper = new TextEnumHelper();
 
         for (String specific : specifics) {
             split = parser.getString(specific, "\\w*:[\\S]*").split(":");
@@ -97,7 +97,7 @@ public class BlocksDefinitionReader {
                 defaultCB.putFillK(k, FillParser.fromString(
                         split[1].substring(6, split[1].length() - 1)));
             } else {
-                BlockSpec spec = helper.valueOfText(BlockSpec.values(), split[0]);
+                BlockSpec spec = (BlockSpec) helper.valueOfText(BlockSpec.values(), split[0]);
                 spec.setBlock(defaultCB, split[1]);
             }
         }

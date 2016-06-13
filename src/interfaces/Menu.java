@@ -2,6 +2,7 @@ package interfaces;
 
 /**
  * Interface of a game menu.
+ * @param <T> a screen.
  *
  * @author Raziel Solomon
  * @since 03-Jun-16.

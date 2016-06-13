@@ -2,7 +2,6 @@ package levels;
 
 import blocks.Block;
 import interfaces.BlockCreator;
-
 import java.util.Map;
 
 /**
@@ -18,19 +17,19 @@ public class BlocksFromSymbolsFactory {
     /**
      * spacers setter.
      *
-     * @param spacerWidths new spacers
+     * @param aSpacerWidths new spacers
      */
-    public void setSpacerWidths(Map<String, Integer> spacerWidths) {
-        this.spacerWidths = spacerWidths;
+    public void setSpacerWidths(Map<String, Integer> aSpacerWidths) {
+        this.spacerWidths = aSpacerWidths;
     }
 
     /**
      * creators setter.
      *
-     * @param blockCreators new creators
+     * @param aBlockCreators new creators
      */
-    public void setBlockCreators(Map<String, BlockCreator> blockCreators) {
-        this.blockCreators = blockCreators;
+    public void setBlockCreators(Map<String, BlockCreator> aBlockCreators) {
+        this.blockCreators = aBlockCreators;
     }
 
     /**

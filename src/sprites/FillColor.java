@@ -3,9 +3,8 @@ package sprites;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Fill;
-import shapes.Rectangle;
-
 import java.awt.Color;
+import shapes.Rectangle;
 
 /**
  * Fill color class.
@@ -63,7 +62,7 @@ public class FillColor extends BaseSprite implements Fill {
     /**
      * rectangle getter.
      *
-     * @return rectangle
+     * @return rectangle.
      */
     public Rectangle getRect() {
         return rect;
@@ -72,24 +71,23 @@ public class FillColor extends BaseSprite implements Fill {
     /**
      * create fill in rectangle size.
      *
-     * @param rect rectangle
-     * @return new fill
+     * @param rectangle rectangle.
+     * @return new fill.
      */
     @Override
-    public Fill create(Rectangle rect) {
-        return new FillColor(getColor(), rect);
+    public Fill create(Rectangle rectangle) {
+        return new FillColor(getColor(), rectangle);
     }
 
     /**
      * toString method.
      *
-     * @return string representation
+     * @return string representation.
      */
     @Override
     public String toString() {
-        return "FillColor{" +
-                "color=" + getColor() +
-                "rect=" + rect +
-                '}';
+        return "FillColor{"
+                + "color=" + getColor()
+                + "rect=" + rect + '}';
     }
 }

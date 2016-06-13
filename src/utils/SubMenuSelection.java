@@ -6,6 +6,7 @@ import interfaces.MenuOption;
 /**
  * Sub menu option class.
  *
+ * @param <T> an option.
  * @author Raziel Solomon
  * @since 11-Jun-16.
  */

@@ -3,7 +3,6 @@ package indicators;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Sprite;
-
 import java.awt.Color;
 
 /**
@@ -27,7 +26,8 @@ public class RectIndicator implements Sprite {
 
     /**
      * notify the sprite that time has passed.
-     * @param dt
+     *
+     * @param dt amount of seconds passed since the last call.
      */
     @Override
     public void timePassed(double dt) {

@@ -1,9 +1,8 @@
 package sprites;
 
 import biuoop.DrawSurface;
-import shapes.Point;
-
 import java.awt.Color;
+import shapes.Point;
 
 /**
  * @author Raziel Solomon
@@ -17,6 +16,17 @@ public class MenuItem extends BaseSprite {
     private Color textColor;
     private String text;
 
+    /**
+     * constructor.
+     *
+     * @param corner    a point.
+     * @param color     a color.
+     * @param back      a background.
+     * @param width     a width.
+     * @param height    a height.
+     * @param textColor text's color.
+     * @param text      menu's item text.
+     */
     public MenuItem(Point corner, Color color, Color back, int width, int height, Color textColor, String text) {
         super(color);
         this.corner = corner;

@@ -4,11 +4,10 @@ import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Fill;
 import interfaces.GameBlock;
-import shapes.Rectangle;
-
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+import shapes.Rectangle;
 
 /**
  * Block representation.
@@ -26,6 +25,7 @@ public class Block extends BaseBlock implements GameBlock {
      * @param rect       a rectangle.
      * @param fill       a filling.
      * @param hitCounter hits counter. 'null' if none.
+     * @param stroke     a color.
      */
     public Block(Rectangle rect, Fill fill, Color stroke, int hitCounter) {
         this(rect, fill, new HashMap<Integer, Fill>(), stroke, hitCounter);
@@ -33,10 +33,11 @@ public class Block extends BaseBlock implements GameBlock {
 
     /**
      * constructor.
-     * @param rect a rectangle
-     * @param fill a filling
-     * @param fillK fill-k map
-     * @param stroke stroke color
+     *
+     * @param rect       a rectangle
+     * @param fill       a filling
+     * @param fillK      fill-k map
+     * @param stroke     stroke color
      * @param hitCounter hit counter
      */
     public Block(Rectangle rect, Fill fill, Map<Integer, Fill> fillK, Color stroke, int hitCounter) {
@@ -123,10 +124,21 @@ public class Block extends BaseBlock implements GameBlock {
         }
     }
 
+    /**
+     * returns a map of fill objects matched to hit points.
+     *
+     * @return a map of fill objects matched to hit points.
+     */
     public Map<Integer, Fill> getFillK() {
         return fillK;
     }
 
+    /**
+     * add an object to the map of fill-hit points.
+     *
+     * @param k    hit points
+     * @param fill a fill object.
+     */
     public void putFillK(int k, Fill fill) {
         fillK.put(k, fill);
     }
