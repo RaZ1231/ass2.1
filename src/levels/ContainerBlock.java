@@ -2,11 +2,10 @@ package levels;
 
 import blocks.Block;
 import interfaces.Fill;
-import sprites.FillColor;
-
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+import sprites.FillColor;
 
 /**
  * Class to contain block info.
@@ -130,7 +129,7 @@ public class ContainerBlock {
      * @param hits New value of hits.
      */
     public void setHits(int hits) {
-        this.hits = hits;
+        this.hits = Math.abs(hits);
     }
 
     /**
@@ -166,7 +165,7 @@ public class ContainerBlock {
      * @param width New value of width.
      */
     public void setWidth(double width) {
-        this.width = width;
+        this.width = Math.abs(width);
     }
 
     /**
@@ -202,7 +201,7 @@ public class ContainerBlock {
      * @param height New value of height.
      */
     public void setHeight(double height) {
-        this.height = height;
+        this.height = Math.abs(height);
     }
 
     /**

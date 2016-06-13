@@ -1,0 +1,11 @@
+# default values for blocks
+default height:30
+
+# block definitions
+bdef symbol:g width:100 hit_points:2 fill:image(block_images/g_message.png)
+bdef symbol:w width:100 hit_points:2 fill:image(block_images/w_message.png)
+bdef symbol:i width:200 height:130 hit_points:2 fill:image(block_images/i_message.png)
+
+# spacers definitions
+sdef symbol:- width:80
+

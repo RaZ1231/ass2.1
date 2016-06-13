@@ -3,9 +3,8 @@ package levels;
 import interfaces.Fill;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
-import motion.Velocity;
-
 import java.util.List;
+import motion.Velocity;
 
 /**
  * Level class.
@@ -49,7 +48,7 @@ public class Level implements LevelInformation {
      * @param paddleSpeed new speed
      */
     public void setPaddleSpeed(int paddleSpeed) {
-        this.paddleSpeed = paddleSpeed;
+        this.paddleSpeed = Math.abs(paddleSpeed);
     }
 
     /**
@@ -58,7 +57,7 @@ public class Level implements LevelInformation {
      * @param paddleWidth new width
      */
     public void setPaddleWidth(int paddleWidth) {
-        this.paddleWidth = paddleWidth;
+        this.paddleWidth = Math.abs(paddleWidth);
     }
 
     /**
@@ -157,7 +156,7 @@ public class Level implements LevelInformation {
      * @param rowHeight new row height
      */
     public void setRowHeight(int rowHeight) {
-        this.rowHeight = rowHeight;
+        this.rowHeight = Math.abs(rowHeight);
     }
 
     /**

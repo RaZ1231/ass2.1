@@ -3,12 +3,11 @@ package sprites;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Fill;
-import shapes.Rectangle;
-
-import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+import shapes.Rectangle;
 
 /**
  * Fill image class.
@@ -42,6 +41,7 @@ public class FillImage implements Fill {
         this.rect = new Rectangle(0, 0, 800, 600);
         try {
             this.img = ImageIO.read(new File(path));
+            ////.close????
         } catch (IOException e) {
             e.printStackTrace();
         }
