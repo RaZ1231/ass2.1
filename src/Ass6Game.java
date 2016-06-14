@@ -1,4 +1,4 @@
-package game;
+import game.Game;
 
 /**
  * Game entry point.

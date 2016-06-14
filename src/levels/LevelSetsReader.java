@@ -34,6 +34,12 @@ public class LevelSetsReader {
             }
         } catch (IOException e) {
             System.out.println("Error reading level sets file");
+        } finally {
+            try {
+                reader.close();
+            } catch (IOException e) {
+                System.out.println("Error closing file!");
+            }
         }
 
         //creating sets
