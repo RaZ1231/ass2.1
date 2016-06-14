@@ -84,7 +84,7 @@ public class GameFlow {
             nhs.showDialog();
             highScores.add(new ScoreInfo(nhs.getpName(), score.getValue()));
             try {
-                highScores.save(new File("highscores.ser"));
+                highScores.save(new File("highscores"));
             } catch (IOException ignored) {
                 System.out.println("Couldn't save high scores.");
             }

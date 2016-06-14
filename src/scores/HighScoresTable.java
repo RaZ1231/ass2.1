@@ -48,7 +48,7 @@ public class HighScoresTable implements Serializable {
             try {
                 highScores.save(filename);
             } catch (IOException e1) {
-                e1.printStackTrace();
+                System.out.println("problem saving scores!");
             }
         }
 
@@ -68,7 +68,7 @@ public class HighScoresTable implements Serializable {
             try {
                 scores = (List<ScoreInfo>) objectInputStream.readObject();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("problem loading scores!");
             }
         } catch (ClassNotFoundException e) {
             scores = new LinkedList<ScoreInfo>();
