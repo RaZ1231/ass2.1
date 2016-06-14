@@ -1,10 +1,11 @@
 package listeners;
 
 import animations.GameLevel;
-import blocks.Block;
-import interfaces.GameBlock;
+import interfaces.Collidable;
 import interfaces.HitListener;
 import shapes.Ball;
+import spaceinvaders.Invader;
+import spaceinvaders.SpaceShipShot;
 import utils.Counter;
 
 /**
@@ -33,13 +34,11 @@ public class ScoreTrackingListener implements HitListener {
      * The hitter parameter is the Ball that's doing the hitting.
      *
      * @param beingHit the block that got hit.
-     * @param hitter the hitting ball.
+     * @param hitter   the hitting ball.
      */
-    public void hitEvent(GameBlock beingHit, Ball hitter) {
-        if (((Block) beingHit).getHitPoints() == 0) {
-            currentScore.increase(10);
-        } else {
-            currentScore.increase(5);
+    public void hitEvent(Collidable beingHit, Ball hitter) {
+        if (beingHit instanceof Invader && hitter instanceof SpaceShipShot) {
+            currentScore.increase(100);
         }
     }
 }

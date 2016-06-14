@@ -1,7 +1,6 @@
 package listeners;
 
-import blocks.Block;
-import interfaces.GameBlock;
+import interfaces.Collidable;
 import interfaces.HitListener;
 import shapes.Ball;
 
@@ -18,7 +17,8 @@ public class PrintingHitListener implements HitListener {
      * @param beingHit the block that got hit.
      * @param hitter   the hitting ball.
      */
-    public void hitEvent(GameBlock beingHit, Ball hitter) {
-        System.out.println("A Block with " + ((Block) beingHit).getHitPoints() + " points was hit.");
+    @Override
+    public void hitEvent(Collidable beingHit, Ball hitter) {
+        System.out.println("Invader hit");
     }
 }

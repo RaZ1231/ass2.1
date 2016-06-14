@@ -16,5 +16,5 @@ public interface HitListener {
      * @param beingHit the block that got hit.
      * @param hitter   the hitting ball.
      */
-    void hitEvent(GameBlock beingHit, Ball hitter);
+    void hitEvent(Collidable beingHit, Ball hitter);
 }

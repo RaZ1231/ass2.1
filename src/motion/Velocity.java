@@ -24,6 +24,10 @@ public class Velocity {
         this.dy = dy;
     }
 
+    public static Velocity vLeft(double speed) {
+        return Velocity.fromAngleAndSpeed(270, speed);
+    }
+
     /**
      * Turns angle and speed to new velocity.
      *
@@ -38,6 +42,10 @@ public class Velocity {
         double dy = speed * Math.cos(Math.toRadians(angle)) * (-1);
 
         return new Velocity(dx, dy);
+    }
+
+    public static Velocity vRight(double speed) {
+        return Velocity.fromAngleAndSpeed(90, speed);
     }
 
     /**

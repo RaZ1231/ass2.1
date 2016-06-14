@@ -66,5 +66,4 @@ public class GameEnvironment {
 
         return new CollisionInfo(closestPoint, collidable);
     }
-
 }

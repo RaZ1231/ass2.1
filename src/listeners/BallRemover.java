@@ -1,7 +1,7 @@
 package listeners;
 
 import animations.GameLevel;
-import interfaces.GameBlock;
+import interfaces.Collidable;
 import interfaces.HitListener;
 import shapes.Ball;
 import utils.Counter;
@@ -35,7 +35,7 @@ public class BallRemover implements HitListener {
      * @param hitter   the hitting ball.
      */
     @Override
-    public void hitEvent(GameBlock beingHit, Ball hitter) {
+    public void hitEvent(Collidable beingHit, Ball hitter) {
         hitter.removeFromGame(gameLevel);
         removedBalls.decrease(1);
     }

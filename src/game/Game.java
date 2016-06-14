@@ -9,15 +9,15 @@ import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.Menu;
 import interfaces.Task;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.util.List;
 import levels.LevelSet;
 import levels.LevelSetsReader;
 import scores.HighScoresTable;
 import utils.Counter;
-import utils.SubMenu;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Game class.
@@ -47,20 +47,14 @@ public class Game {
         final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores"));
 
         //menu items
-        SubMenu sets = new SubMenu("Sets :", gui.getKeyboardSensor());
-
-        for (final LevelSet set : lSets) {
-            sets.addSelection(set.getKey(), set.getName(), new Task<Void>() {
-                @Override
-                public Void run() {
-                    GameFlow gF = new GameFlow(runner, gui, new Counter(7), highScores);
-                    gF.runLevels(set.getLevels());
-                    return null;
-                }
-            });
-        }
-
-        menu.addSubMenu("s", "Start", sets);
+        menu.addSelection("s", "Start", new Task<Void>() {
+            @Override
+            public Void run() {
+                GameFlow gF = new GameFlow(runner, gui, new Counter(3), highScores);
+                gF.runLevels(SOME LEVEL);
+                return null;
+            }
+        });
 
         menu.addSelection("h", "High Scores", new Task<Void>() {
             @Override

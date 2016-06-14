@@ -4,17 +4,16 @@ import animations.GameLevel;
 import animations.GameOver;
 import animations.HighScoresAnimation;
 import animations.KeyPressStoppableAnimation;
-import animations.YouWin;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import interfaces.LevelInformation;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 import scores.HighScoresTable;
 import scores.NewHighScore;
 import scores.ScoreInfo;
 import utils.Counter;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Class responsible for ordering animations.
@@ -46,14 +45,13 @@ public class GameFlow {
     /**
      * running levels one by one according to initialized order.
      *
-     * @param levels list f levels.
+     * @param levelInfo level information.
      */
-    public void runLevels(List<LevelInformation> levels) {
+    public void runLevels(LevelInformation levelInfo) {
         boolean hasLost = false;
         Counter score = new Counter(0);
 
-        for (LevelInformation levelInfo : levels) {
-
+        while (!hasLost) {
             //levels
             GameLevel level = new GameLevel(levelInfo, runner, gui, lives, score);
 
@@ -70,13 +68,9 @@ public class GameFlow {
         }
 
         //end game screen
-        if (hasLost) {
-            this.runner.run(new KeyPressStoppableAnimation(
-                    gui.getKeyboardSensor(), KeyboardSensor.SPACE_KEY, new GameOver(score)));
-        } else {
-            this.runner.run(new KeyPressStoppableAnimation(
-                    gui.getKeyboardSensor(), KeyboardSensor.SPACE_KEY, new YouWin(score)));
-        }
+        this.runner.run(new KeyPressStoppableAnimation(
+                gui.getKeyboardSensor(), KeyboardSensor.SPACE_KEY, new GameOver(score)));
+
 
         //new high score
         if (highScores.checkScore(score.getValue())) {
