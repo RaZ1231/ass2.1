@@ -14,7 +14,7 @@ public class Acceleration {
     }
 
     public void accelBy(int percent) {
-        v = Velocity.fromAngleAndSpeed(v.getAngle(), v.getSpeed() * percent / 100);
+        v = Velocity.fromAngleAndSpeed(v.getAngle(), v.getSpeed() * (percent + 100) / 100);
     }
 
     public Velocity getV() {

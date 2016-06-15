@@ -1,10 +1,9 @@
 package spaceinvaders;
 
 import collisions.GameEnvironment;
+import java.awt.Color;
 import shapes.Ball;
 import shapes.Point;
-
-import java.awt.Color;
 
 /**
  * @author Raziel Solomon
@@ -15,11 +14,9 @@ public class InvaderShot extends Ball {
      * constructor.
      *
      * @param center          center point.
-     * @param radius          ball size.
-     * @param color           ball color.
      * @param gameEnvironment game environment.
      */
-    public InvaderShot(Point center, int radius, Color color, GameEnvironment gameEnvironment) {
-        super(center, radius, color, gameEnvironment);
+    public InvaderShot(Point center, GameEnvironment gameEnvironment) {
+        super(center, 3, Color.green, gameEnvironment);
     }
 }

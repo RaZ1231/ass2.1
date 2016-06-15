@@ -5,15 +5,14 @@ import biuoop.DrawSurface;
 import interfaces.Collidable;
 import interfaces.HitListener;
 import interfaces.Sprite;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Point;
 import shapes.Rectangle;
 import sprites.FillImage;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author Raziel Solomon
@@ -143,6 +142,14 @@ public class Invader implements Sprite, Collidable {
     public void removeFromGame(GameLevel gameLevel) {
         gameLevel.removeCollidable(this);
         gameLevel.removeSprite(this);
+    }
+
+    public void shoot(GameLevel g) {
+        InvaderShot s = new InvaderShot(
+                new Point(getUpperLeft().getX() + getWidth() / 2, getUpperLeft().getY() + getHeight()),
+                g.getEnvironment());
+        s.setVelocity(Velocity.vDown(200));
+        s.addToGame(g);
     }
 
     public boolean isLowerThan(Invader invader) {

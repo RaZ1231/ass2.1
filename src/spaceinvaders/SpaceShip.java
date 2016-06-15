@@ -1,32 +1,36 @@
-package collisions;
+package spaceinvaders;
 
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import interfaces.Collidable;
+import interfaces.Fill;
+import interfaces.HitListener;
 import interfaces.Sprite;
-import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
-import utils.Mathematics;
 
 /**
- * Paddle representation.
+ * SpaceShip representation.
  *
  * @author Elisheva Broyer.
  * @since 31/03/2016.
  */
-public class Paddle implements Sprite, Collidable {
-    public static final int[] ANGLES = {-60, -30, 0, 30, 60};
-
+public class SpaceShip implements Sprite, Collidable {
     private Rectangle rect;
     private KeyboardSensor keyboard;
     private double leftBorder;
     private double rightBorder;
     private int step;
+    private Fill fill;
+    private GameLevel gameLevel;
+    private Timer time;
+    private List<HitListener> hitListeners;
 
     /**
      * constructor.
@@ -37,13 +41,20 @@ public class Paddle implements Sprite, Collidable {
      * @param rightBorder game environment's right border.
      * @param step        speed.
      */
-    public Paddle(Rectangle rect, KeyboardSensor keyboard,
-                  double leftBorder, double rightBorder, int step) {
+    public SpaceShip(Rectangle rect, KeyboardSensor keyboard, double leftBorder, double rightBorder,
+                     int step, Fill fill) {
         this.rect = rect;
         this.keyboard = keyboard;
         this.leftBorder = leftBorder;
         this.rightBorder = rightBorder;
         this.step = step;
+        this.fill = fill.create(rect);
+        this.time = new Timer(0);
+        this.hitListeners = new ArrayList<>();
+    }
+
+    public List<HitListener> getHitListeners() {
+        return hitListeners;
     }
 
     /**
@@ -52,24 +63,24 @@ public class Paddle implements Sprite, Collidable {
      * @param d draw surface.
      */
     public void drawOn(DrawSurface d) {
-        d.setColor(Color.YELLOW);
-        d.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
-        d.setColor(Color.BLACK);
-        d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
+        fill.drawOn(d);
     }
 
     /**
      * check if the "left" or "right" keys are pressed, and if so move it accordingly.
+     * "space" means shoot.
      *
      * @param dt seconds passed.
      */
     public void timePassed(double dt) {
+        time.timePassed(dt);
+
         if (keyboard.isPressed(KeyboardSensor.LEFT_KEY)) {
             this.moveLeft(dt);
         } else if (keyboard.isPressed(KeyboardSensor.RIGHT_KEY)) {
             this.moveRight(dt);
+        } else if (keyboard.isPressed(KeyboardSensor.SPACE_KEY)) {
+            this.shoot();
         }
     }
 
@@ -99,12 +110,27 @@ public class Paddle implements Sprite, Collidable {
         }
     }
 
+    public void shoot() {
+        if (time.hasPassed()) {
+            SpaceShipShot s = new SpaceShipShot(getCenter(), gameLevel.getEnvironment());
+            s.setVelocity(Velocity.vUp(250));
+            s.addToGame(gameLevel);
+            time = new Timer(0.35);
+        }
+    }
+
+    public Point getCenter() {
+        return new Point(rect.getUpperLeft().getX() + rect.getWidth() / 2,
+                rect.getUpperLeft().getY());
+    }
+
     /**
      * Add this paddle to the game.
      *
      * @param g a game.
      */
     public void addToGame(GameLevel g) {
+        this.gameLevel = g;
         g.addCollidable(this);
         g.addSprite(this);
     }
@@ -119,7 +145,7 @@ public class Paddle implements Sprite, Collidable {
     }
 
     /**
-     * returns the new velocity expected after hit the paddle.
+     * returns the new velocity expected after hit.
      *
      * @param hitter          ball of collision.
      * @param collisionPoint  the collision point.
@@ -127,44 +153,22 @@ public class Paddle implements Sprite, Collidable {
      * @return the new velocity expected after the hit.
      */
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
+        this.notifyHit(hitter);
+
         Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
-        if (lNorth.isInline(collisionPoint)) { //hit upper bound
-            double[] regions = getFiveRegions();
-            double speed = Mathematics.pythagoras(currentVelocity.getDx(), currentVelocity.getDy());
-
-            return Velocity.fromAngleAndSpeed(ANGLES[getRegion(collisionPoint.getX(), regions)], speed);
+        if (lNorth.isInline(collisionPoint)) { // hit upper bound.
+            // hurt so dead.
         }
-        return new Velocity(-1 * currentVelocity.getDx(), currentVelocity.getDy()); //hit sides
+        return currentVelocity; // meanless.
     }
 
-    /**
-     * returns an array of the five regions of the paddle.
-     *
-     * @return an array of the five regions of the paddle.
-     */
-    public double[] getFiveRegions() {
-        double[] regions = new double[5];
-
-        for (int i = 0; i < 5; i++) {
-            regions[i] = rect.getUpperLeft().getX() + i * rect.getWidth() / 5;
+    private void notifyHit(Ball hitter) {
+        // Make a copy of the hitListeners before iterating over them.
+        List<HitListener> listeners = new ArrayList<HitListener>(this.getHitListeners());
+        // Notify all listeners about a hit event:
+        for (HitListener hl : listeners) {
+            hl.hitEvent(this, hitter);
         }
-        return regions;
-    }
-
-    /**
-     * returns the region in line in which x is.
-     *
-     * @param x       an x-axis value.
-     * @param regions an array of 5 regions of line.
-     * @return the region in line in which x is.
-     */
-    public int getRegion(double x, double[] regions) {
-        for (int i = 0; i < 4; i++) {
-            if (Mathematics.isBetween(regions[i], x, regions[i + 1])) {
-                return i;
-            }
-        }
-        return 4;
     }
 
     /**

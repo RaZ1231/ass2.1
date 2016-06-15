@@ -4,7 +4,6 @@ import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.HitListener;
 import interfaces.Sprite;
-
 import java.util.List;
 
 /**
@@ -16,12 +15,15 @@ public class Formation implements Sprite {
     private Acceleration a;
     private int width;
     private int height;
+    private Timer time;
+    private GameLevel gameLevel;
 
     public Formation(List<Invader> invaders, Acceleration a, int width, int height) {
         this.a = a;
         this.invaders = invaders;
         this.width = width;
         this.height = height;
+        this.time = new Timer(0);
     }
 
     /**
@@ -43,6 +45,8 @@ public class Formation implements Sprite {
      */
     @Override
     public void timePassed(double dt) {
+        time.timePassed(dt);
+
         Invader leftest = getMostPos(new PositionCmp() {
             @Override
             public boolean compare(Invader i1, Invader i2) {
@@ -91,6 +95,17 @@ public class Formation implements Sprite {
         }
     }
 
+    public void shoot() {
+        if (time.hasPassed()) {
+            getShooter().shoot(gameLevel);
+            time = new Timer(0.5);
+        }
+    }
+
+    private Invader getShooter() {
+
+    }
+
     /**
      * add object to gameLevel.
      *
@@ -103,13 +118,15 @@ public class Formation implements Sprite {
         for (Invader invader : invaders) {
             gameLevel.addCollidable(invader);
         }
+
+        this.gameLevel = gameLevel;
     }
 
     public Invader getLowest() {
         return getMostPos(new PositionCmp() {
             @Override
             public boolean compare(Invader i1, Invader i2) {
-                return i1.isLefterThan(i2);
+                return i1.isLowerThan(i2);
             }
         });
     }
