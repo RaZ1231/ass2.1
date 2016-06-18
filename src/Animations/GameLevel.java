@@ -3,9 +3,7 @@ package animations;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
-import blocks.Borders;
 import collisions.GameEnvironment;
-import collisions.SpaceShip;
 import graphics.AnimationRunner;
 import graphics.SpriteCollection;
 import indicators.LevelIndicator;
@@ -14,18 +12,24 @@ import indicators.RectIndicator;
 import indicators.ScoreIndicator;
 import interfaces.Animation;
 import interfaces.Collidable;
-import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
-import listeners.BallRemover;
+import listeners.InvaderRemover;
+import listeners.LifeRemover;
 import listeners.ScoreTrackingListener;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Rectangle;
+import spaceinvaders.Acceleration;
+import spaceinvaders.Formation;
+import spaceinvaders.Shot;
+import spaceinvaders.SpaceShip;
+import sprites.FillColor;
 import utils.Counter;
+
+import java.awt.Color;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * a game level class.
@@ -34,18 +38,19 @@ import utils.Counter;
  * @since 30-Mar-16.
  */
 public class GameLevel implements Animation {
+    private static int levelNum = 0;
     private int width;
     private int height;
 
     private SpriteCollection sprites;
     private GameEnvironment environment;
     private GUI gui;
-    private Counter blocksCounter;
+    private Counter invadersCounter;
     private Counter ballsCounter;
     private Counter score;
     private Counter lives;
     private SpaceShip spaceShip;
-    private List<GameBlock> borders;
+    private Formation formation;
     private AnimationRunner runner;
     private boolean running;
     private LevelInformation level;
@@ -59,8 +64,7 @@ public class GameLevel implements Animation {
      * @param lives  lives counter.
      * @param score  scores counter.
      */
-    public GameLevel(LevelInformation gLevel, AnimationRunner runner, GUI gui, Counter lives,
-                     Counter score) {
+    public GameLevel(LevelInformation gLevel, AnimationRunner runner, GUI gui, Counter lives, Counter score) {
         level = gLevel;
         this.score = score;
         this.lives = lives;
@@ -73,12 +77,12 @@ public class GameLevel implements Animation {
     }
 
     /**
-     * returns level's number of blocks.
+     * returns level's number of invaders.
      *
-     * @return level's number of blocks.
+     * @return level's number of invaders.
      */
-    public Counter getBlocksCounter() {
-        return blocksCounter;
+    public Counter getInvadersCounter() {
+        return invadersCounter;
     }
 
     /**
@@ -88,15 +92,6 @@ public class GameLevel implements Animation {
      */
     public Counter getLives() {
         return lives;
-    }
-
-    /**
-     * returns game's borders.
-     *
-     * @return game's borders.
-     */
-    public List<GameBlock> getBorders() {
-        return borders;
     }
 
     /**
@@ -141,27 +136,32 @@ public class GameLevel implements Animation {
      * Also draws the level's background.
      */
     public void initialize() {
+        levelNum++;
         width = gui.getDrawSurface().getWidth();
         height = gui.getDrawSurface().getHeight();
 
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
-        borders = new LinkedList<>();
-        borders.addAll(Borders.getBorders(width, height, 15));
-
-        spaceShip = new SpaceShip(new Rectangle(width / 2 - 50, height - 35, level.paddleWidth(), 20),
-                gui.getKeyboardSensor(), 15, width - 15, 0, null); // add speed, fill.
-        List<GameBlock> blocks = level.blocks();
-        blocksCounter = new Counter(level.numberOfBlocksToRemove());
+        spaceShip = new SpaceShip(new Rectangle(width / 2 - 50, height - 35,
+                level.paddleWidth(), 20), gui.getKeyboardSensor(), 15, width - 15,
+                250, new FillColor(Color.blue)); // add speed, fill.
+        formation = new Formation(level.invaders(),
+                new Acceleration(new Velocity(levelNum * 30, 0)), 800, 530);
+        invadersCounter = new Counter(formation.getInvaders().size());
         ballsCounter = new Counter(0);
 
-        //BlockRemover blockRemover = new BlockRemover(this, blocksCounter);
-        BallRemover ballRemover = new BallRemover(this, ballsCounter);
-        ScoreTrackingListener scoreTrackingListener = new ScoreTrackingListener(this, score);
         RectIndicator rectIndicator = new RectIndicator();
         ScoreIndicator scoreIndicator = new ScoreIndicator(score);
         LivesIndicator livesIndicator = new LivesIndicator(lives);
-        LevelIndicator levelIndicator = new LevelIndicator(level);
+        LevelIndicator levelIndicator = new LevelIndicator(level.levelName() + levelNum);
+
+        InvaderRemover invaderRemover = new InvaderRemover(this, invadersCounter);
+        LifeRemover lifeRemover = new LifeRemover(this, lives);
+        ScoreTrackingListener scoreTrackingListener = new ScoreTrackingListener(this, score);
+
+        formation.addHitListener(invaderRemover);
+        formation.addHitListener(scoreTrackingListener);
+        spaceShip.addHitListener(lifeRemover);
 
         //PrintingHitListener phl = new PrintingHitListener();
         level.getBackground().addToGame(this);
@@ -170,19 +170,22 @@ public class GameLevel implements Animation {
         scoreIndicator.addToGame(this);
         livesIndicator.addToGame(this);
         levelIndicator.addToGame(this);
+        formation.addToGame(this);
 
-        for (GameBlock block : blocks) {
-            //block.addHitListener(blockRemover);
+        /*
+        for (GameBlock block : invaders) {
+            block.addHitListener(blockRemover);
             block.addHitListener(scoreTrackingListener);
-            //block.addHitListener(phl);
+            block.addHitListener(phl);
         }
 
-        borders.get(3).addHitListener(ballRemover);
-        blocks.addAll(borders);
+        borders.get(3).addHitListener(lifeRemover);
+        invaders.addAll(borders);
 
         for (GameBlock block : blocks) {
             block.addToGame(this);
         }
+        */
     }
 
     /**
@@ -202,7 +205,16 @@ public class GameLevel implements Animation {
      */
     private void respawn() {
         spaceShip.center(width);
-        initBalls();
+        formation.reset();
+        removeShots();
+    }
+
+    private void removeShots() {
+        for (Sprite s : sprites.copy().getSprites()) {
+            if (s instanceof Shot) {
+                ((Shot) s).removeFromGame(this);
+            }
+        }
     }
 
     /**
@@ -233,24 +245,32 @@ public class GameLevel implements Animation {
     public void doOneFrame(DrawSurface d, double dt) {
         this.sprites.drawAllOn(d);
         this.sprites.notifyAllTimePassed(dt);
+        this.formation.timePassed(dt);
 
-        if (blocksCounter.getValue() == 0) {
+        if (invadersCounter.getValue() == 0) {
             score.increase(100);
             running = false;
         }
-        if (ballsCounter.getValue() == 0) {
+        if (formation.size() > 0 && formation.getLowest().getY() >= 400) {
             lives.decrease(1);
             running = false;
+
+            if (lives.getValue() == 0) {
+                initLevelNumber();
+            }
         }
         if (gui.getKeyboardSensor().isPressed("p")) {
             this.runner.run(new KeyPressStoppableAnimation(
                     gui.getKeyboardSensor(), KeyboardSensor.SPACE_KEY, new PauseScreen()));
         }
-        /*
+
+
         //cheats
         if (gui.getKeyboardSensor().isPressed("z")) { // next level.
-            blocksCounter = new Counter(0);
+            invadersCounter = new Counter(0);
         }
+
+        /*
         if (gui.getKeyboardSensor().isPressed("a")) { // die.
             ballsCounter = new Counter(0);
         }
@@ -264,5 +284,13 @@ public class GameLevel implements Animation {
      */
     public boolean shouldStop() {
         return !this.running;
+    }
+
+    public void initLevelNumber() {
+        levelNum = 0;
+    }
+
+    public void stop() {
+        running = false;
     }
 }
