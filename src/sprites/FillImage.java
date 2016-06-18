@@ -3,11 +3,13 @@ package sprites;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Fill;
+import shapes.Point;
+import shapes.Rectangle;
+
+import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.imageio.ImageIO;
-import shapes.Rectangle;
 
 /**
  * Fill image class.
@@ -103,6 +105,16 @@ public class FillImage implements Fill {
     @Override
     public Fill create(Rectangle rectangle) {
         return new FillImage(getPath(), rectangle);
+    }
+
+    /**
+     * point setter.
+     *
+     * @param point new point
+     */
+    @Override
+    public void setPoint(Point point) {
+        rect.setUpperLeft(point);
     }
 
     /**

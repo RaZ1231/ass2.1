@@ -125,13 +125,14 @@ public class Ball implements Sprite {
      */
     @Override
     public void timePassed(double dt) {
-        Velocity relativeV = Velocity.fromAngleAndSpeed(getVelocity().getAngle(), dt * getVelocity().getSpeed());
+        Velocity relativeV = Velocity.fromAngleAndSpeed(
+                getVelocity().getAngle(), dt * getVelocity().getSpeed());
 
         Point applyPoint = relativeV.applyToPoint(this.center); // next position.
-        Line trajectory = new Line(this.center, applyPoint); // line to next position.
+        Line trajectory = new Line(this.center.round(), applyPoint.round()); // line to next position.
         CollisionInfo info = this.gameEnvironment.getClosestCollision(trajectory); // is there an object it
         if (info.getCollisionObject() != null) { // there is collision.
-            this.setVelocity(info.getCollisionObject().hit(this, info.getCollisionPoint(), this.velocity));
+            info.getCollisionObject().hit(this, info.getCollisionPoint(), getVelocity());
         } else { // there isn't.
             this.center = relativeV.applyToPoint(this.center);
         }
@@ -181,5 +182,9 @@ public class Ball implements Sprite {
      */
     public void removeFromGame(GameLevel gameLevel) {
         gameLevel.removeSprite(this);
+    }
+
+    public boolean isInvaderShot() {
+        return false;
     }
 }

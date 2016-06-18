@@ -2,7 +2,6 @@ package indicators;
 
 import animations.GameLevel;
 import biuoop.DrawSurface;
-import interfaces.LevelInformation;
 import interfaces.Sprite;
 
 /**
@@ -12,15 +11,15 @@ import interfaces.Sprite;
  * @since 15/05/2016.
  */
 public class LevelIndicator implements Sprite {
-    private LevelInformation level;
+    private String name;
 
     /**
      * constructor.
      *
-     * @param level current level.
+     * @param name current level name.
      */
-    public LevelIndicator(LevelInformation level) {
-        this.level = level;
+    public LevelIndicator(String name) {
+        this.name = name;
     }
 
     /**
@@ -60,6 +59,6 @@ public class LevelIndicator implements Sprite {
      */
     @Override
     public String toString() {
-        return "Level Name: " + level.levelName();
+        return "Level Name: " + name;
     }
 }

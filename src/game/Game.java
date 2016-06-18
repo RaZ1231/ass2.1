@@ -9,15 +9,11 @@ import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.Menu;
 import interfaces.Task;
-import levels.LevelSet;
-import levels.LevelSetsReader;
 import scores.HighScoresTable;
+import spaceinvaders.LevelInfo;
 import utils.Counter;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
-import java.util.List;
 
 /**
  * Game class.
@@ -36,6 +32,8 @@ public class Game {
         final GUI gui = new GUI("Arkanoid", 800, 600);
         final AnimationRunner runner = new AnimationRunner(gui, 60);
         Menu<Task<Void>> menu = new MenuAnimation("- Arkanoid -", gui.getKeyboardSensor());
+
+        /*
         List<LevelSet> levelSets;
         String path = args.length > 0 ? args[0] : "level_sets.txt"; //check args
 
@@ -44,6 +42,7 @@ public class Game {
                         .getResourceAsStream(path))));
 
         final List<LevelSet> lSets = levelSets;
+        */
         final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores"));
 
         //menu items
@@ -51,7 +50,7 @@ public class Game {
             @Override
             public Void run() {
                 GameFlow gF = new GameFlow(runner, gui, new Counter(3), highScores);
-                gF.runLevels(SOME LEVEL);
+                gF.runLevels(new LevelInfo());
                 return null;
             }
         });

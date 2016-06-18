@@ -7,24 +7,25 @@ import shapes.Ball;
 import utils.Counter;
 
 /**
- * removing balls listener.
+ * a InvaderRemover is in charge of removing invaders from the gameLevel, as well as keeping count
+ * of the number of invaders that were removed.
  *
- * @author Raziel Solomon
- * @since 11-May-16.
+ * @author Elisheva Broyer.
+ * @since 10/05/2016.
  */
-public class BallRemover implements HitListener {
+public class InvaderRemover implements HitListener {
     private GameLevel gameLevel;
-    private Counter removedBalls;
+    private Counter remainingInvaders;
 
     /**
      * constructor.
      *
      * @param gameLevel         a gameLevel.
-     * @param removedBalls number of blocks.
+     * @param remainingInvaders number of invaders.
      */
-    public BallRemover(GameLevel gameLevel, Counter removedBalls) {
+    public InvaderRemover(GameLevel gameLevel, Counter remainingInvaders) {
         this.gameLevel = gameLevel;
-        this.removedBalls = removedBalls;
+        this.remainingInvaders = remainingInvaders;
     }
 
     /**
@@ -34,9 +35,8 @@ public class BallRemover implements HitListener {
      * @param beingHit the block that got hit.
      * @param hitter   the hitting ball.
      */
-    @Override
     public void hitEvent(Collidable beingHit, Ball hitter) {
-        hitter.removeFromGame(gameLevel);
-        removedBalls.decrease(1);
+        beingHit.hitEvent(gameLevel, remainingInvaders, hitter);
     }
+
 }

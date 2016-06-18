@@ -1,8 +1,9 @@
 package levels;
 
 import interfaces.LevelInformation;
-import java.util.List;
 import utils.Parser;
+
+import java.util.List;
 
 /**
  * Level factory class.
@@ -31,7 +32,7 @@ public class LevelFactory {
             spec.setLevel(level, split[1]);
         }
 
-        //create all blocks of level.
+        //create all invaders of level.
         String blockString = parser.getString(s, "START_BLOCKS(.|\\s)*?END_BLOCKS");
         blockString = blockString.substring("START_BLOCK".length() + 2,
                 blockString.length() - ("END_BLOCK".length() + 2));

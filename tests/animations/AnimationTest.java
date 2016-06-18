@@ -4,12 +4,13 @@ import biuoop.GUI;
 import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.LevelInformation;
-import java.io.File;
-import java.util.LinkedList;
-import java.util.List;
 import org.junit.Test;
 import scores.HighScoresTable;
 import utils.Counter;
+
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Raziel Solomon
@@ -28,7 +29,7 @@ public class AnimationTest {
 
         //run
         GameFlow gF = new GameFlow(runner, gui, lives, hst);
-        gF.runLevels(levels);
+        //gF.runLevels(levels);
 
         gui.close();
     }

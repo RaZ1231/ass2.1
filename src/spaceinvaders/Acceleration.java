@@ -21,7 +21,16 @@ public class Acceleration {
         return v;
     }
 
+    public void setV(Velocity v) {
+        this.v = v;
+    }
+
     public void flipV() {
         v = new Velocity((-1) * v.getDx(), (-1) * v.getDy());
+    }
+
+    @Override
+    public String toString() {
+        return "A{" + v + '}';
     }
 }

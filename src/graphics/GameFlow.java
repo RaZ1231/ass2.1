@@ -57,7 +57,7 @@ public class GameFlow {
 
             level.initialize();
 
-            while ((level.getBlocksCounter().getValue() > 0) && (level.getLives().getValue() > 0)) {
+            while ((level.getInvadersCounter().getValue() > 0) && (level.getLives().getValue() > 0)) {
                 level.playOneTurn();
             }
 

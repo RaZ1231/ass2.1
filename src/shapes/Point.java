@@ -105,5 +105,9 @@ public class Point {
     public String toString() {
         return "(" + getX() + ", " + getY() + ')';
     }
+
+    public Point round() {
+        return new Point(Math.round(getX()), Math.round(getY()));
+    }
 }
 

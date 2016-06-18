@@ -3,8 +3,10 @@ package sprites;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Fill;
-import java.awt.Color;
+import shapes.Point;
 import shapes.Rectangle;
+
+import java.awt.Color;
 
 /**
  * Fill color class.
@@ -77,6 +79,16 @@ public class FillColor extends BaseSprite implements Fill {
     @Override
     public Fill create(Rectangle rectangle) {
         return new FillColor(getColor(), rectangle);
+    }
+
+    /**
+     * point setter.
+     *
+     * @param point new point
+     */
+    @Override
+    public void setPoint(Point point) {
+        rect.setUpperLeft(point);
     }
 
     /**

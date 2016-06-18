@@ -32,8 +32,8 @@ public class Chess extends BaseSprite {
      *
      * @param color1  first color
      * @param p       start point
-     * @param nWidth  blocks in a row
-     * @param nHeight blocks in a column
+     * @param nWidth  invaders in a row
+     * @param nHeight invaders in a column
      * @param bWidth  block width
      * @param bHeight block height
      * @param hit     hit counter
@@ -96,9 +96,9 @@ public class Chess extends BaseSprite {
     }
 
     /**
-     * return chess shaped blocks.
+     * return chess shaped invaders.
      *
-     * @return chess shaped blocks
+     * @return chess shaped invaders
      */
     public List<GameBlock> getBlocks() {
         List<GameBlock> collidables = new LinkedList<>();

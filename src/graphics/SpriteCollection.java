@@ -23,15 +23,6 @@ public class SpriteCollection {
     }
 
     /**
-     * add sprite.
-     *
-     * @param s a sprite.
-     */
-    public void addSprite(Sprite s) {
-        sprites.add(s);
-    }
-
-    /**
      * remove sprite.
      *
      * @param s a sprite.
@@ -48,9 +39,32 @@ public class SpriteCollection {
      * @param dt seconds passed.
      */
     public void notifyAllTimePassed(double dt) {
-        for (Sprite s : sprites) {
+        for (Sprite s : copy().getSprites()) {
             s.timePassed(dt);
         }
+    }
+
+    public List<Sprite> getSprites() {
+        return sprites;
+    }
+
+    public SpriteCollection copy() {
+        SpriteCollection sc = new SpriteCollection();
+
+        for (Sprite s : sprites) {
+            sc.addSprite(s);
+        }
+
+        return sc;
+    }
+
+    /**
+     * add sprite.
+     *
+     * @param s a sprite.
+     */
+    public void addSprite(Sprite s) {
+        sprites.add(s);
     }
 
     /**

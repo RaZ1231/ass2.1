@@ -7,13 +7,14 @@ import interfaces.Collidable;
 import interfaces.Fill;
 import interfaces.HitListener;
 import interfaces.Sprite;
-import java.util.ArrayList;
-import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
-import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
+import utils.Counter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * SpaceShip representation.
@@ -51,10 +52,6 @@ public class SpaceShip implements Sprite, Collidable {
         this.fill = fill.create(rect);
         this.time = new Timer(0);
         this.hitListeners = new ArrayList<>();
-    }
-
-    public List<HitListener> getHitListeners() {
-        return hitListeners;
     }
 
     /**
@@ -113,7 +110,6 @@ public class SpaceShip implements Sprite, Collidable {
     public void shoot() {
         if (time.hasPassed()) {
             SpaceShipShot s = new SpaceShipShot(getCenter(), gameLevel.getEnvironment());
-            s.setVelocity(Velocity.vUp(250));
             s.addToGame(gameLevel);
             time = new Timer(0.35);
         }
@@ -121,7 +117,7 @@ public class SpaceShip implements Sprite, Collidable {
 
     public Point getCenter() {
         return new Point(rect.getUpperLeft().getX() + rect.getWidth() / 2,
-                rect.getUpperLeft().getY());
+                rect.getUpperLeft().getY() - 3);
     }
 
     /**
@@ -154,12 +150,21 @@ public class SpaceShip implements Sprite, Collidable {
      */
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         this.notifyHit(hitter);
+        return null; // meaningless.
+    }
 
-        Line lNorth = new Line(rect.getUpperLeft(), rect.getUpperRight());
-        if (lNorth.isInline(collisionPoint)) { // hit upper bound.
-            // hurt so dead.
-        }
-        return currentVelocity; // meanless.
+    /**
+     * deals with different hit events.
+     *
+     * @param game    the game
+     * @param counter a counter
+     * @param hitter  the ball of hit.
+     */
+    @Override
+    public void hitEvent(GameLevel game, Counter counter, Ball hitter) {
+        hitter.removeFromGame(gameLevel);
+        counter.decrease(1);
+        gameLevel.stop();
     }
 
     private void notifyHit(Ball hitter) {
@@ -169,6 +174,28 @@ public class SpaceShip implements Sprite, Collidable {
         for (HitListener hl : listeners) {
             hl.hitEvent(this, hitter);
         }
+    }
+
+    public List<HitListener> getHitListeners() {
+        return hitListeners;
+    }
+
+    /**
+     * add listener to block's list.
+     *
+     * @param hl a hit listener.
+     */
+    public void addHitListener(HitListener hl) {
+        hitListeners.add(hl);
+    }
+
+    /**
+     * remove listener from block's list.
+     *
+     * @param hl a hit listener.
+     */
+    public void removeHitListener(HitListener hl) {
+        hitListeners.remove(hl);
     }
 
     /**

@@ -1,25 +1,24 @@
-package levelsold;
+package spaceinvaders;
 
-import interfaces.GameBlock;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
 import motion.Velocity;
 import shapes.Point;
-import sprites.Background;
-import sprites.Chess;
-import sprites.Text;
+import sprites.FillColor;
+import sprites.FillImage;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Level 4.
+ * level 1.
  *
  * @author Elisheva Broyer.
- * @since 15/05/2016.
+ * @since 13/05/2016.
  */
-public class Level4 implements LevelInformation {
+public class LevelInfo implements LevelInformation {
     /**
      * returns number of balls played in level.
      *
@@ -27,7 +26,7 @@ public class Level4 implements LevelInformation {
      */
     @Override
     public int numberOfBalls() {
-        return initialBallVelocities().size();
+        return 0;
     }
 
     /**
@@ -37,11 +36,7 @@ public class Level4 implements LevelInformation {
      */
     @Override
     public List<Velocity> initialBallVelocities() {
-        List<Velocity> velocities = new LinkedList<>();
-        for (int i = 0; i < 1; i++) {
-            velocities.add(new Velocity(0, -4 * 60));
-        }
-        return velocities;
+        return new ArrayList<>();
     }
 
     /**
@@ -71,7 +66,7 @@ public class Level4 implements LevelInformation {
      */
     @Override
     public String levelName() {
-        return "Final Four";
+        return "Level ";
     }
 
     /**
@@ -81,24 +76,7 @@ public class Level4 implements LevelInformation {
      */
     @Override
     public Sprite getBackground() {
-        int width = 80;
-        int height = 30;
-
-        Background background = new Background();
-        Chess back = new Chess(Color.white, new Point(0, 0), 800 / width, 600 / height, width, height, 4);
-        background.addElement(back);
-
-        int x = 100;
-        int y = 150;
-
-        Text t1 = new Text(Color.black, new Point(x - 5, y - 5), "Almost done...", 80);
-        background.addElement(t1);
-        Text t2 = new Text(Color.black, new Point(x + 5, y + 5), "Almost done...", 80);
-        background.addElement(t2);
-        Text t3 = new Text(Color.white, new Point(x, y), "Almost done...", 80);
-        background.addElement(t3);
-
-        return background;
+        return new FillColor(Color.gray);
     }
 
     /**
@@ -107,19 +85,28 @@ public class Level4 implements LevelInformation {
      * @return a list of the Blocks that make up this level.
      */
     @Override
-    public List<GameBlock> blocks() {
-        return new Chess(Color.black, new Point(80, 60), 720 / 80, 210 / 30, 80, 30, 4).getBlocks();
+    public List<Invader> invaders() {
+        List<Invader> invaders = new LinkedList<>();
+        FillImage invaderImg = new FillImage("enemy.png");
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 5; j++) {
+                invaders.add(new Invader(new Point(50 * i + 1, 40 * j + 30), invaderImg));
+            }
+        }
+
+        return invaders;
     }
 
     /**
-     * returns the number of blocks that should be removed
+     * returns the number of invaders that should be removed
      * before the level is considered to be "cleared".
      *
-     * @return the number of blocks that should be removed
+     * @return the number of invaders that should be removed
      * before the level is considered to be "cleared".
      */
     @Override
     public int numberOfBlocksToRemove() {
-        return blocks().size();
+        return invaders().size();
     }
 }

@@ -4,9 +4,9 @@ import biuoop.GUI;
 import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.LevelInformation;
-import levelsold.Level4;
 import org.junit.Test;
 import scores.HighScoresTable;
+import spaceinvaders.LevelInfo;
 import utils.Counter;
 
 import java.io.File;
@@ -28,11 +28,11 @@ public class LevelsTest {
         List<LevelInformation> levels = new LinkedList<>();
         HighScoresTable hst = HighScoresTable.loadFromFile(new File("highscores.ser"));
 
-        levels.add(new Level4());
+        levels.add(new LevelInfo());
 
         //run
         GameFlow gF = new GameFlow(runner, gui, lives, hst);
-        gF.runLevels(levels);
+        //gF.runLevels(levels);
 
         gui.close();
     }

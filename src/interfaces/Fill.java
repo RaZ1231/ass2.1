@@ -1,5 +1,6 @@
 package interfaces;
 
+import shapes.Point;
 import shapes.Rectangle;
 
 /**
@@ -16,4 +17,11 @@ public interface Fill extends Sprite {
      * @return new fill
      */
     Fill create(Rectangle rect);
+
+    /**
+     * point setter.
+     *
+     * @param point new point
+     */
+    void setPoint(Point point);
 }

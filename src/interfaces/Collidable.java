@@ -1,9 +1,11 @@
 package interfaces;
 
+import animations.GameLevel;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Point;
 import shapes.Rectangle;
+import utils.Counter;
 
 /**
  * Object that can be collided with.
@@ -31,4 +33,13 @@ public interface Collidable {
      * @return the new velocity expected after the hit.
      */
     Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity);
+
+    /**
+     * deals with different hit events.
+     *
+     * @param game    the game
+     * @param counter a counter
+     * @param hitter  the ball of hit.
+     */
+    void hitEvent(GameLevel game, Counter counter, Ball hitter);
 }

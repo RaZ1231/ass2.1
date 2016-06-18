@@ -3,8 +3,10 @@ package levels;
 import interfaces.Fill;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
-import java.util.List;
 import motion.Velocity;
+import spaceinvaders.Invader;
+
+import java.util.List;
 
 /**
  * Level class.
@@ -88,7 +90,7 @@ public class Level implements LevelInformation {
     }
 
     /**
-     * blocks start x getter.
+     * invaders start x getter.
      *
      * @return start x
      */
@@ -97,7 +99,7 @@ public class Level implements LevelInformation {
     }
 
     /**
-     * blocks start x setter.
+     * invaders start x setter.
      *
      * @param blocksXPosition new x
      */
@@ -106,7 +108,7 @@ public class Level implements LevelInformation {
     }
 
     /**
-     * blocks start y getter.
+     * invaders start y getter.
      *
      * @return start y
      */
@@ -115,7 +117,7 @@ public class Level implements LevelInformation {
     }
 
     /**
-     * blocks start y setter.
+     * invaders start y setter.
      *
      * @param blocksYPosition new y
      */
@@ -124,18 +126,18 @@ public class Level implements LevelInformation {
     }
 
     /**
-     * number of blocks getter.
+     * number of invaders getter.
      *
-     * @return number of blocks
+     * @return number of invaders
      */
     public int getNumOfBlocks() {
         return numOfBlocks;
     }
 
     /**
-     * number of blocks setter.
+     * number of invaders setter.
      *
-     * @param numberOfBlocks set number of blocks
+     * @param numberOfBlocks set number of invaders
      */
     public void setNumOfBlocks(int numberOfBlocks) {
         this.numOfBlocks = numberOfBlocks;
@@ -160,18 +162,18 @@ public class Level implements LevelInformation {
     }
 
     /**
-     * blocks getter.
+     * invaders getter.
      *
-     * @return blocks
+     * @return invaders
      */
     public List<GameBlock> getBlocks() {
         return blocks;
     }
 
     /**
-     * blocks setter.
+     * invaders setter.
      *
-     * @param blocksList new blocks
+     * @param blocksList new invaders
      */
     public void setBlocks(List<GameBlock> blocksList) {
         this.blocks = blocksList;
@@ -270,15 +272,15 @@ public class Level implements LevelInformation {
      * @return a list of the Blocks that make up this level.
      */
     @Override
-    public List<GameBlock> blocks() {
-        return blocks;
+    public List<Invader> invaders() {
+        return null;
     }
 
     /**
-     * returns the number of blocks that should be removed
+     * returns the number of invaders that should be removed
      * before the level is considered to be "cleared".
      *
-     * @return the number of blocks that should be removed
+     * @return the number of invaders that should be removed
      * before the level is considered to be "cleared".
      */
     @Override

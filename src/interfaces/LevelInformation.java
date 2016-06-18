@@ -1,7 +1,9 @@
 package interfaces;
 
-import java.util.List;
 import motion.Velocity;
+import spaceinvaders.Invader;
+
+import java.util.List;
 
 /**
  * Specifies the information required to fully describe a level.
@@ -57,13 +59,13 @@ public interface LevelInformation {
      *
      * @return a list of the Blocks that make up this level.
      */
-    List<GameBlock> blocks();
+    List<Invader> invaders();
 
     /**
-     * returns the number of blocks that should be removed
+     * returns the number of invaders that should be removed
      * before the level is considered to be "cleared".
      *
-     * @return the number of blocks that should be removed
+     * @return the number of invaders that should be removed
      * before the level is considered to be "cleared".
      */
     int numberOfBlocksToRemove();

@@ -4,7 +4,11 @@ import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.HitListener;
 import interfaces.Sprite;
+import motion.Velocity;
+
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Raziel Solomon
@@ -12,6 +16,7 @@ import java.util.List;
  */
 public class Formation implements Sprite {
     private List<Invader> invaders;
+    private Velocity initialV;
     private Acceleration a;
     private int width;
     private int height;
@@ -20,10 +25,24 @@ public class Formation implements Sprite {
 
     public Formation(List<Invader> invaders, Acceleration a, int width, int height) {
         this.a = a;
+        this.initialV = a.getV();
         this.invaders = invaders;
         this.width = width;
         this.height = height;
         this.time = new Timer(0);
+
+        initInvaders();
+    }
+
+    private void initInvaders() {
+        for (Invader invader : invaders) {
+            invader.setFormation(this);
+            invader.setAccel(a);
+        }
+    }
+
+    public List<Invader> getInvaders() {
+        return invaders;
     }
 
     /**
@@ -45,30 +64,47 @@ public class Formation implements Sprite {
      */
     @Override
     public void timePassed(double dt) {
-        time.timePassed(dt);
+        if (size() > 0) {
+            Invader leftest = getMostPos(new PositionCmp() {
+                @Override
+                public boolean compare(Invader i1, Invader i2) {
+                    return i1.isLefterThan(i2);
+                }
+            });
+            Invader rightest = getMostPos(new PositionCmp() {
+                @Override
+                public boolean compare(Invader i1, Invader i2) {
+                    return i1.isRighterThan(i2);
+                }
+            });
 
-        Invader leftest = getMostPos(new PositionCmp() {
-            @Override
-            public boolean compare(Invader i1, Invader i2) {
-                return i1.isLefterThan(i2);
+            if ((leftest.getX() <= 0) || (rightest.getX() + rightest.getWidth() >= width)) {
+                stepDown();
+                a.flipV();
+                a.accelBy(15);
             }
-        });
 
-        Invader rightest = getMostPos(new PositionCmp() {
-            @Override
-            public boolean compare(Invader i1, Invader i2) {
-                return i1.isRighterThan(i2);
-            }
-        });
-
-        if ((leftest.getUpperLeft().getX() <= 0) ||
-                (rightest.getUpperLeft().getX() + rightest.getWidth() >= width)) {
-            stepDown();
-            a.flipV();
-            a.accelBy(10);
+            time.timePassed(dt);
+            shoot();
         }
+    }
 
-        move(dt);
+    /**
+     * add object to gameLevel.
+     *
+     * @param gameLevel a gameLevel to add the object to.
+     */
+    @Override
+    public void addToGame(GameLevel gameLevel) {
+        this.gameLevel = gameLevel;
+
+        for (Invader invader : invaders) {
+            invader.addToGame(gameLevel);
+        }
+    }
+
+    public int size() {
+        return invaders.size();
     }
 
     public Invader getMostPos(PositionCmp cmp) {
@@ -89,12 +125,6 @@ public class Formation implements Sprite {
         }
     }
 
-    public void move(double dt) {
-        for (Invader invader : invaders) {
-            invader.timePassed(dt);
-        }
-    }
-
     public void shoot() {
         if (time.hasPassed()) {
             getShooter().shoot(gameLevel);
@@ -103,23 +133,42 @@ public class Formation implements Sprite {
     }
 
     private Invader getShooter() {
+        List<Invader> lowest = getLowestList();
+        Random rand = new Random();
+        int i = rand.nextInt(lowest.size());
 
+        return lowest.get(i);
     }
 
-    /**
-     * add object to gameLevel.
-     *
-     * @param gameLevel a gameLevel to add the object to.
-     */
-    @Override
-    public void addToGame(GameLevel gameLevel) {
-        gameLevel.addSprite(this);
+    protected List<Invader> getLowestList() {
+        List<Invader> lowestList = new LinkedList<>();
+        boolean isNewCol;
 
         for (Invader invader : invaders) {
-            gameLevel.addCollidable(invader);
+            isNewCol = true;
+
+            for (int i = 0; i < lowestList.size(); i++) {
+                if (invader.getX() == lowestList.get(i).getX()) {
+                    isNewCol = false;
+                    if (invader.getY() > lowestList.get(i).getY()) {
+                        lowestList.set(i, invader);
+                    }
+                    break;
+                }
+            }
+
+            if (isNewCol) {
+                lowestList.add(invader);
+            }
         }
 
-        this.gameLevel = gameLevel;
+        return lowestList;
+    }
+
+    public void move(double dt) {
+        for (Invader invader : invaders) {
+            invader.timePassed(dt);
+        }
     }
 
     public Invader getLowest() {
@@ -151,6 +200,18 @@ public class Formation implements Sprite {
         for (Invader invader : invaders) {
             invader.removeHitListener(hl);
         }
+    }
+
+    public void reset() {
+        a.setV(initialV);
+
+        for (Invader invader : invaders) {
+            invader.reset();
+        }
+    }
+
+    public void remove(Invader invader) {
+        invaders.remove(invader);
     }
 
     /**

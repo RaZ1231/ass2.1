@@ -1,13 +1,14 @@
 package levels;
 
 import interfaces.BlockCreator;
+import utils.Parser;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import utils.Parser;
 
 /**
  * Blocks definition reader class.
@@ -20,7 +21,7 @@ public class BlocksDefinitionReader {
      * get factory from reader.
      *
      * @param reader reader with path
-     * @return blocks factory
+     * @return invaders factory
      */
     public static BlocksFromSymbolsFactory fromReader(java.io.Reader reader) {
         BlocksFromSymbolsFactory bFSF = new BlocksFromSymbolsFactory();

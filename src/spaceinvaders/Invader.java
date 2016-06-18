@@ -3,16 +3,19 @@ package spaceinvaders;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Collidable;
+import interfaces.Fill;
 import interfaces.HitListener;
 import interfaces.Sprite;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Point;
 import shapes.Rectangle;
 import sprites.FillImage;
+import utils.Counter;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author Raziel Solomon
@@ -22,16 +25,21 @@ public class Invader implements Sprite, Collidable {
     private final int width = 40;
     private final int height = 30;
 
+    private Point initialUpperLeft;
     private Point upperLeft;
-    private FillImage img;
+    private Fill img;
     private Acceleration a;
+    private Formation formation;
     private List<HitListener> hitListeners;
 
-    public Invader(Point upperLeft, FillImage img, Acceleration a) {
-        this.upperLeft = upperLeft;
-        this.img = img;
-        this.a = a;
+    public Invader(Point upperLeft, FillImage img) {
+        this.upperLeft = initialUpperLeft = upperLeft;
+        this.img = img.create(new Rectangle(upperLeft, width, height));
         hitListeners = new LinkedList<>();
+    }
+
+    public void setAccel(Acceleration a) {
+        this.a = a;
     }
 
     /**
@@ -59,6 +67,33 @@ public class Invader implements Sprite, Collidable {
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         notifyHit(hitter);
         return null;
+    }
+
+    /**
+     * deals with different hit events.
+     *
+     * @param game    the game
+     * @param counter a counter
+     * @param hitter  the ball of hit.
+     */
+    @Override
+    public void hitEvent(GameLevel game, Counter counter, Ball hitter) {
+        if (!hitter.isInvaderShot()) {
+            removeFromGame(game);
+            counter.decrease(1);
+        }
+        hitter.removeFromGame(game);
+    }
+
+    /**
+     * remove block from game.
+     *
+     * @param gameLevel a level.
+     */
+    public void removeFromGame(GameLevel gameLevel) {
+        gameLevel.removeCollidable(this);
+        gameLevel.removeSprite(this);
+        formation.remove(this);
     }
 
     /**
@@ -101,8 +136,10 @@ public class Invader implements Sprite, Collidable {
      */
     @Override
     public void timePassed(double dt) {
-        Velocity relativeV = Velocity.fromAngleAndSpeed(a.getV().getAngle(), dt * a.getV().getSpeed());
+        Velocity relativeV = Velocity.fromAngleAndSpeed(
+                a.getV().getAngle(), dt * a.getV().getSpeed());
         upperLeft = relativeV.applyToPoint(upperLeft);
+        img.setPoint(upperLeft);
     }
 
     /**
@@ -112,8 +149,8 @@ public class Invader implements Sprite, Collidable {
      */
     @Override
     public void addToGame(GameLevel gameLevel) {
-        gameLevel.addSprite(this);
         gameLevel.addCollidable(this);
+        gameLevel.addSprite(this);
     }
 
     /**
@@ -134,38 +171,15 @@ public class Invader implements Sprite, Collidable {
         hitListeners.remove(hl);
     }
 
-    /**
-     * remove block from game.
-     *
-     * @param gameLevel a level.
-     */
-    public void removeFromGame(GameLevel gameLevel) {
-        gameLevel.removeCollidable(this);
-        gameLevel.removeSprite(this);
-    }
-
     public void shoot(GameLevel g) {
         InvaderShot s = new InvaderShot(
-                new Point(getUpperLeft().getX() + getWidth() / 2, getUpperLeft().getY() + getHeight()),
-                g.getEnvironment());
-        s.setVelocity(Velocity.vDown(200));
+                new Point(getUpperLeft().getX() + getWidth() / 2,
+                        getUpperLeft().getY() + getHeight() + 2), g.getEnvironment());
         s.addToGame(g);
-    }
-
-    public boolean isLowerThan(Invader invader) {
-        return getUpperLeft().getY() >= invader.getUpperLeft().getY();
     }
 
     public Point getUpperLeft() {
         return upperLeft;
-    }
-
-    public boolean isRighterThan(Invader invader) {
-        return getUpperLeft().getX() >= invader.getUpperLeft().getX();
-    }
-
-    public boolean isLefterThan(Invader invader) {
-        return getUpperLeft().getX() <= invader.getUpperLeft().getX();
     }
 
     public int getWidth() {
@@ -176,7 +190,40 @@ public class Invader implements Sprite, Collidable {
         return height;
     }
 
+    public void reset() {
+        upperLeft = initialUpperLeft;
+    }
+
+    public boolean isLowerThan(Invader invader) {
+        return getUpperLeft().getY() <= invader.getUpperLeft().getY();
+    }
+
+    public boolean isRighterThan(Invader invader) {
+        return getUpperLeft().getX() <= invader.getUpperLeft().getX();
+    }
+
+    public boolean isLefterThan(Invader invader) {
+        return getUpperLeft().getX() >= invader.getUpperLeft().getX();
+    }
+
+    public double getX() {
+        return getUpperLeft().getX();
+    }
+
+    public double getY() {
+        return getUpperLeft().getY();
+    }
+
+    public void setFormation(Formation formation) {
+        this.formation = formation;
+    }
+
     public void stepDown() {
         upperLeft = new Point(upperLeft.getX(), upperLeft.getY() + height);
+    }
+
+    @Override
+    public String toString() {
+        return "Invader{" + upperLeft + ',' + a + '}';
     }
 }

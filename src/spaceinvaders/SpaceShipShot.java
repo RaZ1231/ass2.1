@@ -1,15 +1,16 @@
 package spaceinvaders;
 
 import collisions.GameEnvironment;
-import java.awt.Color;
-import shapes.Ball;
+import motion.Velocity;
 import shapes.Point;
+
+import java.awt.Color;
 
 /**
  * @author Raziel Solomon
  * @since 14-Jun-16.
  */
-public class SpaceShipShot extends Ball {
+public class SpaceShipShot extends Shot {
     /**
      * constructor.
      *
@@ -18,5 +19,6 @@ public class SpaceShipShot extends Ball {
      */
     public SpaceShipShot(Point center, GameEnvironment gameEnvironment) {
         super(center, 5, Color.red, gameEnvironment);
+        setVelocity(Velocity.vUp(250));
     }
 }
