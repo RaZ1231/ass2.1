@@ -3,10 +3,9 @@ package sprites;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Fill;
+import java.awt.Color;
 import shapes.Point;
 import shapes.Rectangle;
-
-import java.awt.Color;
 
 /**
  * Fill color class.
@@ -55,10 +54,12 @@ public class FillColor extends BaseSprite implements Fill {
      */
     @Override
     public void drawOn(DrawSurface d) {
-        d.setColor(getColor());
-        d.fillRectangle((int) getRect().getUpperLeft().getX(),
-                (int) getRect().getUpperLeft().getY(),
-                (int) getRect().getWidth(), (int) getRect().getHeight());
+        if (getColor() != null) {
+            d.setColor(getColor());
+            d.fillRectangle((int) getRect().getUpperLeft().getX(),
+                    (int) getRect().getUpperLeft().getY(),
+                    (int) getRect().getWidth(), (int) getRect().getHeight());
+        }
     }
 
     /**

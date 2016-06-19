@@ -9,11 +9,10 @@ import graphics.AnimationRunner;
 import graphics.GameFlow;
 import interfaces.Menu;
 import interfaces.Task;
+import java.io.File;
 import scores.HighScoresTable;
 import spaceinvaders.LevelInfo;
 import utils.Counter;
-
-import java.io.File;
 
 /**
  * Game class.
@@ -29,9 +28,9 @@ public class Game {
      */
     public void run(String[] args) {
         //init game
-        final GUI gui = new GUI("Arkanoid", 800, 600);
+        final GUI gui = new GUI("Space Invaders", 800, 600);
         final AnimationRunner runner = new AnimationRunner(gui, 60);
-        Menu<Task<Void>> menu = new MenuAnimation("- Arkanoid -", gui.getKeyboardSensor());
+        Menu<Task<Void>> menu = new MenuAnimation("Space Invaders", gui.getKeyboardSensor());
 
         /*
         List<LevelSet> levelSets;

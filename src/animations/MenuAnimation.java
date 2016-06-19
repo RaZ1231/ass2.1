@@ -5,18 +5,17 @@ import biuoop.KeyboardSensor;
 import interfaces.Menu;
 import interfaces.MenuOption;
 import interfaces.Task;
-import shapes.Point;
-import sprites.Background;
-import sprites.CopyRightsS;
-import sprites.MenuItem;
-import sprites.Square;
-import sprites.Text;
-import utils.Selection;
-import utils.SubMenuSelection;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import shapes.Point;
+import sprites.Background;
+import sprites.CopyRightsS;
+import sprites.FillImage;
+import sprites.MenuItem;
+import sprites.Text;
+import utils.Selection;
+import utils.SubMenuSelection;
 
 /**
  * Menu animation class.
@@ -113,24 +112,26 @@ public class MenuAnimation implements Menu<Task<Void>> {
                 status = selection.getTask();
             }
         }
-
+/*
         //sub-menus
         for (SubMenuSelection<Task<Void>> subMenu : subMenus) {
             if (sensor.isPressed(subMenu.getKey())) {
                 subMenuStat = subMenu;
             }
         }
-
+*/
         if (getStatus() != null) {
             stop = true;
         }
+        /*
         //sub-menus management
         if (subMenuStat != null) {
             subMenuStat.getMenu().doOneFrame(d, dt);
             status = subMenuStat.getMenu().getStatus();
-        } else {
+        } else {*/
             drawBG(d);
-        }
+        /*}
+        */
     }
 
     /**
@@ -141,20 +142,21 @@ public class MenuAnimation implements Menu<Task<Void>> {
     public void drawBG(DrawSurface d) {
         Background b = new Background();
 
-        Color backColor = new Color(75, 130, 155);
-        Color itemColor = new Color(231, 89, 68);
+        FillImage backGround = new FillImage("menu_background.jpg");
+        Color backColor = new Color(252, 250, 255);
+        Color itemColor = new Color(151, 66, 130);
 
-        Square back = new Square(new Point(0, 0), d.getWidth(), d.getHeight(), backColor);
-        b.addElement(back);
+        //Square back = new Square(new Point(0, 0), d.getWidth(), d.getHeight(), backColor);
+        b.addElement(backGround);
 
-        Text menuTitle = new Text(itemColor, new Point(d.getWidth() / 2 - 155, 195), title, 60);
+        Text menuTitle = new Text(itemColor, new Point(d.getWidth() / 2 - 210, 195), title, 60);
         b.addElement(menuTitle);
 
         int itemHeight = 55;
         int itemWidth = 350;
         List<MenuOption> options = new ArrayList<>();
 
-        options.addAll(subMenus);
+        // options.addAll(subMenus);
         options.addAll(selections);
 
         for (int i = 0; i < options.size(); i++) {

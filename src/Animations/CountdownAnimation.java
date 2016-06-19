@@ -3,9 +3,8 @@ package animations;
 import biuoop.DrawSurface;
 import graphics.SpriteCollection;
 import interfaces.Animation;
-import utils.Counter;
-
 import java.awt.Color;
+import utils.Counter;
 
 /**
  * The CountdownAnimation will display the given gameScreen,
@@ -59,7 +58,7 @@ public class CountdownAnimation implements Animation {
         if (count.getValue() == 0) {
             running = false;
         } else {
-            d.setColor(Color.BLACK);
+            d.setColor(Color.WHITE);
             d.drawText(d.getWidth() / 2 - 16, d.getHeight() / 2, "" + count.getValue(), 32);
         }
     }

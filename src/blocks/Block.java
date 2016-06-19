@@ -7,7 +7,9 @@ import interfaces.GameBlock;
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+import shapes.Ball;
 import shapes.Rectangle;
+import utils.Counter;
 
 /**
  * Block representation.
@@ -151,5 +153,17 @@ public class Block extends BaseBlock implements GameBlock {
     public void removeFromGame(GameLevel gameLevel) {
         gameLevel.removeCollidable(this);
         gameLevel.removeSprite(this);
+    }
+
+    /**
+     * deals with different hit events.
+     *
+     * @param game    the game
+     * @param counter a counter
+     * @param hitter  the ball of hit.
+     */
+    @Override
+    public void hitEvent(GameLevel game, Counter counter, Ball hitter) {
+        //null
     }
 }

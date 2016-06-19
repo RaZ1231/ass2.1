@@ -7,14 +7,13 @@ import interfaces.Collidable;
 import interfaces.Fill;
 import interfaces.HitListener;
 import interfaces.Sprite;
+import java.util.ArrayList;
+import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Point;
 import shapes.Rectangle;
 import utils.Counter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * SpaceShip representation.
@@ -116,7 +115,7 @@ public class SpaceShip implements Sprite, Collidable {
     }
 
     public Point getCenter() {
-        return new Point(rect.getUpperLeft().getX() + rect.getWidth() / 2,
+        return new Point(rect.getUpperLeft().getX() + rect.getWidth() / 2 - 10,
                 rect.getUpperLeft().getY() - 3);
     }
 

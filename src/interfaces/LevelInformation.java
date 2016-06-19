@@ -1,9 +1,10 @@
 package interfaces;
 
+import blocks.BaseBlock;
+import java.util.List;
 import motion.Velocity;
 import spaceinvaders.Invader;
-
-import java.util.List;
+import spaceinvaders.ShieldBlock;
 
 /**
  * Specifies the information required to fully describe a level.
@@ -55,11 +56,25 @@ public interface LevelInformation {
     Sprite getBackground();
 
     /**
-     * returns a list of the Blocks that make up this level.
+     * returns a list of the death regions of level.
      *
-     * @return a list of the Blocks that make up this level.
+     * @return a list of the death regions of level.
+     */
+    List<BaseBlock> getDeathRegion();
+
+    /**
+     * returns a list of the invaders of level.
+     *
+     * @return a list of the invaders of level.
      */
     List<Invader> invaders();
+
+    /**
+     * returns a list of the shield block of level.
+     *
+     * @return a list of the shield block of level.
+     */
+    List<ShieldBlock> shields();
 
     /**
      * returns the number of invaders that should be removed

@@ -1,12 +1,13 @@
 package levels;
 
+import blocks.BaseBlock;
 import interfaces.Fill;
 import interfaces.GameBlock;
 import interfaces.LevelInformation;
+import java.util.List;
 import motion.Velocity;
 import spaceinvaders.Invader;
-
-import java.util.List;
+import spaceinvaders.ShieldBlock;
 
 /**
  * Level class.
@@ -267,12 +268,32 @@ public class Level implements LevelInformation {
     }
 
     /**
+     * returns a list of the death regions of level.
+     *
+     * @return a list of the death regions of level.
+     */
+    @Override
+    public List<BaseBlock> getDeathRegion() {
+        return null;
+    }
+
+    /**
      * returns a list of the Blocks that make up this level.
      *
      * @return a list of the Blocks that make up this level.
      */
     @Override
     public List<Invader> invaders() {
+        return null;
+    }
+
+    /**
+     * returns a list of the shield block of level.
+     *
+     * @return a list of the shield block of level.
+     */
+    @Override
+    public List<ShieldBlock> shields() {
         return null;
     }
 

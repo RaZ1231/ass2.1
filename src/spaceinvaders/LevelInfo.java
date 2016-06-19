@@ -1,16 +1,17 @@
 package spaceinvaders;
 
+import blocks.BaseBlock;
+import blocks.DeathRegion;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
-import motion.Velocity;
-import shapes.Point;
-import sprites.FillColor;
-import sprites.FillImage;
-
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import motion.Velocity;
+import shapes.Point;
+import shapes.Rectangle;
+import sprites.FillColor;
+import sprites.FillImage;
 
 /**
  * level 1.
@@ -76,7 +77,20 @@ public class LevelInfo implements LevelInformation {
      */
     @Override
     public Sprite getBackground() {
-        return new FillColor(Color.gray);
+        return new FillImage("space_background.jpg");
+    }
+
+    public List<BaseBlock> getDeathRegion() {
+        List<BaseBlock> deathRegions = new LinkedList<>();
+        DeathRegion d1 = new DeathRegion(new Rectangle(new Point(30, 0), 800, 30),
+                new FillColor(null), null);
+        deathRegions.add(d1);
+
+        DeathRegion d2 = new DeathRegion(new Rectangle(new Point(30, 570), 800, 30),
+                new FillColor(null), null);
+        deathRegions.add(d2);
+
+        return deathRegions;
     }
 
     /**
@@ -87,7 +101,7 @@ public class LevelInfo implements LevelInformation {
     @Override
     public List<Invader> invaders() {
         List<Invader> invaders = new LinkedList<>();
-        FillImage invaderImg = new FillImage("enemy.png");
+        FillImage invaderImg = new FillImage("alien.jpg");
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 5; j++) {
@@ -96,6 +110,26 @@ public class LevelInfo implements LevelInformation {
         }
 
         return invaders;
+    }
+
+    /**
+     * returns a list of the shield block of level.
+     *
+     * @return a list of the shield block of level.
+     */
+    @Override
+    public List<ShieldBlock> shields() {
+        List<ShieldBlock> shields = new LinkedList<>();
+
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 5; j++) {
+                shields.add(new ShieldBlock(new Point(150 + i, 500 + j)));
+                shields.add(new ShieldBlock(new Point(350 + i, 500 + j)));
+                shields.add(new ShieldBlock(new Point(550 + i, 500 + j)));
+            }
+        }
+
+        return shields;
     }
 
     /**

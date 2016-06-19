@@ -5,8 +5,10 @@ import biuoop.DrawSurface;
 import interfaces.Fill;
 import interfaces.GameBlock;
 import java.awt.Color;
+import shapes.Ball;
 import shapes.Rectangle;
 import sprites.FillColor;
+import utils.Counter;
 
 /**
  * Death region in charge of screen's bottom.
@@ -61,5 +63,17 @@ public class DeathRegion extends BaseBlock implements GameBlock {
     @Override
     public void removeFromGame(GameLevel gameLevel) {
         // nothing happens.
+    }
+
+    /**
+     * deals with different hit events.
+     *
+     * @param game    the game
+     * @param counter a counter
+     * @param hitter  the ball of hit.
+     */
+    @Override
+    public void hitEvent(GameLevel game, Counter counter, Ball hitter) {
+        hitter.removeFromGame(game);
     }
 }

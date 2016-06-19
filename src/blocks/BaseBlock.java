@@ -5,17 +5,15 @@ import biuoop.DrawSurface;
 import interfaces.Fill;
 import interfaces.GameBlock;
 import interfaces.HitListener;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Line;
 import shapes.Point;
 import shapes.Rectangle;
-import utils.Counter;
 import utils.Mathematics;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Base block class.
@@ -224,16 +222,5 @@ public abstract class BaseBlock {
                 + ", fill=" + fill
                 + ", stroke=" + stroke
                 + ", hitListeners=" + hitListeners + '}';
-    }
-
-    /**
-     * deals with different hit events.
-     *
-     * @param game    the game
-     * @param counter a counter
-     * @param hitter  the ball of hit.
-     */
-    public void hitEvent(GameLevel game, Counter counter, Ball hitter) {
-        //do nothing
     }
 }

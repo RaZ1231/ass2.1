@@ -5,7 +5,9 @@ import biuoop.DrawSurface;
 import interfaces.Fill;
 import interfaces.GameBlock;
 import java.awt.Color;
+import shapes.Ball;
 import shapes.Rectangle;
+import utils.Counter;
 
 /**
  * border block class.
@@ -53,5 +55,17 @@ public class BorderBlock extends BaseBlock implements GameBlock {
     @Override
     public void removeFromGame(GameLevel gameLevel) {
         // nothing happens.
+    }
+
+    /**
+     * deals with different hit events.
+     *
+     * @param game    the game
+     * @param counter a counter
+     * @param hitter  the ball of hit.
+     */
+    @Override
+    public void hitEvent(GameLevel game, Counter counter, Ball hitter) {
+        //null.
     }
 }

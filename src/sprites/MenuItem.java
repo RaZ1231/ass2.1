@@ -47,9 +47,9 @@ public class MenuItem extends BaseSprite {
         Square s = new Square(corner, width, height, getColor());
         s.drawOn(d);
 
-        Triangle t = new Triangle(back, new Point(corner.getX() + width - height / 2, corner.getY() + height / 2 - 5),
-                height / 2 - 5);
-        t.drawOn(d);
+        Circle c = new Circle(back, new Point(corner.getX() + width - height / 2, corner.getY() + height / 2),
+                height / 3);
+        c.drawOn(d);
 
         Text te = new Text(textColor, new Point(corner.getX() + 10, corner.getY() + height / 2 + 12), text, 30);
         te.drawOn(d);

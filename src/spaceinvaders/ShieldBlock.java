@@ -5,9 +5,11 @@ import biuoop.DrawSurface;
 import blocks.BaseBlock;
 import interfaces.GameBlock;
 import java.awt.Color;
+import shapes.Ball;
 import shapes.Point;
 import shapes.Rectangle;
 import sprites.FillColor;
+import utils.Counter;
 
 /**
  * @author Elisheva Broyer.
@@ -36,6 +38,19 @@ public class ShieldBlock extends BaseBlock implements GameBlock {
     @Override
     protected void effect() {
         // remove self.
+    }
+
+    /**
+     * deals with different hit events.
+     *
+     * @param game    the game
+     * @param counter a counter
+     * @param hitter  the ball of hit.
+     */
+    @Override
+    public void hitEvent(GameLevel game, Counter counter, Ball hitter) {
+        hitter.removeFromGame(game);
+        this.removeFromGame(game);
     }
 
     /**
