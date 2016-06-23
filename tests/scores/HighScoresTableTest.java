@@ -11,7 +11,7 @@ import org.junit.Test;
 public class HighScoresTableTest {
     @Test
     public void load() throws Exception {
-        String path = "highscores.ser";
+        String path = "highscores";
         HighScoresTable expected = new HighScoresTable(5);
 
         expected.add(new ScoreInfo("Nevo", -15));
@@ -30,7 +30,7 @@ public class HighScoresTableTest {
 
     @Test
     public void save() throws Exception {
-        String path = "highscores.ser";
+        String path = "highscores";
         HighScoresTable highScores = new HighScoresTable(5);
 
         highScores.add(new ScoreInfo("Raz", 99999));

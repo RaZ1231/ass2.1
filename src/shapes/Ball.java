@@ -5,9 +5,8 @@ import biuoop.DrawSurface;
 import collisions.CollisionInfo;
 import collisions.GameEnvironment;
 import interfaces.Sprite;
-import motion.Velocity;
-
 import java.awt.Color;
+import motion.Velocity;
 
 /**
  * ball class.
@@ -184,7 +183,12 @@ public class Ball implements Sprite {
         gameLevel.removeSprite(this);
     }
 
-    public boolean isInvaderShot() {
+    /**
+     * returns if is a spaceship's shot.
+     *
+     * @return if is a spaceship's shot.
+     */
+    public boolean isSpaceshipShot() {
         return false;
     }
 }

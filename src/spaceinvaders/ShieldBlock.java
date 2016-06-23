@@ -12,12 +12,19 @@ import sprites.FillColor;
 import utils.Counter;
 
 /**
+ * shield block class.
+ *
  * @author Elisheva Broyer.
  * @since 15/06/2016.
  */
 public class ShieldBlock extends BaseBlock implements GameBlock {
+    /**
+     * constructor.
+     *
+     * @param upperLeft a point.
+     */
     public ShieldBlock(Point upperLeft) {
-        super(new Rectangle(upperLeft, 1, 1), new FillColor(Color.cyan), null);
+        super(new Rectangle(upperLeft, 5, 5), new FillColor(Color.cyan), null);
     }
 
     /**
@@ -29,7 +36,7 @@ public class ShieldBlock extends BaseBlock implements GameBlock {
      */
     @Override
     protected void drawSelf(DrawSurface d, double x, double y) {
-        // none.
+        // nothing.
     }
 
     /**
@@ -37,7 +44,7 @@ public class ShieldBlock extends BaseBlock implements GameBlock {
      */
     @Override
     protected void effect() {
-        // remove self.
+        // nothing.
     }
 
     /**
@@ -54,7 +61,17 @@ public class ShieldBlock extends BaseBlock implements GameBlock {
     }
 
     /**
-     * remove shield blok from game.
+     * returns if is invader.
+     *
+     * @return if is invader.
+     */
+    @Override
+    public boolean isInvader() {
+        return false;
+    }
+
+    /**
+     * remove shield block from game.
      *
      * @param gameLevel a level.
      */

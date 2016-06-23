@@ -42,4 +42,11 @@ public interface Collidable {
      * @param hitter  the ball of hit.
      */
     void hitEvent(GameLevel game, Counter counter, Ball hitter);
+
+    /**
+     * returns if collidable is invader.
+     *
+     * @return if collidable is invader.
+     */
+    boolean isInvader();
 }

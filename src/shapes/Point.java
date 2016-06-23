@@ -106,6 +106,11 @@ public class Point {
         return "(" + getX() + ", " + getY() + ')';
     }
 
+    /**
+     * returns the rounded values of a point.
+     *
+     * @return the rounded values of a point.
+     */
     public Point round() {
         return new Point(Math.round(getX()), Math.round(getY()));
     }

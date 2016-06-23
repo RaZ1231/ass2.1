@@ -76,4 +76,9 @@ public class DeathRegion extends BaseBlock implements GameBlock {
     public void hitEvent(GameLevel game, Counter counter, Ball hitter) {
         hitter.removeFromGame(game);
     }
+
+    @Override
+    public boolean isInvader() {
+        return false;
+    }
 }

@@ -1,12 +1,13 @@
 package spaceinvaders;
 
 import collisions.GameEnvironment;
+import java.awt.Color;
 import motion.Velocity;
 import shapes.Point;
 
-import java.awt.Color;
-
 /**
+ * a spaceship shot class.
+ *
  * @author Raziel Solomon
  * @since 14-Jun-16.
  */
@@ -20,5 +21,10 @@ public class SpaceShipShot extends Shot {
     public SpaceShipShot(Point center, GameEnvironment gameEnvironment) {
         super(center, 5, Color.red, gameEnvironment);
         setVelocity(Velocity.vUp(250));
+    }
+
+    @Override
+    public boolean isSpaceshipShot() {
+        return true;
     }
 }

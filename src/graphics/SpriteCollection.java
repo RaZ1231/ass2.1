@@ -2,7 +2,6 @@ package graphics;
 
 import biuoop.DrawSurface;
 import interfaces.Sprite;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,10 +43,20 @@ public class SpriteCollection {
         }
     }
 
+    /**
+     * returns a list of all sprites.
+     *
+     * @return a list of all sprites.
+     */
     public List<Sprite> getSprites() {
         return sprites;
     }
 
+    /**
+     * returns a copy of the collection.
+     *
+     * @return a copy of the collection.
+     */
     public SpriteCollection copy() {
         SpriteCollection sc = new SpriteCollection();
 

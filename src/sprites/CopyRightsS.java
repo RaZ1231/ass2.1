@@ -5,6 +5,8 @@ import java.awt.Color;
 import shapes.Point;
 
 /**
+ * drawable copy right sign.
+ *
  * @author Elisheva Broyer.
  * @since 07/06/2016.
  */

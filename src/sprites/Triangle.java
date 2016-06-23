@@ -1,10 +1,9 @@
 package sprites;
 
 import biuoop.DrawSurface;
-import shapes.Point;
-
 import java.awt.Color;
 import java.awt.Polygon;
+import shapes.Point;
 
 /**
  * drawable triangle.

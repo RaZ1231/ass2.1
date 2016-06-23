@@ -2,8 +2,8 @@ package interfaces;
 
 /**
  * A task interface.
- *@param <T> animation screen.
  *
+ * @param <T> animation screen.
  * @author Raziel Solomon
  * @since 03-Jun-16.
  */

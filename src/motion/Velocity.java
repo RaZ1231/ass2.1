@@ -24,10 +24,22 @@ public class Velocity {
         this.dy = dy;
     }
 
+    /**
+     * returns a velocity in 'down' direction.
+     *
+     * @param speed a speed.
+     * @return a velocity in 'down' direction.
+     */
     public static Velocity vDown(double speed) {
         return new Velocity(0, speed);
     }
 
+    /**
+     * returns a velocity in 'up' direction.
+     *
+     * @param speed a speed.
+     * @return a velocity in 'up' direction.
+     */
     public static Velocity vUp(double speed) {
         return Velocity.fromAngleAndSpeed(0, speed);
     }
@@ -48,10 +60,22 @@ public class Velocity {
         return new Velocity(dx, dy);
     }
 
+    /**
+     * returns a velocity in 'left' direction.
+     *
+     * @param speed a speed.
+     * @return a velocity in 'left' direction.
+     */
     public static Velocity vLeft(double speed) {
         return Velocity.fromAngleAndSpeed(270, speed);
     }
 
+    /**
+     * returns a velocity in 'right' direction.
+     *
+     * @param speed a speed.
+     * @return a velocity in 'right' direction.
+     */
     public static Velocity vRight(double speed) {
         return Velocity.fromAngleAndSpeed(90, speed);
     }
@@ -85,10 +109,6 @@ public class Velocity {
         return Math.round(dy);
     }
 
-    @Override
-    public String toString() {
-        return "V{" + dx + ", " + dy + "}";
-    }
 
     /**
      * returns the hit's angle. test's used.
@@ -106,5 +126,15 @@ public class Velocity {
      */
     public double getSpeed() {
         return Mathematics.pythagoras(dx, dy);
+    }
+
+    /**
+     * returns velocity as a string.
+     *
+     * @return velocity as a string.
+     */
+    @Override
+    public String toString() {
+        return "V{" + dx + ", " + dy + "}";
     }
 }

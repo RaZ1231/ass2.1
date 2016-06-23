@@ -40,6 +40,7 @@ public class SpaceShip implements Sprite, Collidable {
      * @param leftBorder  game environment's left border.
      * @param rightBorder game environment's right border.
      * @param step        speed.
+     * @param fill        a fill object.
      */
     public SpaceShip(Rectangle rect, KeyboardSensor keyboard, double leftBorder, double rightBorder,
                      int step, Fill fill) {
@@ -106,14 +107,23 @@ public class SpaceShip implements Sprite, Collidable {
         }
     }
 
+    /**
+     * shoot a single shot on invader.
+     */
     public void shoot() {
         if (time.hasPassed()) {
             SpaceShipShot s = new SpaceShipShot(getCenter(), gameLevel.getEnvironment());
+            gameLevel.addShot(s);
             s.addToGame(gameLevel);
             time = new Timer(0.35);
         }
     }
 
+    /**
+     * returns the upper center point of spaceship.
+     *
+     * @return the upper center point of spaceship.
+     */
     public Point getCenter() {
         return new Point(rect.getUpperLeft().getX() + rect.getWidth() / 2 - 10,
                 rect.getUpperLeft().getY() - 3);
@@ -166,6 +176,16 @@ public class SpaceShip implements Sprite, Collidable {
         gameLevel.stop();
     }
 
+    @Override
+    public boolean isInvader() {
+        return false;
+    }
+
+    /**
+     * notify all listeners of hit event.
+     *
+     * @param hitter an hitting object.
+     */
     private void notifyHit(Ball hitter) {
         // Make a copy of the hitListeners before iterating over them.
         List<HitListener> listeners = new ArrayList<HitListener>(this.getHitListeners());
@@ -175,6 +195,11 @@ public class SpaceShip implements Sprite, Collidable {
         }
     }
 
+    /**
+     * returns a list of all spaceship's listeners.
+     *
+     * @return a list of all spaceship's listeners.
+     */
     public List<HitListener> getHitListeners() {
         return hitListeners;
     }

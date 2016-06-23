@@ -1,12 +1,13 @@
 package spaceinvaders;
 
 import collisions.GameEnvironment;
+import java.awt.Color;
 import shapes.Ball;
 import shapes.Point;
 
-import java.awt.Color;
-
 /**
+ * an  abstract shot class.
+ *
  * @author Raziel Solomon
  * @since 18-Jun-16.
  */

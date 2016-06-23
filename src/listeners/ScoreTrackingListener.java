@@ -4,8 +4,6 @@ import animations.GameLevel;
 import interfaces.Collidable;
 import interfaces.HitListener;
 import shapes.Ball;
-import spaceinvaders.Invader;
-import spaceinvaders.SpaceShipShot;
 import utils.Counter;
 
 /**
@@ -37,7 +35,7 @@ public class ScoreTrackingListener implements HitListener {
      * @param hitter   the hitting ball.
      */
     public void hitEvent(Collidable beingHit, Ball hitter) {
-        if (beingHit instanceof Invader && hitter instanceof SpaceShipShot) {
+        if (beingHit.isInvader() && hitter.isSpaceshipShot()) {
             currentScore.increase(100);
         }
     }

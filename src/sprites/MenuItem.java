@@ -5,6 +5,8 @@ import java.awt.Color;
 import shapes.Point;
 
 /**
+ * drawable menu item.
+ *
  * @author Raziel Solomon
  * @since 03-Jun-16.
  */

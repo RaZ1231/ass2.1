@@ -3,13 +3,12 @@ package sprites;
 import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.Fill;
-import shapes.Point;
-import shapes.Rectangle;
-
-import javax.imageio.ImageIO;
 import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
+import javax.imageio.ImageIO;
+import shapes.Point;
+import shapes.Rectangle;
 
 /**
  * Fill image class.
@@ -45,12 +44,13 @@ public class FillImage implements Fill {
         try {
             is = ClassLoader.getSystemClassLoader().getResourceAsStream(path);
             this.img = ImageIO.read(is);
+            img.flush();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
                 is.close();
-            } catch (IOException e) {
+            } catch (IOException ex) {
                 System.out.println("failed to close image!");
             }
         }

@@ -4,13 +4,15 @@ import animations.GameLevel;
 import biuoop.DrawSurface;
 import interfaces.HitListener;
 import interfaces.Sprite;
-import motion.Velocity;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import motion.Acceleration;
+import motion.Velocity;
 
 /**
+ * formation of invaders.
+ *
  * @author Raziel Solomon
  * @since 14-Jun-16.
  */
@@ -23,9 +25,17 @@ public class Formation implements Sprite {
     private Timer time;
     private GameLevel gameLevel;
 
+    /**
+     * constructor.
+     *
+     * @param invaders list of invaders.
+     * @param a        an acceleration.
+     * @param width    a width.
+     * @param height   a height.
+     */
     public Formation(List<Invader> invaders, Acceleration a, int width, int height) {
         this.a = a;
-        this.initialV = a.getV();
+        this.initialV = a.getVelocity();
         this.invaders = invaders;
         this.width = width;
         this.height = height;
@@ -34,6 +44,9 @@ public class Formation implements Sprite {
         initInvaders();
     }
 
+    /**
+     * initialize invaders' list.
+     */
     private void initInvaders() {
         for (Invader invader : invaders) {
             invader.setFormation(this);
@@ -41,8 +54,22 @@ public class Formation implements Sprite {
         }
     }
 
+    /**
+     * returns list of invaders.
+     *
+     * @return list of invaders.
+     */
     public List<Invader> getInvaders() {
         return invaders;
+    }
+
+    /**
+     * returns list of invaders' size.
+     *
+     * @return list of invaders' size.
+     */
+    public int size() {
+        return invaders.size();
     }
 
     /**
@@ -81,7 +108,7 @@ public class Formation implements Sprite {
             if ((leftest.getX() <= 0) || (rightest.getX() + rightest.getWidth() >= width)) {
                 stepDown();
                 a.flipV();
-                a.accelBy(15);
+                a.accelBy(10);
             }
 
             time.timePassed(dt);
@@ -92,21 +119,23 @@ public class Formation implements Sprite {
     /**
      * add object to gameLevel.
      *
-     * @param gameLevel a gameLevel to add the object to.
+     * @param aGameLevel a gameLevel to add the object to.
      */
     @Override
-    public void addToGame(GameLevel gameLevel) {
-        this.gameLevel = gameLevel;
+    public void addToGame(GameLevel aGameLevel) {
+        this.gameLevel = aGameLevel;
 
         for (Invader invader : invaders) {
             invader.addToGame(gameLevel);
         }
     }
 
-    public int size() {
-        return invaders.size();
-    }
-
+    /**
+     * returns the invader in the given position.
+     *
+     * @param cmp given position.
+     * @return the invader in the given position.
+     */
     public Invader getMostPos(PositionCmp cmp) {
         Invader biggest = invaders.get(0);
 
@@ -119,12 +148,18 @@ public class Formation implements Sprite {
         return biggest;
     }
 
+    /**
+     * move to next invader in list.
+     */
     public void stepDown() {
         for (Invader invader : invaders) {
             invader.stepDown();
         }
     }
 
+    /**
+     * randomly shoot.
+     */
     public void shoot() {
         if (time.hasPassed()) {
             getShooter().shoot(gameLevel);
@@ -132,6 +167,11 @@ public class Formation implements Sprite {
         }
     }
 
+    /**
+     * returns the shooting invaders.
+     *
+     * @return the shooting invaders.
+     */
     private Invader getShooter() {
         List<Invader> lowest = getLowestList();
         Random rand = new Random();
@@ -140,6 +180,11 @@ public class Formation implements Sprite {
         return lowest.get(i);
     }
 
+    /**
+     * returns the lowest list.
+     *
+     * @return the lowest list.
+     */
     protected List<Invader> getLowestList() {
         List<Invader> lowestList = new LinkedList<>();
         boolean isNewCol;
@@ -165,12 +210,22 @@ public class Formation implements Sprite {
         return lowestList;
     }
 
+    /**
+     * move all formation.
+     *
+     * @param dt a delta.
+     */
     public void move(double dt) {
         for (Invader invader : invaders) {
             invader.timePassed(dt);
         }
     }
 
+    /**
+     * returns the lowest invader.
+     *
+     * @return the lowest invader.
+     */
     public Invader getLowest() {
         return getMostPos(new PositionCmp() {
             @Override
@@ -202,14 +257,22 @@ public class Formation implements Sprite {
         }
     }
 
+    /**
+     * reset formation.
+     */
     public void reset() {
-        a.setV(initialV);
+        a.setVelocity(initialV);
 
         for (Invader invader : invaders) {
             invader.reset();
         }
     }
 
+    /**
+     * remove an invader from formation.
+     *
+     * @param invader an invader to remove.
+     */
     public void remove(Invader invader) {
         invaders.remove(invader);
     }
@@ -217,9 +280,9 @@ public class Formation implements Sprite {
     /**
      * remove block from game.
      *
-     * @param gameLevel a level.
+     * @param aGameLevel a level.
      */
-    public void removeFromGame(GameLevel gameLevel) {
-        gameLevel.removeSprite(this);
+    public void removeFromGame(GameLevel aGameLevel) {
+        aGameLevel.removeSprite(this);
     }
 }

@@ -134,10 +134,6 @@ public class HighScoresTable implements Serializable {
         return size;
     }
 
-    //
-    //
-    //
-
     /**
      * Return the current high scores.
      * The list is sorted such that the highest

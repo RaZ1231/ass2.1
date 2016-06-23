@@ -25,7 +25,7 @@ public class CountdownAnimation implements Animation {
     private Counter framesPassed;
 
     /**
-     * count down to the beginning of the game.
+     * constructor. count down to the beginning of the game.
      *
      * @param numOfSeconds the number of seconds to count.
      * @param countFrom    the number to count from.

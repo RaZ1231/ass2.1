@@ -1,11 +1,10 @@
 package collisions;
 
 import interfaces.Collidable;
-import shapes.Line;
-import shapes.Point;
-
 import java.util.LinkedList;
 import java.util.List;
+import shapes.Line;
+import shapes.Point;
 
 /**
  * game environment class.

@@ -12,6 +12,11 @@ import shapes.Ball;
 public class BlockRemover implements HitListener {
     private GameLevel gameLevel;
 
+    /**
+     * constructor.
+     *
+     * @param gameLevel a game level.
+     */
     public BlockRemover(GameLevel gameLevel) {
         this.gameLevel = gameLevel;
     }

@@ -6,6 +6,10 @@ import interfaces.Collidable;
 import interfaces.Fill;
 import interfaces.HitListener;
 import interfaces.Sprite;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import motion.Acceleration;
 import motion.Velocity;
 import shapes.Ball;
 import shapes.Point;
@@ -13,11 +17,9 @@ import shapes.Rectangle;
 import sprites.FillImage;
 import utils.Counter;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 /**
+ * an invader.
+ *
  * @author Raziel Solomon
  * @since 14-Jun-16.
  */
@@ -32,14 +34,26 @@ public class Invader implements Sprite, Collidable {
     private Formation formation;
     private List<HitListener> hitListeners;
 
+    /**
+     * constructor.
+     *
+     * @param upperLeft a point.
+     * @param img       an image.
+     */
     public Invader(Point upperLeft, FillImage img) {
-        this.upperLeft = initialUpperLeft = upperLeft;
+        this.upperLeft = upperLeft;
+        this.initialUpperLeft = upperLeft;
         this.img = img.create(new Rectangle(upperLeft, width, height));
         hitListeners = new LinkedList<>();
     }
 
-    public void setAccel(Acceleration a) {
-        this.a = a;
+    /**
+     * setting an acceleration.
+     *
+     * @param acc an acceleration.
+     */
+    public void setAccel(Acceleration acc) {
+        this.a = acc;
     }
 
     /**
@@ -55,13 +69,11 @@ public class Invader implements Sprite, Collidable {
     /**
      * Notify the object that we collided with it at collisionPoint with
      * a given velocity.
-     * The return is the new velocity expected after the hit (based on
-     * the force the object inflicted on us).
      *
      * @param hitter          the hitting ball.
      * @param collisionPoint  point of collision.
      * @param currentVelocity current velocity.
-     * @return the new velocity expected after the hit.
+     * @return nothing.
      */
     @Override
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
@@ -78,7 +90,7 @@ public class Invader implements Sprite, Collidable {
      */
     @Override
     public void hitEvent(GameLevel game, Counter counter, Ball hitter) {
-        if (!hitter.isInvaderShot()) {
+        if (hitter.isSpaceshipShot()) {
             removeFromGame(game);
             counter.decrease(1);
         }
@@ -137,7 +149,7 @@ public class Invader implements Sprite, Collidable {
     @Override
     public void timePassed(double dt) {
         Velocity relativeV = Velocity.fromAngleAndSpeed(
-                a.getV().getAngle(), dt * a.getV().getSpeed());
+                a.getVelocity().getAngle(), dt * a.getVelocity().getSpeed());
         upperLeft = relativeV.applyToPoint(upperLeft);
         img.setPoint(upperLeft);
     }
@@ -171,57 +183,131 @@ public class Invader implements Sprite, Collidable {
         hitListeners.remove(hl);
     }
 
+    /**
+     * shoot.
+     *
+     * @param g a game level.
+     */
     public void shoot(GameLevel g) {
         InvaderShot s = new InvaderShot(
                 new Point(getUpperLeft().getX() + getWidth() / 2,
                         getUpperLeft().getY() + getHeight() + 2), g.getEnvironment());
+        g.addShot(s);
         s.addToGame(g);
     }
 
+    /**
+     * returns upper left point.
+     *
+     * @return upper left point.
+     */
     public Point getUpperLeft() {
         return upperLeft;
     }
 
+    /**
+     * returns width.
+     *
+     * @return width.
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * returns height.
+     *
+     * @return height.
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * initial upper left point.
+     */
     public void reset() {
         upperLeft = initialUpperLeft;
     }
 
+    /**
+     * returns whether an invader is lower than current.
+     *
+     * @param invader another invader.
+     * @return whether an invader is lower than current.
+     */
     public boolean isLowerThan(Invader invader) {
         return getUpperLeft().getY() <= invader.getUpperLeft().getY();
     }
 
+    /**
+     * returns whether an invader is righter than current.
+     *
+     * @param invader another invader.
+     * @return whether an invader is righter than current.
+     */
     public boolean isRighterThan(Invader invader) {
         return getUpperLeft().getX() <= invader.getUpperLeft().getX();
     }
 
+    /**
+     * returns whether an invader is lefter than current.
+     *
+     * @param invader another invader.
+     * @return whether an invader is lefter than current.
+     */
     public boolean isLefterThan(Invader invader) {
         return getUpperLeft().getX() >= invader.getUpperLeft().getX();
     }
 
+    /**
+     * returns upper left point x-axes value.
+     *
+     * @return upper left point x-axes value.
+     */
     public double getX() {
         return getUpperLeft().getX();
     }
 
+    /**
+     * returns upper left point y-axes value.
+     *
+     * @return upper left point y-axes value.
+     */
     public double getY() {
         return getUpperLeft().getY();
     }
 
-    public void setFormation(Formation formation) {
-        this.formation = formation;
+    /**
+     * setting formation.
+     *
+     * @param aFormation a formation.
+     */
+    public void setFormation(Formation aFormation) {
+        this.formation = aFormation;
     }
 
+    /**
+     * move invader one step down.
+     */
     public void stepDown() {
         upperLeft = new Point(upperLeft.getX(), upperLeft.getY() + height);
     }
 
+    /**
+     * returns if is an invader.
+     *
+     * @return if is an invader.
+     */
+    public boolean isInvader() {
+        return true;
+    }
+
+    /**
+     * returns invader as a string.
+     *
+     * @return invader as a string.
+     */
     @Override
     public String toString() {
         return "Invader{" + upperLeft + ',' + a + '}';

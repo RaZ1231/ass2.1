@@ -14,7 +14,7 @@ import sprites.FillColor;
 import sprites.FillImage;
 
 /**
- * level 1.
+ * a level.
  *
  * @author Elisheva Broyer.
  * @since 13/05/2016.
@@ -67,7 +67,7 @@ public class LevelInfo implements LevelInformation {
      */
     @Override
     public String levelName() {
-        return "Level ";
+        return "Battle number ";
     }
 
     /**
@@ -80,13 +80,18 @@ public class LevelInfo implements LevelInformation {
         return new FillImage("space_background.jpg");
     }
 
+    /**
+     * returns list of death region blocks.
+     *
+     * @return list of death region blocks.
+     */
     public List<BaseBlock> getDeathRegion() {
         List<BaseBlock> deathRegions = new LinkedList<>();
         DeathRegion d1 = new DeathRegion(new Rectangle(new Point(30, 0), 800, 30),
                 new FillColor(null), null);
         deathRegions.add(d1);
 
-        DeathRegion d2 = new DeathRegion(new Rectangle(new Point(30, 570), 800, 30),
+        DeathRegion d2 = new DeathRegion(new Rectangle(new Point(30, 600), 800, 30),
                 new FillColor(null), null);
         deathRegions.add(d2);
 
@@ -121,11 +126,11 @@ public class LevelInfo implements LevelInformation {
     public List<ShieldBlock> shields() {
         List<ShieldBlock> shields = new LinkedList<>();
 
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 5; j++) {
-                shields.add(new ShieldBlock(new Point(150 + i, 500 + j)));
-                shields.add(new ShieldBlock(new Point(350 + i, 500 + j)));
-                shields.add(new ShieldBlock(new Point(550 + i, 500 + j)));
+        for (int i = 0; i < 25; i++) {
+            for (int j = 0; j < 3; j++) {
+                shields.add(new ShieldBlock(new Point(100 + i * 5, 500 + j * 5)));
+                shields.add(new ShieldBlock(new Point(350 + i * 5, 500 + j * 5)));
+                shields.add(new ShieldBlock(new Point(600 + i * 5, 500 + j * 5)));
             }
         }
 

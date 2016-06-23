@@ -1,9 +1,8 @@
 package sprites;
 
 import biuoop.DrawSurface;
-import shapes.Point;
-
 import java.awt.Color;
+import shapes.Point;
 
 /**
  * drawable text.

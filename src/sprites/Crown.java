@@ -1,11 +1,12 @@
 package sprites;
 
 import biuoop.DrawSurface;
+import java.awt.Color;
 import shapes.Point;
 
-import java.awt.Color;
-
 /**
+ * drawable crown.
+ *
  * @author Raziel Solomon
  * @since 19-May-16.
  */

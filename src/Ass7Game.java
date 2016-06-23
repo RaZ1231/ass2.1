@@ -6,7 +6,7 @@ import game.Game;
  * @author Raziel Solomon
  * @since 30-Mar-16.
  */
-public class Ass6Game {
+public class Ass7Game {
     /**
      * the main method of game.
      *

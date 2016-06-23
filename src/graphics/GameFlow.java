@@ -7,13 +7,12 @@ import animations.KeyPressStoppableAnimation;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import interfaces.LevelInformation;
+import java.io.File;
+import java.io.IOException;
 import scores.HighScoresTable;
 import scores.NewHighScore;
 import scores.ScoreInfo;
 import utils.Counter;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Class responsible for ordering animations.

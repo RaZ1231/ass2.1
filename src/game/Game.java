@@ -32,16 +32,6 @@ public class Game {
         final AnimationRunner runner = new AnimationRunner(gui, 60);
         Menu<Task<Void>> menu = new MenuAnimation("Space Invaders", gui.getKeyboardSensor());
 
-        /*
-        List<LevelSet> levelSets;
-        String path = args.length > 0 ? args[0] : "level_sets.txt"; //check args
-
-        levelSets = LevelSetsReader.fromReader(new BufferedReader(
-                new InputStreamReader(ClassLoader.getSystemClassLoader()
-                        .getResourceAsStream(path))));
-
-        final List<LevelSet> lSets = levelSets;
-        */
         final HighScoresTable highScores = HighScoresTable.loadFromFile(new File("highscores"));
 
         //menu items

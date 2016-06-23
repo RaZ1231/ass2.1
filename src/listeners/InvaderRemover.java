@@ -38,5 +38,4 @@ public class InvaderRemover implements HitListener {
     public void hitEvent(Collidable beingHit, Ball hitter) {
         beingHit.hitEvent(gameLevel, remainingInvaders, hitter);
     }
-
 }

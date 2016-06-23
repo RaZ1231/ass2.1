@@ -15,7 +15,6 @@ import sprites.FillImage;
 import sprites.MenuItem;
 import sprites.Text;
 import utils.Selection;
-import utils.SubMenuSelection;
 
 /**
  * Menu animation class.
@@ -27,8 +26,6 @@ public class MenuAnimation implements Menu<Task<Void>> {
     private String title;
     private KeyboardSensor sensor;
     private List<Selection<Void>> selections;
-    private List<SubMenuSelection<Task<Void>>> subMenus;
-    private SubMenuSelection<Task<Void>> subMenuStat;
     private Task<Void> status;
     private boolean stop;
 
@@ -41,11 +38,8 @@ public class MenuAnimation implements Menu<Task<Void>> {
     public MenuAnimation(String title, KeyboardSensor sensor) {
         this.title = title;
         this.sensor = sensor;
-
         selections = new ArrayList<Selection<Void>>();
-        subMenus = new ArrayList<SubMenuSelection<Task<Void>>>();
         status = null;
-        subMenuStat = null;
         stop = false;
     }
 
@@ -80,7 +74,7 @@ public class MenuAnimation implements Menu<Task<Void>> {
      */
     @Override
     public void addSubMenu(String key, String message, Menu<Task<Void>> subMenu) {
-        subMenus.add(new SubMenuSelection<Task<Void>>(key, message, subMenu));
+        // none.
     }
 
     /**
@@ -90,12 +84,6 @@ public class MenuAnimation implements Menu<Task<Void>> {
     public void restart() {
         stop = false;
         status = null;
-        subMenuStat = null;
-
-        //sub-menus
-        for (SubMenuSelection<Task<Void>> subMenu : subMenus) {
-            subMenu.getMenu().restart();
-        }
     }
 
     /**
@@ -112,26 +100,12 @@ public class MenuAnimation implements Menu<Task<Void>> {
                 status = selection.getTask();
             }
         }
-/*
-        //sub-menus
-        for (SubMenuSelection<Task<Void>> subMenu : subMenus) {
-            if (sensor.isPressed(subMenu.getKey())) {
-                subMenuStat = subMenu;
-            }
-        }
-*/
+
         if (getStatus() != null) {
             stop = true;
         }
-        /*
-        //sub-menus management
-        if (subMenuStat != null) {
-            subMenuStat.getMenu().doOneFrame(d, dt);
-            status = subMenuStat.getMenu().getStatus();
-        } else {*/
-            drawBG(d);
-        /*}
-        */
+
+        drawBG(d);
     }
 
     /**
@@ -142,11 +116,10 @@ public class MenuAnimation implements Menu<Task<Void>> {
     public void drawBG(DrawSurface d) {
         Background b = new Background();
 
-        FillImage backGround = new FillImage("menu_background.jpg");
         Color backColor = new Color(252, 250, 255);
         Color itemColor = new Color(151, 66, 130);
 
-        //Square back = new Square(new Point(0, 0), d.getWidth(), d.getHeight(), backColor);
+        FillImage backGround = new FillImage("menu_background.jpg");
         b.addElement(backGround);
 
         Text menuTitle = new Text(itemColor, new Point(d.getWidth() / 2 - 210, 195), title, 60);
@@ -156,7 +129,6 @@ public class MenuAnimation implements Menu<Task<Void>> {
         int itemWidth = 350;
         List<MenuOption> options = new ArrayList<>();
 
-        // options.addAll(subMenus);
         options.addAll(selections);
 
         for (int i = 0; i < options.size(); i++) {

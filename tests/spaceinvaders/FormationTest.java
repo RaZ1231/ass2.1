@@ -1,11 +1,11 @@
 package spaceinvaders;
 
+import java.util.LinkedList;
+import java.util.List;
+import motion.Acceleration;
 import motion.Velocity;
 import org.junit.Test;
 import shapes.Point;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @author Raziel Solomon
@@ -31,7 +31,7 @@ public class FormationTest {
         Formation formation = new Formation(invaders, a, 0, 0);
         //formation.initInvaders();
 
-        a.setV(new Velocity(6, 6));
+        a.setVelocity(new Velocity(6, 6));
 
         for (Invader invader : formation.getInvaders()) {
             System.out.println(invader);
