@@ -44,7 +44,6 @@ public class FillImage implements Fill {
         try {
             is = ClassLoader.getSystemClassLoader().getResourceAsStream(path);
             this.img = ImageIO.read(is);
-            img.flush();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
