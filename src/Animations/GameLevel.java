@@ -3,6 +3,7 @@ package animations;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
+import blocks.BaseBlock;
 import collisions.GameEnvironment;
 import graphics.AnimationRunner;
 import graphics.SpriteCollection;
@@ -14,22 +15,22 @@ import interfaces.Animation;
 import interfaces.Collidable;
 import interfaces.LevelInformation;
 import interfaces.Sprite;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import listeners.BlockRemover;
 import listeners.InvaderRemover;
 import listeners.LifeRemover;
 import listeners.ScoreTrackingListener;
+import motion.Acceleration;
 import motion.Velocity;
-import shapes.Ball;
 import shapes.Rectangle;
-import spaceinvaders.Acceleration;
 import spaceinvaders.Formation;
+import spaceinvaders.ShieldBlock;
 import spaceinvaders.Shot;
 import spaceinvaders.SpaceShip;
-import sprites.FillColor;
+import sprites.FillImage;
 import utils.Counter;
-
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * a game level class.
@@ -54,6 +55,7 @@ public class GameLevel implements Animation {
     private AnimationRunner runner;
     private boolean running;
     private LevelInformation level;
+    private List<Shot> shots;
 
     /**
      * constructor.
@@ -70,8 +72,14 @@ public class GameLevel implements Animation {
         this.lives = lives;
         this.runner = runner;
         this.gui = gui;
+        this.shots = new LinkedList<>();
     }
 
+    /**
+     * returns game environment.
+     *
+     * @return game environment.
+     */
     public GameEnvironment getEnvironment() {
         return environment;
     }
@@ -131,8 +139,17 @@ public class GameLevel implements Animation {
     }
 
     /**
+     * add shot to shots' list.
+     *
+     * @param s a shot.
+     */
+    public void addShot(Shot s) {
+        shots.add(s);
+    }
+
+    /**
      * Initialize a new level: create the Blocks, Ball and Paddle
-     * and add them to the game.
+     * and add them to the Game.
      * Also draws the level's background.
      */
     public void initialize() {
@@ -144,18 +161,19 @@ public class GameLevel implements Animation {
         environment = new GameEnvironment();
         spaceShip = new SpaceShip(new Rectangle(width / 2 - 50, height - 35,
                 level.paddleWidth(), 20), gui.getKeyboardSensor(), 15, width - 15,
-                250, new FillColor(Color.blue)); // add speed, fill.
+                300, new FillImage("spaceship.jpg"));
         formation = new Formation(level.invaders(),
-                new Acceleration(new Velocity(levelNum * 30, 0)), 800, 530);
+                new Acceleration(new Velocity(levelNum * 50 + 20, 0)), 800, 600);
         invadersCounter = new Counter(formation.getInvaders().size());
         ballsCounter = new Counter(0);
 
         RectIndicator rectIndicator = new RectIndicator();
-        ScoreIndicator scoreIndicator = new ScoreIndicator(score);
         LivesIndicator livesIndicator = new LivesIndicator(lives);
+        ScoreIndicator scoreIndicator = new ScoreIndicator(score);
         LevelIndicator levelIndicator = new LevelIndicator(level.levelName() + levelNum);
 
         InvaderRemover invaderRemover = new InvaderRemover(this, invadersCounter);
+        BlockRemover blockRemover = new BlockRemover(this);
         LifeRemover lifeRemover = new LifeRemover(this, lives);
         ScoreTrackingListener scoreTrackingListener = new ScoreTrackingListener(this, score);
 
@@ -163,7 +181,6 @@ public class GameLevel implements Animation {
         formation.addHitListener(scoreTrackingListener);
         spaceShip.addHitListener(lifeRemover);
 
-        //PrintingHitListener phl = new PrintingHitListener();
         level.getBackground().addToGame(this);
         spaceShip.addToGame(this);
         rectIndicator.addToGame(this);
@@ -172,20 +189,15 @@ public class GameLevel implements Animation {
         levelIndicator.addToGame(this);
         formation.addToGame(this);
 
-        /*
-        for (GameBlock block : invaders) {
-            block.addHitListener(blockRemover);
-            block.addHitListener(scoreTrackingListener);
-            block.addHitListener(phl);
+        for (ShieldBlock s : level.shields()) {
+            s.addToGame(this);
+            s.addHitListener(blockRemover);
         }
 
-        borders.get(3).addHitListener(lifeRemover);
-        invaders.addAll(borders);
-
-        for (GameBlock block : blocks) {
-            block.addToGame(this);
+        for (BaseBlock b : level.getDeathRegion()) {
+            b.addToGame(this);
+            b.addHitListener(blockRemover);
         }
-        */
     }
 
     /**
@@ -194,6 +206,7 @@ public class GameLevel implements Animation {
     public void playOneTurn() {
         this.respawn();
         this.runner.run(new CountdownAnimation(2, 3, sprites)); // countdown before turn starts.
+
         // use our runner to run the current animation -- which is one turn of
         // the game.
         this.running = true;
@@ -209,31 +222,17 @@ public class GameLevel implements Animation {
         removeShots();
     }
 
-    private void removeShots() {
-        for (Sprite s : sprites.copy().getSprites()) {
-            if (s instanceof Shot) {
-                ((Shot) s).removeFromGame(this);
-            }
-        }
-    }
-
     /**
-     * initial balls according to level's information.
+     * erase all shots from game when initialized.
      */
-    private void initBalls() {
-        List<Ball> balls = new LinkedList<Ball>();
+    private void removeShots() {
+        Iterator<Shot> iter = shots.iterator();
 
-        for (int i = 0; i < level.numberOfBalls(); i++) {
-            balls.add(new Ball(400 + i * 6, height - 36, 5, Color.WHITE, environment));
+        while (iter.hasNext()) {
+            Shot s = iter.next();
+            s.removeFromGame(this);
+            iter.remove();
         }
-
-        for (int i = 0; i < level.numberOfBalls(); i++) {
-            Velocity v = level.initialBallVelocities().get(i);
-            balls.get(i).setVelocity(v);
-            balls.get(i).addToGame(this);
-        }
-
-        ballsCounter.increase(level.numberOfBalls());
     }
 
     /**
@@ -248,33 +247,25 @@ public class GameLevel implements Animation {
         this.formation.timePassed(dt);
 
         if (invadersCounter.getValue() == 0) {
-            score.increase(100);
             running = false;
         }
-        if (formation.size() > 0 && formation.getLowest().getY() >= 400) {
+        if (formation.size() > 0 && formation.getLowest().getY() >= 450) {
             lives.decrease(1);
             running = false;
-
-            if (lives.getValue() == 0) {
-                initLevelNumber();
-            }
         }
+        if (lives.getValue() == 0) {
+            initLevelNumber();
+        }
+
         if (gui.getKeyboardSensor().isPressed("p")) {
             this.runner.run(new KeyPressStoppableAnimation(
                     gui.getKeyboardSensor(), KeyboardSensor.SPACE_KEY, new PauseScreen()));
         }
 
-
         //cheats
         if (gui.getKeyboardSensor().isPressed("z")) { // next level.
             invadersCounter = new Counter(0);
         }
-
-        /*
-        if (gui.getKeyboardSensor().isPressed("a")) { // die.
-            ballsCounter = new Counter(0);
-        }
-        */
     }
 
     /**
@@ -286,10 +277,16 @@ public class GameLevel implements Animation {
         return !this.running;
     }
 
+    /**
+     * initialize level number.
+     */
     public void initLevelNumber() {
         levelNum = 0;
     }
 
+    /**
+     * stop running.
+     */
     public void stop() {
         running = false;
     }
