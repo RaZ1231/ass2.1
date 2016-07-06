@@ -262,10 +262,12 @@ public class GameLevel implements Animation {
                     gui.getKeyboardSensor(), KeyboardSensor.SPACE_KEY, new PauseScreen()));
         }
 
+        /*
         //cheats
         if (gui.getKeyboardSensor().isPressed("z")) { // next level.
             invadersCounter = new Counter(0);
         }
+        */
     }
 
     /**

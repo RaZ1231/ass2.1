@@ -2,6 +2,7 @@ package animations;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
+import interfaces.Fill;
 import interfaces.Menu;
 import interfaces.MenuOption;
 import interfaces.Task;
@@ -28,6 +29,7 @@ public class MenuAnimation implements Menu<Task<Void>> {
     private List<Selection<Void>> selections;
     private Task<Void> status;
     private boolean stop;
+    private Fill background;
 
     /**
      * Constructor.
@@ -41,6 +43,7 @@ public class MenuAnimation implements Menu<Task<Void>> {
         selections = new ArrayList<Selection<Void>>();
         status = null;
         stop = false;
+        background = new FillImage("menu_background.jpg");
     }
 
     /**
@@ -119,8 +122,7 @@ public class MenuAnimation implements Menu<Task<Void>> {
         Color backColor = new Color(252, 250, 255);
         Color itemColor = new Color(151, 66, 130);
 
-        FillImage backGround = new FillImage("menu_background.jpg");
-        b.addElement(backGround);
+        b.addElement(this.background);
 
         Text menuTitle = new Text(itemColor, new Point(d.getWidth() / 2 - 210, 195), title, 60);
         b.addElement(menuTitle);
